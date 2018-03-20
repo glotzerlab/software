@@ -1,0 +1,49 @@
+
+
+RUN curl -sSL https://glotzerlab.engin.umich.edu/Downloads/hoomd/hoomd-{{ HOOMD_VERSION }}.tar.gz \
+    | tar -xzC /root \
+    && cd /root/hoomd-{{ HOOMD_VERSION }} \
+    && mkdir build \
+    && cd build \
+    && cmake ../ -DENABLE_CUDA=on -DENABLE_MPI={{ ENABLE_MPI }} -DBUILD_TESTING=off -DCMAKE_INSTALL_PREFIX=`python3 -c "import site; print(site.getsitepackages()[0])"` \
+    && make install -j10 \
+    && rm -rf /root/hoomd-{{ HOOMD_VERSION }}
+
+RUN curl -sSL https://glotzerlab.engin.umich.edu/Downloads/freud/freud-{{ FREUD_VERSION }}.tar.gz \
+    | tar -xzC /root \
+    && cd /root/freud-{{ FREUD_VERSION }} \
+    && mkdir build \
+    && cd build \
+    && cmake ../ -DCMAKE_INSTALL_PREFIX=`python3 -c "import site; print(site.getsitepackages()[0])"` \
+    && make install -j10 \
+    && rm -rf /root/freud-{{ FREUD_VERSION }}
+
+RUN curl -sSL https://glotzerlab.engin.umich.edu/Downloads/fresnel/fresnel-{{ FRESNEL_VERSION }}.tar.gz \
+    | tar -xzC /root \
+    && cd /root/fresnel-{{ FRESNEL_VERSION }} \
+    && mkdir build \
+    && cd build \
+    && cmake ../ -DENABLE_TBB=on -DENABLE_EMBREE=on -DENABLE_CUDA=off -DENABLE_OPTIX=off -DCMAKE_INSTALL_PREFIX=`python3 -c "import site; print(site.getsitepackages()[0])"` \
+    && make install -j10 \
+    && rm -rf /root/fresnel-{{ FRESNEL_VERSION }}
+
+RUN curl -sSL https://glotzerlab.engin.umich.edu/Downloads/signac/signac-{{ SIGNAC_VERSION }}.tar.gz \
+    | tar -xzC /root \
+    && cd /root/signac-{{ SIGNAC_VERSION }} \
+    && python3 setup.py install \
+    && rm -rf /root/signac-{{ SIGNAC_VERSION }}
+
+RUN curl -sSL https://glotzerlab.engin.umich.edu/Downloads/signac-flow/signac-flow-{{ SIGNAC_FLOW_VERSION }}.tar.gz \
+    | tar -xzC /root \
+    && cd /root/signac-flow-{{ SIGNAC_FLOW_VERSION }} \
+    && python3 setup.py install \
+    && rm -rf /root/signac-flow-{{ SIGNAC_FLOW_VERSION }}
+
+RUN curl -sSL https://glotzerlab.engin.umich.edu/Downloads/gsd/gsd-{{ GSD_VERSION }}.tar.gz \
+    | tar -xzC /root \
+    && cd /root/gsd-{{ GSD_VERSION }} \
+    && mkdir build \
+    && cd build \
+    && cmake ../ -DCMAKE_INSTALL_PREFIX=`python3 -c "import site; print(site.getsitepackages()[0])"` \
+    && make install -j10 \
+    && rm -rf /root/gsd-{{ GSD_VERSION }}

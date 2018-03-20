@@ -1,0 +1,36 @@
+FROM {{ FROM }}
+
+RUN apt-get update && apt-get install -y --no-install-recommends \
+  clang-5.0 \
+  cmake \
+  curl \
+  cython3 \
+  git \
+  ipython3 \
+  libboost-dev \
+  libedit-dev \
+  libtbb-dev \
+  libsqlite3-dev \
+  python3 \
+  python3-dev \
+  python3-nose \
+  python3-numpy \
+  python3-pil \
+  python3-pip \
+  python3-pytest \
+  python3-setuptools \
+  python3-sphinx \
+  python3-sphinx-rtd-theme \
+  zlib1g-dev \
+  ca-certificates \
+  && rm -rf /var/lib/apt/lists/*
+
+# embree
+ENV CPATH=/opt/embree-{{ EMBREE_VERSION }}.x86_64.linux/include:$CPATH \
+    LIBRARY_PATH=/opt/embree-{{ EMBREE_VERSION }}.x86_64.linux/lib:$LIBRARY_PATH \
+    LD_LIBRARY_PATH=/opt/embree-{{ EMBREE_VERSION }}.x86_64.linux/lib:$LD_LIBRARY_PATH \
+    EMBREE_LINK=/opt/embree-{{ EMBREE_VERSION }}.x86_64.linux/lib
+
+RUN curl -sSL https://github.com/embree/embree/releases/download/v{{ EMBREE_VERSION }}/embree-{{ EMBREE_VERSION }}.x86_64.linux.tar.gz \
+    | tar -xzC /opt \
+    && rm -rf /opt/embree-{{ EMBREE_VERSION }}.x86_64.linux/include/bin
