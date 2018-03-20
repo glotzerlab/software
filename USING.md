@@ -10,7 +10,7 @@ including:
   * [Signac](http://signac.io)
   * [Signac-flow](http://signac.io)
 
-, many dependent libraries, and the commonly used tools:
+The images also contain commonly used tools:
 
   * LLVM/clang
   * python3

@@ -28,13 +28,13 @@ def write(fname, templates, **kwargs):
 env = jinja2.Environment(loader=jinja2.FileSystemLoader('template'))
 base_template = env.get_template('base.jinja')
 openmpi_template = env.get_template('openmpi.jinja')
+titan_template = env.get_template('titan.jinja')
 software_template = env.get_template('software.jinja')
 
 write('cuda8/Dockerfile', [base_template, software_template],
       FROM='nvidia/cuda:8.0-devel-ubuntu16.04',
       ENABLE_MPI='off',
-      CC='/usr/bin/gcc',
-      CXX='/usr/bin/g++',
+      MAKEJOBS=10,
       **versions)
 
 write('cuda8/openmpi3.0/Dockerfile', [base_template, openmpi_template, software_template],
@@ -42,13 +42,11 @@ write('cuda8/openmpi3.0/Dockerfile', [base_template, openmpi_template, software_
       OPENMPI_VERSION='3.0.0',
       OSU_MICROBENCHMARK_VERSION='5.4.1',
       ENABLE_MPI='on',
-      CC='/usr/bin/gcc',
-      CXX='/usr/bin/g++',
+      MAKEJOBS=10,
       **versions)
 
-write('olcf-titan/Dockerfile', [base_template, software_template],
+write('olcf-titan/Dockerfile', [base_template, titan_template, software_template],
       FROM='olcf/titan:ubuntu-16.04_2018-01-18',
       ENABLE_MPI='on',
-      CC='/usr/bin/gcc-4.9',
-      CXX='/usr/bin/g++-4.9',
+      MAKEJOBS=2,
       **versions)

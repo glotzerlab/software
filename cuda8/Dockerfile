@@ -43,9 +43,6 @@ RUN mkdir -p /nfs \
     mkdir -p /scratch \
     mkdir -p /projects
 
-ENV CC=/usr/bin/gcc
-ENV CXX=/usr/bin/g++
-
 RUN curl -sSL https://glotzerlab.engin.umich.edu/Downloads/hoomd/hoomd-v2.2.4.tar.gz \
     | tar -xzC /root \
     && cd /root/hoomd-v2.2.4 \

@@ -45,6 +45,8 @@ RUN mkdir -p /nfs \
 
 ENV CC=/usr/bin/gcc-4.9
 ENV CXX=/usr/bin/g++-4.9
+ENV CFLAGS=-D_FORCE_INLINES
+ENV CXXFLAGS=-D_FORCE_INLINES
 
 RUN curl -sSL https://glotzerlab.engin.umich.edu/Downloads/hoomd/hoomd-v2.2.4.tar.gz \
     | tar -xzC /root \
@@ -52,7 +54,7 @@ RUN curl -sSL https://glotzerlab.engin.umich.edu/Downloads/hoomd/hoomd-v2.2.4.ta
     && mkdir build \
     && cd build \
     && cmake ../ -DENABLE_CUDA=on -DENABLE_MPI=on -DBUILD_TESTING=off -DCMAKE_INSTALL_PREFIX=`python3 -c "import site; print(site.getsitepackages()[0])"` \
-    && make install -j10 \
+    && make install -j2 \
     && rm -rf /root/hoomd-v2.2.4
 
 RUN curl -sSL https://glotzerlab.engin.umich.edu/Downloads/freud/freud-v0.7.0.tar.gz \
@@ -61,7 +63,7 @@ RUN curl -sSL https://glotzerlab.engin.umich.edu/Downloads/freud/freud-v0.7.0.ta
     && mkdir build \
     && cd build \
     && cmake ../ -DCMAKE_INSTALL_PREFIX=`python3 -c "import site; print(site.getsitepackages()[0])"` \
-    && make install -j10 \
+    && make install -j2 \
     && rm -rf /root/freud-v0.7.0
 
 RUN curl -sSL https://glotzerlab.engin.umich.edu/Downloads/fresnel/fresnel-v0.5.0.tar.gz \
@@ -70,7 +72,7 @@ RUN curl -sSL https://glotzerlab.engin.umich.edu/Downloads/fresnel/fresnel-v0.5.
     && mkdir build \
     && cd build \
     && cmake ../ -DENABLE_TBB=on -DENABLE_EMBREE=on -DENABLE_CUDA=off -DENABLE_OPTIX=off -DCMAKE_INSTALL_PREFIX=`python3 -c "import site; print(site.getsitepackages()[0])"` \
-    && make install -j10 \
+    && make install -j2 \
     && rm -rf /root/fresnel-v0.5.0
 
 RUN curl -sSL https://glotzerlab.engin.umich.edu/Downloads/signac/signac-v0.9.2.tar.gz \
@@ -91,5 +93,5 @@ RUN curl -sSL https://glotzerlab.engin.umich.edu/Downloads/gsd/gsd-v1.5.1.tar.gz
     && mkdir build \
     && cd build \
     && cmake ../ -DCMAKE_INSTALL_PREFIX=`python3 -c "import site; print(site.getsitepackages()[0])"` \
-    && make install -j10 \
+    && make install -j2 \
     && rm -rf /root/gsd-v1.5.1
