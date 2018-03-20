@@ -36,14 +36,12 @@ Install and configure docker. You can start an interactive session with the foll
 [Docker documentation](https://docs.docker.com/) for more information on useful tasks such as bind mounting and
 executing individual commands.
 
-```docker run --rm -it glotzerlab/software
-```
+    docker run --rm -it glotzerlab/software
 
 You can utilize NVIDIA GPUs on local and cloud systems with the NVIDIA container runtime. See the [NVIDIA
 GPU CLOUD documentation](http://docs.nvidia.com/ngc/index.html#ngc-with-nvidia-titan-pcs) for more information.
 
-```docker run --runtime=nvidia --rm -it glotzerlab/software
-```
+    docker run --runtime=nvidia --rm -it glotzerlab/software
 
 ### Compute clusters or other multi-user systems with Singularity support
 
@@ -53,24 +51,22 @@ singularity, not docker. [Singularity](http://singularity.lbl.gov/) can import d
 Pull the container to convert it from docker format to singularity format. A current bug in singularity requires that
 you set your umask to 002 before pulling:
 
-```umask 002
-singularity pull docker://glotzerlab/software
-```
+    umask 002
+    singularity pull docker://glotzerlab/software
 
 You can start an interactive session with the following command (note, your file may have the extension ``.img`` or
 ``.simg`` depending on the version of singularity you use).
 
-```singularity shell software.simg
-```
+    singularity shell software.simg
 
 Singularity automatically bind mounts your home directory (and scratch directories on many clusters), so you can easily
 execute individual commands (i.e. from your job script) like this:
 
-```singularity exec software.simg python3 script.py --arguments```
+    singularity exec software.simg python3 script.py --arguments
 
 You can utilize NVIDIA GPUs available on the local system:
 
-```singularity exec --nv software.simg python3 script.py --arguments```
+    singularity exec --nv software.simg python3 script.py --arguments
 
 ### Compute clusters or other multi-user systems with Docker support
 
@@ -87,26 +83,22 @@ future**
 
 Pull the container with openmpi3 support:
 
-```umask 002
-singularity pull docker://glotzerlab/software:openmpi3.0
-```
+    umask 002
+    singularity pull docker://glotzerlab/software:openmpi3.0
 
 To run a HOOMD-blue script with MPI, first you must load the appropriate ``openmpi`` module on flux:
 
-```module load gcc/5.4.0
-module load openmpi/3.0.0/gcc/5.4.0
-```
+    module load gcc/5.4.0
+    module load openmpi/3.0.0/gcc/5.4.0
 
 Then you can use mpirun to launch singularity, which in turn launches a hoomd script inside the container:
 
-```mpirun singularity exec --nv software-openmpi3.0.simg python3 script.py
-```
+    mpirun singularity exec --nv software-openmpi3.0.simg python3 script.py
 
 The image contains the [OSU microbenchmark suite](http://mvapich.cse.ohio-state.edu/benchmarks/) to verify proper MPI
 operation and high speed network performance:
 
-```mpirun -n 2 singularity exec software-openmpi3.0.simg /opt/osu-micro-benchmarks/libexec/osu-micro-benchmarks/mpi/pt2pt/osu_bibw
-```
+    mpirun -n 2 singularity exec software-openmpi3.0.simg /opt/osu-micro-benchmarks/libexec/osu-micro-benchmarks/mpi/pt2pt/osu_bibw
 
 ## Building images on OLCF systems
 
@@ -115,13 +107,11 @@ container to run on OLCF Titan using OLCF's [container builder](https://www.olcf
 need the ``Dockerfile`` from the ``olcf-titan`` directory of this repository
 (https://bitbucket.org/glotzer/docker-glotzerlab-software).
 
-```module load container-builder
-container-builder software.img Dockerfile
-```
+    module load container-builder
+    container-builder software.img Dockerfile
 
 And you can run the container with GPU and MPI support:
 
-```aprun -N 1 singularity software.img python3 run.py
-```
+    aprun -N 1 singularity software.img python3 run.py
 
 OLCF documents several [limitations when using singularity on Titan](https://www.olcf.ornl.gov/software-containers-on-titan/).
