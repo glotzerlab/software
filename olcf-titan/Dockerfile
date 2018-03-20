@@ -37,6 +37,12 @@ RUN curl -sSL https://github.com/embree/embree/releases/download/v2.17.1/embree-
     | tar -xzC /opt \
     && rm -rf /opt/embree-2.17.1.x86_64.linux/include/bin
 
+# mount points for filesystems on clusters
+RUN mkdir -p /nfs \
+    mkdir -p /oasis \
+    mkdir -p /scratch \
+    mkdir -p /projects
+
 ENV CC=/usr/bin/gcc-4.9
 ENV CXX=/usr/bin/g++-4.9
 

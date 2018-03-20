@@ -37,6 +37,12 @@ RUN curl -sSL https://github.com/embree/embree/releases/download/v2.17.1/embree-
     | tar -xzC /opt \
     && rm -rf /opt/embree-2.17.1.x86_64.linux/include/bin
 
+# mount points for filesystems on clusters
+RUN mkdir -p /nfs \
+    mkdir -p /oasis \
+    mkdir -p /scratch \
+    mkdir -p /projects
+
 # IB drivers for MPI (https://community.mellanox.com/docs/DOC-2431)
 # TODO: install MLNX_OFED
 RUN apt-get update && apt-get install -y --no-install-recommends \

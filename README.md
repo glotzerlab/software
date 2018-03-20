@@ -56,3 +56,38 @@ Also, these images must be built within the confines of the
 The ``build.sh`` script builds all of the images and tags them with the current date code.
 
 TODO: consider how to support OptiX for fresnel.
+
+## What works (and what doesn't)
+
+Results of testing these images on a number of local and national supercomputer centers.
+
+Updated: 2018-03-20.
+
+* SDSC Comet (w/ Singularity):
+    * Serial CPU: working
+    * GPU (cuda8): working
+    * MPI (openmpi3.0): **not supported**
+    * Note: *Running the image will create the file =8.0 in your current working directory. Requested singularity upgrade
+      to fix this issue.*
+* PSC Bridges (w/ Singularity):
+    * Serial CPU: working
+    * GPU (cuda8): working
+    * MPI (openmpi3.0): **not supported**
+* TACC Stampede2 (w/ Singularity)
+    * **status unknown**, stampede2 was down for maintenance at time of testing
+* OLCF Titan (w/ Singularity):
+    * **HOOMD fails to compile in the container-builder environment**, workaround unknown at this time
+* University of Michigan Flux (w/ Singularity):
+    * Serial CPU: working
+    * GPU (cuda8): working
+    * MPI (openmpi3.0): working (**infiniband enabled on most nodes, but not all**)
+    * Note: *Running the image will create the file =8.0 in your current working directory. Requested singularity upgrade
+      to fix this issue.*
+* Arch linux workstation (with openmpi 3.0.0 installed):
+    * Docker:
+        * Serial CPU: working
+        * GPU (runtime=nvidia): working
+    * Singularity:
+        * Serial CPU: working
+        * GPU (cuda8): working
+        * MPI (openmpi3.0): **not working, hangs when launching HOOMD with mpirun**
