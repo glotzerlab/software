@@ -8,8 +8,8 @@ This repository hosts Dockerfiles for software developed and used by the
 to be used together, so we install it all together in one image and version it by date (YYYY.MM). Each image contains
 the latest versions of all installed software available at the beginning of that month.
 
-These images are hosted on the Docker Hub in the ``glotzerlab`` organization: TODO: link. This README is intended for
-Dockerfile image developers and those who wish to modify these images.
+These images are hosted on the Docker Hub in the [glotzerlab organization](https://hub.docker.com/r/glotzerlab/software/):
+This README is intended for Dockerfile image developers and those who wish to modify these images.
 
 To prevent combinatorial explosion of the number of images (i.e. multiple MPI versions combined with multiple CUDA
 versions), we only introduce new images where absolutely necessary to support a wide number of users. Supporting dozens
