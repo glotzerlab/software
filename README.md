@@ -76,7 +76,9 @@ Updated: 2018-03-20.
 * TACC Stampede2 (w/ Singularity)
     * **status unknown**, stampede2 was down for maintenance at time of testing
 * OLCF Titan (w/ Singularity):
-    * **HOOMD fails to compile in the container-builder environment**, workaround unknown at this time
+    * Serial CPU: n/a - Titan only runs jobs with aprun
+    * GPU (olcf container-builder): working
+    * MPI (olcf container-builder): working
 * University of Michigan Flux (w/ Singularity):
     * Serial CPU: working
     * GPU (cuda8): working
