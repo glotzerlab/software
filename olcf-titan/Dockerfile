@@ -5,6 +5,8 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
   cmake \
   curl \
   cython3 \
+  g++-4.9 \
+  gcc-4.9 \
   git \
   ipython3 \
   libboost-dev \
@@ -34,6 +36,9 @@ ENV CPATH=/opt/embree-2.17.1.x86_64.linux/include:$CPATH \
 RUN curl -sSL https://github.com/embree/embree/releases/download/v2.17.1/embree-2.17.1.x86_64.linux.tar.gz \
     | tar -xzC /opt \
     && rm -rf /opt/embree-2.17.1.x86_64.linux/include/bin
+
+ENV CC=/usr/bin/gcc-4.9
+ENV CXX=/usr/bin/g++-4.9
 
 RUN curl -sSL https://glotzerlab.engin.umich.edu/Downloads/hoomd/hoomd-v2.2.4.tar.gz \
     | tar -xzC /root \

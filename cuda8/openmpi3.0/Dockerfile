@@ -5,6 +5,8 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
   cmake \
   curl \
   cython3 \
+  g++-4.9 \
+  gcc-4.9 \
   git \
   ipython3 \
   libboost-dev \
@@ -86,6 +88,9 @@ RUN curl -sSL http://mvapich.cse.ohio-state.edu/download/mvapich/osu-micro-bench
    && cd mpi \
    && make install -j8 \
    && rm -rf /root/osu-micro-benchmarks-5.4.1
+
+ENV CC=/usr/bin/gcc
+ENV CXX=/usr/bin/g++
 
 RUN curl -sSL https://glotzerlab.engin.umich.edu/Downloads/hoomd/hoomd-v2.2.4.tar.gz \
     | tar -xzC /root \
