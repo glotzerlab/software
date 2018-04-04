@@ -1,5 +1,8 @@
 #!/bin/bash
 
+set -u
+set -e
+
 DATE_TAG=$(date +%Y.%m)
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
