@@ -82,11 +82,11 @@ RUN curl -sSL https://glotzerlab.engin.umich.edu/Downloads/signac-flow/signac-fl
     && python3 setup.py install \
     && rm -rf /root/signac-flow-v0.5.6
 
-RUN curl -sSL https://glotzerlab.engin.umich.edu/Downloads/gsd/gsd-v1.5.1.tar.gz \
+RUN curl -sSL https://glotzerlab.engin.umich.edu/Downloads/gsd/gsd-v1.5.2.tar.gz \
     | tar -xzC /root \
-    && cd /root/gsd-v1.5.1 \
+    && cd /root/gsd-v1.5.2 \
     && mkdir build \
     && cd build \
     && cmake ../ -DCMAKE_INSTALL_PREFIX=`python3 -c "import site; print(site.getsitepackages()[0])"` \
     && make install -j10 \
-    && rm -rf /root/gsd-v1.5.1
+    && rm -rf /root/gsd-v1.5.2
