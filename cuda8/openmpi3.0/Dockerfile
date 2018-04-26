@@ -13,8 +13,10 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
   libedit-dev \
   libtbb-dev \
   libsqlite3-dev \
+  llvm-5.0-dev \
   python3 \
   python3-dev \
+  python3-matplotlib \
   python3-nose \
   python3-numpy \
   python3-pil \
@@ -26,6 +28,9 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
   zlib1g-dev \
   ca-certificates \
   && rm -rf /var/lib/apt/lists/*
+
+# put clang on the path
+ENV PATH=$PATH:/usr/lib/llvm-5.0/bin
 
 # embree
 ENV CPATH=/opt/embree-2.17.1.x86_64.linux/include:$CPATH \
@@ -94,24 +99,25 @@ RUN curl -sSL http://mvapich.cse.ohio-state.edu/download/mvapich/osu-micro-bench
    && cd mpi \
    && make install -j8 \
    && rm -rf /root/osu-micro-benchmarks-5.4.1
-
-RUN curl -sSL https://glotzerlab.engin.umich.edu/Downloads/hoomd/hoomd-v2.2.4.tar.gz \
+# LD_LIBRARY_PATH is a workaround for hoomd v2.3.0, it should not be needed in 2.3.1+
+ENV LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/lib/python3.5/dist-packages/hoomd
+RUN curl -sSL https://glotzerlab.engin.umich.edu/Downloads/hoomd/hoomd-v2.3.0.tar.gz \
     | tar -xzC /root \
-    && cd /root/hoomd-v2.2.4 \
+    && cd /root/hoomd-v2.3.0 \
     && mkdir build \
     && cd build \
-    && cmake ../ -DENABLE_CUDA=on -DENABLE_MPI=on -DBUILD_TESTING=off -DCMAKE_INSTALL_PREFIX=`python3 -c "import site; print(site.getsitepackages()[0])"` \
+    && cmake ../ -DENABLE_CUDA=on -DENABLE_MPI=on -DENABLE_TBB=on -DBUILD_JIT=on -DBUILD_TESTING=off -DCMAKE_INSTALL_PREFIX=`python3 -c "import site; print(site.getsitepackages()[0])"` \
     && make install -j10 \
-    && rm -rf /root/hoomd-v2.2.4
+    && rm -rf /root/hoomd-v2.3.0
 
-RUN curl -sSL https://glotzerlab.engin.umich.edu/Downloads/freud/freud-v0.7.0.tar.gz \
+RUN curl -sSL https://glotzerlab.engin.umich.edu/Downloads/freud/freud-v0.8.0.tar.gz \
     | tar -xzC /root \
-    && cd /root/freud-v0.7.0 \
+    && cd /root/freud-v0.8.0 \
     && mkdir build \
     && cd build \
     && cmake ../ -DCMAKE_INSTALL_PREFIX=`python3 -c "import site; print(site.getsitepackages()[0])"` \
     && make install -j10 \
-    && rm -rf /root/freud-v0.7.0
+    && rm -rf /root/freud-v0.8.0
 
 RUN curl -sSL https://glotzerlab.engin.umich.edu/Downloads/fresnel/fresnel-v0.5.0.tar.gz \
     | tar -xzC /root \

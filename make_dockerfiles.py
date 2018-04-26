@@ -14,9 +14,9 @@ versions['EMBREE_VERSION'] = '2.17.1'
 
 # glotzer lab
 repo_version['fresnel']     = versions['FRESNEL_VERSION']     = 'v0.5.0'
-repo_version['freud']       = versions['FREUD_VERSION']       = 'v0.7.0'
+repo_version['freud']       = versions['FREUD_VERSION']       = 'v0.8.0'
 repo_version['gsd']         = versions['GSD_VERSION']         = 'v1.5.2'
-repo_version['hoomd-blue']  = versions['HOOMD_VERSION']       = 'v2.2.4'
+repo_version['hoomd-blue']  = versions['HOOMD_VERSION']       = 'v2.3.0'
 repo_version['signac']      = versions['SIGNAC_VERSION']      = 'v0.9.2'
 repo_version['signac-flow'] = versions['SIGNAC_FLOW_VERSION'] = 'v0.5.6'
 
