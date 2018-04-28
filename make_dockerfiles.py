@@ -29,7 +29,10 @@ if __name__ == '__main__':
 
     env = jinja2.Environment(loader=jinja2.FileSystemLoader('template'))
     base_template = env.get_template('base.jinja')
+    ibtools_template = env.get_template('ib-tools.jinja')
+    bridges_template = env.get_template('bridges.jinja')
     openmpi_template = env.get_template('openmpi.jinja')
+    mvapich2_template = env.get_template('mvapich2.jinja')
     titan_template = env.get_template('titan.jinja')
     software_template = env.get_template('software.jinja')
 
@@ -39,9 +42,37 @@ if __name__ == '__main__':
           MAKEJOBS=10,
           **versions)
 
-    write('cuda8/openmpi3.0/Dockerfile', [base_template, openmpi_template, software_template],
+    write('cuda8/flux/Dockerfile', [base_template, ibtools_template, openmpi_template, software_template],
           FROM='nvidia/cuda:8.0-devel-ubuntu16.04',
-          OPENMPI_VERSION='3.0.0',
+          OPENMPI_VERSION='3.0',
+          OPENMPI_PATCHLEVEL='0',
+          OSU_MICROBENCHMARK_VERSION='5.4.1',
+          ENABLE_MPI='on',
+          MAKEJOBS=10,
+          **versions)
+
+    write('cuda8/comet/Dockerfile', [base_template, ibtools_template, openmpi_template, software_template],
+          FROM='nvidia/cuda:8.0-devel-ubuntu16.04',
+          OPENMPI_VERSION='1.8',
+          OPENMPI_PATCHLEVEL='4',
+          OSU_MICROBENCHMARK_VERSION='5.4.1',
+          ENABLE_MPI='on',
+          MAKEJOBS=10,
+          **versions)
+
+    write('cuda8/bridges/Dockerfile', [base_template, ibtools_template, bridges_template, openmpi_template, software_template],
+          FROM='nvidia/cuda:8.0-devel-ubuntu16.04',
+          OPENMPI_VERSION='1.10',
+          OPENMPI_PATCHLEVEL='4',
+          OSU_MICROBENCHMARK_VERSION='5.4.1',
+          ENABLE_MPI='on',
+          MAKEJOBS=10,
+          **versions)
+
+    write('cuda8/stampede2/Dockerfile', [base_template, ibtools_template, bridges_template, mvapich2_template, software_template],
+          FROM='nvidia/cuda:8.0-devel-ubuntu16.04',
+          MVAPICH_VERSION='2.3',
+          MVAPICH_PATCHLEVEL='rc1',
           OSU_MICROBENCHMARK_VERSION='5.4.1',
           ENABLE_MPI='on',
           MAKEJOBS=10,

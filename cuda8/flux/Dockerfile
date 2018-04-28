@@ -5,8 +5,6 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
   cmake \
   curl \
   cython3 \
-  g++-4.9 \
-  gcc-4.9 \
   git \
   ipython3 \
   libboost-dev \
@@ -48,48 +46,39 @@ RUN mkdir -p /nfs \
     mkdir -p /scratch \
     mkdir -p /projects
 
-# IB drivers for MPI (https://community.mellanox.com/docs/DOC-2431)
-# TODO: install MLNX_OFED
+# packages needed to support IB on Comet
+# https://github.com/mkandes/naked-singularity/blob/master/definition-files/us/ucsd/sdsc/comet/ubuntu/ubuntu-openmpi.def
 RUN apt-get update && apt-get install -y --no-install-recommends \
-  libhwloc-plugins \
-  libhwloc5 \
+  dkms \
   infiniband-diags \
-  libibverbs* \
+  libibverbs-dev \
   ibacm \
-  librdmacm* \
-  libmlx4* \
-  libmlx5* \
-  libpsm-infinipath1 \
+  librdmacm-dev \
+  libmlx4-dev \
+  libmlx5-dev \
   mstflint \
-  libibcm.* \
-  libibmad.* \
-  libibumad* \
+  libibcm-dev \
+  libibmad-dev \
+  libibumad-dev \
   opensm \
   srptools \
-  libmlx4-dev \
-  rdmacm-utils \
-  ibverbs-utils \
-  perftest \
-  vlan \
   ibutils \
+  ibverbs-utils \
+  rdmacm-utils \
+  perftest \
+  numactl \
+  libnuma-dev \
   libnl-3-200 \
   libnl-route-3-200 \
   libnl-route-3-dev \
   libnl-utils \
-  libnuma-dev \
-  libpciaccess0 \
-  byacc \
-  flex \
   && rm -rf /var/lib/apt/lists/*
-
 
 RUN curl -sSL https://www.open-mpi.org/software/ompi/v3.0/downloads/openmpi-3.0.0.tar.bz2 \
    | tar -xjC /root \
    && cd /root/openmpi-3.0.0 \
    && ./configure --prefix=/usr \
-                  --with-verbs \
-                  --disable-dlopen --enable-shared \
-   && make install -j8 \
+   && make all install \
    && rm -rf /root/openmpi-3.0.0
 
 RUN curl -sSL http://mvapich.cse.ohio-state.edu/download/mvapich/osu-micro-benchmarks-5.4.1.tar.gz \
@@ -97,7 +86,7 @@ RUN curl -sSL http://mvapich.cse.ohio-state.edu/download/mvapich/osu-micro-bench
    && cd /root/osu-micro-benchmarks-5.4.1 \
    && ./configure --prefix=/opt/osu-micro-benchmarks CC=`which mpicc` CXX=`which mpicxx` \
    && cd mpi \
-   && make install -j8 \
+   && make install \
    && rm -rf /root/osu-micro-benchmarks-5.4.1
 # LD_LIBRARY_PATH is a workaround for hoomd v2.3.0, it should not be needed in 2.3.1+
 ENV LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/lib/python3.5/dist-packages/hoomd

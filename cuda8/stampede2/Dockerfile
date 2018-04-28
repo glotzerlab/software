@@ -1,4 +1,4 @@
-FROM olcf/titan:ubuntu-16.04_2018-01-18
+FROM nvidia/cuda:8.0-devel-ubuntu16.04
 
 RUN apt-get update && apt-get install -y --no-install-recommends \
   clang-5.0 \
@@ -46,10 +46,58 @@ RUN mkdir -p /nfs \
     mkdir -p /scratch \
     mkdir -p /projects
 
-ENV CC=/usr/bin/gcc-4.9
-ENV CXX=/usr/bin/g++-4.9
-ENV CFLAGS=-D_FORCE_INLINES
-ENV CXXFLAGS=-D_FORCE_INLINES
+# packages needed to support IB on Comet
+# https://github.com/mkandes/naked-singularity/blob/master/definition-files/us/ucsd/sdsc/comet/ubuntu/ubuntu-openmpi.def
+RUN apt-get update && apt-get install -y --no-install-recommends \
+  dkms \
+  infiniband-diags \
+  libibverbs-dev \
+  ibacm \
+  librdmacm-dev \
+  libmlx4-dev \
+  libmlx5-dev \
+  mstflint \
+  libibcm-dev \
+  libibmad-dev \
+  libibumad-dev \
+  opensm \
+  srptools \
+  ibutils \
+  ibverbs-utils \
+  rdmacm-utils \
+  perftest \
+  numactl \
+  libnuma-dev \
+  libnl-3-200 \
+  libnl-route-3-200 \
+  libnl-route-3-dev \
+  libnl-utils \
+  && rm -rf /var/lib/apt/lists/*
+
+# Intels OPA drivers don't support ubuntu. Copying these two files from Bridges seems to be the minimum
+# needed to get the high performance interconnect working.
+COPY hfi1.driver /etc/libibverbs.d/
+COPY libhfi1verbs-rdmav2.so /usr/lib/
+
+RUN apt-get update && apt-get install -y --no-install-recommends \
+  byacc \
+  flex \
+  && rm -rf /var/lib/apt/lists/*
+
+RUN curl -sSL http://mvapich.cse.ohio-state.edu/download/mvapich/mv2/mvapich2-2.3rc1.tar.gz \
+   | tar -xzC /root \
+   && cd /root/mvapich2-2.3rc1 \
+   && ./configure --prefix=/usr --disable-fortran \
+   && make install \
+   && rm -rf /root/mvapich2-2.3rc1
+
+RUN curl -sSL http://mvapich.cse.ohio-state.edu/download/mvapich/osu-micro-benchmarks-5.4.1.tar.gz \
+   | tar -xzC /root \
+   && cd /root/osu-micro-benchmarks-5.4.1 \
+   && ./configure --prefix=/opt/osu-micro-benchmarks CC=`which mpicc` CXX=`which mpicxx` \
+   && cd mpi \
+   && make install \
+   && rm -rf /root/osu-micro-benchmarks-5.4.1
 # LD_LIBRARY_PATH is a workaround for hoomd v2.3.0, it should not be needed in 2.3.1+
 ENV LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/lib/python3.5/dist-packages/hoomd
 RUN curl -sSL https://glotzerlab.engin.umich.edu/Downloads/hoomd/hoomd-v2.3.0.tar.gz \
@@ -58,7 +106,7 @@ RUN curl -sSL https://glotzerlab.engin.umich.edu/Downloads/hoomd/hoomd-v2.3.0.ta
     && mkdir build \
     && cd build \
     && cmake ../ -DENABLE_CUDA=on -DENABLE_MPI=on -DENABLE_TBB=on -DBUILD_JIT=on -DBUILD_TESTING=off -DCMAKE_INSTALL_PREFIX=`python3 -c "import site; print(site.getsitepackages()[0])"` \
-    && make install -j2 \
+    && make install -j10 \
     && rm -rf /root/hoomd-v2.3.0
 
 RUN curl -sSL https://glotzerlab.engin.umich.edu/Downloads/freud/freud-v0.8.0.tar.gz \
@@ -67,7 +115,7 @@ RUN curl -sSL https://glotzerlab.engin.umich.edu/Downloads/freud/freud-v0.8.0.ta
     && mkdir build \
     && cd build \
     && cmake ../ -DCMAKE_INSTALL_PREFIX=`python3 -c "import site; print(site.getsitepackages()[0])"` \
-    && make install -j2 \
+    && make install -j10 \
     && rm -rf /root/freud-v0.8.0
 
 RUN curl -sSL https://glotzerlab.engin.umich.edu/Downloads/fresnel/fresnel-v0.5.0.tar.gz \
@@ -76,7 +124,7 @@ RUN curl -sSL https://glotzerlab.engin.umich.edu/Downloads/fresnel/fresnel-v0.5.
     && mkdir build \
     && cd build \
     && cmake ../ -DENABLE_TBB=on -DENABLE_EMBREE=on -DENABLE_CUDA=off -DENABLE_OPTIX=off -DCMAKE_INSTALL_PREFIX=`python3 -c "import site; print(site.getsitepackages()[0])"` \
-    && make install -j2 \
+    && make install -j10 \
     && rm -rf /root/fresnel-v0.5.0
 
 RUN curl -sSL https://glotzerlab.engin.umich.edu/Downloads/signac/signac-v0.9.2.tar.gz \
@@ -97,5 +145,5 @@ RUN curl -sSL https://glotzerlab.engin.umich.edu/Downloads/gsd/gsd-v1.5.2.tar.gz
     && mkdir build \
     && cd build \
     && cmake ../ -DCMAKE_INSTALL_PREFIX=`python3 -c "import site; print(site.getsitepackages()[0])"` \
-    && make install -j2 \
+    && make install -j10 \
     && rm -rf /root/gsd-v1.5.2

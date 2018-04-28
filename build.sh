@@ -11,7 +11,22 @@ docker build $DIR/cuda8 \
              -t glotzerlab/software:cuda8 \
              -t glotzerlab/software:${DATE_TAG}-cuda8
 
-docker build $DIR/cuda8/openmpi3.0 \
-             -t glotzerlab/software:openmpi3.0 \
-             -t glotzerlab/software:cuda8-openmpi3.0 \
-             -t glotzerlab/software:${DATE_TAG}-cuda8-openmpi3.0
+docker build $DIR/cuda8/flux \
+             -t glotzerlab/software:flux \
+             -t glotzerlab/software:cuda8-flux \
+             -t glotzerlab/software:${DATE_TAG}-cuda8-flux
+
+docker build $DIR/cuda8/comet \
+             -t glotzerlab/software:comet \
+             -t glotzerlab/software:cuda8-comet \
+             -t glotzerlab/software:${DATE_TAG}-cuda8-comet
+
+docker build $DIR/cuda8/bridges \
+             -t glotzerlab/software:bridges \
+             -t glotzerlab/software:cuda8-bridges \
+             -t glotzerlab/software:${DATE_TAG}-cuda8-bridges
+
+docker build $DIR/cuda8/stampede2 \
+             -t glotzerlab/software:stampede2 \
+             -t glotzerlab/software:cuda8-stampede2 \
+             -t glotzerlab/software:${DATE_TAG}-cuda8-stampede2

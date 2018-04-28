@@ -5,8 +5,6 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
   cmake \
   curl \
   cython3 \
-  g++-4.9 \
-  gcc-4.9 \
   git \
   ipython3 \
   libboost-dev \

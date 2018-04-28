@@ -1,0 +1,6 @@
+
+
+# Intels OPA drivers don't support ubuntu. Copying these two files from Bridges seems to be the minimum
+# needed to get the high performance interconnect working.
+COPY hfi1.driver /etc/libibverbs.d/
+COPY libhfi1verbs-rdmav2.so /usr/lib/

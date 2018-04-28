@@ -27,7 +27,7 @@ Images are stored in the docker hub repository ``glotzerlab/software``.
 For future expansion, images are put in a top level directory named after their base image: Currently ``cuda8`` for the ``nvidia/cuda-8.0-devel-ubuntu16.04`` image above. Additional layers are added in sub directories under the base.
 
 * ``glotzerlab/cuda8/Dockerfile`` - base image with no MPI support
-* ``glotzerlab/cuda8/openmpi3.0/Dockerfile`` - Add OpenMPI 3.0
+* ``glotzerlab/cuda8/${cluster}/Dockerfile`` - Add MPI support for a given cluster
 
 Due to the use of site-specific software, OLCF Titan and Summit require base layers tailored specifically to them. Also, these images must be built within the confines of the [container-builder service at OLCF](https://www.olcf.ornl.gov/container-builder/).
 
@@ -40,6 +40,12 @@ The ``build.sh`` script builds all of the images and tags them with the current 
 
 TODO: consider how to support OptiX for fresnel.
 
+## Benchmarking
+
+The image contains the [OSU microbenchmark suite](http://mvapich.cse.ohio-state.edu/benchmarks/) to verify proper MPI operation and high speed network performance:
+
+    mpirun -N 1 singularity exec ${IMAGE} /opt/osu-micro-benchmarks/libexec/osu-micro-benchmarks/mpi/pt2pt/osu_bibw
+
 ## What works (and what doesn't)
 
 Results of testing these images on a number of local and national supercomputer centers.
@@ -48,31 +54,27 @@ Updated: 2018-03-20.
 
 * SDSC Comet (w/ Singularity):
     * Serial CPU: working
-    * GPU (cuda8): working
-    * MPI (openmpi3.0): **not supported**
-    * Note: *Running the image will create the file =8.0 in your current working directory. Requested singularity upgrade
-      to fix this issue.*
+    * Serial GPU (cuda8): working
+    * MPI (comet): working
+    * Note: *Running the image will create the file =8.0 in your current working directory. This issue will go away when SDSC updates to a newer version of singularity
 * PSC Bridges (w/ Singularity):
     * Serial CPU: working
-    * GPU (cuda8): working
-    * MPI (openmpi3.0): **not supported**
+    * Serial GPU (cuda8): working
+    * MPI (bridges): working
 * TACC Stampede2 (w/ Singularity)
-    * **status unknown**, stampede2 was down for maintenance at time of testing
+    * Serial CPU: working
+    * MPI (stampede2): working
 * OLCF Titan (w/ Singularity):
-    * Serial CPU: n/a - Titan only runs jobs with aprun
-    * GPU (olcf container-builder): working
-    * MPI (olcf container-builder): working
+    * n/a - Singularity has been removed from Titan
 * University of Michigan Flux (w/ Singularity):
     * Serial CPU: working
-    * GPU (cuda8): working
-    * MPI (openmpi3.0): working (**infiniband enabled on most nodes, but not all**)
-    * Note: *Running the image will create the file =8.0 in your current working directory. Requested singularity upgrade
-      to fix this issue.*
+    * Serial GPU (cuda8): working
+    * MPI (flux): working (**infiniband enabled on most nodes, but not all**)
 * Arch linux workstation (with openmpi 3.0.0 installed):
     * Docker:
         * Serial CPU: working
         * GPU (runtime=nvidia): working
     * Singularity:
         * Serial CPU: working
-        * GPU (cuda8): working
-        * MPI (openmpi3.0): **not working, hangs when launching HOOMD with mpirun**
+        * Serial GPU (cuda8): working
+        * MPI: **not supported**

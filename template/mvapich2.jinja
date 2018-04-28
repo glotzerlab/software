@@ -1,0 +1,21 @@
+
+
+RUN apt-get update && apt-get install -y --no-install-recommends \
+  byacc \
+  flex \
+  && rm -rf /var/lib/apt/lists/*
+
+RUN curl -sSL http://mvapich.cse.ohio-state.edu/download/mvapich/mv2/mvapich2-{{ MVAPICH_VERSION }}{{ MVAPICH_PATCHLEVEL }}.tar.gz \
+   | tar -xzC /root \
+   && cd /root/mvapich2-{{ MVAPICH_VERSION }}{{ MVAPICH_PATCHLEVEL }} \
+   && ./configure --prefix=/usr --disable-fortran \
+   && make install \
+   && rm -rf /root/mvapich2-{{ MVAPICH_VERSION }}{{ MVAPICH_PATCHLEVEL }}
+
+RUN curl -sSL http://mvapich.cse.ohio-state.edu/download/mvapich/osu-micro-benchmarks-{{ OSU_MICROBENCHMARK_VERSION }}.tar.gz \
+   | tar -xzC /root \
+   && cd /root/osu-micro-benchmarks-{{ OSU_MICROBENCHMARK_VERSION }} \
+   && ./configure --prefix=/opt/osu-micro-benchmarks CC=`which mpicc` CXX=`which mpicxx` \
+   && cd mpi \
+   && make install \
+   && rm -rf /root/osu-micro-benchmarks-{{ OSU_MICROBENCHMARK_VERSION }}
