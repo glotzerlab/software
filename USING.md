@@ -18,6 +18,8 @@ The images also contain commonly used tools:
   * pytest
   * sphinx
 
+Request additional tool installations by opening an issue at [docker-glotzerlab-software Bitbucket project](https://bitbucket.org/glotzer/docker-glotzerlab-software). Only **standard** tools of general interest to a large number of users belong in the base image. You can [create your own Docker image](https://docs.docker.com/get-started/part2/) to extend the ``glotzerlab/software`` base with your custom tools.
+
 ## Tags
 
 The following images are available:
@@ -28,7 +30,8 @@ The following images are available:
   * ``bridges``, ``cuda8-bridges`` - Latest image built with CUDA 8.0, MPI, and network drivers for PSC Bridges
   * ``stampede2``, ``cuda8-stampede2`` - Latest image built with CUDA 8.0, MPI, and network drivers for TACC Stampede2
   * ``YYYY.MM-cuda?`` - Archived images, built with the indicated versions of CUDA (no MPI)
-  * ``YYYY.MM-cuda?-*`` - Archived images, built with the indicated versions of CUDA, MPI, and network drivers for the named cluster.
+  * ``YYYY.MM-cuda?-${network}-${mpi}`` - Archived images, built with the indicated versions of CUDA, IB network drivers, and MPI.
+  * ``YYYY.MM-cuda?-${cluster}`` - Archived images, built with the indicated versions of CUDA, MPI, and network drivers for the named cluster.
 
 See the tags tab for a list of these archived images.
 
@@ -81,7 +84,7 @@ Refer to your system's documentation.
 
 [Singularity](http://singularity.lbl.gov/) supports MPI applications within containers. However, MPI enabled-containers are not fully portable. The MPI libraries on the host and within the container must be compatible, and the container must have the correct drivers installed to access the high performance interconnect.
 
-There are specific tagged versions of the ``glotzerlab/software`` container to support specific clusters. If your cluster is not on the list, try one with a similar interconnect and MPI software version. If that doesn't work, you will need to modify the ``glotzerlab/software`` Dockerfiles to match and build your own container for your system.
+There are specific tagged versions of the ``glotzerlab/software`` container to support specific clusters. If your cluster is not on the list, try one with a similar interconnect and MPI software version. If that doesn't work, clone the [docker-glotzerlab-software git repository](https://bitbucket.org/glotzer/docker-glotzerlab-software) Dockerfiles accordingly and build a container for your system.
 
 Most clusters have very limited home directory quotas. Set the singularity cache dir to scratch file space and pull on scratch filesystems to avoid quota limits:
 

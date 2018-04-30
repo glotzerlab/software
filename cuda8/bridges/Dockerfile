@@ -46,16 +46,12 @@ RUN mkdir -p /nfs \
     mkdir -p /scratch \
     mkdir -p /projects
 
-# packages needed to support IB on Comet
-# https://github.com/mkandes/naked-singularity/blob/master/definition-files/us/ucsd/sdsc/comet/ubuntu/ubuntu-openmpi.def
 RUN apt-get update && apt-get install -y --no-install-recommends \
   dkms \
   infiniband-diags \
   libibverbs-dev \
   ibacm \
   librdmacm-dev \
-  libmlx4-dev \
-  libmlx5-dev \
   mstflint \
   libibcm-dev \
   libibmad-dev \
