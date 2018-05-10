@@ -6,16 +6,26 @@ These images contain software developed and used by the [Glotzer lab](http://glo
   * [Freud](https://bitbucket.org/glotzer/freud)
   * [GSD](https://bitbucket.org/glotzer/gsd)
   * [HOOMD-blue](http://glotzerlab.engin.umich.edu/hoomd-blue/)
+  * [libgetar](https://bitbucket.org/glotzer/libgetar/)
+  * [Pythia](https://bitbucket.org/glotzer/pythia/)
+  * [Rowan](https://bitbucket.org/glotzer/rowan/)
+  * [Plato](https://bitbucket.org/glotzer/plato/)
   * [Signac](http://signac.io)
   * [Signac-flow](http://signac.io)
 
 The images also contain commonly used tools:
 
+  * ffmpeg
+  * h5py
+  * jupyter
   * LLVM/clang
-  * python3
   * matplotlib
+  * mpi4py
   * numpy
   * pytest
+  * python3
+  * scipy
+  * scikit-learn
   * sphinx
 
 Request additional tool installations by opening an issue at [docker-glotzerlab-software Bitbucket project](https://bitbucket.org/glotzer/docker-glotzerlab-software). Only **standard** tools of general interest to a large number of users belong in the base image. You can [create your own Docker image](https://docs.docker.com/get-started/part2/) to extend the ``glotzerlab/software`` base with your custom tools.

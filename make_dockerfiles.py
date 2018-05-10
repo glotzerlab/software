@@ -11,12 +11,17 @@ repo_version = {}
 
 # dependencies
 versions['EMBREE_VERSION'] = '2.17.1'
+versions['MPI4PY_VERSION'] = '3.0.0'
 
 # glotzer lab
 repo_version['fresnel']     = versions['FRESNEL_VERSION']     = 'v0.5.0'
-repo_version['freud']       = versions['FREUD_VERSION']       = 'v0.8.0'
+repo_version['freud']       = versions['FREUD_VERSION']       = 'v0.8.1'
 repo_version['gsd']         = versions['GSD_VERSION']         = 'v1.5.2'
 repo_version['hoomd-blue']  = versions['HOOMD_VERSION']       = 'v2.3.0'
+repo_version['libgetar']    = versions['LIBGETAR_VERSION']    = 'v0.5.4'
+repo_version['pythia']      = versions['PYTHIA_VERSION']      = 'v0.2.2'
+repo_version['rowan']       = versions['ROWAN_VERSION']       = 'v0.6.1'
+repo_version['plato']       = versions['PLATO_VERSION']       = 'v1.0.0'
 repo_version['signac']      = versions['SIGNAC_VERSION']      = 'v0.9.2'
 repo_version['signac-flow'] = versions['SIGNAC_FLOW_VERSION'] = 'v0.5.6'
 

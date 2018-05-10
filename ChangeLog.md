@@ -1,5 +1,27 @@
 # Change log
 
+## next release (TBD)
+
+Additional commonly used tools:
+
+  * ffmpeg
+  * h5py
+  * jupyter
+  * scipy
+  * scikit-learn
+
+Glotzerlab software versions:
+
+* Fresnel v0.5.0
+* Freud v0.8.1
+* GSD v1.5.2
+* HOOMD-blue v2.3.0
+* Pythia v0.2.2
+* Rowan v0.6.1
+* Plato v1.0.0
+* Signac v0.9.2
+* Signac-flow v0.5.6
+
 ## 2018.04
 
 *Changes*
