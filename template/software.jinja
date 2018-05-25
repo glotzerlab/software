@@ -1,4 +1,8 @@
 
+# set system specific cflags
+ENV CFLAGS="{{CFLAGS}}"
+ENV CXXFLAGS="{{CFLAGS}}"
+
 # LD_LIBRARY_PATH is a workaround for hoomd v2.3.0, it should not be needed in 2.3.1+
 ENV LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/lib/python3.5/dist-packages/hoomd
 RUN curl -sSL https://glotzerlab.engin.umich.edu/Downloads/hoomd/hoomd-{{ HOOMD_VERSION }}.tar.gz \

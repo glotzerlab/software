@@ -51,6 +51,10 @@ RUN mkdir -p /nfs \
     mkdir -p /oasis \
     mkdir -p /scratch \
     mkdir -p /projects
+# set system specific cflags
+ENV CFLAGS=""
+ENV CXXFLAGS=""
+
 # LD_LIBRARY_PATH is a workaround for hoomd v2.3.0, it should not be needed in 2.3.1+
 ENV LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/lib/python3.5/dist-packages/hoomd
 RUN curl -sSL https://glotzerlab.engin.umich.edu/Downloads/hoomd/hoomd-v2.3.0.tar.gz \
@@ -80,14 +84,14 @@ RUN curl -sSL https://glotzerlab.engin.umich.edu/Downloads/fresnel/fresnel-v0.5.
     && make install -j10 \
     && rm -rf /root/fresnel-v0.5.0
 
-RUN curl -sSL https://glotzerlab.engin.umich.edu/Downloads/gsd/gsd-v1.5.2.tar.gz \
+RUN curl -sSL https://glotzerlab.engin.umich.edu/Downloads/gsd/gsd-v1.5.3.tar.gz \
     | tar -xzC /root \
-    && cd /root/gsd-v1.5.2 \
+    && cd /root/gsd-v1.5.3 \
     && mkdir build \
     && cd build \
     && cmake ../ -DCMAKE_INSTALL_PREFIX=`python3 -c "import site; print(site.getsitepackages()[0])"` \
     && make install -j10 \
-    && rm -rf /root/gsd-v1.5.2
+    && rm -rf /root/gsd-v1.5.3
 
 RUN curl -sSL https://glotzerlab.engin.umich.edu/Downloads/libgetar/libgetar-v0.5.4.tar.gz \
     | tar -xzC /root \
@@ -119,9 +123,9 @@ RUN curl -sSL https://glotzerlab.engin.umich.edu/Downloads/signac/signac-v0.9.2.
     && python3 setup.py install \
     && rm -rf /root/signac-v0.9.2
 
-RUN curl -sSL https://glotzerlab.engin.umich.edu/Downloads/signac-flow/signac-flow-v0.5.6.tar.gz \
+RUN curl -sSL https://glotzerlab.engin.umich.edu/Downloads/signac-flow/signac-flow-v0.6.0.tar.gz \
     | tar -xzC /root \
-    && cd /root/signac-flow-v0.5.6 \
+    && cd /root/signac-flow-v0.6.0 \
     && python3 setup.py install \
-    && rm -rf /root/signac-flow-v0.5.6
+    && rm -rf /root/signac-flow-v0.6.0
 
