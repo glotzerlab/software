@@ -22,6 +22,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
   python3-pil \
   python3-pip \
   python3-pytest \
+  python3-pyqt5 \
   python3-scipy \
   python3-sklearn-lib \
   python3-skimage-lib \
@@ -106,14 +107,14 @@ ENV CXXFLAGS="-march=knl -mmmx -mno-3dnow -msse -msse2 -msse3 -mssse3 -mno-sse4a
 
 # LD_LIBRARY_PATH is a workaround for hoomd v2.3.0, it should not be needed in 2.3.1+
 ENV LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/lib/python3.5/dist-packages/hoomd
-RUN curl -sSL https://glotzerlab.engin.umich.edu/Downloads/hoomd/hoomd-v2.3.0.tar.gz \
+RUN curl -sSL https://glotzerlab.engin.umich.edu/Downloads/hoomd/hoomd-v2.3.1.tar.gz \
     | tar -xzC /root \
-    && cd /root/hoomd-v2.3.0 \
+    && cd /root/hoomd-v2.3.1 \
     && mkdir build \
     && cd build \
     && cmake ../ -DENABLE_CUDA=on -DENABLE_MPI=on -DENABLE_TBB=on -DBUILD_JIT=on -DBUILD_TESTING=off -DCMAKE_INSTALL_PREFIX=`python3 -c "import site; print(site.getsitepackages()[0])"` \
     && make install -j10 \
-    && rm -rf /root/hoomd-v2.3.0
+    && rm -rf /root/hoomd-v2.3.1
 
 RUN curl -sSL https://glotzerlab.engin.umich.edu/Downloads/freud/freud-v0.8.1.tar.gz \
     | tar -xzC /root \
