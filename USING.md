@@ -65,16 +65,15 @@ You can utilize NVIDIA GPUs on local and cloud systems with the NVIDIA container
 
 Many compute clusters, including XSEDE Comet, XSEDE Bridges, XSEDE Stampede2, and University of Michigan Flux support singularity. [Singularity](http://singularity.lbl.gov/) can import docker images.
 
-Pull the container to convert it from docker format to singularity format. A current bug in singularity requires that you set your umask to 002 before pulling:
+Pull the container to convert it from docker format to singularity format. Set the umask to 002 to avoid a bug in Singularity, and set `SINGULARITY_CACHEDIR` to scratch space (if needed to avoid quota limits on your home directory):
 
     umask 002
+    export SINGULARITY_CACHEDIR="$SCRATCH/.singularity"
     singularity pull docker://glotzerlab/software
 
 You can start an interactive session with the following command:
 
     singularity shell software.simg
-
-Note: your file may have the extension ``.img`` or ``.simg`` depending on the version of singularity.
 
 Singularity automatically bind mounts your home directory (and scratch directories on many clusters), so you can easily execute individual commands (i.e. from your job script) like this:
 
@@ -94,15 +93,93 @@ Refer to your system's documentation.
 
 [Singularity](http://singularity.lbl.gov/) supports MPI applications within containers. However, MPI enabled-containers are not fully portable. The MPI libraries on the host and within the container must be compatible, and the container must have the correct drivers installed to access the high performance interconnect.
 
-There are specific tagged versions of the ``glotzerlab/software`` container to support specific clusters. If your cluster is not on the list, try one with a similar interconnect and MPI software version. If that doesn't work, clone the [docker-glotzerlab-software git repository](https://bitbucket.org/glotzer/docker-glotzerlab-software) Dockerfiles accordingly and build a container for your system.
+There are specific tagged versions of the ``glotzerlab/software`` container to support specific clusters. If your cluster is not on the list, try one with a similar interconnect and MPI software version. If that doesn't work, clone the [docker-glotzerlab-software git repository](https://bitbucket.org/glotzer/docker-glotzerlab-software), modify the Dockerfiles accordingly, and build a container for your system.
 
-Most clusters have very limited home directory quotas. Set the singularity cache dir to scratch file space and pull on scratch filesystems to avoid quota limits:
+### SDSC Comet
+
+Comet has OpenMPI 1.8.4 and a Mellanox 4 IB network.
+
+Use Oasis for the singularity cache directory to avoid quota limits on the default home directory:
+
+    export SINGULARITY_CACHEDIR="/oasis/scratch/comet/$USER/temp_project/.singularity"
+
+Pull the container inside an interactive job (pulls on the head node fail with an error message):
+
+    srun --partition=debug --pty --nodes=1 --ntasks-per-node=24 -t 00:30:00 --wait=0 --export=ALL /bin/bash
+    # wait for job to start
+    module load singularity
+    umask 002
+    singularity pull docker://glotzerlab/software:comet
+
+Load the appropriate ``openmpi`` module in your job script before launching singularity:
+
+    module load singularity
+    module unload mvpaich2_ib
+    module load openmpi_ib
+
+Use ibrun to launch singularity, which in turn launches a MPI enabled application in the container:
+
+    ibrun singularity exec --nv software-comet.simg python3 script.py
+
+### SDSC Bridges
+
+Bridges has OpenMPI 1.10.4 and an Intel Omni-Path network.
+
+Use Pylon for the singularity cache directory to avoid quota limits on the default home directory:
 
     export SINGULARITY_CACHEDIR="$SCRATCH/.singularity"
+
+Pull the container with support for Bridges:
+
+    module load singularity
+    umask 002
+    singularity pull docker://glotzerlab/software:bridges
+
+Load the appropriate ``openmpi`` module in your job script before launching singularity:
+
+    source /etc/profile.d/modules.sh
+    module load singularity
+    module unload intel
+    module load mpi/gcc_openmpi
+
+Use mpirun to launch singularity, which in turn launches a MPI enabled application in the container:
+
+    mpirun singularity exec --nv software-bridges.simg python3 script.py
+
+### TACC Stampede2
+
+Stampede2 has mvapich2.3 and an Intel Omni-Path network.
+
+Use scratch for the singularity cache directory to avoid quota limits on the default home directory:
+
+    export SINGULARITY_CACHEDIR="$SCRATCH/.singularity"
+
+Pull the container inside an interactive job:
+
+    idev -p skx-normal -N 1 -m 30
+    # wait for job to start
+    module load tacc-singularity
+    umask 002
+    singularity pull docker://glotzerlab/software:stampede2
+
+Load the appropriate ``mvapich2`` module in your job script before launching singularity:
+
+    module load tacc-singularity
+    module load mvapich2
+
+Use ibrun to launch singularity, which in turn launches a MPI enabled application in the container:
+
+    ibrun singularity exec software-stampede2.img python3 script.py
+
+Warning: Executing the container will create a file named "=8.0" in the current working directory. This bug is fixed in newer versions of Singularity and will go away when TACC updates to a recent version.
 
 ### University of Michigan Flux
 
 Flux has OpenMPI 3.0 and a Mellanox 4 IB network.
+
+Use scratch for the singularity cache directory to avoid quota limits on the default home directory (replace ${YOUR_ACCOUNT} with your account:
+
+    export SINGULARITY_CACHEDIR="/scratch/${YOUR_ACCOUNT}/${USER}.singularity"
 
 Pull the container with support for Flux:
 
@@ -114,66 +191,9 @@ Load the appropriate ``openmpi`` module in your job script before launching sing
     module load gcc/5.4.0
     module load openmpi/3.0.0/gcc/5.4.0
 
-Then you can use mpirun to launch singularity, which in turn launches a MPI enabled application in the container:
+Use mpirun to launch singularity, which in turn launches a MPI enabled application in the container:
 
     mpirun singularity exec --nv software-flux.simg python3 script.py
-
-### SDSC Comet
-
-Comet has OpenMPI 1.8.4 and a Mellanox 4 IB network.
-
-Pull the container with support for Comet:
-
-    umask 002
-    singularity pull docker://glotzerlab/software:comet
-
-Load the appropriate ``openmpi`` module in your job script before launching singularity:
-
-    module load singularity
-    module unload mvpaich2_ib
-    module load openmpi_ib
-
-Then you can use ibrun to launch singularity, which in turn launches a MPI enabled application in the container:
-
-    ibrun singularity exec --nv software-comet.simg python3 script.py
-
-### SDSC Bridges
-
-Bridges has OpenMPI 1.10.4 and an Intel Omni-Path network.
-
-Pull the container with support for Bridges:
-
-    umask 002
-    singularity pull docker://glotzerlab/software:bridges
-
-Load the appropriate ``openmpi`` module in your job script before launching singularity:
-
-    source /etc/profile.d/modules.sh
-    module load singularity
-    module unload intel
-    module load mpi/gcc_openmpi
-
-Then you can use mpirun to launch singularity, which in turn launches a MPI enabled application in the container:
-
-    mpirun singularity exec --nv software-bridges.simg python3 script.py
-
-### TACC Stampede2
-
-Stampede2 has mvapich2.3 and an Intel Omni-Path network.
-
-Pull the container with support for Stampede2:
-
-    umask 002
-    singularity pull docker://glotzerlab/software:stampede2
-
-Load the appropriate ``mvapich2`` module in your job script before launching singularity:
-
-    module load tacc-singularity
-    module load mvapich2
-
-Then you can use ibrun to launch singularity, which in turn launches a MPI enabled application in the container:
-
-    ibrun singularity exec --nv software-stampede2.simg python3 script.py
 
 ## Building images on OLCF systems
 
@@ -182,7 +202,7 @@ OLCF Titan requires special containers that include a Titan specific version of 
     module load container-builder
     container-builder software.img Dockerfile
 
-And you can run the container with GPU and MPI support:
+Run the container with GPU and MPI support (no --nv option needed):
 
     aprun -N 1 singularity software.img python3 run.py
 
