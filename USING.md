@@ -13,7 +13,7 @@ These images contain software developed and used by the [Glotzer lab](http://glo
   * [Signac](http://signac.io)
   * [Signac-flow](http://signac.io)
 
-The images also contain commonly used tools:
+The images also contain common tools:
 
   * ffmpeg
   * h5py
@@ -22,6 +22,10 @@ The images also contain commonly used tools:
   * matplotlib
   * mpi4py
   * numpy
+  * pandas
+  * pillow
+  * PyQt5
+  * pyyaml
   * pytest
   * python3
   * scipy

@@ -2,11 +2,15 @@
 
 ## next release (TBD)
 
-Additional commonly used tools:
+Additional common tools:
 
   * ffmpeg
   * h5py
   * jupyter
+  * pandas
+  * pillow
+  * PyQt5
+  * pyyaml
   * scipy
   * scikit-learn
 

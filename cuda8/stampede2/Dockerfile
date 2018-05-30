@@ -16,19 +16,23 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
   llvm-5.0-dev \
   python3 \
   python3-dev \
+  python3-h5py \
   python3-matplotlib \
   python3-nose \
   python3-numpy \
+  python3-pandas \
   python3-pil \
   python3-pip \
   python3-pytest \
   python3-pyqt5 \
   python3-scipy \
   python3-sklearn-lib \
+  python3-sklearn-pandas \
   python3-skimage-lib \
   python3-setuptools \
   python3-sphinx \
   python3-sphinx-rtd-theme \
+  python3-yaml \
   zlib1g-dev \
   ca-certificates \
   && rm -rf /var/lib/apt/lists/* \
