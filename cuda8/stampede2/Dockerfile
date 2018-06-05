@@ -7,8 +7,6 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
   cython3 \
   ffmpeg \
   git \
-  ipython3 \
-  ipython3-notebook \
   libboost-dev \
   libedit-dev \
   libtbb-dev \
@@ -21,7 +19,6 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
   python3-nose \
   python3-numpy \
   python3-pandas \
-  python3-pil \
   python3-pip \
   python3-pytest \
   python3-pyqt5 \
@@ -36,7 +33,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
   zlib1g-dev \
   ca-certificates \
   && rm -rf /var/lib/apt/lists/* \
-  && pip3 install --no-cache-dir jupyter
+  && pip3 install --no-cache-dir jupyter pillow
 
 # put clang on the path
 ENV PATH=$PATH:/usr/lib/llvm-5.0/bin
@@ -105,12 +102,20 @@ RUN curl -sSL http://mvapich.cse.ohio-state.edu/download/mvapich/osu-micro-bench
    && cd mpi \
    && make install \
    && rm -rf /root/osu-micro-benchmarks-5.4.1
+
+
+# mpi4py
+RUN curl -sSL https://bitbucket.org/mpi4py/mpi4py/downloads/mpi4py-3.0.0.tar.gz \
+    | tar -xzC /root \
+    && cd /root/mpi4py-3.0.0 \
+    && python3 setup.py install \
+    && rm -rf /root/mpi4py-3.0.0
+
+
 # set system specific cflags
 ENV CFLAGS="-march=knl -mmmx -mno-3dnow -msse -msse2 -msse3 -mssse3 -mno-sse4a -mcx16 -msahf -mmovbe -maes -mno-sha -mpclmul -mpopcnt -mabm -mno-lwp -mfma -mno-fma4 -mno-xop -mbmi -mbmi2 -mno-tbm -mavx -mavx2 -msse4.2 -msse4.1 -mlzcnt -mrtm -mhle -mrdrnd -mf16c -mfsgsbase -mrdseed -mprfchw -madx -mfxsr -mxsave -mxsaveopt -mavx512f -mno-avx512er -mavx512cd -mno-avx512pf -mno-prefetchwt1 -mclflushopt -mxsavec -mxsaves -mavx512dq -mavx512bw -mno-avx512vl -mno-avx512ifma -mno-avx512vbmi -mclwb -mno-pcommit -mno-mwaitx --param l1-cache-size=32 --param l1-cache-line-size=64 --param l2-cache-size=33792 -mtune=generic"
 ENV CXXFLAGS="-march=knl -mmmx -mno-3dnow -msse -msse2 -msse3 -mssse3 -mno-sse4a -mcx16 -msahf -mmovbe -maes -mno-sha -mpclmul -mpopcnt -mabm -mno-lwp -mfma -mno-fma4 -mno-xop -mbmi -mbmi2 -mno-tbm -mavx -mavx2 -msse4.2 -msse4.1 -mlzcnt -mrtm -mhle -mrdrnd -mf16c -mfsgsbase -mrdseed -mprfchw -madx -mfxsr -mxsave -mxsaveopt -mavx512f -mno-avx512er -mavx512cd -mno-avx512pf -mno-prefetchwt1 -mclflushopt -mxsavec -mxsaves -mavx512dq -mavx512bw -mno-avx512vl -mno-avx512ifma -mno-avx512vbmi -mclwb -mno-pcommit -mno-mwaitx --param l1-cache-size=32 --param l1-cache-line-size=64 --param l2-cache-size=33792 -mtune=generic"
 
-# LD_LIBRARY_PATH is a workaround for hoomd v2.3.0, it should not be needed in 2.3.1+
-ENV LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/lib/python3.5/dist-packages/hoomd
 RUN curl -sSL https://glotzerlab.engin.umich.edu/Downloads/hoomd/hoomd-v2.3.1.tar.gz \
     | tar -xzC /root \
     && cd /root/hoomd-v2.3.1 \
@@ -183,9 +188,11 @@ RUN curl -sSL https://glotzerlab.engin.umich.edu/Downloads/signac-flow/signac-fl
     && python3 setup.py install \
     && rm -rf /root/signac-flow-v0.6.0
 
+RUN mkdir /hoomd-examples \
+    && curl -sSL https://bitbucket.org/glotzer/hoomd-examples/get/master.tar.gz \
+    | tar -xzC /hoomd-examples --strip-components=1
 
-RUN curl -sSL https://bitbucket.org/mpi4py/mpi4py/downloads/mpi4py-3.0.0.tar.gz \
-    | tar -xzC /root \
-    && cd /root/mpi4py-3.0.0 \
-    && python3 setup.py install \
-    && rm -rf /root/mpi4py-3.0.0
+# configure unprivileged user
+RUN useradd --create-home --shell /bin/bash glotzerlab-software \
+    && chown glotzerlab-software:glotzerlab-software -R /hoomd-examples
+USER glotzerlab-software:glotzerlab-software
