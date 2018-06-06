@@ -158,11 +158,11 @@ RUN curl -sSL https://glotzerlab.engin.umich.edu/Downloads/rowan/rowan-v0.6.1.ta
     && python3 setup.py install \
     && rm -rf /root/rowan-v0.6.1
 
-RUN curl -sSL https://glotzerlab.engin.umich.edu/Downloads/plato/plato-v1.0.0.tar.gz \
+RUN curl -sSL https://glotzerlab.engin.umich.edu/Downloads/plato/plato-v1.1.0.tar.gz \
     | tar -xzC /root \
-    && cd /root/plato-v1.0.0 \
+    && cd /root/plato-v1.1.0 \
     && python3 setup.py install \
-    && rm -rf /root/plato-v1.0.0
+    && rm -rf /root/plato-v1.1.0
 
 RUN curl -sSL https://glotzerlab.engin.umich.edu/Downloads/pythia/pythia-v0.2.2.tar.gz \
     | tar -xzC /root \

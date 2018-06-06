@@ -1,6 +1,6 @@
 # Change log
 
-## next release (TBD)
+## 2018.06
 
 Additional common tools:
 
@@ -20,9 +20,10 @@ Glotzerlab software versions:
 * Freud v0.8.1
 * GSD v1.5.3
 * HOOMD-blue v2.3.1
+* libgetar v0.5.4
 * Pythia v0.2.2
 * Rowan v0.6.1
-* Plato v1.0.0
+* Plato v1.1.0
 * Signac v0.9.2
 * Signac-flow v0.6.0
 
