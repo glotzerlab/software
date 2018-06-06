@@ -7,6 +7,7 @@ Additional common tools:
   * ffmpeg
   * h5py
   * jupyter
+  * mpi4py
   * pandas
   * pillow
   * PyQt5
