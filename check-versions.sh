@@ -5,7 +5,7 @@ packages="fresnel freud gsd hoomd-blue libgetar pythia rowan plato signac signac
 output="package git-version pkgver needs-update\n"
 for package in ${packages}
 do
-    repos=git+ssh://bitbucket.org/glotzer/${package}
+    repos=https://bitbucket.org/glotzer/${package}
 
     git_version=$(git ls-remote --tags ${repos} | sort -t '/' -k 3 -k 4 -V | grep -v { | awk -F/ '{ print $3 }' | tail -n1)
     if [ -z "${git_version}" ]
