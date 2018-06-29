@@ -89,6 +89,10 @@ RUN mkdir /hoomd-examples \
     && curl -sSL https://bitbucket.org/glotzer/hoomd-examples/get/master.tar.gz \
     | tar -xzC /hoomd-examples --strip-components=1
 
+RUN mkdir /fresnel-examples \
+    && curl -sSL https://bitbucket.org/glotzer/fresnel-examples/get/master.tar.gz \
+    | tar -xzC /fresnel-examples --strip-components=1
+
 # configure unprivileged user
 RUN useradd --create-home --shell /bin/bash glotzerlab-software \
     && chown glotzerlab-software:glotzerlab-software -R /hoomd-examples
