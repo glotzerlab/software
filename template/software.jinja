@@ -5,7 +5,7 @@
 RUN curl -sSL https://bitbucket.org/mpi4py/mpi4py/downloads/mpi4py-{{ MPI4PY_VERSION }}.tar.gz \
     | tar -xzC /root \
     && cd /root/mpi4py-{{ MPI4PY_VERSION }} \
-    && python3 setup.py install \
+    && python3 -m pip install --no-deps --ignore-installed . \
     && rm -rf /root/mpi4py-{{ MPI4PY_VERSION }}
 {% endif %}
 
@@ -52,37 +52,37 @@ RUN curl -sSL https://glotzerlab.engin.umich.edu/Downloads/gsd/gsd-{{ GSD_VERSIO
 RUN curl -sSL https://glotzerlab.engin.umich.edu/Downloads/libgetar/libgetar-{{ LIBGETAR_VERSION }}.tar.gz \
     | tar -xzC /root \
     && cd /root/libgetar-{{ LIBGETAR_VERSION }} \
-    && python3 setup.py install \
+    && python3 -m pip install --no-deps --ignore-installed . \
     && rm -rf /root/libgetar-{{ LIBGETAR_VERSION }}
 
 RUN curl -sSL https://glotzerlab.engin.umich.edu/Downloads/rowan/rowan-{{ ROWAN_VERSION }}.tar.gz \
     | tar -xzC /root \
     && cd /root/rowan-{{ ROWAN_VERSION }} \
-    && python3 setup.py install \
+    && python3 -m pip install --no-deps --ignore-installed . \
     && rm -rf /root/rowan-{{ ROWAN_VERSION }}
 
 RUN curl -sSL https://glotzerlab.engin.umich.edu/Downloads/plato/plato-{{ PLATO_VERSION }}.tar.gz \
     | tar -xzC /root \
     && cd /root/plato-{{ PLATO_VERSION }} \
-    && python3 setup.py install \
+    && python3 -m pip install --no-deps --ignore-installed . \
     && rm -rf /root/plato-{{ PLATO_VERSION }}
 
 RUN curl -sSL https://glotzerlab.engin.umich.edu/Downloads/pythia/pythia-{{ PYTHIA_VERSION }}.tar.gz \
     | tar -xzC /root \
     && cd /root/pythia-{{ PYTHIA_VERSION }} \
-    && python3 setup.py install \
+    && python3 -m pip install --no-deps --ignore-installed . \
     && rm -rf /root/pythia-{{ PYTHIA_VERSION }}
 
 RUN curl -sSL https://glotzerlab.engin.umich.edu/Downloads/signac/signac-{{ SIGNAC_VERSION }}.tar.gz \
     | tar -xzC /root \
     && cd /root/signac-{{ SIGNAC_VERSION }} \
-    && python3 setup.py install \
+    && python3 -m pip install --no-deps --ignore-installed . \
     && rm -rf /root/signac-{{ SIGNAC_VERSION }}
 
 RUN curl -sSL https://glotzerlab.engin.umich.edu/Downloads/signac-flow/signac-flow-{{ SIGNAC_FLOW_VERSION }}.tar.gz \
     | tar -xzC /root \
     && cd /root/signac-flow-{{ SIGNAC_FLOW_VERSION }} \
-    && python3 setup.py install \
+    && python3 -m pip install --no-deps --ignore-installed \
     && rm -rf /root/signac-flow-{{ SIGNAC_FLOW_VERSION }}
 
 RUN mkdir /hoomd-examples \

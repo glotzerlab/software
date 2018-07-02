@@ -33,7 +33,13 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
   zlib1g-dev \
   ca-certificates \
   && rm -rf /var/lib/apt/lists/* \
-  && pip3 install --no-cache-dir jupyter pillow
+  && pip3 install --no-cache-dir jupyter pillow pyhull
+
+# prevent python from loading packages from outside the container
+# default empty pythonpath
+ENV PYTHONPATH=/ignore/pythonpath
+# disable user site directories (https://docs.python.org/3/library/site.html#module-site)
+RUN sed -i -e 's/ENABLE_USER_SITE = None/ENABLE_USER_SITE = False/g' `python3 -c 'import site; print(site.__file__)'`
 
 # put clang on the path
 ENV PATH=$PATH:/usr/lib/llvm-5.0/bin

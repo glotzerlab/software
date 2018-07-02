@@ -33,7 +33,13 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
   zlib1g-dev \
   ca-certificates \
   && rm -rf /var/lib/apt/lists/* \
-  && pip3 install --no-cache-dir jupyter pillow
+  && pip3 install --no-cache-dir jupyter pillow pyhull
+
+# prevent python from loading packages from outside the container
+# default empty pythonpath
+ENV PYTHONPATH=/ignore/pythonpath
+# disable user site directories (https://docs.python.org/3/library/site.html#module-site)
+RUN sed -i -e 's/ENABLE_USER_SITE = None/ENABLE_USER_SITE = False/g' `python3 -c 'import site; print(site.__file__)'`
 
 # put clang on the path
 ENV PATH=$PATH:/usr/lib/llvm-5.0/bin
@@ -108,7 +114,7 @@ RUN curl -sSL http://mvapich.cse.ohio-state.edu/download/mvapich/osu-micro-bench
 RUN curl -sSL https://bitbucket.org/mpi4py/mpi4py/downloads/mpi4py-3.0.0.tar.gz \
     | tar -xzC /root \
     && cd /root/mpi4py-3.0.0 \
-    && python3 setup.py install \
+    && python3 -m pip install --no-deps --ignore-installed . \
     && rm -rf /root/mpi4py-3.0.0
 
 
@@ -116,23 +122,23 @@ RUN curl -sSL https://bitbucket.org/mpi4py/mpi4py/downloads/mpi4py-3.0.0.tar.gz 
 ENV CFLAGS="-march=knl -mmmx -mno-3dnow -msse -msse2 -msse3 -mssse3 -mno-sse4a -mcx16 -msahf -mmovbe -maes -mno-sha -mpclmul -mpopcnt -mabm -mno-lwp -mfma -mno-fma4 -mno-xop -mbmi -mbmi2 -mno-tbm -mavx -mavx2 -msse4.2 -msse4.1 -mlzcnt -mrtm -mhle -mrdrnd -mf16c -mfsgsbase -mrdseed -mprfchw -madx -mfxsr -mxsave -mxsaveopt -mavx512f -mno-avx512er -mavx512cd -mno-avx512pf -mno-prefetchwt1 -mclflushopt -mxsavec -mxsaves -mavx512dq -mavx512bw -mno-avx512vl -mno-avx512ifma -mno-avx512vbmi -mclwb -mno-pcommit -mno-mwaitx --param l1-cache-size=32 --param l1-cache-line-size=64 --param l2-cache-size=33792 -mtune=generic"
 ENV CXXFLAGS="-march=knl -mmmx -mno-3dnow -msse -msse2 -msse3 -mssse3 -mno-sse4a -mcx16 -msahf -mmovbe -maes -mno-sha -mpclmul -mpopcnt -mabm -mno-lwp -mfma -mno-fma4 -mno-xop -mbmi -mbmi2 -mno-tbm -mavx -mavx2 -msse4.2 -msse4.1 -mlzcnt -mrtm -mhle -mrdrnd -mf16c -mfsgsbase -mrdseed -mprfchw -madx -mfxsr -mxsave -mxsaveopt -mavx512f -mno-avx512er -mavx512cd -mno-avx512pf -mno-prefetchwt1 -mclflushopt -mxsavec -mxsaves -mavx512dq -mavx512bw -mno-avx512vl -mno-avx512ifma -mno-avx512vbmi -mclwb -mno-pcommit -mno-mwaitx --param l1-cache-size=32 --param l1-cache-line-size=64 --param l2-cache-size=33792 -mtune=generic"
 
-RUN curl -sSL https://glotzerlab.engin.umich.edu/Downloads/hoomd/hoomd-v2.3.1.tar.gz \
+RUN curl -sSL https://glotzerlab.engin.umich.edu/Downloads/hoomd/hoomd-v2.3.2.tar.gz \
     | tar -xzC /root \
-    && cd /root/hoomd-v2.3.1 \
+    && cd /root/hoomd-v2.3.2 \
     && mkdir build \
     && cd build \
     && cmake ../ -DENABLE_CUDA=on -DENABLE_MPI=on -DENABLE_TBB=on -DBUILD_JIT=on -DBUILD_TESTING=off -DCMAKE_INSTALL_PREFIX=`python3 -c "import site; print(site.getsitepackages()[0])"` \
     && make install -j10 \
-    && rm -rf /root/hoomd-v2.3.1
+    && rm -rf /root/hoomd-v2.3.2
 
-RUN curl -sSL https://glotzerlab.engin.umich.edu/Downloads/freud/freud-v0.8.1.tar.gz \
+RUN curl -sSL https://glotzerlab.engin.umich.edu/Downloads/freud/freud-v0.8.2.tar.gz \
     | tar -xzC /root \
-    && cd /root/freud-v0.8.1 \
+    && cd /root/freud-v0.8.2 \
     && mkdir build \
     && cd build \
     && cmake ../ -DCMAKE_INSTALL_PREFIX=`python3 -c "import site; print(site.getsitepackages()[0])"` \
     && make install -j10 \
-    && rm -rf /root/freud-v0.8.1
+    && rm -rf /root/freud-v0.8.2
 
 RUN curl -sSL https://glotzerlab.engin.umich.edu/Downloads/fresnel/fresnel-v0.5.0.tar.gz \
     | tar -xzC /root \
@@ -155,42 +161,46 @@ RUN curl -sSL https://glotzerlab.engin.umich.edu/Downloads/gsd/gsd-v1.5.3.tar.gz
 RUN curl -sSL https://glotzerlab.engin.umich.edu/Downloads/libgetar/libgetar-v0.5.4.tar.gz \
     | tar -xzC /root \
     && cd /root/libgetar-v0.5.4 \
-    && python3 setup.py install \
+    && python3 -m pip install --no-deps --ignore-installed . \
     && rm -rf /root/libgetar-v0.5.4
 
 RUN curl -sSL https://glotzerlab.engin.umich.edu/Downloads/rowan/rowan-v0.6.1.tar.gz \
     | tar -xzC /root \
     && cd /root/rowan-v0.6.1 \
-    && python3 setup.py install \
+    && python3 -m pip install --no-deps --ignore-installed . \
     && rm -rf /root/rowan-v0.6.1
 
 RUN curl -sSL https://glotzerlab.engin.umich.edu/Downloads/plato/plato-v1.1.0.tar.gz \
     | tar -xzC /root \
     && cd /root/plato-v1.1.0 \
-    && python3 setup.py install \
+    && python3 -m pip install --no-deps --ignore-installed . \
     && rm -rf /root/plato-v1.1.0
 
 RUN curl -sSL https://glotzerlab.engin.umich.edu/Downloads/pythia/pythia-v0.2.2.tar.gz \
     | tar -xzC /root \
     && cd /root/pythia-v0.2.2 \
-    && python3 setup.py install \
+    && python3 -m pip install --no-deps --ignore-installed . \
     && rm -rf /root/pythia-v0.2.2
 
-RUN curl -sSL https://glotzerlab.engin.umich.edu/Downloads/signac/signac-v0.9.2.tar.gz \
+RUN curl -sSL https://glotzerlab.engin.umich.edu/Downloads/signac/signac-v0.9.3.tar.gz \
     | tar -xzC /root \
-    && cd /root/signac-v0.9.2 \
-    && python3 setup.py install \
-    && rm -rf /root/signac-v0.9.2
+    && cd /root/signac-v0.9.3 \
+    && python3 -m pip install --no-deps --ignore-installed . \
+    && rm -rf /root/signac-v0.9.3
 
 RUN curl -sSL https://glotzerlab.engin.umich.edu/Downloads/signac-flow/signac-flow-v0.6.0.tar.gz \
     | tar -xzC /root \
     && cd /root/signac-flow-v0.6.0 \
-    && python3 setup.py install \
+    && python3 -m pip install --no-deps --ignore-installed \
     && rm -rf /root/signac-flow-v0.6.0
 
 RUN mkdir /hoomd-examples \
     && curl -sSL https://bitbucket.org/glotzer/hoomd-examples/get/master.tar.gz \
     | tar -xzC /hoomd-examples --strip-components=1
+
+RUN mkdir /fresnel-examples \
+    && curl -sSL https://bitbucket.org/glotzer/fresnel-examples/get/master.tar.gz \
+    | tar -xzC /fresnel-examples --strip-components=1
 
 # configure unprivileged user
 RUN useradd --create-home --shell /bin/bash glotzerlab-software \
