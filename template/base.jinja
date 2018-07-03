@@ -50,9 +50,12 @@ ENV CPATH=/opt/embree-{{ EMBREE_VERSION }}.x86_64.linux/include:$CPATH \
     LD_LIBRARY_PATH=/opt/embree-{{ EMBREE_VERSION }}.x86_64.linux/lib:$LD_LIBRARY_PATH \
     EMBREE_LINK=/opt/embree-{{ EMBREE_VERSION }}.x86_64.linux/lib
 
-RUN curl -sSL https://github.com/embree/embree/releases/download/v{{ EMBREE_VERSION }}/embree-{{ EMBREE_VERSION }}.x86_64.linux.tar.gz \
-    | tar -xzC /opt \
-    && rm -rf /opt/embree-{{ EMBREE_VERSION }}.x86_64.linux/include/bin
+RUN curl -sSLO https://github.com/embree/embree/releases/download/v{{ EMBREE_VERSION }}/embree-{{ EMBREE_VERSION }}.x86_64.linux.tar.gz \
+    && echo "{{ EMBREE_SHA }}  embree-{{ EMBREE_VERSION }}.x86_64.linux.tar.gz" | sha256sum -c - \
+    && tar -xzf embree-{{ EMBREE_VERSION }}.x86_64.linux.tar.gz -C /opt \
+    && rm -rf /opt/embree-{{ EMBREE_VERSION }}.x86_64.linux/bin \
+    && rm -rf /opt/embree-{{ EMBREE_VERSION }}.x86_64.linux/doc \
+    && rm embree-{{ EMBREE_VERSION }}.x86_64.linux.tar.gz
 
 # mount points for filesystems on clusters
 RUN mkdir -p /nfs \
