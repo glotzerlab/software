@@ -237,3 +237,7 @@ RUN useradd --create-home --shell /bin/bash glotzerlab-software \
     && chown glotzerlab-software:glotzerlab-software -R /fresnel-examples
 
 USER glotzerlab-software:glotzerlab-software
+
+# unset CFLAGS to work around stampede2 bug
+ENV CFLAGS=""
+ENV CXXFLAGS=""
