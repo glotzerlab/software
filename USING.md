@@ -118,7 +118,7 @@ Pull the container inside an interactive job (pulls on the head node fail with a
 Load the appropriate ``openmpi`` module in your job script before launching singularity:
 
     module load singularity
-    module unload mvpaich2_ib
+    module unload mvapich2_ib
     module load openmpi_ib
 
 Use ibrun to launch singularity, which in turn launches a MPI enabled application in the container:
