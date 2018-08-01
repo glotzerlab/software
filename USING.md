@@ -183,7 +183,7 @@ Flux has OpenMPI 3.0 and a Mellanox 4 IB network.
 
 Use scratch for the singularity cache directory to avoid quota limits on the default home directory (replace ${YOUR_ACCOUNT} with your account:
 
-    export SINGULARITY_CACHEDIR="/scratch/${YOUR_ACCOUNT}/${USER}.singularity"
+    export SINGULARITY_CACHEDIR="/scratch/${YOUR_ACCOUNT}/${USER}/.singularity"
 
 Pull the container with support for Flux:
 
