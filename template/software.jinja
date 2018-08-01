@@ -43,7 +43,7 @@ RUN curl -sSLO https://glotzerlab.engin.umich.edu/Downloads/fresnel/fresnel-{{ F
     && cd /root/fresnel-{{ FRESNEL_VERSION }} \
     && mkdir build \
     && cd build \
-    && cmake ../ -DENABLE_TBB=on -DENABLE_EMBREE=on -DENABLE_CUDA=off -DENABLE_OPTIX=off -DCMAKE_INSTALL_PREFIX=`python3 -c "import site; print(site.getsitepackages()[0])"` \
+    && cmake ../ -DENABLE_EMBREE=on -DENABLE_OPTIX=off -Dembree_DIR=/opt/embree-{{ EMBREE_VERSION }}.x86_64.linux -DCMAKE_INSTALL_PREFIX=`python3 -c "import site; print(site.getsitepackages()[0])"` \
     && make install -j{{ MAKEJOBS }} \
     && rm -rf /root/fresnel-{{ FRESNEL_VERSION }} \
     && rm /fresnel-{{ FRESNEL_VERSION }}.tar.gz

@@ -1,5 +1,20 @@
 # Change log
 
+## 2018.08
+
+Glotzerlab software versions:
+
+* Fresnel v0.6.0
+* Freud v0.9.0
+* GSD v1.5.3
+* HOOMD-blue v2.3.4
+* libgetar v0.5.4
+* Pythia v0.2.2
+* Rowan v0.6.1
+* Plato v1.1.0
+* Signac v0.9.3
+* Signac-flow v0.6.1
+
 ## 2018.07
 
 Additional common tools:

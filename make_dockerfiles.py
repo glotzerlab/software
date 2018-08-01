@@ -11,8 +11,8 @@ shas = {}
 repo_version = {}
 
 # dependencies
-versions['EMBREE_VERSION'] = '2.17.1'
-shas['EMBREE_SHA'] = 'e012149ab32abb0410d5b2cfec87cbc15f2c129e102fc6d5b4c84e4e484b68a1'
+versions['EMBREE_VERSION'] = '3.2.0'
+shas['EMBREE_SHA'] = '7671cc37c4dc4e3da00b2b299b906b35816f058efea92701e7b89574b15e652d'
 
 versions['OSU_MICROBENCHMARK_VERSION'] ='5.4.1'
 shas['OSU_MICROBENCHMARK_SHA'] ='e90cb683a01744377f77d420de401431242593d8376b25b120950266e140e83c'
@@ -21,17 +21,17 @@ versions['MPI4PY_VERSION'] = '3.0.0'
 shas['MPI4PY_SHA'] = 'b457b02d85bdd9a4775a097fac5234a20397b43e073f14d9e29b6cd78c68efd7'
 
 # glotzer lab
-repo_version['fresnel']     = versions['FRESNEL_VERSION']     = 'v0.5.0'
-shas['FRESNEL_SHA'] = '6d73e33f335aa39bd12839f9a4aa863805a1f58da85e3abe8df74aeb3b010550'
+repo_version['fresnel']     = versions['FRESNEL_VERSION']     = 'v0.6.0'
+shas['FRESNEL_SHA'] = 'de1b18f87b5bcdd96844c143d6a9cf560df873a9f1f7eae8d6ff2eac5a1d2467'
 
-repo_version['freud']       = versions['FREUD_VERSION']       = 'v0.8.2'
-shas['FREUD_SHA'] = 'e4c2c3dbddb70f42fb526375186b882ce35073d75ca494cabbec478aa523ab48'
+repo_version['freud']       = versions['FREUD_VERSION']       = 'v0.9.0'
+shas['FREUD_SHA'] = 'd51ac395f4e497bdc9761af26ad1a9c2b9cb6a29e644e9adaa04f0913a7979d0'
 
 repo_version['gsd']         = versions['GSD_VERSION']         = 'v1.5.3'
 shas['GSD_SHA'] = '10b6d37b2dadb9dc3543f4975e3722da3f3fd790df44e887b2a0306c045cf76d'
 
-repo_version['hoomd-blue']  = versions['HOOMD_VERSION']       = 'v2.3.3'
-shas['HOOMD_SHA'] = 'af130549334c346472bd4c8fed087ddda5289f9a65dfd8d22f64c348f2fec092'
+repo_version['hoomd-blue']  = versions['HOOMD_VERSION']       = 'v2.3.4'
+shas['HOOMD_SHA'] = '72bea429483528d38e8c8da77cc4b0fa6df6dcfd8846bbe9d7975a007c749525'
 
 repo_version['libgetar']    = versions['LIBGETAR_VERSION']    = 'v0.5.4'
 shas['LIBGETAR_SHA'] = '781d972b32e4d02bf2c396bad19a585f682329df0d1d630c0b34405e70dd9c70'

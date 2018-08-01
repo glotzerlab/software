@@ -45,17 +45,17 @@ RUN sed -i -e 's/ENABLE_USER_SITE = None/ENABLE_USER_SITE = False/g' `python3 -c
 ENV PATH=$PATH:/usr/lib/llvm-5.0/bin
 
 # embree
-ENV CPATH=/opt/embree-2.17.1.x86_64.linux/include:$CPATH \
-    LIBRARY_PATH=/opt/embree-2.17.1.x86_64.linux/lib:$LIBRARY_PATH \
-    LD_LIBRARY_PATH=/opt/embree-2.17.1.x86_64.linux/lib:$LD_LIBRARY_PATH \
-    EMBREE_LINK=/opt/embree-2.17.1.x86_64.linux/lib
+ENV CPATH=/opt/embree-3.2.0.x86_64.linux/include:$CPATH \
+    LIBRARY_PATH=/opt/embree-3.2.0.x86_64.linux/lib:$LIBRARY_PATH \
+    LD_LIBRARY_PATH=/opt/embree-3.2.0.x86_64.linux/lib:$LD_LIBRARY_PATH \
+    EMBREE3_LINK=/opt/embree-3.2.0.x86_64.linux/lib
 
-RUN curl -sSLO https://github.com/embree/embree/releases/download/v2.17.1/embree-2.17.1.x86_64.linux.tar.gz \
-    && echo "e012149ab32abb0410d5b2cfec87cbc15f2c129e102fc6d5b4c84e4e484b68a1  embree-2.17.1.x86_64.linux.tar.gz" | sha256sum -c - \
-    && tar -xzf embree-2.17.1.x86_64.linux.tar.gz -C /opt \
-    && rm -rf /opt/embree-2.17.1.x86_64.linux/bin \
-    && rm -rf /opt/embree-2.17.1.x86_64.linux/doc \
-    && rm embree-2.17.1.x86_64.linux.tar.gz
+RUN curl -sSLO https://github.com/embree/embree/releases/download/v3.2.0/embree-3.2.0.x86_64.linux.tar.gz \
+    && echo "7671cc37c4dc4e3da00b2b299b906b35816f058efea92701e7b89574b15e652d  embree-3.2.0.x86_64.linux.tar.gz" | sha256sum -c - \
+    && tar -xzf embree-3.2.0.x86_64.linux.tar.gz -C /opt \
+    && rm -rf /opt/embree-3.2.0.x86_64.linux/bin \
+    && rm -rf /opt/embree-3.2.0.x86_64.linux/doc \
+    && rm embree-3.2.0.x86_64.linux.tar.gz
 
 # mount points for filesystems on clusters
 RUN mkdir -p /nfs \
@@ -125,38 +125,38 @@ RUN curl -sSLO https://bitbucket.org/mpi4py/mpi4py/downloads/mpi4py-3.0.0.tar.gz
 ENV CFLAGS=""
 ENV CXXFLAGS=""
 
-RUN curl -sSLO https://glotzerlab.engin.umich.edu/Downloads/hoomd/hoomd-v2.3.3.tar.gz \
-    && echo "af130549334c346472bd4c8fed087ddda5289f9a65dfd8d22f64c348f2fec092  hoomd-v2.3.3.tar.gz" | sha256sum -c - \
-    && tar -xzf hoomd-v2.3.3.tar.gz -C /root \
-    && cd /root/hoomd-v2.3.3 \
+RUN curl -sSLO https://glotzerlab.engin.umich.edu/Downloads/hoomd/hoomd-v2.3.4.tar.gz \
+    && echo "72bea429483528d38e8c8da77cc4b0fa6df6dcfd8846bbe9d7975a007c749525  hoomd-v2.3.4.tar.gz" | sha256sum -c - \
+    && tar -xzf hoomd-v2.3.4.tar.gz -C /root \
+    && cd /root/hoomd-v2.3.4 \
     && mkdir build \
     && cd build \
     && cmake ../ -DENABLE_CUDA=on -DENABLE_MPI=on -DENABLE_TBB=on -DBUILD_JIT=on -DBUILD_TESTING=off -DCMAKE_INSTALL_PREFIX=`python3 -c "import site; print(site.getsitepackages()[0])"` \
     && make install -j10 \
-    && rm -rf /root/hoomd-v2.3.3 \
-    && rm /hoomd-v2.3.3.tar.gz
+    && rm -rf /root/hoomd-v2.3.4 \
+    && rm /hoomd-v2.3.4.tar.gz
 
-RUN curl -sSLO https://glotzerlab.engin.umich.edu/Downloads/freud/freud-v0.8.2.tar.gz \
-    && echo "e4c2c3dbddb70f42fb526375186b882ce35073d75ca494cabbec478aa523ab48  freud-v0.8.2.tar.gz" | sha256sum -c - \
-    && tar -xzf freud-v0.8.2.tar.gz -C /root \
-    && cd /root/freud-v0.8.2 \
+RUN curl -sSLO https://glotzerlab.engin.umich.edu/Downloads/freud/freud-v0.9.0.tar.gz \
+    && echo "d51ac395f4e497bdc9761af26ad1a9c2b9cb6a29e644e9adaa04f0913a7979d0  freud-v0.9.0.tar.gz" | sha256sum -c - \
+    && tar -xzf freud-v0.9.0.tar.gz -C /root \
+    && cd /root/freud-v0.9.0 \
     && mkdir build \
     && cd build \
     && cmake ../ -DCMAKE_INSTALL_PREFIX=`python3 -c "import site; print(site.getsitepackages()[0])"` \
     && make install -j10 \
-    && rm -rf /root/freud-v0.8.2 \
-    && rm /freud-v0.8.2.tar.gz
+    && rm -rf /root/freud-v0.9.0 \
+    && rm /freud-v0.9.0.tar.gz
 
-RUN curl -sSLO https://glotzerlab.engin.umich.edu/Downloads/fresnel/fresnel-v0.5.0.tar.gz \
-    && echo "6d73e33f335aa39bd12839f9a4aa863805a1f58da85e3abe8df74aeb3b010550  fresnel-v0.5.0.tar.gz" | sha256sum -c - \
-    && tar -xzf fresnel-v0.5.0.tar.gz -C /root \
-    && cd /root/fresnel-v0.5.0 \
+RUN curl -sSLO https://glotzerlab.engin.umich.edu/Downloads/fresnel/fresnel-v0.6.0.tar.gz \
+    && echo "de1b18f87b5bcdd96844c143d6a9cf560df873a9f1f7eae8d6ff2eac5a1d2467  fresnel-v0.6.0.tar.gz" | sha256sum -c - \
+    && tar -xzf fresnel-v0.6.0.tar.gz -C /root \
+    && cd /root/fresnel-v0.6.0 \
     && mkdir build \
     && cd build \
-    && cmake ../ -DENABLE_TBB=on -DENABLE_EMBREE=on -DENABLE_CUDA=off -DENABLE_OPTIX=off -DCMAKE_INSTALL_PREFIX=`python3 -c "import site; print(site.getsitepackages()[0])"` \
+    && cmake ../ -DENABLE_EMBREE=on -DENABLE_OPTIX=off -Dembree_DIR=/opt/embree-3.2.0.x86_64.linux -DCMAKE_INSTALL_PREFIX=`python3 -c "import site; print(site.getsitepackages()[0])"` \
     && make install -j10 \
-    && rm -rf /root/fresnel-v0.5.0 \
-    && rm /fresnel-v0.5.0.tar.gz
+    && rm -rf /root/fresnel-v0.6.0 \
+    && rm /fresnel-v0.6.0.tar.gz
 
 RUN curl -sSLO https://glotzerlab.engin.umich.edu/Downloads/gsd/gsd-v1.5.3.tar.gz \
     && echo "10b6d37b2dadb9dc3543f4975e3722da3f3fd790df44e887b2a0306c045cf76d  gsd-v1.5.3.tar.gz" | sha256sum -c - \

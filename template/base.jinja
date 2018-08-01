@@ -48,7 +48,7 @@ ENV PATH=$PATH:/usr/lib/llvm-5.0/bin
 ENV CPATH=/opt/embree-{{ EMBREE_VERSION }}.x86_64.linux/include:$CPATH \
     LIBRARY_PATH=/opt/embree-{{ EMBREE_VERSION }}.x86_64.linux/lib:$LIBRARY_PATH \
     LD_LIBRARY_PATH=/opt/embree-{{ EMBREE_VERSION }}.x86_64.linux/lib:$LD_LIBRARY_PATH \
-    EMBREE_LINK=/opt/embree-{{ EMBREE_VERSION }}.x86_64.linux/lib
+    EMBREE3_LINK=/opt/embree-{{ EMBREE_VERSION }}.x86_64.linux/lib
 
 RUN curl -sSLO https://github.com/embree/embree/releases/download/v{{ EMBREE_VERSION }}/embree-{{ EMBREE_VERSION }}.x86_64.linux.tar.gz \
     && echo "{{ EMBREE_SHA }}  embree-{{ EMBREE_VERSION }}.x86_64.linux.tar.gz" | sha256sum -c - \
