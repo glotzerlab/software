@@ -30,10 +30,7 @@ RUN curl -sSLO https://glotzerlab.engin.umich.edu/Downloads/freud/freud-{{ FREUD
     && echo "{{ FREUD_SHA }}  freud-{{ FREUD_VERSION }}.tar.gz" | sha256sum -c - \
     && tar -xzf freud-{{ FREUD_VERSION }}.tar.gz -C /root \
     && cd /root/freud-{{ FREUD_VERSION }} \
-    && mkdir build \
-    && cd build \
-    && cmake ../ -DCMAKE_INSTALL_PREFIX=`python3 -c "import site; print(site.getsitepackages()[0])"` \
-    && make install -j{{ MAKEJOBS }} \
+    && python3 -m pip install --no-deps --ignore-installed . \
     && rm -rf /root/freud-{{ FREUD_VERSION }} \
     && rm /freud-{{ FREUD_VERSION }}.tar.gz
 

@@ -92,16 +92,13 @@ RUN curl -sSLO https://glotzerlab.engin.umich.edu/Downloads/hoomd/hoomd-v2.3.4.t
     && rm -rf /root/hoomd-v2.3.4 \
     && rm /hoomd-v2.3.4.tar.gz
 
-RUN curl -sSLO https://glotzerlab.engin.umich.edu/Downloads/freud/freud-v0.9.0.tar.gz \
-    && echo "d51ac395f4e497bdc9761af26ad1a9c2b9cb6a29e644e9adaa04f0913a7979d0  freud-v0.9.0.tar.gz" | sha256sum -c - \
-    && tar -xzf freud-v0.9.0.tar.gz -C /root \
-    && cd /root/freud-v0.9.0 \
-    && mkdir build \
-    && cd build \
-    && cmake ../ -DCMAKE_INSTALL_PREFIX=`python3 -c "import site; print(site.getsitepackages()[0])"` \
-    && make install -j2 \
-    && rm -rf /root/freud-v0.9.0 \
-    && rm /freud-v0.9.0.tar.gz
+RUN curl -sSLO https://glotzerlab.engin.umich.edu/Downloads/freud/freud-v0.10.0.tar.gz \
+    && echo "f0d00cf5d958b0e3b819ab09ba0433f2fb29b0cdac30879222d49cad7e460e1f  freud-v0.10.0.tar.gz" | sha256sum -c - \
+    && tar -xzf freud-v0.10.0.tar.gz -C /root \
+    && cd /root/freud-v0.10.0 \
+    && python3 -m pip install --no-deps --ignore-installed . \
+    && rm -rf /root/freud-v0.10.0 \
+    && rm /freud-v0.10.0.tar.gz
 
 RUN curl -sSLO https://glotzerlab.engin.umich.edu/Downloads/fresnel/fresnel-v0.6.0.tar.gz \
     && echo "de1b18f87b5bcdd96844c143d6a9cf560df873a9f1f7eae8d6ff2eac5a1d2467  fresnel-v0.6.0.tar.gz" | sha256sum -c - \
@@ -125,21 +122,21 @@ RUN curl -sSLO https://glotzerlab.engin.umich.edu/Downloads/gsd/gsd-v1.5.3.tar.g
     && rm -rf /root/gsd-v1.5.3 \
     && rm /gsd-v1.5.3.tar.gz
 
-RUN curl -sSLO https://glotzerlab.engin.umich.edu/Downloads/libgetar/libgetar-v0.5.4.tar.gz \
-    && echo "781d972b32e4d02bf2c396bad19a585f682329df0d1d630c0b34405e70dd9c70  libgetar-v0.5.4.tar.gz" | sha256sum -c - \
-    && tar -xzf libgetar-v0.5.4.tar.gz -C /root \
-    && cd /root/libgetar-v0.5.4 \
+RUN curl -sSLO https://glotzerlab.engin.umich.edu/Downloads/libgetar/libgetar-v0.6.1.tar.gz \
+    && echo "3e7e0124ba6b7c831e789e13d75313a4700fbea9b0d04ebd5c1afc87b732aa24  libgetar-v0.6.1.tar.gz" | sha256sum -c - \
+    && tar -xzf libgetar-v0.6.1.tar.gz -C /root \
+    && cd /root/libgetar-v0.6.1 \
     && python3 -m pip install --no-deps --ignore-installed . \
-    && rm -rf /root/libgetar-v0.5.4 \
-    && rm /libgetar-v0.5.4.tar.gz
+    && rm -rf /root/libgetar-v0.6.1 \
+    && rm /libgetar-v0.6.1.tar.gz
 
-RUN curl -sSLO https://glotzerlab.engin.umich.edu/Downloads/rowan/rowan-v0.6.1.tar.gz \
-    && echo "31b10e78013219a178336b9fd85c01ba3f0dbee34e676b8240d88bb796d48b8e  rowan-v0.6.1.tar.gz" | sha256sum -c - \
-    && tar -xzf rowan-v0.6.1.tar.gz -C /root \
-    && cd /root/rowan-v0.6.1 \
+RUN curl -sSLO https://glotzerlab.engin.umich.edu/Downloads/rowan/rowan-v1.1.0.tar.gz \
+    && echo "43a7a29a95409acb458184647081c0e6e178943018db58f993e771b9d48602c7  rowan-v1.1.0.tar.gz" | sha256sum -c - \
+    && tar -xzf rowan-v1.1.0.tar.gz -C /root \
+    && cd /root/rowan-v1.1.0 \
     && python3 -m pip install --no-deps --ignore-installed . \
-    && rm -rf /root/rowan-v0.6.1 \
-    && rm /rowan-v0.6.1.tar.gz
+    && rm -rf /root/rowan-v1.1.0 \
+    && rm /rowan-v1.1.0.tar.gz
 
 RUN curl -sSLO https://glotzerlab.engin.umich.edu/Downloads/plato/plato-v1.1.0.tar.gz \
     && echo "ad1b213f28990e34677bcd6449f17852420a0c6ed8b807ec842b6a0b0433a8ad  plato-v1.1.0.tar.gz" | sha256sum -c - \
@@ -165,13 +162,13 @@ RUN curl -sSLO https://glotzerlab.engin.umich.edu/Downloads/signac/signac-v0.9.3
     && rm -rf /root/signac-v0.9.3 \
     && rm /signac-v0.9.3.tar.gz
 
-RUN curl -sSLO https://glotzerlab.engin.umich.edu/Downloads/signac-flow/signac-flow-v0.6.1.tar.gz \
-    && echo "417e31a922bf236758ffc2a715c0beca2888cc9406342c311329c79636e130ac  signac-flow-v0.6.1.tar.gz" | sha256sum -c - \
-    && tar -xzf signac-flow-v0.6.1.tar.gz -C /root \
-    && cd /root/signac-flow-v0.6.1 \
+RUN curl -sSLO https://glotzerlab.engin.umich.edu/Downloads/signac-flow/signac-flow-v0.6.3.tar.gz \
+    && echo "0a1ff4d052ea1e02079b60c0a5710df28e3fa8286649ccc030d032ec99901dba  signac-flow-v0.6.3.tar.gz" | sha256sum -c - \
+    && tar -xzf signac-flow-v0.6.3.tar.gz -C /root \
+    && cd /root/signac-flow-v0.6.3 \
     && python3 -m pip install --no-deps --ignore-installed . \
-    && rm -rf /root/signac-flow-v0.6.1 \
-    && rm /signac-flow-v0.6.1.tar.gz
+    && rm -rf /root/signac-flow-v0.6.3 \
+    && rm /signac-flow-v0.6.3.tar.gz
 
 RUN mkdir /hoomd-examples \
     && curl -sSL https://bitbucket.org/glotzer/hoomd-examples/get/master.tar.gz \
