@@ -66,16 +66,18 @@ if __name__ == '__main__':
     openmpi_template = env.get_template('openmpi.jinja')
     mvapich2_template = env.get_template('mvapich2.jinja')
     titan_template = env.get_template('titan.jinja')
-    software_template = env.get_template('software.jinja')
+    glotzerlab_software_template = env.get_template('glotzerlab-software.jinja')
+    glotzerlab_software_mpi_template = env.get_template('glotzerlab-software-mpi.jinja')
+    finalize_template = env.get_template('finalize.jinja')
 
-    write('cuda8/Dockerfile', [base_template, software_template],
+    write('cuda8/Dockerfile', [base_template, glotzerlab_software_template, glotzerlab_software_mpi_template, finalize_template],
           FROM='nvidia/cuda:8.0-devel-ubuntu16.04',
           ENABLE_MPI='off',
           MAKEJOBS=10,
           **versions,
           **shas)
 
-    write('cuda8/flux/Dockerfile', [base_template, ib_mlx_template, openmpi_template, software_template],
+    write('cuda8/flux/Dockerfile', [base_template, glotzerlab_software_template, ib_mlx_template, openmpi_template, glotzerlab_software_mpi_template, finalize_template],
           FROM='nvidia/cuda:8.0-devel-ubuntu16.04',
           OPENMPI_VERSION='3.0',
           OPENMPI_PATCHLEVEL='0',
@@ -87,7 +89,7 @@ if __name__ == '__main__':
 
     # see https://stackoverflow.com/questions/5470257/how-to-see-which-flags-march-native-will-activate
     # for information on obtaining CFLAGS settings for specific machines
-    write('cuda8/comet/Dockerfile', [base_template, ib_mlx_template, openmpi_template, software_template],
+    write('cuda8/comet/Dockerfile', [base_template, glotzerlab_software_template, ib_mlx_template, openmpi_template, glotzerlab_software_mpi_template, finalize_template],
           FROM='nvidia/cuda:8.0-devel-ubuntu16.04',
           OPENMPI_VERSION='1.8',
           OPENMPI_PATCHLEVEL='4',
@@ -98,7 +100,7 @@ if __name__ == '__main__':
           **versions,
           **shas)
 
-    write('cuda8/bridges/Dockerfile', [base_template, ib_hfi1_template, openmpi_template, software_template],
+    write('cuda8/bridges/Dockerfile', [base_template, glotzerlab_software_template, ib_hfi1_template, openmpi_template, glotzerlab_software_mpi_template, finalize_template],
           FROM='nvidia/cuda:8.0-devel-ubuntu16.04',
           OPENMPI_VERSION='1.10',
           OPENMPI_PATCHLEVEL='4',
@@ -109,7 +111,7 @@ if __name__ == '__main__':
           **versions,
           **shas)
 
-    write('cuda8/stampede2/Dockerfile', [base_template, ib_hfi1_template, mvapich2_template, software_template],
+    write('cuda8/stampede2/Dockerfile', [base_template, glotzerlab_software_template, ib_hfi1_template, mvapich2_template, glotzerlab_software_mpi_template, finalize_template],
           FROM='nvidia/cuda:8.0-devel-ubuntu16.04',
           MVAPICH_VERSION='2.3',
           MVAPICH_PATCHLEVEL='rc1',
@@ -120,7 +122,7 @@ if __name__ == '__main__':
           **versions,
           **shas)
 
-    write('olcf-titan/Dockerfile', [base_template, titan_template, software_template],
+    write('olcf-titan/Dockerfile', [base_template, titan_template, glotzerlab_software_template, glotzerlab_software_mpi_template, finalize_template],
           FROM='olcf/titan:ubuntu-16.04_2018-01-18',
           ENABLE_MPI='on',
           MAKEJOBS=2,

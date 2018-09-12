@@ -1,0 +1,24 @@
+
+
+{% if ENABLE_MPI == 'on' %}
+# mpi4py
+RUN curl -sSLO https://bitbucket.org/mpi4py/mpi4py/downloads/mpi4py-{{ MPI4PY_VERSION }}.tar.gz \
+    && echo "{{ MPI4PY_SHA }}  mpi4py-{{ MPI4PY_VERSION }}.tar.gz" | sha256sum -c - \
+    && tar -xz -f mpi4py-{{ MPI4PY_VERSION }}.tar.gz -C /root \
+    && cd /root/mpi4py-{{ MPI4PY_VERSION }} \
+    && python3 -m pip install --no-deps --ignore-installed . \
+    && rm -rf /root/mpi4py-{{ MPI4PY_VERSION }} \
+    && rm /mpi4py-{{ MPI4PY_VERSION }}.tar.gz
+{% endif %}
+
+RUN curl -sSLO https://glotzerlab.engin.umich.edu/Downloads/hoomd/hoomd-{{ HOOMD_VERSION }}.tar.gz \
+    && echo "{{ HOOMD_SHA }}  hoomd-{{ HOOMD_VERSION }}.tar.gz" | sha256sum -c - \
+    && tar -xzf hoomd-{{ HOOMD_VERSION }}.tar.gz -C /root \
+    && cd /root/hoomd-{{ HOOMD_VERSION }} \
+    && mkdir build \
+    && cd build \
+    && CFLAGS="{{CFLAGS}}" CXXFLAGS="{{CFLAGS}}" \
+    && cmake ../ -DENABLE_CUDA=on -DENABLE_MPI={{ ENABLE_MPI }} -DENABLE_TBB=on -DBUILD_JIT=on -DBUILD_TESTING=off -DCMAKE_INSTALL_PREFIX=`python3 -c "import site; print(site.getsitepackages()[0])"` \
+    && make install -j{{ MAKEJOBS }} \
+    && rm -rf /root/hoomd-{{ HOOMD_VERSION }} \
+    && rm /hoomd-{{ HOOMD_VERSION }}.tar.gz

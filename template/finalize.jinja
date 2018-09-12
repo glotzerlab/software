@@ -1,0 +1,8 @@
+
+
+# configure unprivileged user
+RUN useradd --create-home --shell /bin/bash glotzerlab-software \
+    && chown glotzerlab-software:glotzerlab-software -R /hoomd-examples \
+    && chown glotzerlab-software:glotzerlab-software -R /fresnel-examples
+
+USER glotzerlab-software:glotzerlab-software
