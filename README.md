@@ -96,3 +96,4 @@ Updated: 2018-03-20.
         * Serial CPU: working
         * Serial GPU (cuda8): working
         * MPI: **not supported**
+
