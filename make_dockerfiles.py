@@ -70,7 +70,14 @@ if __name__ == '__main__':
     glotzerlab_software_mpi_template = env.get_template('glotzerlab-software-mpi.jinja')
     finalize_template = env.get_template('finalize.jinja')
 
-    write('cuda8/Dockerfile', [base_template, glotzerlab_software_template, glotzerlab_software_mpi_template, finalize_template],
+    write('cuda8/Dockerfile', [base_template],
+          FROM='nvidia/cuda:8.0-devel-ubuntu16.04',
+          ENABLE_MPI='off',
+          MAKEJOBS=10,
+          **versions,
+          **shas)
+
+    write('cuda8/nompi/Dockerfile', [base_template, glotzerlab_software_template, glotzerlab_software_mpi_template, finalize_template],
           FROM='nvidia/cuda:8.0-devel-ubuntu16.04',
           ENABLE_MPI='off',
           MAKEJOBS=10,
@@ -89,6 +96,7 @@ if __name__ == '__main__':
 
     # see https://stackoverflow.com/questions/5470257/how-to-see-which-flags-march-native-will-activate
     # for information on obtaining CFLAGS settings for specific machines
+    # gcc -'###' -E - -march=native 2>&1 | sed -r '/cc1/!d;s/(")|(^.* - )|( -mno-[^\ ]+)//g'
     write('cuda8/comet/Dockerfile', [base_template, glotzerlab_software_template, ib_mlx_template, openmpi_template, glotzerlab_software_mpi_template, finalize_template],
           FROM='nvidia/cuda:8.0-devel-ubuntu16.04',
           OPENMPI_VERSION='1.8',

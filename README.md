@@ -20,9 +20,12 @@ The templates ``ib-mlx.jinja`` and ``ib-hfi1``.jinja adds high speed IB networki
 
 The templates ``openmpi.jinja`` and ``mvapich2.jinja`` build the corresponding MPI libraries.
 
-The template ``software.jinja`` compiles and installs glotzer group software.
+The template ``glotzer-software.jinja`` compiles and installs glotzer group software that doesn't require MPI.
+``glotzer-software-mpi.jinja`` installs software that does require MPI. These two sets are separated so that docker can
+cache the builds from the first and only need to rebuild the second.
 
-We do not separately publish the base images. Doing so adds complexity to the build scripts, and users who wish to build their own images will want to start from their own custom base image anyways. This way, the only glotzerlab docker images published are those containing the group software stack.
+The template ``finalize.jinja`` creates a ``glotzerlab-software`` user so that tools designed to run as non-root can
+run without any user intervention.
 
 ### Software images
 
@@ -30,7 +33,8 @@ Images are stored in the docker hub repository ``glotzerlab/software``.
 
 For future expansion, images are put in a top level directory named after their base image: Currently ``cuda8`` for the ``nvidia/cuda-8.0-devel-ubuntu16.04`` image above. Additional layers are added in sub directories under the base.
 
-* ``glotzerlab/cuda8/Dockerfile`` - base image with no MPI support
+* ``glotzerlab/cuda8/Dockerfile`` - devel image providing dependencies but no software
+* ``glotzerlab/cuda8/nompi/Dockerfile`` - base image with no MPI support
 * ``glotzerlab/cuda8/${cluster}/Dockerfile`` - Add MPI support for a given cluster
 
 Due to the use of site-specific software, OLCF Titan and Summit require base layers tailored specifically to them. Also, these images must be built within the confines of the [container-builder service at OLCF](https://www.olcf.ornl.gov/container-builder/).
@@ -42,13 +46,23 @@ Due to the use of site-specific software, OLCF Titan and Summit require base lay
 
 The ``build.sh`` script builds all of the images and tags them with the current date code.
 
-TODO: consider add support OptiX for fresnel.
+## Singularity
+
+Singularity's docker pull support is flaky. ``build.sh`` generates a ``Singulartiy`` file for each cluster for
+[singularity hub](https://www.singularity-hub.org/) to build. Each just pulls from the docker image that ``build.sh``
+produces, so one must ``docker push`` before ``git push``, or the singularity build will fail.
+
+At this time, we do not freeze older versions on singularity hub.
 
 ## Benchmarking
 
 The image contains the [OSU microbenchmark suite](http://mvapich.cse.ohio-state.edu/benchmarks/) to verify proper MPI operation and high speed network performance:
 
     mpirun -N 1 singularity exec ${IMAGE} /opt/osu-micro-benchmarks/libexec/osu-micro-benchmarks/mpi/pt2pt/osu_bibw
+
+## Testing
+
+TODO: write test scripts that validate that the image and the software inside works on each tested platform.
 
 ## What works (and what doesn't)
 

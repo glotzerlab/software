@@ -38,14 +38,12 @@ Request additional tool installations by opening an issue at [docker-glotzerlab-
 
 The following images are available:
 
-  * ``latest``, ``cuda8`` - Latest image built with CUDA 8.0 (no MPI)
-  * ``flux``, ``cuda8-flux`` - Latest image built with CUDA 8.0, MPI, and network drivers for University of Michigan Flux
-  * ``comet``, ``cuda8-comet`` - Latest image built with CUDA 8.0, MPI, and network drivers for SDSC Comet
-  * ``bridges``, ``cuda8-bridges`` - Latest image built with CUDA 8.0, MPI, and network drivers for PSC Bridges
-  * ``stampede2``, ``cuda8-stampede2`` - Latest image built with CUDA 8.0, MPI, and network drivers for TACC Stampede2
-  * ``YYYY.MM-cuda?`` - Archived images, built with the indicated versions of CUDA (no MPI)
-  * ``YYYY.MM-cuda?-${network}-${mpi}`` - Archived images, built with the indicated versions of CUDA, IB network drivers, and MPI.
-  * ``YYYY.MM-cuda?-${cluster}`` - Archived images, built with the indicated versions of CUDA, MPI, and network drivers for the named cluster.
+  * ``latest`` - Latest image built without MPI
+  * ``flux`` - Latest image built with CUDA 8.0, MPI, and network drivers for University of Michigan Flux
+  * ``comet`` - Latest image built with CUDA 8.0, MPI, and network drivers for SDSC Comet
+  * ``bridges`` - Latest image built with CUDA 8.0, MPI, and network drivers for PSC Bridges
+  * ``stampede2`` - Latest image built with CUDA 8.0, MPI, and network drivers for TACC Stampede2
+  * ``YYYY.MM-{cpu-arch}-cuda?-${network}-${mpi}`` - Archived images, built for the indicated cpu architecture and the given versions of CUDA, IB network drivers, and MPI.
 
 See the tags tab for a list of these archived images.
 
