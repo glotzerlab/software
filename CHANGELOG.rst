@@ -5,7 +5,12 @@ Change log
 2018.09
 -------
 
-Updates:
+*Changes:*
+
+* Documentation now on readthedocs.org
+* Latest images are now available directly from singularity-hub
+
+*Software updates:*
 
 * Freud v0.10.0
 * libgetar v0.6.1
@@ -15,7 +20,7 @@ Updates:
 2018.08
 -------
 
-Updates:
+*Software updates:*
 
 * Fresnel v0.6.0
 * Freud v0.9.0
@@ -28,7 +33,7 @@ Added:
 
 * pyhull
 
-Updates:
+*Software updates:*
 
 * Freud v0.8.2
 * HOOMD-blue v2.3.3
@@ -55,7 +60,7 @@ Added:
 * Rowan v0.6.1
 * Plato v1.1.0
 
-Updates:
+*Software updates:*
 
 * Freud v0.8.1
 * GSD v1.5.3
@@ -65,12 +70,12 @@ Updates:
 2018.04
 -------
 
-*Changes*
+*Changes:*
 
 * Tag MPI enabled builds for specific clusters
 * Support SDSC Comet, PSC Bridges, TACC Stampede2, and University of Michigan Flux clusters.
 
-Updates:
+*Software updates:*
 
 * Freud v0.8.0
 * GSD v1.5.2

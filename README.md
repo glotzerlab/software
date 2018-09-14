@@ -1,6 +1,6 @@
 # Glotzerlab docker images
 
-Read this if you want to learn how the glotzerlab software images are built. If you just want to use the images, see [USING.md](USING.md)
+Read this if you want to learn how the glotzerlab software images are built. If you just want to use the images, see the [glotzerlab-software documentation](https://glotzerlab-software.readthedocs.io/).
 
 This repository hosts Dockerfiles for software developed and used by the [Glotzer lab](http://glotzerlab.engin.umich.edu/home/). Most of these software packages are python libraries designed to be used together, so we install it all together in one image and version it by date (YYYY.MM). Each image contains the latest versions of all installed software available that month.
 
@@ -96,4 +96,3 @@ Updated: 2018-03-20.
         * Serial CPU: working
         * Serial GPU (cuda8): working
         * MPI: **not supported**
-
