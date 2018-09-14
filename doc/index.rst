@@ -7,10 +7,11 @@ related software commonly used in simulation and data analysis workflows. An *im
 a single file which can be copied, moved, shared with others, and published to provide a completely
 reproducible workflow. A *host* system provides the resources to execute software inside containers.
 `Singularity <https://www.sylabs.io/docs/>`_ provides a high performance solution, supporting NVIDIA GPUs and MPI
-parallel execution. Singularity is available on most HPC resources.
+parallel execution. Singularity is available on most HPC resources. You can install it on your linux system if you have
+root access.
 
 Quick start
------------
+===========
 
 First, pull the **glotzerlab/software** image::
 
@@ -20,14 +21,14 @@ First, pull the **glotzerlab/software** image::
 
 .. note::
 
-    On HPC clusters, pull the cluster specific image. See __ for details.
+    On HPC clusters, pull the cluster specific image. See :doc:`cluster` for details.
 
 **singularity exec** executes software from inside the container::
 
     ▶ singularity exec software.simg python3 --version
     Python 3.5.2
 
-Add the ``--nv`` option to enable NVIDIA GPUs inside the container::
+Add the ``--nv`` option to **enable NVIDIA GPUs** inside the container::
 
     ▶ singularity exec --nv software.simg nvidia-smi
     Thu Sep 13 16:49:15 2018
@@ -60,7 +61,7 @@ Add the ``--nv`` option to enable NVIDIA GPUs inside the container::
     HOOMD-blue is running on the following GPU(s):
      [0]          Quadro GP100  56 SM_6.0 @ 1.44 GHz, 16278 MiB DRAM
 
-**glotzerlab-software** updates monthly with the latest versions of included software. Delete your existing image and
+**glotzerlab-software** :doc:`updates monthly <changes>` with the latest versions of included software. Delete your existing image and
 pull the latest image to update::
 
     ▶ rm software.simg
@@ -70,7 +71,7 @@ pull the latest image to update::
 
 .. seealso::
 
-    See the `Singularity documentation <https://www.sylabs.io/docs/>`_ for more information on singularity commands.
+    See the `Singularity documentation <https://www.sylabs.io/docs/>`_ for more information on ``singularity`` commands.
 
 Documentation
 _____________
@@ -78,6 +79,8 @@ _____________
 .. toctree::
     :maxdepth: 2
 
+    software
+    cluster
     files
     community
     changes
