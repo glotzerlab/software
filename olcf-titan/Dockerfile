@@ -61,7 +61,9 @@ RUN curl -sSLO https://github.com/embree/embree/releases/download/v3.2.0/embree-
 RUN mkdir -p /nfs \
     mkdir -p /oasis \
     mkdir -p /scratch \
-    mkdir -p /projects
+    mkdir -p /work \
+    mkdir -p /projects \
+    mkdir -p /home1
 
 ENV CC=/usr/bin/gcc-4.9
 ENV CXX=/usr/bin/g++-4.9
@@ -190,3 +192,5 @@ RUN useradd --create-home --shell /bin/bash glotzerlab-software \
     && chown glotzerlab-software:glotzerlab-software -R /fresnel-examples
 
 USER glotzerlab-software:glotzerlab-software
+
+LABEL maintainer="glotzerlab: http://glotzerlab.engin.umich.edu"
