@@ -2,8 +2,8 @@ Glotzerlab software images
 ++++++++++++++++++++++++++
 
 **glotzerlab-software** is a set of container images that provide software developed by the
-`Glotzer group <http://glotzerlab.engin.umich.edu>`_ at the `University of Michigan <https://www.umich.edu/>`_, and
-related software commonly used in simulation and data analysis workflows. An *image* bundles these tools into
+`Glotzer group <http://glotzerlab.engin.umich.edu>`_ at the `University of Michigan <https://www.umich.edu/>`_ along
+with related software commonly used in simulation and data analysis workflows. An *image* bundles these tools into
 a single file which can be copied, moved, shared with others, and published to provide a completely
 reproducible workflow. A *host* system provides the resources to execute software inside containers.
 `Singularity <https://www.sylabs.io/docs/>`_ provides a high performance solution, supporting NVIDIA GPUs and MPI
@@ -82,6 +82,7 @@ _____________
     software
     cluster
     files
+    docker
     community
     changes
     license
