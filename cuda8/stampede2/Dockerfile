@@ -61,7 +61,8 @@ RUN curl -sSLO https://github.com/embree/embree/releases/download/v3.2.0/embree-
 RUN mkdir -p /nfs \
     mkdir -p /oasis \
     mkdir -p /scratch \
-    mkdir -p /projects
+    mkdir -p /projects \
+    mkdir -p /home1
 
 RUN curl -sSLO https://glotzerlab.engin.umich.edu/Downloads/freud/freud-v0.10.0.tar.gz \
     && echo "f0d00cf5d958b0e3b819ab09ba0433f2fb29b0cdac30879222d49cad7e460e1f  freud-v0.10.0.tar.gz" | sha256sum -c - \
@@ -240,3 +241,5 @@ RUN useradd --create-home --shell /bin/bash glotzerlab-software \
     && chown glotzerlab-software:glotzerlab-software -R /fresnel-examples
 
 USER glotzerlab-software:glotzerlab-software
+
+LABEL maintainer="glotzerlab: http://glotzerlab.engin.umich.edu"

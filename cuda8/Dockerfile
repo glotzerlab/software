@@ -61,4 +61,5 @@ RUN curl -sSLO https://github.com/embree/embree/releases/download/v3.2.0/embree-
 RUN mkdir -p /nfs \
     mkdir -p /oasis \
     mkdir -p /scratch \
-    mkdir -p /projects
+    mkdir -p /projects \
+    mkdir -p /home1
