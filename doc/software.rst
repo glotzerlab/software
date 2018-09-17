@@ -12,9 +12,9 @@ Installed software
     * `GSD <https://gsd.readthedocs.io>`_
     * `HOOMD-blue <http://glotzerlab.engin.umich.edu/hoomd-blue/>`_
     * `libgetar <https://libgetar.readthedocs.io>`_
+    * `Plato <https://plato-draw.readthedocs.io>`_
     * `Pythia <https://pythia-learn.readthedocs.io/>`_
     * `Rowan <https://rowan.readthedocs.io/>`_
-    * `Plato <https://plato-draw.readthedocs.io>`_
     * `Signac <http://signac.io>`_
     * `Signac-flow <http://signac.io>`_
 
