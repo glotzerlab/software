@@ -22,17 +22,17 @@ Use the following commands in your job scripts or interactively to execute softw
     replace ``command arguments`` with the command and arguments you wish to run. For example:
     ``python3 script.py``
 
-Serial (or multithreaded) CPU jobs (``RM-shared`` partition)::
+Serial (or multithreaded) CPU jobs (``RM-shared`` partitions)::
 
     source /etc/profile.d/modules.sh
     module load singularity
-    singularity exec $SCRATCH/software.simg command arguments
+    mpirun -n 1 singularity exec $SCRATCH/software.simg command arguments
 
 Single GPU jobs (``GPU-shared`` partition)::
 
     source /etc/profile.d/modules.sh
     module load singularity
-    singularity exec --nv $SCRATCH/software.simg command arguments
+    mpirun -n 1 singularity exec --nv $SCRATCH/software.simg command arguments
 
 MPI parallel CPU jobs (``RM`` partition, ``RM-shared`` partition with more than 1 core)::
 

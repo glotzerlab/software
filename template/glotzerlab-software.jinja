@@ -4,7 +4,7 @@ RUN curl -sSLO https://glotzerlab.engin.umich.edu/Downloads/freud/freud-{{ FREUD
     && echo "{{ FREUD_SHA }}  freud-{{ FREUD_VERSION }}.tar.gz" | sha256sum -c - \
     && tar -xzf freud-{{ FREUD_VERSION }}.tar.gz -C /root \
     && cd /root/freud-{{ FREUD_VERSION }} \
-    && CFLAGS="{{CFLAGS}}" CXXFLAGS="{{CFLAGS}}" \
+    && export CFLAGS="{{CFLAGS}}" CXXFLAGS="{{CFLAGS}}" \
     && python3 -m pip install --no-deps --ignore-installed . \
     && rm -rf /root/freud-{{ FREUD_VERSION }} \
     && rm /freud-{{ FREUD_VERSION }}.tar.gz
@@ -15,7 +15,7 @@ RUN curl -sSLO https://glotzerlab.engin.umich.edu/Downloads/fresnel/fresnel-{{ F
     && cd /root/fresnel-{{ FRESNEL_VERSION }} \
     && mkdir build \
     && cd build \
-    && CFLAGS="{{CFLAGS}}" CXXFLAGS="{{CFLAGS}}" \
+    && export CFLAGS="{{CFLAGS}}" CXXFLAGS="{{CFLAGS}}" \
     && cmake ../ -DENABLE_EMBREE=on -DENABLE_OPTIX=off -Dembree_DIR=/opt/embree-{{ EMBREE_VERSION }}.x86_64.linux -DCMAKE_INSTALL_PREFIX=`python3 -c "import site; print(site.getsitepackages()[0])"` \
     && make install -j{{ MAKEJOBS }} \
     && rm -rf /root/fresnel-{{ FRESNEL_VERSION }} \
@@ -27,7 +27,7 @@ RUN curl -sSLO https://glotzerlab.engin.umich.edu/Downloads/gsd/gsd-{{ GSD_VERSI
     && cd /root/gsd-{{ GSD_VERSION }} \
     && mkdir build \
     && cd build \
-    && CFLAGS="{{CFLAGS}}" CXXFLAGS="{{CFLAGS}}" \
+    && export CFLAGS="{{CFLAGS}}" CXXFLAGS="{{CFLAGS}}" \
     && cmake ../ -DCMAKE_INSTALL_PREFIX=`python3 -c "import site; print(site.getsitepackages()[0])"` \
     && make install -j{{ MAKEJOBS }} \
     && rm -rf /root/gsd-{{ GSD_VERSION }} \
@@ -37,7 +37,7 @@ RUN curl -sSLO https://glotzerlab.engin.umich.edu/Downloads/libgetar/libgetar-{{
     && echo "{{ LIBGETAR_SHA }}  libgetar-{{ LIBGETAR_VERSION }}.tar.gz" | sha256sum -c - \
     && tar -xzf libgetar-{{ LIBGETAR_VERSION }}.tar.gz -C /root \
     && cd /root/libgetar-{{ LIBGETAR_VERSION }} \
-    && CFLAGS="{{CFLAGS}}" CXXFLAGS="{{CFLAGS}}" \
+    && export CFLAGS="{{CFLAGS}}" CXXFLAGS="{{CFLAGS}}" \
     && python3 -m pip install --no-deps --ignore-installed . \
     && rm -rf /root/libgetar-{{ LIBGETAR_VERSION }} \
     && rm /libgetar-{{ LIBGETAR_VERSION }}.tar.gz
@@ -46,7 +46,7 @@ RUN curl -sSLO https://glotzerlab.engin.umich.edu/Downloads/rowan/rowan-{{ ROWAN
     && echo "{{ ROWAN_SHA }}  rowan-{{ ROWAN_VERSION }}.tar.gz" | sha256sum -c - \
     && tar -xzf rowan-{{ ROWAN_VERSION }}.tar.gz -C /root \
     && cd /root/rowan-{{ ROWAN_VERSION }} \
-    && CFLAGS="{{CFLAGS}}" CXXFLAGS="{{CFLAGS}}" \
+    && export CFLAGS="{{CFLAGS}}" CXXFLAGS="{{CFLAGS}}" \
     && python3 -m pip install --no-deps --ignore-installed . \
     && rm -rf /root/rowan-{{ ROWAN_VERSION }} \
     && rm /rowan-{{ ROWAN_VERSION }}.tar.gz
@@ -55,7 +55,7 @@ RUN curl -sSLO https://glotzerlab.engin.umich.edu/Downloads/plato/plato-{{ PLATO
     && echo "{{ PLATO_SHA }}  plato-{{ PLATO_VERSION }}.tar.gz" | sha256sum -c - \
     && tar -xzf plato-{{ PLATO_VERSION }}.tar.gz -C /root \
     && cd /root/plato-{{ PLATO_VERSION }} \
-    && CFLAGS="{{CFLAGS}}" CXXFLAGS="{{CFLAGS}}" \
+    && export CFLAGS="{{CFLAGS}}" CXXFLAGS="{{CFLAGS}}" \
     && python3 -m pip install --no-deps --ignore-installed . \
     && rm -rf /root/plato-{{ PLATO_VERSION }} \
     && rm /plato-{{ PLATO_VERSION }}.tar.gz
@@ -64,7 +64,7 @@ RUN curl -sSLO https://glotzerlab.engin.umich.edu/Downloads/pythia/pythia-{{ PYT
     && echo "{{ PYTHIA_SHA }}  pythia-{{ PYTHIA_VERSION }}.tar.gz" | sha256sum -c - \
     && tar -xzf pythia-{{ PYTHIA_VERSION }}.tar.gz -C /root \
     && cd /root/pythia-{{ PYTHIA_VERSION }} \
-    && CFLAGS="{{CFLAGS}}" CXXFLAGS="{{CFLAGS}}" \
+    && export CFLAGS="{{CFLAGS}}" CXXFLAGS="{{CFLAGS}}" \
     && python3 -m pip install --no-deps --ignore-installed . \
     && rm -rf /root/pythia-{{ PYTHIA_VERSION }} \
     && rm /pythia-{{ PYTHIA_VERSION }}.tar.gz
@@ -73,7 +73,7 @@ RUN curl -sSLO https://glotzerlab.engin.umich.edu/Downloads/signac/signac-{{ SIG
     && echo "{{ SIGNAC_SHA }}  signac-{{ SIGNAC_VERSION }}.tar.gz" | sha256sum -c - \
     && tar -xzf signac-{{ SIGNAC_VERSION }}.tar.gz -C /root \
     && cd /root/signac-{{ SIGNAC_VERSION }} \
-    && CFLAGS="{{CFLAGS}}" CXXFLAGS="{{CFLAGS}}" \
+    && export CFLAGS="{{CFLAGS}}" CXXFLAGS="{{CFLAGS}}" \
     && python3 -m pip install --no-deps --ignore-installed . \
     && rm -rf /root/signac-{{ SIGNAC_VERSION }} \
     && rm /signac-{{ SIGNAC_VERSION }}.tar.gz
@@ -82,7 +82,7 @@ RUN curl -sSLO https://glotzerlab.engin.umich.edu/Downloads/signac-flow/signac-f
     && echo "{{ SIGNAC_FLOW_SHA }}  signac-flow-{{ SIGNAC_FLOW_VERSION }}.tar.gz" | sha256sum -c - \
     && tar -xzf signac-flow-{{ SIGNAC_FLOW_VERSION }}.tar.gz -C /root \
     && cd /root/signac-flow-{{ SIGNAC_FLOW_VERSION }} \
-    && CFLAGS="{{CFLAGS}}" CXXFLAGS="{{CFLAGS}}" \
+    && export CFLAGS="{{CFLAGS}}" CXXFLAGS="{{CFLAGS}}" \
     && python3 -m pip install --no-deps --ignore-installed . \
     && rm -rf /root/signac-flow-{{ SIGNAC_FLOW_VERSION }} \
     && rm /signac-flow-{{ SIGNAC_FLOW_VERSION }}.tar.gz

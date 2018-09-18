@@ -17,7 +17,7 @@ RUN curl -sSLO https://glotzerlab.engin.umich.edu/Downloads/hoomd/hoomd-{{ HOOMD
     && cd /root/hoomd-{{ HOOMD_VERSION }} \
     && mkdir build \
     && cd build \
-    && CFLAGS="{{CFLAGS}}" CXXFLAGS="{{CFLAGS}}" \
+    && export CFLAGS="{{CFLAGS}}" CXXFLAGS="{{CFLAGS}}" \
     && cmake ../ -DENABLE_CUDA=on -DENABLE_MPI={{ ENABLE_MPI }} -DENABLE_TBB=on -DBUILD_JIT=on -DBUILD_TESTING=off -DCMAKE_INSTALL_PREFIX=`python3 -c "import site; print(site.getsitepackages()[0])"` \
     && make install -j{{ MAKEJOBS }} \
     && rm -rf /root/hoomd-{{ HOOMD_VERSION }} \

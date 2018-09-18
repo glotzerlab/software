@@ -82,6 +82,7 @@ _____________
     software
     cluster
     files
+    test
     docker
     community
     changes
