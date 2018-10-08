@@ -52,7 +52,8 @@ Singularity's docker pull support is flaky. ``build.sh`` generates a ``Singulart
 [singularity hub](https://www.singularity-hub.org/) to build. Each just pulls from the docker image that ``build.sh``
 produces, so one must ``docker push`` before ``git push``, or the singularity build will fail.
 
-At this time, we do not freeze older versions on singularity hub.
+Previous builds are frozen on singularity hub. Users are strongly encouraged to use the latest images, but sometimes
+there is reason to delay updating.
 
 ## Benchmarking
 
@@ -62,37 +63,4 @@ The image contains the [OSU microbenchmark suite](http://mvapich.cse.ohio-state.
 
 ## Testing
 
-TODO: write test scripts that validate that the image and the software inside works on each tested platform.
-
-## What works (and what doesn't)
-
-Results of testing these images on a number of local and national supercomputer centers.
-
-Updated: 2018-03-20.
-
-* SDSC Comet (w/ Singularity):
-    * Serial CPU: working
-    * Serial GPU (cuda8): working
-    * MPI (comet): working
-    * Note: *Running the image will create the file =8.0 in your current working directory. This issue will go away when SDSC updates to a newer version of singularity
-* PSC Bridges (w/ Singularity):
-    * Serial CPU: working
-    * Serial GPU (cuda8): working
-    * MPI (bridges): working
-* TACC Stampede2 (w/ Singularity)
-    * Serial CPU: working
-    * MPI (stampede2): working
-* OLCF Titan (w/ Singularity):
-    * n/a - Singularity has been removed from Titan
-* University of Michigan Flux (w/ Singularity):
-    * Serial CPU: working
-    * Serial GPU (cuda8): working
-    * MPI (flux): working (**infiniband enabled on most nodes, but not all**)
-* Arch linux workstation (with openmpi 3.0.0 installed):
-    * Docker:
-        * Serial CPU: working
-        * GPU (runtime=nvidia): working
-    * Singularity:
-        * Serial CPU: working
-        * Serial GPU (cuda8): working
-        * MPI: **not supported**
+See: https://glotzerlab-software.readthedocs.io/en/latest/test.html

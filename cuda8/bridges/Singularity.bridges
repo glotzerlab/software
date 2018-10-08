@@ -1,3 +1,2 @@
 BootStrap: docker
-From: glotzerlab/software:2018.09-haswell-cuda8-hfi1-openmpi2.1.2
-
+From: glotzerlab/software:2018.10-haswell-cuda8-hfi1-openmpi2.1.2

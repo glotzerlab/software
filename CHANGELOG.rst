@@ -2,6 +2,16 @@
 Change log
 ==========
 
+2018.10
+-------
+
+*Software updates:*
+
+* Embree v3.2.1
+* Freud v0.11.0
+* GSD v1.5.4
+* HOOMD-blue v2.3.5
+
 2018.09
 -------
 
