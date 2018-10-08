@@ -45,17 +45,17 @@ RUN sed -i -e 's/ENABLE_USER_SITE = None/ENABLE_USER_SITE = False/g' `python3 -c
 ENV PATH=$PATH:/usr/lib/llvm-5.0/bin
 
 # embree
-ENV CPATH=/opt/embree-3.2.0.x86_64.linux/include:$CPATH \
-    LIBRARY_PATH=/opt/embree-3.2.0.x86_64.linux/lib:$LIBRARY_PATH \
-    LD_LIBRARY_PATH=/opt/embree-3.2.0.x86_64.linux/lib:$LD_LIBRARY_PATH \
-    EMBREE3_LINK=/opt/embree-3.2.0.x86_64.linux/lib
+ENV CPATH=/opt/embree-3.2.1.x86_64.linux/include:$CPATH \
+    LIBRARY_PATH=/opt/embree-3.2.1.x86_64.linux/lib:$LIBRARY_PATH \
+    LD_LIBRARY_PATH=/opt/embree-3.2.1.x86_64.linux/lib:$LD_LIBRARY_PATH \
+    EMBREE3_LINK=/opt/embree-3.2.1.x86_64.linux/lib
 
-RUN curl -sSLO https://github.com/embree/embree/releases/download/v3.2.0/embree-3.2.0.x86_64.linux.tar.gz \
-    && echo "7671cc37c4dc4e3da00b2b299b906b35816f058efea92701e7b89574b15e652d  embree-3.2.0.x86_64.linux.tar.gz" | sha256sum -c - \
-    && tar -xzf embree-3.2.0.x86_64.linux.tar.gz -C /opt \
-    && rm -rf /opt/embree-3.2.0.x86_64.linux/bin \
-    && rm -rf /opt/embree-3.2.0.x86_64.linux/doc \
-    && rm embree-3.2.0.x86_64.linux.tar.gz
+RUN curl -sSLO https://github.com/embree/embree/releases/download/v3.2.1/embree-3.2.1.x86_64.linux.tar.gz \
+    && echo "4bc1801d7a358dfd71e1fb6d46c9401397923980c11e7801f26d5b3f1aed4506  embree-3.2.1.x86_64.linux.tar.gz" | sha256sum -c - \
+    && tar -xzf embree-3.2.1.x86_64.linux.tar.gz -C /opt \
+    && rm -rf /opt/embree-3.2.1.x86_64.linux/bin \
+    && rm -rf /opt/embree-3.2.1.x86_64.linux/doc \
+    && rm embree-3.2.1.x86_64.linux.tar.gz
 
 # mount points for filesystems on clusters
 RUN mkdir -p /nfs \
@@ -65,14 +65,14 @@ RUN mkdir -p /nfs \
     mkdir -p /projects \
     mkdir -p /home1
 
-RUN curl -sSLO https://glotzerlab.engin.umich.edu/Downloads/freud/freud-v0.10.0.tar.gz \
-    && echo "f0d00cf5d958b0e3b819ab09ba0433f2fb29b0cdac30879222d49cad7e460e1f  freud-v0.10.0.tar.gz" | sha256sum -c - \
-    && tar -xzf freud-v0.10.0.tar.gz -C /root \
-    && cd /root/freud-v0.10.0 \
+RUN curl -sSLO https://glotzerlab.engin.umich.edu/Downloads/freud/freud-v0.11.0.tar.gz \
+    && echo "2b04b0df5da7e095dbbf1c2363b63d878824b0f36191ab0894972bd9ec64b36b  freud-v0.11.0.tar.gz" | sha256sum -c - \
+    && tar -xzf freud-v0.11.0.tar.gz -C /root \
+    && cd /root/freud-v0.11.0 \
     && export CFLAGS="-march=knl -mmmx -msse -msse2 -msse3 -mssse3 -mcx16 -msahf -mmovbe -maes -mpclmul -mpopcnt -mabm -mfma -mbmi -mbmi2 -mavx -mavx2 -msse4.2 -msse4.1 -mlzcnt -mrtm -mhle -mrdrnd -mf16c -mfsgsbase -mrdseed -mprfchw -madx -mfxsr -mxsave -mxsaveopt -mavx512f -mavx512cd -mclflushopt -mxsavec -mxsaves -mavx512dq -mavx512bw -mclwb --param l1-cache-size=32 --param l1-cache-line-size=64 --param l2-cache-size=33792 -mtune=generic" CXXFLAGS="-march=knl -mmmx -msse -msse2 -msse3 -mssse3 -mcx16 -msahf -mmovbe -maes -mpclmul -mpopcnt -mabm -mfma -mbmi -mbmi2 -mavx -mavx2 -msse4.2 -msse4.1 -mlzcnt -mrtm -mhle -mrdrnd -mf16c -mfsgsbase -mrdseed -mprfchw -madx -mfxsr -mxsave -mxsaveopt -mavx512f -mavx512cd -mclflushopt -mxsavec -mxsaves -mavx512dq -mavx512bw -mclwb --param l1-cache-size=32 --param l1-cache-line-size=64 --param l2-cache-size=33792 -mtune=generic" \
     && python3 -m pip install --no-deps --ignore-installed . \
-    && rm -rf /root/freud-v0.10.0 \
-    && rm /freud-v0.10.0.tar.gz
+    && rm -rf /root/freud-v0.11.0 \
+    && rm /freud-v0.11.0.tar.gz
 
 RUN curl -sSLO https://glotzerlab.engin.umich.edu/Downloads/fresnel/fresnel-v0.6.0.tar.gz \
     && echo "de1b18f87b5bcdd96844c143d6a9cf560df873a9f1f7eae8d6ff2eac5a1d2467  fresnel-v0.6.0.tar.gz" | sha256sum -c - \
@@ -81,22 +81,22 @@ RUN curl -sSLO https://glotzerlab.engin.umich.edu/Downloads/fresnel/fresnel-v0.6
     && mkdir build \
     && cd build \
     && export CFLAGS="-march=knl -mmmx -msse -msse2 -msse3 -mssse3 -mcx16 -msahf -mmovbe -maes -mpclmul -mpopcnt -mabm -mfma -mbmi -mbmi2 -mavx -mavx2 -msse4.2 -msse4.1 -mlzcnt -mrtm -mhle -mrdrnd -mf16c -mfsgsbase -mrdseed -mprfchw -madx -mfxsr -mxsave -mxsaveopt -mavx512f -mavx512cd -mclflushopt -mxsavec -mxsaves -mavx512dq -mavx512bw -mclwb --param l1-cache-size=32 --param l1-cache-line-size=64 --param l2-cache-size=33792 -mtune=generic" CXXFLAGS="-march=knl -mmmx -msse -msse2 -msse3 -mssse3 -mcx16 -msahf -mmovbe -maes -mpclmul -mpopcnt -mabm -mfma -mbmi -mbmi2 -mavx -mavx2 -msse4.2 -msse4.1 -mlzcnt -mrtm -mhle -mrdrnd -mf16c -mfsgsbase -mrdseed -mprfchw -madx -mfxsr -mxsave -mxsaveopt -mavx512f -mavx512cd -mclflushopt -mxsavec -mxsaves -mavx512dq -mavx512bw -mclwb --param l1-cache-size=32 --param l1-cache-line-size=64 --param l2-cache-size=33792 -mtune=generic" \
-    && cmake ../ -DENABLE_EMBREE=on -DENABLE_OPTIX=off -Dembree_DIR=/opt/embree-3.2.0.x86_64.linux -DCMAKE_INSTALL_PREFIX=`python3 -c "import site; print(site.getsitepackages()[0])"` \
+    && cmake ../ -DENABLE_EMBREE=on -DENABLE_OPTIX=off -Dembree_DIR=/opt/embree-3.2.1.x86_64.linux -DCMAKE_INSTALL_PREFIX=`python3 -c "import site; print(site.getsitepackages()[0])"` \
     && make install -j10 \
     && rm -rf /root/fresnel-v0.6.0 \
     && rm /fresnel-v0.6.0.tar.gz
 
-RUN curl -sSLO https://glotzerlab.engin.umich.edu/Downloads/gsd/gsd-v1.5.3.tar.gz \
-    && echo "10b6d37b2dadb9dc3543f4975e3722da3f3fd790df44e887b2a0306c045cf76d  gsd-v1.5.3.tar.gz" | sha256sum -c - \
-    && tar -xzf gsd-v1.5.3.tar.gz -C /root \
-    && cd /root/gsd-v1.5.3 \
+RUN curl -sSLO https://glotzerlab.engin.umich.edu/Downloads/gsd/gsd-v1.5.4.tar.gz \
+    && echo "09b09f1316c809dae96b1a02972673ef928eb549fcc1cae484265590a5b4acff  gsd-v1.5.4.tar.gz" | sha256sum -c - \
+    && tar -xzf gsd-v1.5.4.tar.gz -C /root \
+    && cd /root/gsd-v1.5.4 \
     && mkdir build \
     && cd build \
     && export CFLAGS="-march=knl -mmmx -msse -msse2 -msse3 -mssse3 -mcx16 -msahf -mmovbe -maes -mpclmul -mpopcnt -mabm -mfma -mbmi -mbmi2 -mavx -mavx2 -msse4.2 -msse4.1 -mlzcnt -mrtm -mhle -mrdrnd -mf16c -mfsgsbase -mrdseed -mprfchw -madx -mfxsr -mxsave -mxsaveopt -mavx512f -mavx512cd -mclflushopt -mxsavec -mxsaves -mavx512dq -mavx512bw -mclwb --param l1-cache-size=32 --param l1-cache-line-size=64 --param l2-cache-size=33792 -mtune=generic" CXXFLAGS="-march=knl -mmmx -msse -msse2 -msse3 -mssse3 -mcx16 -msahf -mmovbe -maes -mpclmul -mpopcnt -mabm -mfma -mbmi -mbmi2 -mavx -mavx2 -msse4.2 -msse4.1 -mlzcnt -mrtm -mhle -mrdrnd -mf16c -mfsgsbase -mrdseed -mprfchw -madx -mfxsr -mxsave -mxsaveopt -mavx512f -mavx512cd -mclflushopt -mxsavec -mxsaves -mavx512dq -mavx512bw -mclwb --param l1-cache-size=32 --param l1-cache-line-size=64 --param l2-cache-size=33792 -mtune=generic" \
     && cmake ../ -DCMAKE_INSTALL_PREFIX=`python3 -c "import site; print(site.getsitepackages()[0])"` \
     && make install -j10 \
-    && rm -rf /root/gsd-v1.5.3 \
-    && rm /gsd-v1.5.3.tar.gz
+    && rm -rf /root/gsd-v1.5.4 \
+    && rm /gsd-v1.5.4.tar.gz
 
 RUN curl -sSLO https://glotzerlab.engin.umich.edu/Downloads/libgetar/libgetar-v0.6.1.tar.gz \
     && echo "3e7e0124ba6b7c831e789e13d75313a4700fbea9b0d04ebd5c1afc87b732aa24  libgetar-v0.6.1.tar.gz" | sha256sum -c - \
@@ -224,17 +224,17 @@ RUN curl -sSLO https://bitbucket.org/mpi4py/mpi4py/downloads/mpi4py-3.0.0.tar.gz
     && rm /mpi4py-3.0.0.tar.gz
 
 
-RUN curl -sSLO https://glotzerlab.engin.umich.edu/Downloads/hoomd/hoomd-v2.3.4.tar.gz \
-    && echo "72bea429483528d38e8c8da77cc4b0fa6df6dcfd8846bbe9d7975a007c749525  hoomd-v2.3.4.tar.gz" | sha256sum -c - \
-    && tar -xzf hoomd-v2.3.4.tar.gz -C /root \
-    && cd /root/hoomd-v2.3.4 \
+RUN curl -sSLO https://glotzerlab.engin.umich.edu/Downloads/hoomd/hoomd-v2.3.5.tar.gz \
+    && echo "81941c2a5407127dda00f5ffe39bc0faecb5f462cb34b860df71391038cc2268  hoomd-v2.3.5.tar.gz" | sha256sum -c - \
+    && tar -xzf hoomd-v2.3.5.tar.gz -C /root \
+    && cd /root/hoomd-v2.3.5 \
     && mkdir build \
     && cd build \
     && export CFLAGS="-march=knl -mmmx -msse -msse2 -msse3 -mssse3 -mcx16 -msahf -mmovbe -maes -mpclmul -mpopcnt -mabm -mfma -mbmi -mbmi2 -mavx -mavx2 -msse4.2 -msse4.1 -mlzcnt -mrtm -mhle -mrdrnd -mf16c -mfsgsbase -mrdseed -mprfchw -madx -mfxsr -mxsave -mxsaveopt -mavx512f -mavx512cd -mclflushopt -mxsavec -mxsaves -mavx512dq -mavx512bw -mclwb --param l1-cache-size=32 --param l1-cache-line-size=64 --param l2-cache-size=33792 -mtune=generic" CXXFLAGS="-march=knl -mmmx -msse -msse2 -msse3 -mssse3 -mcx16 -msahf -mmovbe -maes -mpclmul -mpopcnt -mabm -mfma -mbmi -mbmi2 -mavx -mavx2 -msse4.2 -msse4.1 -mlzcnt -mrtm -mhle -mrdrnd -mf16c -mfsgsbase -mrdseed -mprfchw -madx -mfxsr -mxsave -mxsaveopt -mavx512f -mavx512cd -mclflushopt -mxsavec -mxsaves -mavx512dq -mavx512bw -mclwb --param l1-cache-size=32 --param l1-cache-line-size=64 --param l2-cache-size=33792 -mtune=generic" \
     && cmake ../ -DENABLE_CUDA=on -DENABLE_MPI=on -DENABLE_TBB=on -DBUILD_JIT=on -DBUILD_TESTING=off -DCMAKE_INSTALL_PREFIX=`python3 -c "import site; print(site.getsitepackages()[0])"` \
     && make install -j10 \
-    && rm -rf /root/hoomd-v2.3.4 \
-    && rm /hoomd-v2.3.4.tar.gz
+    && rm -rf /root/hoomd-v2.3.5 \
+    && rm /hoomd-v2.3.5.tar.gz
 
 # setup self test
 RUN mkdir /test

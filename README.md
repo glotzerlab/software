@@ -52,8 +52,8 @@ Singularity's docker pull support is flaky. ``build.sh`` generates a ``Singulart
 [singularity hub](https://www.singularity-hub.org/) to build. Each just pulls from the docker image that ``build.sh``
 produces, so one must ``docker push`` before ``git push``, or the singularity build will fail.
 
-Previous builds are frozen on singularity hub. Users are strongly encouraged to use the latest images, but sometimes
-there is reason to delay updating.
+Previous builds are not frozen on singularity hub. Users are strongly encouraged to use the latest images, but sometimes
+there is reason to delay updating. If users need a previous image, they can build it from the archive on Docker hub.
 
 ## Benchmarking
 
