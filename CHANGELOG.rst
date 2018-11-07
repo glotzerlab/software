@@ -2,6 +2,19 @@
 Change log
 ==========
 
+2018.11
+-------
+
+*Software updates:*
+
+* Freud v0.11.3
+* HOOMD-blue v2.4.0
+* libgetar v0.7.0
+* plato v1.2.0
+* pythia v0.2.3
+* rowan v1.1.6
+* signac v0.9.4
+
 2018.10
 -------
 
