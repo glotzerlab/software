@@ -8,8 +8,10 @@
 #SBATCH -t 0:10:00
 
 module load singularity
+module unload mvapich2_ib
+module load openmpi_ib
 
 rm -f test-results-gpu.out
 
-singularity exec --nv software.simg python3 serial-gpu.py
+ibrun -n 1 singularity exec --nv software.simg python3 serial-gpu.py
 

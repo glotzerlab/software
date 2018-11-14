@@ -12,7 +12,7 @@ module load openmpi_ib
 
 rm -f test-results-cpu.out
 
-singularity exec software.simg python3 serial-cpu.py
+ibrun -n 1 singularity exec software.simg python3 serial-cpu.py
 
 ibrun --npernode 1 singularity exec software.simg python3 mpi-cpu.py
 

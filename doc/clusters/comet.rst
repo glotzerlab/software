@@ -25,12 +25,16 @@ Use the following commands in your job scripts or interactively to execute softw
 Serial (or multithreaded) CPU jobs (``shared`` partition)::
 
     module load singularity
-    singularity exec /oasis/scratch/comet/$USER/temp_project/software.simg command arguments
+    module unload mvapich2_ib
+    module load openmpi_ib
+    ibrun -n 1 singularity exec /oasis/scratch/comet/$USER/temp_project/software.simg command arguments
 
 Single GPU jobs (``gpu-shared`` partition)::
 
     module load singularity
-    singularity exec --nv /oasis/scratch/comet/$USER/temp_project/software.simg command arguments
+    module unload mvapich2_ib
+    module load openmpi_ib
+    ibrun -n 1 singularity exec --nv /oasis/scratch/comet/$USER/temp_project/software.simg command arguments
 
 MPI parallel CPU jobs (``compute`` partition, ``shared`` partition with more than 1 core)::
 
