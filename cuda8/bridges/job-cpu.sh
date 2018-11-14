@@ -8,7 +8,7 @@
 #SBATCH -t 0:10:00
 
 source /etc/profile.d/modules.sh
-module load singularity
+module load singularity/2.6.0
 module unload intel
 module load mpi/gcc_openmpi
 
