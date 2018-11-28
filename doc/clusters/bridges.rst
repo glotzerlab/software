@@ -31,12 +31,16 @@ Serial (or multithreaded) CPU jobs (``RM-shared`` partitions)::
 
     source /etc/profile.d/modules.sh
     module load singularity/2.6.0
+    module unload intel
+    module load mpi/gcc_openmpi
     mpirun -n 1 singularity exec $SCRATCH/software.simg command arguments
 
 Single GPU jobs (``GPU-shared`` partition)::
 
     source /etc/profile.d/modules.sh
     module load singularity/2.6.0
+    module unload intel
+    module load mpi/gcc_openmpi
     mpirun -n 1 singularity exec --nv $SCRATCH/software.simg command arguments
 
 MPI parallel CPU jobs (``RM`` partition, ``RM-shared`` partition with more than 1 core)::
