@@ -1,96 +1,128 @@
+{% if output == 'script' %}
+{% set RUN = '' %}
+{% set pip_root = '--prefix=$ROOT' %}
+{% set cmake_prefix = '$ROOT`python -c "import distutils.sysconfig; print(distutils.sysconfig.get_python_lib()[len(distutils.sysconfig.PREFIX):])"`' %}
+{% else %}
+{% set RUN = 'RUN' %}
+{% set pip_root = '' %}
+{% set cmake_prefix = '`python3 -c "import site; print(site.getsitepackages()[0])"`' %}
+{% endif %}
 
-
-RUN curl -sSLO https://glotzerlab.engin.umich.edu/Downloads/freud/freud-{{ FREUD_VERSION }}.tar.gz \
+{{ RUN }} curl -sSLO https://glotzerlab.engin.umich.edu/Downloads/freud/freud-{{ FREUD_VERSION }}.tar.gz \
     && echo "{{ FREUD_SHA }}  freud-{{ FREUD_VERSION }}.tar.gz" | sha256sum -c - \
-    && tar -xzf freud-{{ FREUD_VERSION }}.tar.gz -C /root \
-    && cd /root/freud-{{ FREUD_VERSION }} \
+    && tar -xzf freud-{{ FREUD_VERSION }}.tar.gz -C . \
+    && rm -f freud-{{ FREUD_VERSION }}/*.toml \
     && export CFLAGS="{{CFLAGS}}" CXXFLAGS="{{CFLAGS}}" \
-    && python3 -m pip install --no-deps --ignore-installed . \
-    && rm -rf /root/freud-{{ FREUD_VERSION }} \
-    && rm /freud-{{ FREUD_VERSION }}.tar.gz
+    && python3 -m pip install --no-deps --ignore-installed {{ pip_root }} ./freud-{{ FREUD_VERSION }} \
+    && rm -rf freud-{{ FREUD_VERSION }} \
+    && rm freud-{{ FREUD_VERSION }}.tar.gz \
+    || exit 1
 
-RUN curl -sSLO https://glotzerlab.engin.umich.edu/Downloads/fresnel/fresnel-{{ FRESNEL_VERSION }}.tar.gz \
+{% if system != 'summit' %}
+{{ RUN }} curl -sSLO https://glotzerlab.engin.umich.edu/Downloads/fresnel/fresnel-{{ FRESNEL_VERSION }}.tar.gz \
     && echo "{{ FRESNEL_SHA }}  fresnel-{{ FRESNEL_VERSION }}.tar.gz" | sha256sum -c - \
-    && tar -xzf fresnel-{{ FRESNEL_VERSION }}.tar.gz -C /root \
-    && cd /root/fresnel-{{ FRESNEL_VERSION }} \
+    && tar -xzf fresnel-{{ FRESNEL_VERSION }}.tar.gz -C . \
+    && cd fresnel-{{ FRESNEL_VERSION }} \
     && mkdir build \
     && cd build \
     && export CFLAGS="{{CFLAGS}}" CXXFLAGS="{{CFLAGS}}" \
-    && cmake ../ -DENABLE_EMBREE=on -DENABLE_OPTIX=off -Dembree_DIR=/opt/embree-{{ EMBREE_VERSION }}.x86_64.linux -DCMAKE_INSTALL_PREFIX=`python3 -c "import site; print(site.getsitepackages()[0])"` \
+    && cmake ../ -DENABLE_EMBREE=on -DENABLE_OPTIX=off -Dembree_DIR=/opt/embree-{{ EMBREE_VERSION }}.x86_64.linux -DCMAKE_INSTALL_PREFIX={{ cmake_prefix }} \
     && make install -j{{ MAKEJOBS }} \
-    && rm -rf /root/fresnel-{{ FRESNEL_VERSION }} \
-    && rm /fresnel-{{ FRESNEL_VERSION }}.tar.gz
+    && cd ../../ \
+    && rm -rf fresnel-{{ FRESNEL_VERSION }} \
+    && rm fresnel-{{ FRESNEL_VERSION }}.tar.gz \
+    || exit 1
+{% endif %}
 
-RUN curl -sSLO https://glotzerlab.engin.umich.edu/Downloads/gsd/gsd-{{ GSD_VERSION }}.tar.gz \
+{{ RUN }} curl -sSLO https://glotzerlab.engin.umich.edu/Downloads/gsd/gsd-{{ GSD_VERSION }}.tar.gz \
     && echo "{{ GSD_SHA }}  gsd-{{ GSD_VERSION }}.tar.gz" | sha256sum -c - \
-    && tar -xzf gsd-{{ GSD_VERSION }}.tar.gz -C /root \
-    && cd /root/gsd-{{ GSD_VERSION }} \
+    && tar -xzf gsd-{{ GSD_VERSION }}.tar.gz -C . \
+    && cd gsd-{{ GSD_VERSION }} \
     && mkdir build \
     && cd build \
     && export CFLAGS="{{CFLAGS}}" CXXFLAGS="{{CFLAGS}}" \
-    && cmake ../ -DCMAKE_INSTALL_PREFIX=`python3 -c "import site; print(site.getsitepackages()[0])"` \
+    && cmake ../ -DCMAKE_INSTALL_PREFIX={{ cmake_prefix }} \
     && make install -j{{ MAKEJOBS }} \
-    && rm -rf /root/gsd-{{ GSD_VERSION }} \
-    && rm /gsd-{{ GSD_VERSION }}.tar.gz
+    && cd ../../ \
+    && rm -rf gsd-{{ GSD_VERSION }} \
+    && rm gsd-{{ GSD_VERSION }}.tar.gz \
+    || exit 1
 
-RUN curl -sSLO https://glotzerlab.engin.umich.edu/Downloads/libgetar/libgetar-{{ LIBGETAR_VERSION }}.tar.gz \
+{{ RUN }} curl -sSLO https://glotzerlab.engin.umich.edu/Downloads/libgetar/libgetar-{{ LIBGETAR_VERSION }}.tar.gz \
     && echo "{{ LIBGETAR_SHA }}  libgetar-{{ LIBGETAR_VERSION }}.tar.gz" | sha256sum -c - \
-    && tar -xzf libgetar-{{ LIBGETAR_VERSION }}.tar.gz -C /root \
-    && cd /root/libgetar-{{ LIBGETAR_VERSION }} \
+    && tar -xzf libgetar-{{ LIBGETAR_VERSION }}.tar.gz -C . \
+    && rm -f libgetar-{{ LIBGETAR_VERSION }}/*.toml \
     && export CFLAGS="{{CFLAGS}}" CXXFLAGS="{{CFLAGS}}" \
-    && python3 -m pip install --no-deps --ignore-installed . \
-    && rm -rf /root/libgetar-{{ LIBGETAR_VERSION }} \
-    && rm /libgetar-{{ LIBGETAR_VERSION }}.tar.gz
+    && python3 -m pip install --no-deps --ignore-installed {{ pip_root }} ./libgetar-{{ LIBGETAR_VERSION }} \
+    && rm -rf libgetar-{{ LIBGETAR_VERSION }} \
+    && rm libgetar-{{ LIBGETAR_VERSION }}.tar.gz \
+    || exit 1
 
-RUN curl -sSLO https://glotzerlab.engin.umich.edu/Downloads/rowan/rowan-{{ ROWAN_VERSION }}.tar.gz \
+{{ RUN }} curl -sSLO https://glotzerlab.engin.umich.edu/Downloads/rowan/rowan-{{ ROWAN_VERSION }}.tar.gz \
     && echo "{{ ROWAN_SHA }}  rowan-{{ ROWAN_VERSION }}.tar.gz" | sha256sum -c - \
-    && tar -xzf rowan-{{ ROWAN_VERSION }}.tar.gz -C /root \
-    && cd /root/rowan-{{ ROWAN_VERSION }} \
+    && tar -xzf rowan-{{ ROWAN_VERSION }}.tar.gz -C . \
     && export CFLAGS="{{CFLAGS}}" CXXFLAGS="{{CFLAGS}}" \
-    && python3 -m pip install --no-deps --ignore-installed . \
-    && rm -rf /root/rowan-{{ ROWAN_VERSION }} \
-    && rm /rowan-{{ ROWAN_VERSION }}.tar.gz
+    && python3 -m pip install --no-deps --ignore-installed {{ pip_root }} ./rowan-{{ ROWAN_VERSION }} \
+    && rm -rf rowan-{{ ROWAN_VERSION }} \
+    && rm rowan-{{ ROWAN_VERSION }}.tar.gz \
+    || exit 1
 
-RUN curl -sSLO https://glotzerlab.engin.umich.edu/Downloads/plato/plato-{{ PLATO_VERSION }}.tar.gz \
+{{ RUN }} curl -sSLO https://glotzerlab.engin.umich.edu/Downloads/plato/plato-{{ PLATO_VERSION }}.tar.gz \
     && echo "{{ PLATO_SHA }}  plato-{{ PLATO_VERSION }}.tar.gz" | sha256sum -c - \
-    && tar -xzf plato-{{ PLATO_VERSION }}.tar.gz -C /root \
-    && cd /root/plato-{{ PLATO_VERSION }} \
+    && tar -xzf plato-{{ PLATO_VERSION }}.tar.gz -C . \
     && export CFLAGS="{{CFLAGS}}" CXXFLAGS="{{CFLAGS}}" \
-    && python3 -m pip install --no-deps --ignore-installed . \
-    && rm -rf /root/plato-{{ PLATO_VERSION }} \
-    && rm /plato-{{ PLATO_VERSION }}.tar.gz
+    && python3 -m pip install --no-deps --ignore-installed {{ pip_root }} ./plato-{{ PLATO_VERSION }} \
+    && rm -rf plato-{{ PLATO_VERSION }} \
+    && rm plato-{{ PLATO_VERSION }}.tar.gz \
+    || exit 1
 
-RUN curl -sSLO https://glotzerlab.engin.umich.edu/Downloads/pythia/pythia-{{ PYTHIA_VERSION }}.tar.gz \
+{{ RUN }} curl -sSLO https://glotzerlab.engin.umich.edu/Downloads/pythia/pythia-{{ PYTHIA_VERSION }}.tar.gz \
     && echo "{{ PYTHIA_SHA }}  pythia-{{ PYTHIA_VERSION }}.tar.gz" | sha256sum -c - \
-    && tar -xzf pythia-{{ PYTHIA_VERSION }}.tar.gz -C /root \
-    && cd /root/pythia-{{ PYTHIA_VERSION }} \
+    && tar -xzf pythia-{{ PYTHIA_VERSION }}.tar.gz -C . \
     && export CFLAGS="{{CFLAGS}}" CXXFLAGS="{{CFLAGS}}" \
-    && python3 -m pip install --no-deps --ignore-installed . \
-    && rm -rf /root/pythia-{{ PYTHIA_VERSION }} \
-    && rm /pythia-{{ PYTHIA_VERSION }}.tar.gz
+    && python3 -m pip install --no-deps --ignore-installed {{ pip_root }} ./pythia-{{ PYTHIA_VERSION }} \
+    && rm -rf pythia-{{ PYTHIA_VERSION }} \
+    && rm pythia-{{ PYTHIA_VERSION }}.tar.gz \
+    || exit 1
 
-RUN curl -sSLO https://glotzerlab.engin.umich.edu/Downloads/signac/signac-{{ SIGNAC_VERSION }}.tar.gz \
+{{ RUN }} curl -sSLO https://glotzerlab.engin.umich.edu/Downloads/signac/signac-{{ SIGNAC_VERSION }}.tar.gz \
     && echo "{{ SIGNAC_SHA }}  signac-{{ SIGNAC_VERSION }}.tar.gz" | sha256sum -c - \
-    && tar -xzf signac-{{ SIGNAC_VERSION }}.tar.gz -C /root \
-    && cd /root/signac-{{ SIGNAC_VERSION }} \
+    && tar -xzf signac-{{ SIGNAC_VERSION }}.tar.gz -C . \
     && export CFLAGS="{{CFLAGS}}" CXXFLAGS="{{CFLAGS}}" \
-    && python3 -m pip install --no-deps --ignore-installed . \
-    && rm -rf /root/signac-{{ SIGNAC_VERSION }} \
-    && rm /signac-{{ SIGNAC_VERSION }}.tar.gz
+    && python3 -m pip install --no-deps --ignore-installed {{ pip_root }} ./signac-{{ SIGNAC_VERSION }} \
+    && rm -rf signac-{{ SIGNAC_VERSION }} \
+    && rm signac-{{ SIGNAC_VERSION }}.tar.gz \
+    || exit 1
 
-RUN curl -sSLO https://glotzerlab.engin.umich.edu/Downloads/signac-flow/signac-flow-{{ SIGNAC_FLOW_VERSION }}.tar.gz \
+{{ RUN }} curl -sSLO https://glotzerlab.engin.umich.edu/Downloads/signac-flow/signac-flow-{{ SIGNAC_FLOW_VERSION }}.tar.gz \
     && echo "{{ SIGNAC_FLOW_SHA }}  signac-flow-{{ SIGNAC_FLOW_VERSION }}.tar.gz" | sha256sum -c - \
-    && tar -xzf signac-flow-{{ SIGNAC_FLOW_VERSION }}.tar.gz -C /root \
-    && cd /root/signac-flow-{{ SIGNAC_FLOW_VERSION }} \
+    && tar -xzf signac-flow-{{ SIGNAC_FLOW_VERSION }}.tar.gz -C . \
     && export CFLAGS="{{CFLAGS}}" CXXFLAGS="{{CFLAGS}}" \
-    && python3 -m pip install --no-deps --ignore-installed . \
-    && rm -rf /root/signac-flow-{{ SIGNAC_FLOW_VERSION }} \
-    && rm /signac-flow-{{ SIGNAC_FLOW_VERSION }}.tar.gz
+    && python3 -m pip install --no-deps --ignore-installed {{ pip_root }} ./signac-flow-{{ SIGNAC_FLOW_VERSION }} \
+    && rm -rf signac-flow-{{ SIGNAC_FLOW_VERSION }} \
+    && rm signac-flow-{{ SIGNAC_FLOW_VERSION }}.tar.gz \
+    || exit 1
 
-RUN mkdir /hoomd-examples \
+{{ RUN }} curl -sSLO https://glotzerlab.engin.umich.edu/Downloads/hoomd/hoomd-{{ HOOMD_VERSION }}.tar.gz \
+    && echo "{{ HOOMD_SHA }}  hoomd-{{ HOOMD_VERSION }}.tar.gz" | sha256sum -c - \
+    && tar -xzf hoomd-{{ HOOMD_VERSION }}.tar.gz -C . \
+    && cd hoomd-{{ HOOMD_VERSION }} \
+    && mkdir build \
+    && cd build \
+    && export CFLAGS="{{CFLAGS}}" CXXFLAGS="{{CFLAGS}}" \
+    && cmake ../ -DENABLE_CUDA=on -DENABLE_MPI={{ ENABLE_MPI }} -DENABLE_TBB={{ ENABLE_TBB|default('on') }} -DBUILD_JIT={{ BUILD_JIT|default('on') }} -DBUILD_TESTING=off -DENABLE_MPI_CUDA={{ ENABLE_MPI_CUDA|default('off') }} -DCMAKE_INSTALL_PREFIX={{ cmake_prefix }} \
+    && make install -j{{ MAKEJOBS }} \
+    && cd ../../ \
+    && rm -rf /root/hoomd-{{ HOOMD_VERSION }} \
+    && rm hoomd-{{ HOOMD_VERSION }}.tar.gz \
+    || exit 1
+
+{% if output != 'script' %}
+{{ RUN }} mkdir /hoomd-examples \
     && curl -sSL https://bitbucket.org/glotzer/hoomd-examples/get/master.tar.gz \
     | tar -xzC /hoomd-examples --strip-components=1
 
-RUN mkdir /fresnel-examples \
+{{ RUN }} mkdir /fresnel-examples \
     && curl -sSL https://bitbucket.org/glotzer/fresnel-examples/get/master.tar.gz \
     | tar -xzC /fresnel-examples --strip-components=1
+{% endif %}

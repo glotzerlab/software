@@ -1,0 +1,60 @@
+set -u
+set -e
+
+usage="$(basename "$0") root -- Build software and install in root."
+
+if [[ $# -lt 1 || $# -gt 1  || $1 == "-h" ]]
+then
+    echo "$usage"
+    exit 0
+fi
+
+ROOT=$1
+mkdir -p $ROOT
+
+cat >$ROOT/environment.sh <<'EOL'
+module reset
+module load gcc/4.8.5
+module load python/3.7.0
+module load cuda
+module load py-numpy
+module load cmake
+module load git
+module load py-pip
+module load py-cython
+module load py-h5py
+module load py-mpi4py
+module load py-nose
+module load py-six
+module load py-setuptools
+
+export LD_LIBRARY_PATH=$ROOT/lib:$LD_LIBRARY_PATH
+export PATH=$ROOT/bin:$PATH
+export PYTHONPATH=$ROOT/lib/python3.7/site-packages:$PYTHONPATH
+export CPATH=$ROOT/include:$CPATH
+export LIBRARY_PATH=$ROOT/lib:$LIBRARY_PATH
+EOL
+
+source $ROOT/environment.sh
+
+mkdir -p /tmp/$USER
+cd /tmp/$USER
+
+# python3-scipy \
+
+# TBB
+curl -sSLO https://github.com/01org/tbb/archive/{{ TBB_VERSION }}.tar.gz \
+    && echo "{{ TBB_SHA }}  {{ TBB_VERSION }}.tar.gz" | sha256sum -c - \
+    && tar -xzf {{ TBB_VERSION }}.tar.gz -C . \
+    && cd tbb-{{ TBB_VERSION }} \
+    && make \
+    && install -d $ROOT/lib \
+    && install -m755 build/linux_*release/*.so* ${ROOT}/lib \
+    && install -d $ROOT/include \
+    && cp -a include/tbb $ROOT/include \
+    && cd .. \
+    && rm -rf tbb-{{ TBB_VERSION }} \
+    && rm {{ TBB_VERSION }}.tar.gz \
+    || exit 1
+
+# embree is not available for power9

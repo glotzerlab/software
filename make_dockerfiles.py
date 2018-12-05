@@ -20,6 +20,9 @@ shas['OSU_MICROBENCHMARK_SHA'] ='e90cb683a01744377f77d420de401431242593d8376b25b
 versions['MPI4PY_VERSION'] = '3.0.0'
 shas['MPI4PY_SHA'] = 'b457b02d85bdd9a4775a097fac5234a20397b43e073f14d9e29b6cd78c68efd7'
 
+versions['TBB_VERSION'] = '2019_U2'
+shas['TBB_SHA'] = '1245aa394a92099e23ce2f60cdd50c90eb3ddcd61d86cae010ef2f1de61f32d9'
+
 # glotzer lab
 repo_version['fresnel']     = versions['FRESNEL_VERSION']     = 'v0.6.0'
 shas['FRESNEL_SHA'] = 'de1b18f87b5bcdd96844c143d6a9cf560df873a9f1f7eae8d6ff2eac5a1d2467'
@@ -66,8 +69,8 @@ if __name__ == '__main__':
     openmpi_template = env.get_template('openmpi.jinja')
     mvapich2_template = env.get_template('mvapich2.jinja')
     titan_template = env.get_template('titan.jinja')
+    summit_template = env.get_template('summit.jinja')
     glotzerlab_software_template = env.get_template('glotzerlab-software.jinja')
-    glotzerlab_software_mpi_template = env.get_template('glotzerlab-software-mpi.jinja')
     finalize_template = env.get_template('finalize.jinja')
 
     write('cuda8/Dockerfile', [base_template],
@@ -77,15 +80,16 @@ if __name__ == '__main__':
           **versions,
           **shas)
 
-    write('cuda8/nompi/Dockerfile', [base_template, glotzerlab_software_template, glotzerlab_software_mpi_template, finalize_template],
+    write('cuda8/nompi/Dockerfile', [base_template, glotzerlab_software_template, finalize_template],
           FROM='nvidia/cuda:8.0-devel-ubuntu16.04',
           ENABLE_MPI='off',
           MAKEJOBS=10,
           **versions,
           **shas)
 
-    write('cuda8/flux/Dockerfile', [base_template, glotzerlab_software_template, ib_mlx_template, openmpi_template, glotzerlab_software_mpi_template, finalize_template],
+    write('cuda8/flux/Dockerfile', [base_template, ib_mlx_template, openmpi_template, glotzerlab_software_template, finalize_template],
           FROM='nvidia/cuda:8.0-devel-ubuntu16.04',
+          system='flux',
           OPENMPI_VERSION='3.0',
           OPENMPI_PATCHLEVEL='0',
           OPENMPI_SHA = 'f699bff21db0125d8cccfe79518b77641cd83628725a1e1ed3e45633496a82d7',
@@ -97,8 +101,9 @@ if __name__ == '__main__':
     # see https://stackoverflow.com/questions/5470257/how-to-see-which-flags-march-native-will-activate
     # for information on obtaining CFLAGS settings for specific machines
     # gcc -'###' -E - -march=native 2>&1 | sed -r '/cc1/!d;s/(")|(^.* - )|( -mno-[^\ ]+)//g'
-    write('cuda8/comet/Dockerfile', [base_template, glotzerlab_software_template, ib_mlx_template, openmpi_template, glotzerlab_software_mpi_template, finalize_template],
+    write('cuda8/comet/Dockerfile', [base_template, ib_mlx_template, openmpi_template, glotzerlab_software_template, finalize_template],
           FROM='nvidia/cuda:8.0-devel-ubuntu16.04',
+          system='comet',
           OPENMPI_VERSION='1.8',
           OPENMPI_PATCHLEVEL='4',
           OPENMPI_SHA='23158d916e92c80e2924016b746a93913ba7fae9fff51bf68d5c2a0ae39a2f8a',
@@ -108,8 +113,9 @@ if __name__ == '__main__':
           **versions,
           **shas)
 
-    write('cuda8/bridges/Dockerfile', [base_template, glotzerlab_software_template, ib_hfi1_template, openmpi_template, glotzerlab_software_mpi_template, finalize_template],
+    write('cuda8/bridges/Dockerfile', [base_template, ib_hfi1_template, openmpi_template, glotzerlab_software_template, finalize_template],
           FROM='nvidia/cuda:8.0-devel-ubuntu16.04',
+          system='bridges',
           OPENMPI_VERSION='2.1',
           OPENMPI_PATCHLEVEL='2',
           OPENMPI_SHA='3cc5804984c5329bdf88effc44f2971ed244a29b256e0011b8deda02178dd635',
@@ -120,8 +126,9 @@ if __name__ == '__main__':
           **shas)
 
     # TODO: update cflags after switching to newer compiler
-    write('cuda8/stampede2/Dockerfile', [base_template, glotzerlab_software_template, ib_hfi1_template, mvapich2_template, glotzerlab_software_mpi_template, finalize_template],
+    write('cuda8/stampede2/Dockerfile', [base_template, ib_hfi1_template, mvapich2_template, glotzerlab_software_template, finalize_template],
           FROM='nvidia/cuda:8.0-devel-ubuntu16.04',
+          system='stampede2',
           MVAPICH_VERSION='2.3',
           MVAPICH_PATCHLEVEL='',
           MVAPICH_SHA='01d5fb592454ddd9ecc17e91c8983b6aea0e7559aa38f410b111c8ef385b50dd',
@@ -131,10 +138,26 @@ if __name__ == '__main__':
           **versions,
           **shas)
 
-    write('olcf-titan/Dockerfile', [base_template, titan_template, glotzerlab_software_template, glotzerlab_software_mpi_template, finalize_template],
+    write('olcf-titan/Dockerfile', [base_template, titan_template, glotzerlab_software_template, finalize_template],
           FROM='olcf/titan:ubuntu-16.04_2018-01-18',
           ENABLE_MPI='on',
+          output='script',
+          system='titan',
           MAKEJOBS=2,
           CFLAGS='-D_FORCE_INLINES',
+          ENABLE_TBB='off',
+          BUILD_JIT='off',
+          **versions,
+          **shas)
+
+    write('olcf-summit/build.sh', [summit_template, glotzerlab_software_template],
+          ENABLE_MPI='on',
+          MAKEJOBS=20,
+          CFLAGS='',
+          output='script',
+          system='summit',
+          ENABLE_TBB='off',
+          BUILD_JIT='off',
+          ENABLE_MPI_CUDA='on',
           **versions,
           **shas)
