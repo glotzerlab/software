@@ -1,6 +1,8 @@
-# Glotzerlab docker images
+# Glotzerlab software
 
 Read this if you want to learn how the glotzerlab software images are built. If you just want to use the images, see the [glotzerlab-software documentation](https://glotzerlab-software.readthedocs.io/).
+
+## Docker file overview
 
 This repository hosts Dockerfiles for software developed and used by the [Glotzer lab](http://glotzerlab.engin.umich.edu/home/). Most of these software packages are python libraries designed to be used together, so we install it all together in one image and version it by date (YYYY.MM). Each image contains the latest versions of all installed software available that month.
 
@@ -8,21 +10,25 @@ These images are hosted on the Docker Hub in the [glotzerlab organization](https
 
 To prevent combinatorial explosion of the number of images (i.e. multiple MPI versions combined with multiple CUDA versions), we only introduce new images where absolutely necessary to support a wide number of users. Supporting dozens of images is not only time consuming to build and test, but also confusing for users. Individual users that require specific versions can clone this repository, make the modification, and build their own images.
 
+## Installation scripts
+
+Not all HPC systems support containers. For these systems glotzerlab-software generates installation scripts from the same templates used for docker.
+
 ## Layout
 
 Images are combined from a number of Jinja template files in ``template/*.jinja`` by the script ``make_dockerfiles.py``. Modifications must be made to the templates, not the generated dockerfiles.
 
 ### Base templates
 
-The template ``template/base.jinja`` provides the base dependencies necessary to build Glotzer Lab software along with commonly used tools. This image is based on ``nvidia/cuda-8.0-devel-ubuntu16.04``. Not all clusters support CUDA 9.0 yet, so we start with CUDA 8.0, and ubuntu 16.04 is the current LTS support version (TODO: switch to 18.04 when available).
+The template ``template/base.jinja`` provides the base dependencies necessary to build Glotzer Lab software along with commonly used tools. This image is based on ``nvidia/cuda-?.0-devel-ubuntu16.04``.
+
+The template ``summit.jinja`` provides the base dependencies through modules on summit and configures a software root directory for the build script.
 
 The templates ``ib-mlx.jinja`` and ``ib-hfi1``.jinja adds high speed IB networking drivers.
 
 The templates ``openmpi.jinja`` and ``mvapich2.jinja`` build the corresponding MPI libraries.
 
-The template ``glotzer-software.jinja`` compiles and installs glotzer group software that doesn't require MPI.
-``glotzer-software-mpi.jinja`` installs software that does require MPI. These two sets are separated so that docker can
-cache the builds from the first and only need to rebuild the second.
+The template ``glotzer-software.jinja`` compiles and installs glotzer group software.
 
 The template ``finalize.jinja`` creates a ``glotzerlab-software`` user so that tools designed to run as non-root can
 run without any user intervention.
@@ -31,16 +37,18 @@ run without any user intervention.
 
 Images are stored in the docker hub repository ``glotzerlab/software``.
 
-For future expansion, images are put in a top level directory named after their base image: Currently ``cuda8`` for the ``nvidia/cuda-8.0-devel-ubuntu16.04`` image above. Additional layers are added in sub directories under the base.
+The script ``make_dockerfiles.py`` generates the docker files from the templates and places them under the ``docker/`` directory.
 
-* ``glotzerlab/cuda8/Dockerfile`` - devel image providing dependencies but no software
-* ``glotzerlab/cuda8/nompi/Dockerfile`` - base image with no MPI support
-* ``glotzerlab/cuda8/${cluster}/Dockerfile`` - Add MPI support for a given cluster
+* ``docker/Dockerfile`` - devel image providing dependencies but no software
+* ``docker/nompi/Dockerfile`` - base image with no MPI support
+* ``docker/${cluster}/Dockerfile`` - Add MPI support for a given cluster
 
-Due to the use of site-specific software, OLCF Titan and Summit require base layers tailored specifically to them. Also, these images must be built within the confines of the [container-builder service at OLCF](https://www.olcf.ornl.gov/container-builder/).
+### Installation scripts
 
-* ``glotzerlab/olcf-titan/Dockerfile``
-* ``glotzerlab/olcf-summit/Dockerfile``
+Build scripts are generated under the ``script/`` directory for systems that don't support containers.
+
+* ``script/titan/install.sh``
+* ``script/summit/install.sh``
 
 ## Building images
 

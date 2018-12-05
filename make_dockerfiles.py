@@ -73,21 +73,21 @@ if __name__ == '__main__':
     glotzerlab_software_template = env.get_template('glotzerlab-software.jinja')
     finalize_template = env.get_template('finalize.jinja')
 
-    write('cuda8/Dockerfile', [base_template],
+    write('docker/Dockerfile', [base_template],
           FROM='nvidia/cuda:8.0-devel-ubuntu16.04',
           ENABLE_MPI='off',
           MAKEJOBS=10,
           **versions,
           **shas)
 
-    write('cuda8/nompi/Dockerfile', [base_template, glotzerlab_software_template, finalize_template],
+    write('docker/nompi/Dockerfile', [base_template, glotzerlab_software_template, finalize_template],
           FROM='nvidia/cuda:8.0-devel-ubuntu16.04',
           ENABLE_MPI='off',
           MAKEJOBS=10,
           **versions,
           **shas)
 
-    write('cuda8/flux/Dockerfile', [base_template, ib_mlx_template, openmpi_template, glotzerlab_software_template, finalize_template],
+    write('docker/flux/Dockerfile', [base_template, ib_mlx_template, openmpi_template, glotzerlab_software_template, finalize_template],
           FROM='nvidia/cuda:8.0-devel-ubuntu16.04',
           system='flux',
           OPENMPI_VERSION='3.0',
@@ -101,7 +101,7 @@ if __name__ == '__main__':
     # see https://stackoverflow.com/questions/5470257/how-to-see-which-flags-march-native-will-activate
     # for information on obtaining CFLAGS settings for specific machines
     # gcc -'###' -E - -march=native 2>&1 | sed -r '/cc1/!d;s/(")|(^.* - )|( -mno-[^\ ]+)//g'
-    write('cuda8/comet/Dockerfile', [base_template, ib_mlx_template, openmpi_template, glotzerlab_software_template, finalize_template],
+    write('docker/comet/Dockerfile', [base_template, ib_mlx_template, openmpi_template, glotzerlab_software_template, finalize_template],
           FROM='nvidia/cuda:8.0-devel-ubuntu16.04',
           system='comet',
           OPENMPI_VERSION='1.8',
@@ -113,7 +113,7 @@ if __name__ == '__main__':
           **versions,
           **shas)
 
-    write('cuda8/bridges/Dockerfile', [base_template, ib_hfi1_template, openmpi_template, glotzerlab_software_template, finalize_template],
+    write('docker/bridges/Dockerfile', [base_template, ib_hfi1_template, openmpi_template, glotzerlab_software_template, finalize_template],
           FROM='nvidia/cuda:8.0-devel-ubuntu16.04',
           system='bridges',
           OPENMPI_VERSION='2.1',
@@ -126,7 +126,7 @@ if __name__ == '__main__':
           **shas)
 
     # TODO: update cflags after switching to newer compiler
-    write('cuda8/stampede2/Dockerfile', [base_template, ib_hfi1_template, mvapich2_template, glotzerlab_software_template, finalize_template],
+    write('docker/stampede2/Dockerfile', [base_template, ib_hfi1_template, mvapich2_template, glotzerlab_software_template, finalize_template],
           FROM='nvidia/cuda:8.0-devel-ubuntu16.04',
           system='stampede2',
           MVAPICH_VERSION='2.3',
@@ -138,7 +138,7 @@ if __name__ == '__main__':
           **versions,
           **shas)
 
-    write('olcf-titan/Dockerfile', [base_template, titan_template, glotzerlab_software_template, finalize_template],
+    write('script/titan/install.sh', [base_template, titan_template, glotzerlab_software_template, finalize_template],
           FROM='olcf/titan:ubuntu-16.04_2018-01-18',
           ENABLE_MPI='on',
           output='script',
@@ -150,7 +150,7 @@ if __name__ == '__main__':
           **versions,
           **shas)
 
-    write('olcf-summit/build.sh', [summit_template, glotzerlab_software_template],
+    write('script/summit/install.sh', [summit_template, glotzerlab_software_template],
           ENABLE_MPI='on',
           MAKEJOBS=20,
           CFLAGS='',

@@ -9,42 +9,42 @@ DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 docker build $DIR/cuda8 \
              -t glotzerlab/software:devel \
 
-cp $DIR/test/*.py $DIR/cuda8/nompi
-docker build $DIR/cuda8/nompi \
+cp $DIR/test/*.py $DIR/docker/nompi
+docker build $DIR/docker/nompi \
              -t glotzerlab/software:latest \
              -t glotzerlab/software:${DATE_TAG}-cuda8
 echo "BootStrap: docker
 From: glotzerlab/software:${DATE_TAG}-cuda8
-" > $DIR/cuda8/Singularity.latest
+" > $DIR/docker/Singularity.latest
 
-cp $DIR/test/*.py $DIR/cuda8/flux
-docker build $DIR/cuda8/flux \
+cp $DIR/test/*.py $DIR/docker/flux
+docker build $DIR/docker/flux \
              -t glotzerlab/software:flux \
              -t glotzerlab/software:${DATE_TAG}-cuda8-mlx-openmpi3.0.0
 echo "BootStrap: docker
 From: glotzerlab/software:${DATE_TAG}-cuda8-mlx-openmpi3.0.0
-" > $DIR/cuda8/flux/Singularity.flux
+" > $DIR/docker/flux/Singularity.flux
 
-cp $DIR/test/*.py $DIR/cuda8/comet
-docker build $DIR/cuda8/comet \
+cp $DIR/test/*.py $DIR/docker/comet
+docker build $DIR/docker/comet \
              -t glotzerlab/software:comet \
              -t glotzerlab/software:${DATE_TAG}-haswell-cuda8-mlx-openmpi1.8.4
 echo "BootStrap: docker
 From: glotzerlab/software:${DATE_TAG}-haswell-cuda8-mlx-openmpi1.8.4
-" > $DIR/cuda8/comet/Singularity.comet
+" > $DIR/docker/comet/Singularity.comet
 
-cp $DIR/test/*.py $DIR/cuda8/bridges
-docker build $DIR/cuda8/bridges \
+cp $DIR/test/*.py $DIR/docker/bridges
+docker build $DIR/docker/bridges \
              -t glotzerlab/software:bridges \
              -t glotzerlab/software:${DATE_TAG}-haswell-cuda8-hfi1-openmpi2.1.2
 echo "BootStrap: docker
 From: glotzerlab/software:${DATE_TAG}-haswell-cuda8-hfi1-openmpi2.1.2
-" > $DIR/cuda8/bridges/Singularity.bridges
+" > $DIR/docker/bridges/Singularity.bridges
 
-cp $DIR/test/*.py $DIR/cuda8/stampede2
-docker build $DIR/cuda8/stampede2 \
+cp $DIR/test/*.py $DIR/docker/stampede2
+docker build $DIR/docker/stampede2 \
              -t glotzerlab/software:stampede2 \
              -t glotzerlab/software:${DATE_TAG}-skylakex-cuda8-hfi1-mvapich2.3
 echo "BootStrap: docker
 From: glotzerlab/software:${DATE_TAG}-skylakex-cuda8-hfi1-mvapich2.3
-" > $DIR/cuda8/stampede2/Singularity.stampede2
+" > $DIR/docker/stampede2/Singularity.stampede2
