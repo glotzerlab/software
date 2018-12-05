@@ -12,7 +12,7 @@ fi
 ROOT=$1
 mkdir -p $ROOT
 
-cat >$ROOT/environment.sh <<'EOL'
+cat >$ROOT/environment.sh << EOL
 module reset
 module load gcc/4.8.5
 module load python/3.7.0
@@ -28,11 +28,11 @@ module load py-nose
 module load py-six
 module load py-setuptools
 
-export LD_LIBRARY_PATH=$ROOT/lib:$LD_LIBRARY_PATH
-export PATH=$ROOT/bin:$PATH
-export PYTHONPATH=$ROOT/lib/python3.7/site-packages:$PYTHONPATH
-export CPATH=$ROOT/include:$CPATH
-export LIBRARY_PATH=$ROOT/lib:$LIBRARY_PATH
+export LD_LIBRARY_PATH=$ROOT/lib:\$LD_LIBRARY_PATH
+export PATH=$ROOT/bin:\$PATH
+export PYTHONPATH=$ROOT/lib/python3.7/site-packages:\$PYTHONPATH
+export CPATH=$ROOT/include:\$CPATH
+export LIBRARY_PATH=$ROOT/lib:\$LIBRARY_PATH
 EOL
 
 source $ROOT/environment.sh
