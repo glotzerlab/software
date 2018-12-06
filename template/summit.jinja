@@ -10,32 +10,24 @@ then
 fi
 
 ROOT=$1
-module load python/3.7.0
-python3 -m venv $ROOT --copies --system-site-packages
-
-cat >$ROOT/environment.sh << EOL
 module reset
 module load gcc/4.8.5
 module load python/3.7.0
+python3 -m venv $ROOT --system-site-packages
+
+cat >$ROOT/environment.sh << EOL
+module reset
+module load gcc/6.4.0
 module load cuda
-module load py-numpy
 module load cmake
 module load git
-module load py-pip
-module load py-cython
-module load py-h5py
-module load py-mpi4py
-module load py-nose
-module load py-six
-module load py-setuptools
-module load py-virtualenv
 
 export LD_LIBRARY_PATH=$ROOT/lib:\$LD_LIBRARY_PATH
 export PATH=$ROOT/bin:\$PATH
 export CPATH=$ROOT/include:\$CPATH
-export LIBRARY_PATH=$ROOT/lib:/sw/ascent/gcc/6.4.0/lib64:\$LIBRARY_PATH
-export CC=/sw/ascent/gcc/6.4.0/bin/gcc
-export CXX=/sw/ascent/gcc/6.4.0/bin/g++
+export LIBRARY_PATH=$ROOT/lib:\$LIBRARY_PATH
+export CC=\${OLCF_GCC_ROOT}/bin/gcc
+export CXX=\${OLCF_GCC_ROOT}/bin/g++
 export VIRTUAL_ENV=$ROOT
 EOL
 
@@ -45,7 +37,7 @@ mkdir -p /tmp/$USER-glotzerlab-software
 cd /tmp/$USER-glotzerlab-software
 rm -rf /tmp/$USER-glotzerlab-software/*
 
-# python3-scipy \
+python3 -m pip install --progress-bar off --no-deps --no-binary :all: cython mpi4py six numpy
 
 # TBB
 curl -sSLO https://github.com/01org/tbb/archive/{{ TBB_VERSION }}.tar.gz \

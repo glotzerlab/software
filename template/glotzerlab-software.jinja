@@ -37,7 +37,7 @@
     && mkdir build \
     && cd build \
     && export CFLAGS="{{CFLAGS}}" CXXFLAGS="{{CFLAGS}}" \
-    && cmake ../ -DCMAKE_INSTALL_PREFIX=`python3 -c "import site; print(site.getsitepackages()[0])"` \
+    && cmake ../ -DPYTHON_EXECUTABLE="`which python3`" -DCMAKE_INSTALL_PREFIX=`python3 -c "import site; print(site.getsitepackages()[0])"` \
     && make install -j{{ MAKEJOBS }} \
     && cd ../../ \
     && rm -rf gsd-{{ GSD_VERSION }} \
@@ -106,7 +106,7 @@
     && mkdir build \
     && cd build \
     && export CFLAGS="{{CFLAGS}}" CXXFLAGS="{{CFLAGS}}" \
-    && cmake ../ -DENABLE_CUDA=on -DENABLE_MPI={{ ENABLE_MPI }} -DENABLE_TBB={{ ENABLE_TBB|default('on') }} -DBUILD_JIT={{ BUILD_JIT|default('on') }} -DBUILD_TESTING=off -DENABLE_MPI_CUDA={{ ENABLE_MPI_CUDA|default('off') }} -DCMAKE_INSTALL_PREFIX=`python3 -c "import site; print(site.getsitepackages()[0])"` \
+    && cmake ../ -DPYTHON_EXECUTABLE="`which python3`" -DENABLE_CUDA=on -DENABLE_MPI={{ ENABLE_MPI }} -DENABLE_TBB={{ ENABLE_TBB|default('on') }} -DBUILD_JIT={{ BUILD_JIT|default('on') }} -DBUILD_TESTING=off -DENABLE_MPI_CUDA={{ ENABLE_MPI_CUDA|default('off') }} -DCMAKE_INSTALL_PREFIX=`python3 -c "import site; print(site.getsitepackages()[0])"` \
     && make install -j{{ MAKEJOBS }} \
     && cd ../../ \
     && rm -rf /root/hoomd-{{ HOOMD_VERSION }} \

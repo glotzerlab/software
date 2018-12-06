@@ -103,7 +103,7 @@ ENV CXX=/usr/bin/g++-4.9
     && mkdir build \
     && cd build \
     && export CFLAGS="-D_FORCE_INLINES" CXXFLAGS="-D_FORCE_INLINES" \
-    && cmake ../ -DCMAKE_INSTALL_PREFIX=`python3 -c "import site; print(site.getsitepackages()[0])"` \
+    && cmake ../ -DPYTHON_EXECUTABLE="`which python3`" -DCMAKE_INSTALL_PREFIX=`python3 -c "import site; print(site.getsitepackages()[0])"` \
     && make install -j2 \
     && cd ../../ \
     && rm -rf gsd-v1.5.4 \
@@ -172,7 +172,7 @@ ENV CXX=/usr/bin/g++-4.9
     && mkdir build \
     && cd build \
     && export CFLAGS="-D_FORCE_INLINES" CXXFLAGS="-D_FORCE_INLINES" \
-    && cmake ../ -DENABLE_CUDA=on -DENABLE_MPI=on -DENABLE_TBB=off -DBUILD_JIT=off -DBUILD_TESTING=off -DENABLE_MPI_CUDA=off -DCMAKE_INSTALL_PREFIX=`python3 -c "import site; print(site.getsitepackages()[0])"` \
+    && cmake ../ -DPYTHON_EXECUTABLE="`which python3`" -DENABLE_CUDA=on -DENABLE_MPI=on -DENABLE_TBB=off -DBUILD_JIT=off -DBUILD_TESTING=off -DENABLE_MPI_CUDA=off -DCMAKE_INSTALL_PREFIX=`python3 -c "import site; print(site.getsitepackages()[0])"` \
     && make install -j2 \
     && cd ../../ \
     && rm -rf /root/hoomd-v2.4.0 \
