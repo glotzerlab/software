@@ -122,14 +122,12 @@ RUN curl -sSLO https://bitbucket.org/mpi4py/mpi4py/downloads/mpi4py-3.0.0.tar.gz
 
 
 
-
-
 RUN curl -sSLO https://glotzerlab.engin.umich.edu/Downloads/freud/freud-v0.11.3.tar.gz \
     && echo "fc803bd20a43b998cc660011ac408c51750427bebe5e26131aef9f9446fe53ec  freud-v0.11.3.tar.gz" | sha256sum -c - \
     && tar -xzf freud-v0.11.3.tar.gz -C . \
     && rm -f freud-v0.11.3/*.toml \
     && export CFLAGS="-march=haswell -mmmx -msse -msse2 -msse3 -mssse3 -mcx16 -msahf -mmovbe -maes -mpclmul -mpopcnt -mabm -mfma -mbmi -mbmi2 -mavx -mavx2 -msse4.2 -msse4.1 -mlzcnt -mrdrnd -mf16c -mfsgsbase -mfxsr -mxsave -mxsaveopt --param l1-cache-size=32 --param l1-cache-line-size=64 --param l2-cache-size=30720 -mtune=haswell -fstack-protector-strong -Wformat -Wformat-security" CXXFLAGS="-march=haswell -mmmx -msse -msse2 -msse3 -mssse3 -mcx16 -msahf -mmovbe -maes -mpclmul -mpopcnt -mabm -mfma -mbmi -mbmi2 -mavx -mavx2 -msse4.2 -msse4.1 -mlzcnt -mrdrnd -mf16c -mfsgsbase -mfxsr -mxsave -mxsaveopt --param l1-cache-size=32 --param l1-cache-line-size=64 --param l2-cache-size=30720 -mtune=haswell -fstack-protector-strong -Wformat -Wformat-security" \
-    && python3 -m pip install --no-deps --ignore-installed  ./freud-v0.11.3 \
+    && python3 -m pip install --no-deps --ignore-installed ./freud-v0.11.3 \
     && rm -rf freud-v0.11.3 \
     && rm freud-v0.11.3.tar.gz \
     || exit 1
@@ -169,7 +167,7 @@ RUN curl -sSLO https://glotzerlab.engin.umich.edu/Downloads/libgetar/libgetar-v0
     && tar -xzf libgetar-v0.7.0.tar.gz -C . \
     && rm -f libgetar-v0.7.0/*.toml \
     && export CFLAGS="-march=haswell -mmmx -msse -msse2 -msse3 -mssse3 -mcx16 -msahf -mmovbe -maes -mpclmul -mpopcnt -mabm -mfma -mbmi -mbmi2 -mavx -mavx2 -msse4.2 -msse4.1 -mlzcnt -mrdrnd -mf16c -mfsgsbase -mfxsr -mxsave -mxsaveopt --param l1-cache-size=32 --param l1-cache-line-size=64 --param l2-cache-size=30720 -mtune=haswell -fstack-protector-strong -Wformat -Wformat-security" CXXFLAGS="-march=haswell -mmmx -msse -msse2 -msse3 -mssse3 -mcx16 -msahf -mmovbe -maes -mpclmul -mpopcnt -mabm -mfma -mbmi -mbmi2 -mavx -mavx2 -msse4.2 -msse4.1 -mlzcnt -mrdrnd -mf16c -mfsgsbase -mfxsr -mxsave -mxsaveopt --param l1-cache-size=32 --param l1-cache-line-size=64 --param l2-cache-size=30720 -mtune=haswell -fstack-protector-strong -Wformat -Wformat-security" \
-    && python3 -m pip install --no-deps --ignore-installed  ./libgetar-v0.7.0 \
+    && python3 -m pip install --no-deps --ignore-installed ./libgetar-v0.7.0 \
     && rm -rf libgetar-v0.7.0 \
     && rm libgetar-v0.7.0.tar.gz \
     || exit 1
@@ -178,7 +176,7 @@ RUN curl -sSLO https://glotzerlab.engin.umich.edu/Downloads/rowan/rowan-v1.1.6.t
     && echo "14627245b95b88e3d4358e6d9df0501eec1bcb892c71ba5829904d4728ecb9f8  rowan-v1.1.6.tar.gz" | sha256sum -c - \
     && tar -xzf rowan-v1.1.6.tar.gz -C . \
     && export CFLAGS="-march=haswell -mmmx -msse -msse2 -msse3 -mssse3 -mcx16 -msahf -mmovbe -maes -mpclmul -mpopcnt -mabm -mfma -mbmi -mbmi2 -mavx -mavx2 -msse4.2 -msse4.1 -mlzcnt -mrdrnd -mf16c -mfsgsbase -mfxsr -mxsave -mxsaveopt --param l1-cache-size=32 --param l1-cache-line-size=64 --param l2-cache-size=30720 -mtune=haswell -fstack-protector-strong -Wformat -Wformat-security" CXXFLAGS="-march=haswell -mmmx -msse -msse2 -msse3 -mssse3 -mcx16 -msahf -mmovbe -maes -mpclmul -mpopcnt -mabm -mfma -mbmi -mbmi2 -mavx -mavx2 -msse4.2 -msse4.1 -mlzcnt -mrdrnd -mf16c -mfsgsbase -mfxsr -mxsave -mxsaveopt --param l1-cache-size=32 --param l1-cache-line-size=64 --param l2-cache-size=30720 -mtune=haswell -fstack-protector-strong -Wformat -Wformat-security" \
-    && python3 -m pip install --no-deps --ignore-installed  ./rowan-v1.1.6 \
+    && python3 -m pip install --no-deps --ignore-installed ./rowan-v1.1.6 \
     && rm -rf rowan-v1.1.6 \
     && rm rowan-v1.1.6.tar.gz \
     || exit 1
@@ -187,7 +185,7 @@ RUN curl -sSLO https://glotzerlab.engin.umich.edu/Downloads/plato/plato-v1.2.0.t
     && echo "fdd574a5ed6956bb68430de13991938d4765697736c857822c8c1addf5edd07d  plato-v1.2.0.tar.gz" | sha256sum -c - \
     && tar -xzf plato-v1.2.0.tar.gz -C . \
     && export CFLAGS="-march=haswell -mmmx -msse -msse2 -msse3 -mssse3 -mcx16 -msahf -mmovbe -maes -mpclmul -mpopcnt -mabm -mfma -mbmi -mbmi2 -mavx -mavx2 -msse4.2 -msse4.1 -mlzcnt -mrdrnd -mf16c -mfsgsbase -mfxsr -mxsave -mxsaveopt --param l1-cache-size=32 --param l1-cache-line-size=64 --param l2-cache-size=30720 -mtune=haswell -fstack-protector-strong -Wformat -Wformat-security" CXXFLAGS="-march=haswell -mmmx -msse -msse2 -msse3 -mssse3 -mcx16 -msahf -mmovbe -maes -mpclmul -mpopcnt -mabm -mfma -mbmi -mbmi2 -mavx -mavx2 -msse4.2 -msse4.1 -mlzcnt -mrdrnd -mf16c -mfsgsbase -mfxsr -mxsave -mxsaveopt --param l1-cache-size=32 --param l1-cache-line-size=64 --param l2-cache-size=30720 -mtune=haswell -fstack-protector-strong -Wformat -Wformat-security" \
-    && python3 -m pip install --no-deps --ignore-installed  ./plato-v1.2.0 \
+    && python3 -m pip install --no-deps --ignore-installed ./plato-v1.2.0 \
     && rm -rf plato-v1.2.0 \
     && rm plato-v1.2.0.tar.gz \
     || exit 1
@@ -196,7 +194,7 @@ RUN curl -sSLO https://glotzerlab.engin.umich.edu/Downloads/pythia/pythia-v0.2.3
     && echo "6fa74e608024d8126657d788016ec3a4112a7c17b8deda86e51a2905c47f5ed5  pythia-v0.2.3.tar.gz" | sha256sum -c - \
     && tar -xzf pythia-v0.2.3.tar.gz -C . \
     && export CFLAGS="-march=haswell -mmmx -msse -msse2 -msse3 -mssse3 -mcx16 -msahf -mmovbe -maes -mpclmul -mpopcnt -mabm -mfma -mbmi -mbmi2 -mavx -mavx2 -msse4.2 -msse4.1 -mlzcnt -mrdrnd -mf16c -mfsgsbase -mfxsr -mxsave -mxsaveopt --param l1-cache-size=32 --param l1-cache-line-size=64 --param l2-cache-size=30720 -mtune=haswell -fstack-protector-strong -Wformat -Wformat-security" CXXFLAGS="-march=haswell -mmmx -msse -msse2 -msse3 -mssse3 -mcx16 -msahf -mmovbe -maes -mpclmul -mpopcnt -mabm -mfma -mbmi -mbmi2 -mavx -mavx2 -msse4.2 -msse4.1 -mlzcnt -mrdrnd -mf16c -mfsgsbase -mfxsr -mxsave -mxsaveopt --param l1-cache-size=32 --param l1-cache-line-size=64 --param l2-cache-size=30720 -mtune=haswell -fstack-protector-strong -Wformat -Wformat-security" \
-    && python3 -m pip install --no-deps --ignore-installed  ./pythia-v0.2.3 \
+    && python3 -m pip install --no-deps --ignore-installed ./pythia-v0.2.3 \
     && rm -rf pythia-v0.2.3 \
     && rm pythia-v0.2.3.tar.gz \
     || exit 1
@@ -205,7 +203,7 @@ RUN curl -sSLO https://glotzerlab.engin.umich.edu/Downloads/signac/signac-v0.9.4
     && echo "8a3c5b46d079decb9fa2d5d85628c2bd31057a44e945beba930d3b624dcb8437  signac-v0.9.4.tar.gz" | sha256sum -c - \
     && tar -xzf signac-v0.9.4.tar.gz -C . \
     && export CFLAGS="-march=haswell -mmmx -msse -msse2 -msse3 -mssse3 -mcx16 -msahf -mmovbe -maes -mpclmul -mpopcnt -mabm -mfma -mbmi -mbmi2 -mavx -mavx2 -msse4.2 -msse4.1 -mlzcnt -mrdrnd -mf16c -mfsgsbase -mfxsr -mxsave -mxsaveopt --param l1-cache-size=32 --param l1-cache-line-size=64 --param l2-cache-size=30720 -mtune=haswell -fstack-protector-strong -Wformat -Wformat-security" CXXFLAGS="-march=haswell -mmmx -msse -msse2 -msse3 -mssse3 -mcx16 -msahf -mmovbe -maes -mpclmul -mpopcnt -mabm -mfma -mbmi -mbmi2 -mavx -mavx2 -msse4.2 -msse4.1 -mlzcnt -mrdrnd -mf16c -mfsgsbase -mfxsr -mxsave -mxsaveopt --param l1-cache-size=32 --param l1-cache-line-size=64 --param l2-cache-size=30720 -mtune=haswell -fstack-protector-strong -Wformat -Wformat-security" \
-    && python3 -m pip install --no-deps --ignore-installed  ./signac-v0.9.4 \
+    && python3 -m pip install --no-deps --ignore-installed ./signac-v0.9.4 \
     && rm -rf signac-v0.9.4 \
     && rm signac-v0.9.4.tar.gz \
     || exit 1
@@ -214,7 +212,7 @@ RUN curl -sSLO https://glotzerlab.engin.umich.edu/Downloads/signac-flow/signac-f
     && echo "0a1ff4d052ea1e02079b60c0a5710df28e3fa8286649ccc030d032ec99901dba  signac-flow-v0.6.3.tar.gz" | sha256sum -c - \
     && tar -xzf signac-flow-v0.6.3.tar.gz -C . \
     && export CFLAGS="-march=haswell -mmmx -msse -msse2 -msse3 -mssse3 -mcx16 -msahf -mmovbe -maes -mpclmul -mpopcnt -mabm -mfma -mbmi -mbmi2 -mavx -mavx2 -msse4.2 -msse4.1 -mlzcnt -mrdrnd -mf16c -mfsgsbase -mfxsr -mxsave -mxsaveopt --param l1-cache-size=32 --param l1-cache-line-size=64 --param l2-cache-size=30720 -mtune=haswell -fstack-protector-strong -Wformat -Wformat-security" CXXFLAGS="-march=haswell -mmmx -msse -msse2 -msse3 -mssse3 -mcx16 -msahf -mmovbe -maes -mpclmul -mpopcnt -mabm -mfma -mbmi -mbmi2 -mavx -mavx2 -msse4.2 -msse4.1 -mlzcnt -mrdrnd -mf16c -mfsgsbase -mfxsr -mxsave -mxsaveopt --param l1-cache-size=32 --param l1-cache-line-size=64 --param l2-cache-size=30720 -mtune=haswell -fstack-protector-strong -Wformat -Wformat-security" \
-    && python3 -m pip install --no-deps --ignore-installed  ./signac-flow-v0.6.3 \
+    && python3 -m pip install --no-deps --ignore-installed ./signac-flow-v0.6.3 \
     && rm -rf signac-flow-v0.6.3 \
     && rm signac-flow-v0.6.3.tar.gz \
     || exit 1

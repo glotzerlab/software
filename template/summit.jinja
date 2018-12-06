@@ -10,7 +10,8 @@ then
 fi
 
 ROOT=$1
-mkdir -p $ROOT
+module load python/3.7.0
+python3 -m venv $ROOT --copies --system-site-packages
 
 cat >$ROOT/environment.sh << EOL
 module reset
@@ -27,18 +28,22 @@ module load py-mpi4py
 module load py-nose
 module load py-six
 module load py-setuptools
+module load py-virtualenv
 
 export LD_LIBRARY_PATH=$ROOT/lib:\$LD_LIBRARY_PATH
 export PATH=$ROOT/bin:\$PATH
-export PYTHONPATH=$ROOT/lib/python3.7/site-packages:\$PYTHONPATH
 export CPATH=$ROOT/include:\$CPATH
-export LIBRARY_PATH=$ROOT/lib:\$LIBRARY_PATH
+export LIBRARY_PATH=$ROOT/lib:/sw/ascent/gcc/6.4.0/lib64:\$LIBRARY_PATH
+export CC=/sw/ascent/gcc/6.4.0/bin/gcc
+export CXX=/sw/ascent/gcc/6.4.0/bin/g++
+export VIRTUAL_ENV=$ROOT
 EOL
 
 source $ROOT/environment.sh
 
-mkdir -p /tmp/$USER
-cd /tmp/$USER
+mkdir -p /tmp/$USER-glotzerlab-software
+cd /tmp/$USER-glotzerlab-software
+rm -rf /tmp/$USER-glotzerlab-software/*
 
 # python3-scipy \
 
