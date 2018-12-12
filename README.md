@@ -54,6 +54,9 @@ Build scripts are generated under the ``script/`` directory for systems that don
 
 The ``build.sh`` script builds all of the images and tags them with the current date code.
 
+``build_testing.sh`` builds all of the images as local singularity images for testing. Use this script to test images
+prior to deploying them on the docker and singularity hubs.
+
 ## Singularity
 
 Singularity's docker pull support is flaky. ``build.sh`` generates a ``Singulartiy`` file for each cluster for
