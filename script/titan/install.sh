@@ -45,17 +45,17 @@ RUN sed -i -e 's/ENABLE_USER_SITE = None/ENABLE_USER_SITE = False/g' `python3 -c
 ENV PATH=$PATH:/usr/lib/llvm-5.0/bin
 
 # embree
-ENV CPATH=/opt/embree-3.2.1.x86_64.linux/include:$CPATH \
-    LIBRARY_PATH=/opt/embree-3.2.1.x86_64.linux/lib:$LIBRARY_PATH \
-    LD_LIBRARY_PATH=/opt/embree-3.2.1.x86_64.linux/lib:$LD_LIBRARY_PATH \
-    EMBREE3_LINK=/opt/embree-3.2.1.x86_64.linux/lib
+ENV CPATH=/opt/embree-3.3.0.x86_64.linux/include:$CPATH \
+    LIBRARY_PATH=/opt/embree-3.3.0.x86_64.linux/lib:$LIBRARY_PATH \
+    LD_LIBRARY_PATH=/opt/embree-3.3.0.x86_64.linux/lib:$LD_LIBRARY_PATH \
+    EMBREE3_LINK=/opt/embree-3.3.0.x86_64.linux/lib
 
-RUN curl -sSLO https://github.com/embree/embree/releases/download/v3.2.1/embree-3.2.1.x86_64.linux.tar.gz \
-    && echo "4bc1801d7a358dfd71e1fb6d46c9401397923980c11e7801f26d5b3f1aed4506  embree-3.2.1.x86_64.linux.tar.gz" | sha256sum -c - \
-    && tar -xzf embree-3.2.1.x86_64.linux.tar.gz -C /opt \
-    && rm -rf /opt/embree-3.2.1.x86_64.linux/bin \
-    && rm -rf /opt/embree-3.2.1.x86_64.linux/doc \
-    && rm embree-3.2.1.x86_64.linux.tar.gz
+RUN curl -sSLO https://github.com/embree/embree/releases/download/v3.3.0/embree-3.3.0.x86_64.linux.tar.gz \
+    && echo "c70e5cef5eeb88aa5c384121c8908287950d756c3eaac3f0bccea2d94c4fea3f  embree-3.3.0.x86_64.linux.tar.gz" | sha256sum -c - \
+    && tar -xzf embree-3.3.0.x86_64.linux.tar.gz -C /opt \
+    && rm -rf /opt/embree-3.3.0.x86_64.linux/bin \
+    && rm -rf /opt/embree-3.3.0.x86_64.linux/doc \
+    && rm embree-3.3.0.x86_64.linux.tar.gz
 
 # mount points for filesystems on clusters
 RUN mkdir -p /nfs \
@@ -70,14 +70,14 @@ ENV CXX=/usr/bin/g++-4.9
 
 
 
- curl -sSLO https://glotzerlab.engin.umich.edu/Downloads/freud/freud-v0.11.3.tar.gz \
-    && echo "fc803bd20a43b998cc660011ac408c51750427bebe5e26131aef9f9446fe53ec  freud-v0.11.3.tar.gz" | sha256sum -c - \
-    && tar -xzf freud-v0.11.3.tar.gz -C . \
-    && rm -f freud-v0.11.3/*.toml \
+ curl -sSLO https://glotzerlab.engin.umich.edu/Downloads/freud/freud-v0.11.4.tar.gz \
+    && echo "9e54cb2f9ef2df7569ae04b5794d0372439b8667cd1ba32390496b5ddf3ad233  freud-v0.11.4.tar.gz" | sha256sum -c - \
+    && tar -xzf freud-v0.11.4.tar.gz -C . \
+    && rm -f freud-v0.11.4/*.toml \
     && export CFLAGS="-D_FORCE_INLINES" CXXFLAGS="-D_FORCE_INLINES" \
-    && python3 -m pip install --no-deps --ignore-installed ./freud-v0.11.3 \
-    && rm -rf freud-v0.11.3 \
-    && rm freud-v0.11.3.tar.gz \
+    && python3 -m pip install --no-deps --ignore-installed ./freud-v0.11.4 \
+    && rm -rf freud-v0.11.4 \
+    && rm freud-v0.11.4.tar.gz \
     || exit 1
 
 
@@ -88,7 +88,7 @@ ENV CXX=/usr/bin/g++-4.9
     && mkdir build \
     && cd build \
     && export CFLAGS="-D_FORCE_INLINES" CXXFLAGS="-D_FORCE_INLINES" \
-    && cmake ../ -DENABLE_EMBREE=on -DENABLE_OPTIX=off -Dembree_DIR=/opt/embree-3.2.1.x86_64.linux -DCMAKE_INSTALL_PREFIX=`python3 -c "import site; print(site.getsitepackages()[0])"` \
+    && cmake ../ -DENABLE_EMBREE=on -DENABLE_OPTIX=off -Dembree_DIR=/opt/embree-3.3.0.x86_64.linux -DCMAKE_INSTALL_PREFIX=`python3 -c "import site; print(site.getsitepackages()[0])"` \
     && make install -j2 \
     && cd ../../ \
     && rm -rf fresnel-v0.6.0 \
@@ -96,18 +96,18 @@ ENV CXX=/usr/bin/g++-4.9
     || exit 1
 
 
- curl -sSLO https://glotzerlab.engin.umich.edu/Downloads/gsd/gsd-v1.5.4.tar.gz \
-    && echo "09b09f1316c809dae96b1a02972673ef928eb549fcc1cae484265590a5b4acff  gsd-v1.5.4.tar.gz" | sha256sum -c - \
-    && tar -xzf gsd-v1.5.4.tar.gz -C . \
-    && cd gsd-v1.5.4 \
+ curl -sSLO https://glotzerlab.engin.umich.edu/Downloads/gsd/gsd-v1.5.5.tar.gz \
+    && echo "465fbf207217e5d1223e6f3ab07a58ed5656b704f32730c27feaa0cfb6b6e70f  gsd-v1.5.5.tar.gz" | sha256sum -c - \
+    && tar -xzf gsd-v1.5.5.tar.gz -C . \
+    && cd gsd-v1.5.5 \
     && mkdir build \
     && cd build \
     && export CFLAGS="-D_FORCE_INLINES" CXXFLAGS="-D_FORCE_INLINES" \
     && cmake ../ -DPYTHON_EXECUTABLE="`which python3`" -DCMAKE_INSTALL_PREFIX=`python3 -c "import site; print(site.getsitepackages()[0])"` \
     && make install -j2 \
     && cd ../../ \
-    && rm -rf gsd-v1.5.4 \
-    && rm gsd-v1.5.4.tar.gz \
+    && rm -rf gsd-v1.5.5 \
+    && rm gsd-v1.5.5.tar.gz \
     || exit 1
 
  curl -sSLO https://glotzerlab.engin.umich.edu/Downloads/libgetar/libgetar-v0.7.0.tar.gz \
@@ -129,22 +129,22 @@ ENV CXX=/usr/bin/g++-4.9
     && rm rowan-v1.1.6.tar.gz \
     || exit 1
 
- curl -sSLO https://glotzerlab.engin.umich.edu/Downloads/plato/plato-v1.2.0.tar.gz \
-    && echo "fdd574a5ed6956bb68430de13991938d4765697736c857822c8c1addf5edd07d  plato-v1.2.0.tar.gz" | sha256sum -c - \
-    && tar -xzf plato-v1.2.0.tar.gz -C . \
+ curl -sSLO https://glotzerlab.engin.umich.edu/Downloads/plato/plato-v1.3.0.tar.gz \
+    && echo "ff079b6dead70fe2b1419277c8269d5c21dcbbd82c753aaa223e8614b5446d66  plato-v1.3.0.tar.gz" | sha256sum -c - \
+    && tar -xzf plato-v1.3.0.tar.gz -C . \
     && export CFLAGS="-D_FORCE_INLINES" CXXFLAGS="-D_FORCE_INLINES" \
-    && python3 -m pip install --no-deps --ignore-installed ./plato-v1.2.0 \
-    && rm -rf plato-v1.2.0 \
-    && rm plato-v1.2.0.tar.gz \
+    && python3 -m pip install --no-deps --ignore-installed ./plato-v1.3.0 \
+    && rm -rf plato-v1.3.0 \
+    && rm plato-v1.3.0.tar.gz \
     || exit 1
 
- curl -sSLO https://glotzerlab.engin.umich.edu/Downloads/pythia/pythia-v0.2.3.tar.gz \
-    && echo "6fa74e608024d8126657d788016ec3a4112a7c17b8deda86e51a2905c47f5ed5  pythia-v0.2.3.tar.gz" | sha256sum -c - \
-    && tar -xzf pythia-v0.2.3.tar.gz -C . \
+ curl -sSLO https://glotzerlab.engin.umich.edu/Downloads/pythia/pythia-v0.2.4.tar.gz \
+    && echo "cebc1033759f518aa4f9c41d4660c7748b646f6f6117be9e4dcb9e53ef2f0251  pythia-v0.2.4.tar.gz" | sha256sum -c - \
+    && tar -xzf pythia-v0.2.4.tar.gz -C . \
     && export CFLAGS="-D_FORCE_INLINES" CXXFLAGS="-D_FORCE_INLINES" \
-    && python3 -m pip install --no-deps --ignore-installed ./pythia-v0.2.3 \
-    && rm -rf pythia-v0.2.3 \
-    && rm pythia-v0.2.3.tar.gz \
+    && python3 -m pip install --no-deps --ignore-installed ./pythia-v0.2.4 \
+    && rm -rf pythia-v0.2.4 \
+    && rm pythia-v0.2.4.tar.gz \
     || exit 1
 
  curl -sSLO https://glotzerlab.engin.umich.edu/Downloads/signac/signac-v0.9.4.tar.gz \
@@ -165,18 +165,18 @@ ENV CXX=/usr/bin/g++-4.9
     && rm signac-flow-v0.6.3.tar.gz \
     || exit 1
 
- curl -sSLO https://glotzerlab.engin.umich.edu/Downloads/hoomd/hoomd-v2.4.0.tar.gz \
-    && echo "052fffd0ebcc43a86fa530ff54054ae183dcd5c404957e41f7d83f633e39569a  hoomd-v2.4.0.tar.gz" | sha256sum -c - \
-    && tar -xzf hoomd-v2.4.0.tar.gz -C . \
-    && cd hoomd-v2.4.0 \
+ curl -sSLO https://glotzerlab.engin.umich.edu/Downloads/hoomd/hoomd-v2.4.1.tar.gz \
+    && echo "0763c0f701f70439667256b67581b70052877330006cadd7b4eae7655fc913e9  hoomd-v2.4.1.tar.gz" | sha256sum -c - \
+    && tar -xzf hoomd-v2.4.1.tar.gz -C . \
+    && cd hoomd-v2.4.1 \
     && mkdir build \
     && cd build \
     && export CFLAGS="-D_FORCE_INLINES" CXXFLAGS="-D_FORCE_INLINES" \
     && cmake ../ -DPYTHON_EXECUTABLE="`which python3`" -DENABLE_CUDA=on -DENABLE_MPI=on -DENABLE_TBB=off -DBUILD_JIT=off -DBUILD_TESTING=off -DENABLE_MPI_CUDA=off -DCMAKE_INSTALL_PREFIX=`python3 -c "import site; print(site.getsitepackages()[0])"` \
     && make install -j2 \
     && cd ../../ \
-    && rm -rf /root/hoomd-v2.4.0 \
-    && rm hoomd-v2.4.0.tar.gz \
+    && rm -rf /root/hoomd-v2.4.1 \
+    && rm hoomd-v2.4.1.tar.gz \
     || exit 1
 
 

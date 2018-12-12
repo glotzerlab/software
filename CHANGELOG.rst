@@ -2,6 +2,21 @@
 Change log
 ==========
 
+2018.12
+-------
+
+*Software updates:*
+
+* Freud v0.11.4
+* gsd v1.5.5
+* HOOMD-blue v2.4.1
+* plato v1.3.0
+* pythia v0.2.4
+
+*Supported systems:*
+
+* Added Summit build scripts
+
 2018.11
 -------
 
