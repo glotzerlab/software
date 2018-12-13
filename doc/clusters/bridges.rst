@@ -1,5 +1,5 @@
-PSC Bridges
------------
+Bridges (PSC)
+-------------
 
 `Bridges <https://psc.edu/resources/computing/bridges>`_ is an HPC cluster at PSC with GPU and CPU nodes.
 Apply for resources on Bridges through the `XSEDE <https://www.xsede.org/>`_ program.

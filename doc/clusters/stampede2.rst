@@ -1,5 +1,5 @@
-TACC Stampede2
---------------
+Stampede2 (TACC)
+----------------
 
 `Stampede2 <https://www.tacc.utexas.edu/systems/stampede2>`_ is an HPC cluster at TACC with CPU nodes.
 Apply for resources on Stampede2 through the `XSEDE <https://www.xsede.org/>`_ program.

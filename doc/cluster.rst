@@ -9,7 +9,8 @@ cluster, contact the :doc:`user community <community>` for suggestions.
 .. toctree::
     :maxdepth: 2
 
-    clusters/flux
-    clusters/comet
     clusters/bridges
+    clusters/comet
+    clusters/flux
     clusters/stampede2
+    clusters/summit

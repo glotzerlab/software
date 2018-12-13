@@ -1,5 +1,5 @@
-UMich Flux
-----------
+Flux (UMich)
+------------
 
 `Flux <https://arc-ts.umich.edu/flux/>`_ is the University of Michigan campus cluster.
 

@@ -1,5 +1,5 @@
-SDSC Comet
-----------
+Comet (SDSC)
+------------
 
 `Comet <https://www.sdsc.edu/support/user_guides/comet.html>`_ is an HPC cluster at SDSC with GPU and CPU nodes.
 Apply for resources on Comet through the `XSEDE <https://www.xsede.org/>`_ program.
