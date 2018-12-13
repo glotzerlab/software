@@ -3,7 +3,7 @@
 set -u
 set -e
 
-DATE_TAG=$(date +%Y.%m)-testing
+DATE_TAG="$(date +%Y-%m)-testing"
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
 cp $DIR/test/*.py $DIR/docker/nompi
