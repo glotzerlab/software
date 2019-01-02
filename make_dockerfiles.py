@@ -30,11 +30,11 @@ shas['FRESNEL_SHA'] = 'de1b18f87b5bcdd96844c143d6a9cf560df873a9f1f7eae8d6ff2eac5
 repo_version['freud']       = versions['FREUD_VERSION']       = 'v0.11.4'
 shas['FREUD_SHA'] = '9e54cb2f9ef2df7569ae04b5794d0372439b8667cd1ba32390496b5ddf3ad233'
 
-repo_version['gsd']         = versions['GSD_VERSION']         = 'v1.5.5'
-shas['GSD_SHA'] = '465fbf207217e5d1223e6f3ab07a58ed5656b704f32730c27feaa0cfb6b6e70f'
+repo_version['gsd']         = versions['GSD_VERSION']         = 'v1.6.0'
+shas['GSD_SHA'] = '2d4ddacbea75b36a446a41c5df8ba16d793c5f1674e001795393931f96d0f4e9'
 
-repo_version['hoomd-blue']  = versions['HOOMD_VERSION']       = 'v2.4.1'
-shas['HOOMD_SHA'] = '0763c0f701f70439667256b67581b70052877330006cadd7b4eae7655fc913e9'
+repo_version['hoomd-blue']  = versions['HOOMD_VERSION']       = 'v2.4.2'
+shas['HOOMD_SHA'] = '2d46725844336c9b3cd39fcba26741042410e9d20384d5218c9272c92cccfb08'
 
 repo_version['libgetar']    = versions['LIBGETAR_VERSION']    = 'v0.7.0'
 shas['LIBGETAR_SHA'] = '2a33809981b7a99c856ca60a1a7b9b1a0b3978fd8315ab3ab07b7b279a7c55e7'
@@ -45,14 +45,14 @@ shas['PYTHIA_SHA'] = 'cebc1033759f518aa4f9c41d4660c7748b646f6f6117be9e4dcb9e53ef
 repo_version['rowan']       = versions['ROWAN_VERSION']       = 'v1.1.6'
 shas['ROWAN_SHA'] = '14627245b95b88e3d4358e6d9df0501eec1bcb892c71ba5829904d4728ecb9f8'
 
-repo_version['plato']       = versions['PLATO_VERSION']       = 'v1.3.0'
-shas['PLATO_SHA'] = 'ff079b6dead70fe2b1419277c8269d5c21dcbbd82c753aaa223e8614b5446d66'
+repo_version['plato']       = versions['PLATO_VERSION']       = 'v1.4.0'
+shas['PLATO_SHA'] = 'fd5b764da5fdca9e704b22629b12c83fbf482db95fe7050e2b7b7661c8e57cdf'
 
 repo_version['signac']      = versions['SIGNAC_VERSION']      = 'v0.9.4'
 shas['SIGNAC_SHA'] = '8a3c5b46d079decb9fa2d5d85628c2bd31057a44e945beba930d3b624dcb8437'
 
-repo_version['signac-flow'] = versions['SIGNAC_FLOW_VERSION'] = 'v0.6.3'
-shas['SIGNAC_FLOW_SHA'] = '0a1ff4d052ea1e02079b60c0a5710df28e3fa8286649ccc030d032ec99901dba'
+repo_version['signac-flow'] = versions['SIGNAC_FLOW_VERSION'] = 'v0.6.4'
+shas['SIGNAC_FLOW_SHA'] = 'c261204eef08c5e954179840cdb68795f2a464c213b58e67d7b502caada4d34c'
 
 
 if __name__ == '__main__':

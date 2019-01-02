@@ -2,6 +2,16 @@
 Change log
 ==========
 
+2019.01
+-------
+
+*Software updates:*
+
+* gsd v1.6.0
+* HOOMD-blue v2.4.2
+* plato v1.4.0
+* signac-flow v0.6.4
+
 2018.12
 -------
 
