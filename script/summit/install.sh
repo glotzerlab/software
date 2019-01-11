@@ -23,6 +23,7 @@ module load gcc/6.4.0
 module load cuda
 module load cmake
 module load git
+module load netlib-lapack/3.8.0
 
 export LD_LIBRARY_PATH=$ROOT/lib:\$LD_LIBRARY_PATH
 export PATH=$ROOT/bin:\$PATH
@@ -57,6 +58,16 @@ curl -sSLO https://github.com/01org/tbb/archive/2019_U2.tar.gz \
     || exit 1
 
 # embree is not available for power9
+
+
+# scipy
+curl -sSLO https://github.com/scipy/scipy/releases/download/v1.2.0/scipy-1.2.0.tar.gz \
+    && echo "51a2424c8ed80e60bdb9a896806e7adaf24a58253b326fbad10f80a6d06f2214  scipy-1.2.0.tar.gz" | sha256sum -c - \
+    && tar -xzf scipy-1.2.0.tar.gz -C . \
+    && cd tbb-1.2.0 \
+    && export LAPACK=${OLCF_NETLIB_LAPACK_ROOT}lib64/liblapack.so
+    && export BLAS=${OLCF_NETLIB_LAPACK_ROOT}/lib64/libblas.so
+    && python setup.py install
 
 
 

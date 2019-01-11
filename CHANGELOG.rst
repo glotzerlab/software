@@ -5,6 +5,10 @@ Change log
 2019.02
 -------
 
+*Software updates:*
+
+* [summit] scipy v1.2.0
+
 *Fixes:*
 
 * Stampede2 multi-node MPI now works

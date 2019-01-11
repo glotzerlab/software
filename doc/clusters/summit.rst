@@ -51,14 +51,14 @@ The following packages are missing because we have not yet tested these on summi
   * matplotlib
   * pandas
   * pyqt5
-  * scipy
   * sklearn
   * yaml
 
 The summit environment is a `python3 venv <https://docs.python.org/3/library/venv.html>`_. You may extend it with
-additional python packages using ``pip install``::
+additional python packages using ``python3 -m pip install``::
 
     ▶ source ${GLOTZERLAB_SOFTWARE_ROOT}/environment.sh
+    ▶ python3 -m pip install package
 
 .. note::
 
