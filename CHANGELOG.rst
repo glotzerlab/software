@@ -2,6 +2,13 @@
 Change log
 ==========
 
+2019.02
+-------
+
+*Fixes:*
+
+* Stampede2 multi-node MPI now works
+
 2019.01
 -------
 

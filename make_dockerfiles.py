@@ -66,6 +66,7 @@ if __name__ == '__main__':
     base_template = env.get_template('base.jinja')
     ib_mlx_template = env.get_template('ib-mlx.jinja')
     ib_hfi1_template = env.get_template('ib-hfi1.jinja')
+    ib_hfi1_stampede2_template = env.get_template('ib-hfi1-stampede2.jinja')
     openmpi_template = env.get_template('openmpi.jinja')
     mvapich2_template = env.get_template('mvapich2.jinja')
     titan_template = env.get_template('titan.jinja')
@@ -126,12 +127,13 @@ if __name__ == '__main__':
           **shas)
 
     # TODO: update cflags after switching to newer compiler
-    write('docker/stampede2/Dockerfile', [base_template, ib_hfi1_template, mvapich2_template, glotzerlab_software_template, finalize_template],
+    write('docker/stampede2/Dockerfile', [base_template, ib_hfi1_stampede2_template, mvapich2_template, glotzerlab_software_template, finalize_template],
           FROM='nvidia/cuda:9.2-devel-ubuntu16.04',
           system='stampede2',
           MVAPICH_VERSION='2.3',
           MVAPICH_PATCHLEVEL='',
           MVAPICH_SHA='01d5fb592454ddd9ecc17e91c8983b6aea0e7559aa38f410b111c8ef385b50dd',
+          MVAPICH_EXTRA_OPTS='--with-device=ch3:psm --with-ch3-rank-bits=32 --enable-cxx --enable-romio --enable-fast=O3 --enable-g=dbg',
           ENABLE_MPI='on',
           MAKEJOBS=10,
           CFLAGS='-march=knl -mmmx -msse -msse2 -msse3 -mssse3 -mcx16 -msahf -mmovbe -maes -mpclmul -mpopcnt -mabm -mfma -mbmi -mbmi2 -mavx -mavx2 -msse4.2 -msse4.1 -mlzcnt -mrtm -mhle -mrdrnd -mf16c -mfsgsbase -mrdseed -mprfchw -madx -mfxsr -mxsave -mxsaveopt -mavx512f -mavx512cd -mclflushopt -mxsavec -mxsaves -mavx512dq -mavx512bw -mclwb --param l1-cache-size=32 --param l1-cache-line-size=64 --param l2-cache-size=33792 -mtune=generic',

@@ -68,7 +68,6 @@ RUN mkdir -p /nfs \
 RUN apt-get update && apt-get install -y --no-install-recommends \
   dkms \
   infiniband-diags \
-  libibverbs-dev \
   ibacm \
   librdmacm-dev \
   mstflint \
@@ -89,10 +88,22 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
   libnl-utils \
   && rm -rf /var/lib/apt/lists/*
 
-# Intels OPA drivers don't support ubuntu. Copying these two files from Bridges seems to be the minimum
+# Intels OPA drivers don't support ubuntu. Copying these files from stampede2 seems to be the minimum
 # needed to get the high performance interconnect working.
+RUN rm -f /usr/lib/libibverbs* /lib/x86_64-linux-gnu/libnl* /usr/include/infiniband/*
+
 COPY hfi1.driver /etc/libibverbs.d/
 COPY libhfi1verbs-rdmav2.so /usr/lib/
+COPY libibverbs.so.1.1.13 /usr/lib/libibverbs.so.1.1.13
+RUN ln -s /usr/lib/libibverbs.so.1.1.13 /usr/lib/libibverbs.so && \
+    ln -s /usr/lib/libibverbs.so.1.1.13 /usr/lib/libibverbs.so.1
+COPY libpsm2.so.2.1 /usr/lib/libpsm2.so.2.1
+RUN ln -s /usr/lib/libpsm2.so.2.1 /usr/lib/libpsm2.so.2 && \
+    ln -s /usr/lib/libpsm2.so.2.1 /usr/lib/libpsm2.so
+COPY libnl-3.so.200 /lib/x86_64-linux-gnu/
+COPY libnl-route-3.so.200 /lib/x86_64-linux-gnu/
+COPY infiniband/* /usr/include/infiniband/
+COPY psm*.h /usr/include/
 
 RUN apt-get update && apt-get install -y --no-install-recommends \
   byacc \
@@ -103,7 +114,7 @@ RUN curl -sSLO http://mvapich.cse.ohio-state.edu/download/mvapich/mv2/mvapich2-2
    && echo "01d5fb592454ddd9ecc17e91c8983b6aea0e7559aa38f410b111c8ef385b50dd  mvapich2-2.3.tar.gz" | sha256sum -c - \
    && tar -xzf mvapich2-2.3.tar.gz -C /root \
    && cd /root/mvapich2-2.3 \
-   && ./configure --prefix=/usr --disable-fortran \
+   && ./configure --prefix=/usr --disable-fortran --with-device=ch3:psm --with-ch3-rank-bits=32 --enable-cxx --enable-romio --enable-fast=O3 --enable-g=dbg\
    && make install \
    && rm -rf /root/mvapich2-2.3 \
    && rm /mvapich2-2.3.tar.gz
