@@ -43,31 +43,28 @@ rm -rf /tmp/$USER-glotzerlab-software/*
 python3 -m pip install --progress-bar off --no-deps --no-binary :all: cython mpi4py six numpy
 
 # TBB
-curl -sSLO https://github.com/01org/tbb/archive/2019_U2.tar.gz \
-    && echo "1245aa394a92099e23ce2f60cdd50c90eb3ddcd61d86cae010ef2f1de61f32d9  2019_U2.tar.gz" | sha256sum -c - \
-    && tar -xzf 2019_U2.tar.gz -C . \
-    && cd tbb-2019_U2 \
+curl -sSLO https://github.com/01org/tbb/archive/2019_U3.tar.gz \
+    && echo "b2244147bc8159cdd8f06a38afeb42f3237d3fc822555499d7ccfbd4b86f8ece  2019_U3.tar.gz" | sha256sum -c - \
+    && tar -xzf 2019_U3.tar.gz -C . \
+    && cd tbb-2019_U3 \
     && make \
     && install -d $ROOT/lib \
     && install -m755 build/linux_*release/*.so* ${ROOT}/lib \
     && install -d $ROOT/include \
     && cp -a include/tbb $ROOT/include \
     && cd .. \
-    && rm -rf tbb-2019_U2 \
-    && rm 2019_U2.tar.gz \
+    && rm -rf tbb-2019_U3 \
+    && rm 2019_U3.tar.gz \
     || exit 1
 
 # embree is not available for power9
-
 
 # scipy
 curl -sSLO https://github.com/scipy/scipy/releases/download/v1.2.0/scipy-1.2.0.tar.gz \
     && echo "51a2424c8ed80e60bdb9a896806e7adaf24a58253b326fbad10f80a6d06f2214  scipy-1.2.0.tar.gz" | sha256sum -c - \
     && tar -xzf scipy-1.2.0.tar.gz -C . \
-    && cd tbb-1.2.0 \
-    && export LAPACK=${OLCF_NETLIB_LAPACK_ROOT}lib64/liblapack.so
-    && export BLAS=${OLCF_NETLIB_LAPACK_ROOT}/lib64/libblas.so
-    && python setup.py install
+    && cd scipy-1.2.0 \
+    && LAPACK=${OLCF_NETLIB_LAPACK_ROOT}/lib64/liblapack.so BLAS=${OLCF_NETLIB_LAPACK_ROOT}/lib64/libblas.so python3 setup.py install
 
 
 
@@ -107,13 +104,13 @@ curl -sSLO https://github.com/scipy/scipy/releases/download/v1.2.0/scipy-1.2.0.t
     && rm libgetar-v0.7.0.tar.gz \
     || exit 1
 
- curl -sSLO https://glotzerlab.engin.umich.edu/Downloads/rowan/rowan-v1.1.6.tar.gz \
-    && echo "14627245b95b88e3d4358e6d9df0501eec1bcb892c71ba5829904d4728ecb9f8  rowan-v1.1.6.tar.gz" | sha256sum -c - \
-    && tar -xzf rowan-v1.1.6.tar.gz -C . \
+ curl -sSLO https://glotzerlab.engin.umich.edu/Downloads/rowan/rowan-v1.1.7.tar.gz \
+    && echo "01b82fbe522a1cafdfff662f771151be00e379508bbc81e63705087a47d6d26e  rowan-v1.1.7.tar.gz" | sha256sum -c - \
+    && tar -xzf rowan-v1.1.7.tar.gz -C . \
     && export CFLAGS="-mcpu=power9 -mtune=power9" CXXFLAGS="-mcpu=power9 -mtune=power9" \
-    && python3 -m pip install --no-deps --ignore-installed ./rowan-v1.1.6 \
-    && rm -rf rowan-v1.1.6 \
-    && rm rowan-v1.1.6.tar.gz \
+    && python3 -m pip install --no-deps --ignore-installed ./rowan-v1.1.7 \
+    && rm -rf rowan-v1.1.7 \
+    && rm rowan-v1.1.7.tar.gz \
     || exit 1
 
  curl -sSLO https://glotzerlab.engin.umich.edu/Downloads/plato/plato-v1.4.0.tar.gz \
@@ -134,13 +131,13 @@ curl -sSLO https://github.com/scipy/scipy/releases/download/v1.2.0/scipy-1.2.0.t
     && rm pythia-v0.2.4.tar.gz \
     || exit 1
 
- curl -sSLO https://glotzerlab.engin.umich.edu/Downloads/signac/signac-v0.9.4.tar.gz \
-    && echo "8a3c5b46d079decb9fa2d5d85628c2bd31057a44e945beba930d3b624dcb8437  signac-v0.9.4.tar.gz" | sha256sum -c - \
-    && tar -xzf signac-v0.9.4.tar.gz -C . \
+ curl -sSLO https://glotzerlab.engin.umich.edu/Downloads/signac/signac-v0.9.5.tar.gz \
+    && echo "9773bd11e46a52ddda7b431931e65b5e85304606a1668aaa344a173848d1a9c2  signac-v0.9.5.tar.gz" | sha256sum -c - \
+    && tar -xzf signac-v0.9.5.tar.gz -C . \
     && export CFLAGS="-mcpu=power9 -mtune=power9" CXXFLAGS="-mcpu=power9 -mtune=power9" \
-    && python3 -m pip install --no-deps --ignore-installed ./signac-v0.9.4 \
-    && rm -rf signac-v0.9.4 \
-    && rm signac-v0.9.4.tar.gz \
+    && python3 -m pip install --no-deps --ignore-installed ./signac-v0.9.5 \
+    && rm -rf signac-v0.9.5 \
+    && rm signac-v0.9.5.tar.gz \
     || exit 1
 
  curl -sSLO https://glotzerlab.engin.umich.edu/Downloads/signac-flow/signac-flow-v0.6.4.tar.gz \
@@ -152,17 +149,17 @@ curl -sSLO https://github.com/scipy/scipy/releases/download/v1.2.0/scipy-1.2.0.t
     && rm signac-flow-v0.6.4.tar.gz \
     || exit 1
 
- curl -sSLO https://glotzerlab.engin.umich.edu/Downloads/hoomd/hoomd-v2.4.2.tar.gz \
-    && echo "2d46725844336c9b3cd39fcba26741042410e9d20384d5218c9272c92cccfb08  hoomd-v2.4.2.tar.gz" | sha256sum -c - \
-    && tar -xzf hoomd-v2.4.2.tar.gz -C . \
-    && cd hoomd-v2.4.2 \
+ curl -sSLO https://glotzerlab.engin.umich.edu/Downloads/hoomd/hoomd-v2.5.0.tar.gz \
+    && echo "7ddeb1946eb21ec2554d42727854e4d79823080d5d6e7f91f985c81db1238497  hoomd-v2.5.0.tar.gz" | sha256sum -c - \
+    && tar -xzf hoomd-v2.5.0.tar.gz -C . \
+    && cd hoomd-v2.5.0 \
     && mkdir build \
     && cd build \
     && export CFLAGS="-mcpu=power9 -mtune=power9" CXXFLAGS="-mcpu=power9 -mtune=power9" \
     && cmake ../ -DPYTHON_EXECUTABLE="`which python3`" -DENABLE_CUDA=on -DENABLE_MPI=on -DENABLE_TBB=off -DBUILD_JIT=off -DBUILD_TESTING=off -DENABLE_MPI_CUDA=on -DCMAKE_INSTALL_PREFIX=`python3 -c "import site; print(site.getsitepackages()[0])"` \
     && make install -j20 \
     && cd ../../ \
-    && rm -rf /root/hoomd-v2.4.2 \
-    && rm hoomd-v2.4.2.tar.gz \
+    && rm -rf /root/hoomd-v2.5.0 \
+    && rm hoomd-v2.5.0.tar.gz \
     || exit 1
 

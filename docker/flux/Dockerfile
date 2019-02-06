@@ -45,17 +45,17 @@ RUN sed -i -e 's/ENABLE_USER_SITE = None/ENABLE_USER_SITE = False/g' `python3 -c
 ENV PATH=$PATH:/usr/lib/llvm-5.0/bin
 
 # embree
-ENV CPATH=/opt/embree-3.3.0.x86_64.linux/include:$CPATH \
-    LIBRARY_PATH=/opt/embree-3.3.0.x86_64.linux/lib:$LIBRARY_PATH \
-    LD_LIBRARY_PATH=/opt/embree-3.3.0.x86_64.linux/lib:$LD_LIBRARY_PATH \
-    EMBREE3_LINK=/opt/embree-3.3.0.x86_64.linux/lib
+ENV CPATH=/opt/embree-3.4.0.x86_64.linux/include:$CPATH \
+    LIBRARY_PATH=/opt/embree-3.4.0.x86_64.linux/lib:$LIBRARY_PATH \
+    LD_LIBRARY_PATH=/opt/embree-3.4.0.x86_64.linux/lib:$LD_LIBRARY_PATH \
+    EMBREE3_LINK=/opt/embree-3.4.0.x86_64.linux/lib
 
-RUN curl -sSLO https://github.com/embree/embree/releases/download/v3.3.0/embree-3.3.0.x86_64.linux.tar.gz \
-    && echo "c70e5cef5eeb88aa5c384121c8908287950d756c3eaac3f0bccea2d94c4fea3f  embree-3.3.0.x86_64.linux.tar.gz" | sha256sum -c - \
-    && tar -xzf embree-3.3.0.x86_64.linux.tar.gz -C /opt \
-    && rm -rf /opt/embree-3.3.0.x86_64.linux/bin \
-    && rm -rf /opt/embree-3.3.0.x86_64.linux/doc \
-    && rm embree-3.3.0.x86_64.linux.tar.gz
+RUN curl -sSLO https://github.com/embree/embree/releases/download/v3.4.0/embree-3.4.0.x86_64.linux.tar.gz \
+    && echo "d767b5ef10d5634c464328628cf6b83cecdb01c5b98df41e747be70a5917589c  embree-3.4.0.x86_64.linux.tar.gz" | sha256sum -c - \
+    && tar -xzf embree-3.4.0.x86_64.linux.tar.gz -C /opt \
+    && rm -rf /opt/embree-3.4.0.x86_64.linux/bin \
+    && rm -rf /opt/embree-3.4.0.x86_64.linux/doc \
+    && rm embree-3.4.0.x86_64.linux.tar.gz
 
 # mount points for filesystems on clusters
 RUN mkdir -p /nfs \
@@ -133,18 +133,18 @@ RUN curl -sSLO https://glotzerlab.engin.umich.edu/Downloads/freud/freud-v0.11.4.
     || exit 1
 
 
-RUN curl -sSLO https://glotzerlab.engin.umich.edu/Downloads/fresnel/fresnel-v0.6.0.tar.gz \
-    && echo "de1b18f87b5bcdd96844c143d6a9cf560df873a9f1f7eae8d6ff2eac5a1d2467  fresnel-v0.6.0.tar.gz" | sha256sum -c - \
-    && tar -xzf fresnel-v0.6.0.tar.gz -C . \
-    && cd fresnel-v0.6.0 \
+RUN curl -sSLO https://glotzerlab.engin.umich.edu/Downloads/fresnel/fresnel-v0.7.1.tar.gz \
+    && echo "08e0ba0254f3108a7145d86a18ae126613a29cf3a2551f330e38f6b2f6e29482  fresnel-v0.7.1.tar.gz" | sha256sum -c - \
+    && tar -xzf fresnel-v0.7.1.tar.gz -C . \
+    && cd fresnel-v0.7.1 \
     && mkdir build \
     && cd build \
     && export CFLAGS="" CXXFLAGS="" \
-    && cmake ../ -DENABLE_EMBREE=on -DENABLE_OPTIX=off -Dembree_DIR=/opt/embree-3.3.0.x86_64.linux -DCMAKE_INSTALL_PREFIX=`python3 -c "import site; print(site.getsitepackages()[0])"` \
+    && cmake ../ -DENABLE_EMBREE=on -DENABLE_OPTIX=off -Dembree_DIR=/opt/embree-3.4.0.x86_64.linux -DCMAKE_INSTALL_PREFIX=`python3 -c "import site; print(site.getsitepackages()[0])"` \
     && make install -j10 \
     && cd ../../ \
-    && rm -rf fresnel-v0.6.0 \
-    && rm fresnel-v0.6.0.tar.gz \
+    && rm -rf fresnel-v0.7.1 \
+    && rm fresnel-v0.7.1.tar.gz \
     || exit 1
 
 
@@ -172,13 +172,13 @@ RUN curl -sSLO https://glotzerlab.engin.umich.edu/Downloads/libgetar/libgetar-v0
     && rm libgetar-v0.7.0.tar.gz \
     || exit 1
 
-RUN curl -sSLO https://glotzerlab.engin.umich.edu/Downloads/rowan/rowan-v1.1.6.tar.gz \
-    && echo "14627245b95b88e3d4358e6d9df0501eec1bcb892c71ba5829904d4728ecb9f8  rowan-v1.1.6.tar.gz" | sha256sum -c - \
-    && tar -xzf rowan-v1.1.6.tar.gz -C . \
+RUN curl -sSLO https://glotzerlab.engin.umich.edu/Downloads/rowan/rowan-v1.1.7.tar.gz \
+    && echo "01b82fbe522a1cafdfff662f771151be00e379508bbc81e63705087a47d6d26e  rowan-v1.1.7.tar.gz" | sha256sum -c - \
+    && tar -xzf rowan-v1.1.7.tar.gz -C . \
     && export CFLAGS="" CXXFLAGS="" \
-    && python3 -m pip install --no-deps --ignore-installed ./rowan-v1.1.6 \
-    && rm -rf rowan-v1.1.6 \
-    && rm rowan-v1.1.6.tar.gz \
+    && python3 -m pip install --no-deps --ignore-installed ./rowan-v1.1.7 \
+    && rm -rf rowan-v1.1.7 \
+    && rm rowan-v1.1.7.tar.gz \
     || exit 1
 
 RUN curl -sSLO https://glotzerlab.engin.umich.edu/Downloads/plato/plato-v1.4.0.tar.gz \
@@ -199,13 +199,13 @@ RUN curl -sSLO https://glotzerlab.engin.umich.edu/Downloads/pythia/pythia-v0.2.4
     && rm pythia-v0.2.4.tar.gz \
     || exit 1
 
-RUN curl -sSLO https://glotzerlab.engin.umich.edu/Downloads/signac/signac-v0.9.4.tar.gz \
-    && echo "8a3c5b46d079decb9fa2d5d85628c2bd31057a44e945beba930d3b624dcb8437  signac-v0.9.4.tar.gz" | sha256sum -c - \
-    && tar -xzf signac-v0.9.4.tar.gz -C . \
+RUN curl -sSLO https://glotzerlab.engin.umich.edu/Downloads/signac/signac-v0.9.5.tar.gz \
+    && echo "9773bd11e46a52ddda7b431931e65b5e85304606a1668aaa344a173848d1a9c2  signac-v0.9.5.tar.gz" | sha256sum -c - \
+    && tar -xzf signac-v0.9.5.tar.gz -C . \
     && export CFLAGS="" CXXFLAGS="" \
-    && python3 -m pip install --no-deps --ignore-installed ./signac-v0.9.4 \
-    && rm -rf signac-v0.9.4 \
-    && rm signac-v0.9.4.tar.gz \
+    && python3 -m pip install --no-deps --ignore-installed ./signac-v0.9.5 \
+    && rm -rf signac-v0.9.5 \
+    && rm signac-v0.9.5.tar.gz \
     || exit 1
 
 RUN curl -sSLO https://glotzerlab.engin.umich.edu/Downloads/signac-flow/signac-flow-v0.6.4.tar.gz \
@@ -217,18 +217,18 @@ RUN curl -sSLO https://glotzerlab.engin.umich.edu/Downloads/signac-flow/signac-f
     && rm signac-flow-v0.6.4.tar.gz \
     || exit 1
 
-RUN curl -sSLO https://glotzerlab.engin.umich.edu/Downloads/hoomd/hoomd-v2.4.2.tar.gz \
-    && echo "2d46725844336c9b3cd39fcba26741042410e9d20384d5218c9272c92cccfb08  hoomd-v2.4.2.tar.gz" | sha256sum -c - \
-    && tar -xzf hoomd-v2.4.2.tar.gz -C . \
-    && cd hoomd-v2.4.2 \
+RUN curl -sSLO https://glotzerlab.engin.umich.edu/Downloads/hoomd/hoomd-v2.5.0.tar.gz \
+    && echo "7ddeb1946eb21ec2554d42727854e4d79823080d5d6e7f91f985c81db1238497  hoomd-v2.5.0.tar.gz" | sha256sum -c - \
+    && tar -xzf hoomd-v2.5.0.tar.gz -C . \
+    && cd hoomd-v2.5.0 \
     && mkdir build \
     && cd build \
     && export CFLAGS="" CXXFLAGS="" \
     && cmake ../ -DPYTHON_EXECUTABLE="`which python3`" -DENABLE_CUDA=on -DENABLE_MPI=on -DENABLE_TBB=on -DBUILD_JIT=on -DBUILD_TESTING=off -DENABLE_MPI_CUDA=off -DCMAKE_INSTALL_PREFIX=`python3 -c "import site; print(site.getsitepackages()[0])"` \
     && make install -j10 \
     && cd ../../ \
-    && rm -rf /root/hoomd-v2.4.2 \
-    && rm hoomd-v2.4.2.tar.gz \
+    && rm -rf /root/hoomd-v2.5.0 \
+    && rm hoomd-v2.5.0.tar.gz \
     || exit 1
 
 
