@@ -7,7 +7,16 @@ Change log
 
 *Software updates:*
 
+* fresnel v0.7.1
+* HOOMD-blue v2.5.0
+* rowan v1.1.7
+* signac v0.9.5
 * [summit] scipy v1.2.0
+
+*Library updates:*
+
+* embree 3.4.0
+* TBB 2019_U3
 
 *Fixes:*
 

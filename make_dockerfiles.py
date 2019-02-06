@@ -11,8 +11,8 @@ shas = {}
 repo_version = {}
 
 # dependencies
-versions['EMBREE_VERSION'] = '3.3.0'
-shas['EMBREE_SHA'] = 'c70e5cef5eeb88aa5c384121c8908287950d756c3eaac3f0bccea2d94c4fea3f'
+versions['EMBREE_VERSION'] = '3.4.0'
+shas['EMBREE_SHA'] = 'd767b5ef10d5634c464328628cf6b83cecdb01c5b98df41e747be70a5917589c'
 
 versions['OSU_MICROBENCHMARK_VERSION'] ='5.4.1'
 shas['OSU_MICROBENCHMARK_SHA'] ='e90cb683a01744377f77d420de401431242593d8376b25b120950266e140e83c'
@@ -20,15 +20,15 @@ shas['OSU_MICROBENCHMARK_SHA'] ='e90cb683a01744377f77d420de401431242593d8376b25b
 versions['MPI4PY_VERSION'] = '3.0.0'
 shas['MPI4PY_SHA'] = 'b457b02d85bdd9a4775a097fac5234a20397b43e073f14d9e29b6cd78c68efd7'
 
-versions['TBB_VERSION'] = '2019_U2'
-shas['TBB_SHA'] = '1245aa394a92099e23ce2f60cdd50c90eb3ddcd61d86cae010ef2f1de61f32d9'
+versions['TBB_VERSION'] = '2019_U3'
+shas['TBB_SHA'] = 'b2244147bc8159cdd8f06a38afeb42f3237d3fc822555499d7ccfbd4b86f8ece'
 
 versions['SCIPY_VERSION'] = '1.2.0'
 shas['SCIPY_SHA'] = '51a2424c8ed80e60bdb9a896806e7adaf24a58253b326fbad10f80a6d06f2214'
 
 # glotzer lab
-repo_version['fresnel']     = versions['FRESNEL_VERSION']     = 'v0.6.0'
-shas['FRESNEL_SHA'] = 'de1b18f87b5bcdd96844c143d6a9cf560df873a9f1f7eae8d6ff2eac5a1d2467'
+repo_version['fresnel']     = versions['FRESNEL_VERSION']     = 'v0.7.1'
+shas['FRESNEL_SHA'] = '08e0ba0254f3108a7145d86a18ae126613a29cf3a2551f330e38f6b2f6e29482'
 
 repo_version['freud']       = versions['FREUD_VERSION']       = 'v0.11.4'
 shas['FREUD_SHA'] = '9e54cb2f9ef2df7569ae04b5794d0372439b8667cd1ba32390496b5ddf3ad233'
@@ -36,8 +36,8 @@ shas['FREUD_SHA'] = '9e54cb2f9ef2df7569ae04b5794d0372439b8667cd1ba32390496b5ddf3
 repo_version['gsd']         = versions['GSD_VERSION']         = 'v1.6.0'
 shas['GSD_SHA'] = '2d4ddacbea75b36a446a41c5df8ba16d793c5f1674e001795393931f96d0f4e9'
 
-repo_version['hoomd-blue']  = versions['HOOMD_VERSION']       = 'v2.4.2'
-shas['HOOMD_SHA'] = '2d46725844336c9b3cd39fcba26741042410e9d20384d5218c9272c92cccfb08'
+repo_version['hoomd-blue']  = versions['HOOMD_VERSION']       = 'v2.5.0'
+shas['HOOMD_SHA'] = '7ddeb1946eb21ec2554d42727854e4d79823080d5d6e7f91f985c81db1238497'
 
 repo_version['libgetar']    = versions['LIBGETAR_VERSION']    = 'v0.7.0'
 shas['LIBGETAR_SHA'] = '2a33809981b7a99c856ca60a1a7b9b1a0b3978fd8315ab3ab07b7b279a7c55e7'
@@ -45,14 +45,14 @@ shas['LIBGETAR_SHA'] = '2a33809981b7a99c856ca60a1a7b9b1a0b3978fd8315ab3ab07b7b27
 repo_version['pythia']      = versions['PYTHIA_VERSION']      = 'v0.2.4'
 shas['PYTHIA_SHA'] = 'cebc1033759f518aa4f9c41d4660c7748b646f6f6117be9e4dcb9e53ef2f0251'
 
-repo_version['rowan']       = versions['ROWAN_VERSION']       = 'v1.1.6'
-shas['ROWAN_SHA'] = '14627245b95b88e3d4358e6d9df0501eec1bcb892c71ba5829904d4728ecb9f8'
+repo_version['rowan']       = versions['ROWAN_VERSION']       = 'v1.1.7'
+shas['ROWAN_SHA'] = '01b82fbe522a1cafdfff662f771151be00e379508bbc81e63705087a47d6d26e'
 
 repo_version['plato']       = versions['PLATO_VERSION']       = 'v1.4.0'
 shas['PLATO_SHA'] = 'fd5b764da5fdca9e704b22629b12c83fbf482db95fe7050e2b7b7661c8e57cdf'
 
-repo_version['signac']      = versions['SIGNAC_VERSION']      = 'v0.9.4'
-shas['SIGNAC_SHA'] = '8a3c5b46d079decb9fa2d5d85628c2bd31057a44e945beba930d3b624dcb8437'
+repo_version['signac']      = versions['SIGNAC_VERSION']      = 'v0.9.5'
+shas['SIGNAC_SHA'] = '9773bd11e46a52ddda7b431931e65b5e85304606a1668aaa344a173848d1a9c2'
 
 repo_version['signac-flow'] = versions['SIGNAC_FLOW_VERSION'] = 'v0.6.4'
 shas['SIGNAC_FLOW_SHA'] = 'c261204eef08c5e954179840cdb68795f2a464c213b58e67d7b502caada4d34c'
