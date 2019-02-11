@@ -11,4 +11,4 @@ announcements, post questions for advice on using the images, and discuss potent
 Issue tracker
 -------------
 
-File bug reports and feature requests on `glotzerlab-software's issue tracker <https://bitbucket.org/glotzer/docker-glotzerlab-software/issues?status=new&status=open>`_.
+File bug reports and feature requests on `glotzerlab-software's issue tracker <https://github.com/glotzerlab/software/issues>`_.
