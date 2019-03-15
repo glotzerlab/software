@@ -1,3 +1,3 @@
 BootStrap: docker
-From: glotzerlab/software:2019.02-cuda9
+From: glotzerlab/software:2019.03-cuda9
 

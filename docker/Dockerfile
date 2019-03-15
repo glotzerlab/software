@@ -45,17 +45,17 @@ RUN sed -i -e 's/ENABLE_USER_SITE = None/ENABLE_USER_SITE = False/g' `python3 -c
 ENV PATH=$PATH:/usr/lib/llvm-5.0/bin
 
 # embree
-ENV CPATH=/opt/embree-3.4.0.x86_64.linux/include:$CPATH \
-    LIBRARY_PATH=/opt/embree-3.4.0.x86_64.linux/lib:$LIBRARY_PATH \
-    LD_LIBRARY_PATH=/opt/embree-3.4.0.x86_64.linux/lib:$LD_LIBRARY_PATH \
-    EMBREE3_LINK=/opt/embree-3.4.0.x86_64.linux/lib
+ENV CPATH=/opt/embree-3.5.2.x86_64.linux/include:$CPATH \
+    LIBRARY_PATH=/opt/embree-3.5.2.x86_64.linux/lib:$LIBRARY_PATH \
+    LD_LIBRARY_PATH=/opt/embree-3.5.2.x86_64.linux/lib:$LD_LIBRARY_PATH \
+    EMBREE3_LINK=/opt/embree-3.5.2.x86_64.linux/lib
 
-RUN curl -sSLO https://github.com/embree/embree/releases/download/v3.4.0/embree-3.4.0.x86_64.linux.tar.gz \
-    && echo "d767b5ef10d5634c464328628cf6b83cecdb01c5b98df41e747be70a5917589c  embree-3.4.0.x86_64.linux.tar.gz" | sha256sum -c - \
-    && tar -xzf embree-3.4.0.x86_64.linux.tar.gz -C /opt \
-    && rm -rf /opt/embree-3.4.0.x86_64.linux/bin \
-    && rm -rf /opt/embree-3.4.0.x86_64.linux/doc \
-    && rm embree-3.4.0.x86_64.linux.tar.gz
+RUN curl -sSLO https://github.com/embree/embree/releases/download/v3.5.2/embree-3.5.2.x86_64.linux.tar.gz \
+    && echo "a2f2adf05db1ee3fb9f3116d041b36c8d272a3d3f5156ba0e042146d641db750  embree-3.5.2.x86_64.linux.tar.gz" | sha256sum -c - \
+    && tar -xzf embree-3.5.2.x86_64.linux.tar.gz -C /opt \
+    && rm -rf /opt/embree-3.5.2.x86_64.linux/bin \
+    && rm -rf /opt/embree-3.5.2.x86_64.linux/doc \
+    && rm embree-3.5.2.x86_64.linux.tar.gz
 
 # mount points for filesystems on clusters
 RUN mkdir -p /nfs \

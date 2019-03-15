@@ -2,6 +2,22 @@
 Change log
 ==========
 
+2019.03
+-------
+
+*Software updates:*
+
+* fresnel v0.8.0
+* freud v1.0.0
+* GSD v1.6.1
+* HOOMD-blue v2.5.1
+* rowan v1.2.0
+* signac v1.0.0
+
+*Library updates:*
+
+* embree 3.5.2
+
 2019.02
 -------
 
