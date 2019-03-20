@@ -95,6 +95,7 @@
     && tar -xzf signac-flow-{{ SIGNAC_FLOW_VERSION }}.tar.gz -C . \
     && export CFLAGS="{{CFLAGS}}" CXXFLAGS="{{CFLAGS}}" \
     && python3 -m pip install --no-deps --ignore-installed ./signac-flow-{{ SIGNAC_FLOW_VERSION }} \
+    && chmod o+rX /usr/local/lib/**/dist-packages/flow/templates/* \
     && rm -rf signac-flow-{{ SIGNAC_FLOW_VERSION }} \
     && rm signac-flow-{{ SIGNAC_FLOW_VERSION }}.tar.gz \
     || exit 1

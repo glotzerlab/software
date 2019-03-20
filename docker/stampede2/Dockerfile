@@ -230,6 +230,7 @@ RUN curl -sSLO https://glotzerlab.engin.umich.edu/Downloads/signac-flow/signac-f
     && tar -xzf signac-flow-v0.6.4.tar.gz -C . \
     && export CFLAGS="-march=knl -mmmx -msse -msse2 -msse3 -mssse3 -mcx16 -msahf -mmovbe -maes -mpclmul -mpopcnt -mabm -mfma -mbmi -mbmi2 -mavx -mavx2 -msse4.2 -msse4.1 -mlzcnt -mrtm -mhle -mrdrnd -mf16c -mfsgsbase -mrdseed -mprfchw -madx -mfxsr -mxsave -mxsaveopt -mavx512f -mavx512cd -mclflushopt -mxsavec -mxsaves -mavx512dq -mavx512bw -mclwb --param l1-cache-size=32 --param l1-cache-line-size=64 --param l2-cache-size=33792 -mtune=generic" CXXFLAGS="-march=knl -mmmx -msse -msse2 -msse3 -mssse3 -mcx16 -msahf -mmovbe -maes -mpclmul -mpopcnt -mabm -mfma -mbmi -mbmi2 -mavx -mavx2 -msse4.2 -msse4.1 -mlzcnt -mrtm -mhle -mrdrnd -mf16c -mfsgsbase -mrdseed -mprfchw -madx -mfxsr -mxsave -mxsaveopt -mavx512f -mavx512cd -mclflushopt -mxsavec -mxsaves -mavx512dq -mavx512bw -mclwb --param l1-cache-size=32 --param l1-cache-line-size=64 --param l2-cache-size=33792 -mtune=generic" \
     && python3 -m pip install --no-deps --ignore-installed ./signac-flow-v0.6.4 \
+    && chmod o+rX /usr/local/lib/**/dist-packages/flow/templates/* \
     && rm -rf signac-flow-v0.6.4 \
     && rm signac-flow-v0.6.4.tar.gz \
     || exit 1

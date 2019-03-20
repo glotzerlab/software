@@ -213,6 +213,7 @@ RUN curl -sSLO https://glotzerlab.engin.umich.edu/Downloads/signac-flow/signac-f
     && tar -xzf signac-flow-v0.6.4.tar.gz -C . \
     && export CFLAGS="" CXXFLAGS="" \
     && python3 -m pip install --no-deps --ignore-installed ./signac-flow-v0.6.4 \
+    && chmod o+rX /usr/local/lib/**/dist-packages/flow/templates/* \
     && rm -rf signac-flow-v0.6.4 \
     && rm signac-flow-v0.6.4.tar.gz \
     || exit 1
