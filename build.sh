@@ -6,6 +6,8 @@ set -e
 DATE_TAG=$(date +%Y.%m)
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
+umask 022
+
 docker build $DIR/docker \
              -t glotzerlab/software:devel \
 
