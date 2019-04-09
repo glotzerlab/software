@@ -24,6 +24,7 @@ module load cuda
 module load cmake
 module load git
 module load netlib-lapack/3.8.0
+module load hdf5/1.10.3
 
 export LD_LIBRARY_PATH=$ROOT/lib:\$LD_LIBRARY_PATH
 export PATH=$ROOT/bin:\$PATH
@@ -40,7 +41,7 @@ mkdir -p /tmp/$USER-glotzerlab-software
 cd /tmp/$USER-glotzerlab-software
 rm -rf /tmp/$USER-glotzerlab-software/*
 
-python3 -m pip install --progress-bar off --no-deps --no-binary :all: cython mpi4py six numpy
+python3 -m pip install --progress-bar off --no-deps --no-binary :all: cython mpi4py six numpy tables numexpr
 
 # TBB
 curl -sSLO https://github.com/01org/tbb/archive/{{ TBB_VERSION }}.tar.gz \
