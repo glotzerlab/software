@@ -66,3 +66,6 @@ curl -sSLO https://github.com/scipy/scipy/releases/download/v{{ SCIPY_VERSION }}
     && tar -xzf scipy-{{ SCIPY_VERSION }}.tar.gz -C . \
     && cd scipy-{{ SCIPY_VERSION }} \
     && LAPACK=${OLCF_NETLIB_LAPACK_ROOT}/lib64/liblapack.so BLAS=${OLCF_NETLIB_LAPACK_ROOT}/lib64/libblas.so python3 setup.py install
+    && rm -rf scipy-{{ SCIPY_VERSION }} \
+    && rm scipy-{{ SCIPY_VERSION }}.tar.gz \
+    || exit 1
