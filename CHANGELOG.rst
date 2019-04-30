@@ -2,6 +2,16 @@
 Change log
 ==========
 
+2019.04
+-------
+
+*Software updates:*
+
+* fresnel v0.9.0
+* GSD v1.7.0
+* HOOMD-blue v2.5.2
+* signac-flow v0.7.1
+
 2019.03
 -------
 

@@ -27,17 +27,17 @@ versions['SCIPY_VERSION'] = '1.2.0'
 shas['SCIPY_SHA'] = '51a2424c8ed80e60bdb9a896806e7adaf24a58253b326fbad10f80a6d06f2214'
 
 # glotzer lab
-repo_version['fresnel']     = versions['FRESNEL_VERSION']     = 'v0.8.0'
-shas['FRESNEL_SHA'] = '0bdb1f2249717b56f351492a06a0eb3bfe9f8ed0b4f490fdd73ef4cde922de31'
+repo_version['fresnel']     = versions['FRESNEL_VERSION']     = 'v0.9.0'
+shas['FRESNEL_SHA'] = '8f3d49bbb0c8410772f9d5a997b77b9546d512b8fba01ce5604dbf2b1499dd4e'
 
 repo_version['freud']       = versions['FREUD_VERSION']       = 'v1.0.0'
 shas['FREUD_SHA'] = '71599d85be07e6ed9afc3c85ec9a5ab5eafa8c8185fd4b306eb4ae43d5e127f2'
 
-repo_version['gsd']         = versions['GSD_VERSION']         = 'v1.6.1'
-shas['GSD_SHA'] = '45edc981a5899ca7fb81205a3c1a3a07d58ea955f877fdd63e2a3e15d5ead41e'
+repo_version['gsd']         = versions['GSD_VERSION']         = 'v1.7.0'
+shas['GSD_SHA'] = '6c496bf6c64bada82dfd4524dd16d273523f2a4ea93c3a2608ff30bd25076a85'
 
-repo_version['hoomd-blue']  = versions['HOOMD_VERSION']       = 'v2.5.1'
-shas['HOOMD_SHA'] = '07fcc83f7fb48373fe485bf7b8ac71cb79a2a6c918da3498dd64a37f2dc2c964'
+repo_version['hoomd-blue']  = versions['HOOMD_VERSION']       = 'v2.5.2'
+shas['HOOMD_SHA'] = '0822b944cb667ab8068b482022c71094762e5cba75964c125bbd54dd5a902b81'
 
 repo_version['libgetar']    = versions['LIBGETAR_VERSION']    = 'v0.7.0'
 shas['LIBGETAR_SHA'] = '2a33809981b7a99c856ca60a1a7b9b1a0b3978fd8315ab3ab07b7b279a7c55e7'
@@ -54,8 +54,8 @@ shas['PLATO_SHA'] = 'fd5b764da5fdca9e704b22629b12c83fbf482db95fe7050e2b7b7661c8e
 repo_version['signac']      = versions['SIGNAC_VERSION']      = 'v1.0.0'
 shas['SIGNAC_SHA'] = '7eff681ec328a106ae9682697d2ed74565270a93410bab8583414fa756728ed0'
 
-repo_version['signac-flow'] = versions['SIGNAC_FLOW_VERSION'] = 'v0.6.4'
-shas['SIGNAC_FLOW_SHA'] = 'c261204eef08c5e954179840cdb68795f2a464c213b58e67d7b502caada4d34c'
+repo_version['signac-flow'] = versions['SIGNAC_FLOW_VERSION'] = 'v0.7.1'
+shas['SIGNAC_FLOW_SHA'] = '970ea990d8c86143161670e7c260a66357323a55ee8a5b8d8d30fe00386a929c'
 
 if __name__ == '__main__':
 
