@@ -13,17 +13,18 @@ fi
 
 ROOT=$1
 module reset
-module load gcc/4.8.5
+module load gcc/7.4.0
 module load python/3.7.0
 python3 -m venv $ROOT --system-site-packages
 
 cat >$ROOT/environment.sh << EOL
 module reset
-module load gcc/6.4.0
+module load gcc/7.4.0
 module load cuda
 module load cmake
 module load git
 module load netlib-lapack/3.8.0
+module load hdf5/1.10.3
 
 export LD_LIBRARY_PATH=$ROOT/lib:\$LD_LIBRARY_PATH
 export PATH=$ROOT/bin:\$PATH
@@ -38,9 +39,8 @@ source $ROOT/environment.sh
 
 mkdir -p /tmp/$USER-glotzerlab-software
 cd /tmp/$USER-glotzerlab-software
-rm -rf /tmp/$USER-glotzerlab-software/*
 
-python3 -m pip install --progress-bar off --no-deps --no-binary :all: cython mpi4py six numpy
+python3 -m pip install --progress-bar off --no-deps --no-binary :all: cython mpi4py six numpy tables numexpr
 
 # TBB
 curl -sSLO https://github.com/01org/tbb/archive/2019_U3.tar.gz \
@@ -64,7 +64,9 @@ curl -sSLO https://github.com/scipy/scipy/releases/download/v1.2.0/scipy-1.2.0.t
     && echo "51a2424c8ed80e60bdb9a896806e7adaf24a58253b326fbad10f80a6d06f2214  scipy-1.2.0.tar.gz" | sha256sum -c - \
     && tar -xzf scipy-1.2.0.tar.gz -C . \
     && cd scipy-1.2.0 \
-    && LAPACK=${OLCF_NETLIB_LAPACK_ROOT}/lib64/liblapack.so BLAS=${OLCF_NETLIB_LAPACK_ROOT}/lib64/libblas.so python3 setup.py install
+    && LAPACK=${OLCF_NETLIB_LAPACK_ROOT}/lib64/liblapack.so BLAS=${OLCF_NETLIB_LAPACK_ROOT}/lib64/libblas.so python3 setup.py install \
+    && rm -rf scipy-1.2.0 \
+    || exit 1
 
 
 
@@ -80,18 +82,18 @@ curl -sSLO https://github.com/scipy/scipy/releases/download/v1.2.0/scipy-1.2.0.t
 
 
 
- curl -sSLO https://glotzerlab.engin.umich.edu/Downloads/gsd/gsd-v1.6.1.tar.gz \
-    && echo "45edc981a5899ca7fb81205a3c1a3a07d58ea955f877fdd63e2a3e15d5ead41e  gsd-v1.6.1.tar.gz" | sha256sum -c - \
-    && tar -xzf gsd-v1.6.1.tar.gz -C . \
-    && cd gsd-v1.6.1 \
+ curl -sSLO https://glotzerlab.engin.umich.edu/Downloads/gsd/gsd-v1.7.0.tar.gz \
+    && echo "6c496bf6c64bada82dfd4524dd16d273523f2a4ea93c3a2608ff30bd25076a85  gsd-v1.7.0.tar.gz" | sha256sum -c - \
+    && tar -xzf gsd-v1.7.0.tar.gz -C . \
+    && cd gsd-v1.7.0 \
     && mkdir build \
     && cd build \
     && export CFLAGS="-mcpu=power9 -mtune=power9" CXXFLAGS="-mcpu=power9 -mtune=power9" \
     && cmake ../ -DPYTHON_EXECUTABLE="`which python3`" -DCMAKE_INSTALL_PREFIX=`python3 -c "import site; print(site.getsitepackages()[0])"` \
     && make install -j20 \
     && cd ../../ \
-    && rm -rf gsd-v1.6.1 \
-    && rm gsd-v1.6.1.tar.gz \
+    && rm -rf gsd-v1.7.0 \
+    && rm gsd-v1.7.0.tar.gz \
     || exit 1
 
  curl -sSLO https://glotzerlab.engin.umich.edu/Downloads/libgetar/libgetar-v0.7.0.tar.gz \
@@ -140,26 +142,26 @@ curl -sSLO https://github.com/scipy/scipy/releases/download/v1.2.0/scipy-1.2.0.t
     && rm signac-v1.0.0.tar.gz \
     || exit 1
 
- curl -sSLO https://glotzerlab.engin.umich.edu/Downloads/signac-flow/signac-flow-v0.6.4.tar.gz \
-    && echo "c261204eef08c5e954179840cdb68795f2a464c213b58e67d7b502caada4d34c  signac-flow-v0.6.4.tar.gz" | sha256sum -c - \
-    && tar -xzf signac-flow-v0.6.4.tar.gz -C . \
+ curl -sSLO https://glotzerlab.engin.umich.edu/Downloads/signac-flow/signac-flow-v0.7.1.tar.gz \
+    && echo "970ea990d8c86143161670e7c260a66357323a55ee8a5b8d8d30fe00386a929c  signac-flow-v0.7.1.tar.gz" | sha256sum -c - \
+    && tar -xzf signac-flow-v0.7.1.tar.gz -C . \
     && export CFLAGS="-mcpu=power9 -mtune=power9" CXXFLAGS="-mcpu=power9 -mtune=power9" \
-    && python3 -m pip install --no-deps --ignore-installed ./signac-flow-v0.6.4 \
-    && rm -rf signac-flow-v0.6.4 \
-    && rm signac-flow-v0.6.4.tar.gz \
+    && python3 -m pip install --no-deps --ignore-installed ./signac-flow-v0.7.1 \
+    && rm -rf signac-flow-v0.7.1 \
+    && rm signac-flow-v0.7.1.tar.gz \
     || exit 1
 
- curl -sSLO https://glotzerlab.engin.umich.edu/Downloads/hoomd/hoomd-v2.5.1.tar.gz \
-    && echo "07fcc83f7fb48373fe485bf7b8ac71cb79a2a6c918da3498dd64a37f2dc2c964  hoomd-v2.5.1.tar.gz" | sha256sum -c - \
-    && tar -xzf hoomd-v2.5.1.tar.gz -C . \
-    && cd hoomd-v2.5.1 \
+ curl -sSLO https://glotzerlab.engin.umich.edu/Downloads/hoomd/hoomd-v2.5.2.tar.gz \
+    && echo "0822b944cb667ab8068b482022c71094762e5cba75964c125bbd54dd5a902b81  hoomd-v2.5.2.tar.gz" | sha256sum -c - \
+    && tar -xzf hoomd-v2.5.2.tar.gz -C . \
+    && cd hoomd-v2.5.2 \
     && mkdir build \
     && cd build \
     && export CFLAGS="-mcpu=power9 -mtune=power9" CXXFLAGS="-mcpu=power9 -mtune=power9" \
     && cmake ../ -DPYTHON_EXECUTABLE="`which python3`" -DENABLE_CUDA=on -DENABLE_MPI=on -DENABLE_TBB=off -DBUILD_JIT=off -DBUILD_TESTING=off -DENABLE_MPI_CUDA=on -DCMAKE_INSTALL_PREFIX=`python3 -c "import site; print(site.getsitepackages()[0])"` \
     && make install -j20 \
     && cd ../../ \
-    && rm -rf /root/hoomd-v2.5.1 \
-    && rm hoomd-v2.5.1.tar.gz \
+    && rm -rf /root/hoomd-v2.5.2 \
+    && rm hoomd-v2.5.2.tar.gz \
     || exit 1
 

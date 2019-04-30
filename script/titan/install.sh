@@ -1,17 +1,20 @@
 FROM olcf/titan:ubuntu-16.04_2018-01-18
 
+ENV DEBIAN_FRONTEND=noninteractive
+
 RUN apt-get update && apt-get install -y --no-install-recommends \
-  clang-5.0 \
+  clang-7 \
   cmake \
   curl \
   cython3 \
   ffmpeg \
   git \
+  jupyter \
   libboost-dev \
   libedit-dev \
   libtbb-dev \
   libsqlite3-dev \
-  llvm-5.0-dev \
+  llvm-7-dev \
   python3 \
   python3-dev \
   python3-h5py \
@@ -19,6 +22,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
   python3-nose \
   python3-numpy \
   python3-pandas \
+  python3-pillow \
   python3-pip \
   python3-pytest \
   python3-pyqt5 \
@@ -29,11 +33,12 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
   python3-setuptools \
   python3-sphinx \
   python3-sphinx-rtd-theme \
+  python3-tables \
   python3-yaml \
   zlib1g-dev \
   ca-certificates \
   && rm -rf /var/lib/apt/lists/* \
-  && pip3 install --no-cache-dir jupyter pillow pyhull
+  && pip3 install --no-cache-dir pyhull
 
 # prevent python from loading packages from outside the container
 # default empty pythonpath
@@ -42,7 +47,7 @@ ENV PYTHONPATH=/ignore/pythonpath
 RUN sed -i -e 's/ENABLE_USER_SITE = None/ENABLE_USER_SITE = False/g' `python3 -c 'import site; print(site.__file__)'`
 
 # put clang on the path
-ENV PATH=$PATH:/usr/lib/llvm-5.0/bin
+ENV PATH=$PATH:/usr/lib/llvm-7/bin
 
 # embree
 ENV CPATH=/opt/embree-3.5.2.x86_64.linux/include:$CPATH \
@@ -81,33 +86,33 @@ ENV CXX=/usr/bin/g++-4.9
     || exit 1
 
 
- curl -sSLO https://glotzerlab.engin.umich.edu/Downloads/fresnel/fresnel-v0.8.0.tar.gz \
-    && echo "0bdb1f2249717b56f351492a06a0eb3bfe9f8ed0b4f490fdd73ef4cde922de31  fresnel-v0.8.0.tar.gz" | sha256sum -c - \
-    && tar -xzf fresnel-v0.8.0.tar.gz -C . \
-    && cd fresnel-v0.8.0 \
+ curl -sSLO https://glotzerlab.engin.umich.edu/Downloads/fresnel/fresnel-v0.9.0.tar.gz \
+    && echo "8f3d49bbb0c8410772f9d5a997b77b9546d512b8fba01ce5604dbf2b1499dd4e  fresnel-v0.9.0.tar.gz" | sha256sum -c - \
+    && tar -xzf fresnel-v0.9.0.tar.gz -C . \
+    && cd fresnel-v0.9.0 \
     && mkdir build \
     && cd build \
     && export CFLAGS="-D_FORCE_INLINES" CXXFLAGS="-D_FORCE_INLINES" \
     && cmake ../ -DENABLE_EMBREE=on -DENABLE_OPTIX=off -Dembree_DIR=/opt/embree-3.5.2.x86_64.linux -DCMAKE_INSTALL_PREFIX=`python3 -c "import site; print(site.getsitepackages()[0])"` \
     && make install -j2 \
     && cd ../../ \
-    && rm -rf fresnel-v0.8.0 \
-    && rm fresnel-v0.8.0.tar.gz \
+    && rm -rf fresnel-v0.9.0 \
+    && rm fresnel-v0.9.0.tar.gz \
     || exit 1
 
 
- curl -sSLO https://glotzerlab.engin.umich.edu/Downloads/gsd/gsd-v1.6.1.tar.gz \
-    && echo "45edc981a5899ca7fb81205a3c1a3a07d58ea955f877fdd63e2a3e15d5ead41e  gsd-v1.6.1.tar.gz" | sha256sum -c - \
-    && tar -xzf gsd-v1.6.1.tar.gz -C . \
-    && cd gsd-v1.6.1 \
+ curl -sSLO https://glotzerlab.engin.umich.edu/Downloads/gsd/gsd-v1.7.0.tar.gz \
+    && echo "6c496bf6c64bada82dfd4524dd16d273523f2a4ea93c3a2608ff30bd25076a85  gsd-v1.7.0.tar.gz" | sha256sum -c - \
+    && tar -xzf gsd-v1.7.0.tar.gz -C . \
+    && cd gsd-v1.7.0 \
     && mkdir build \
     && cd build \
     && export CFLAGS="-D_FORCE_INLINES" CXXFLAGS="-D_FORCE_INLINES" \
     && cmake ../ -DPYTHON_EXECUTABLE="`which python3`" -DCMAKE_INSTALL_PREFIX=`python3 -c "import site; print(site.getsitepackages()[0])"` \
     && make install -j2 \
     && cd ../../ \
-    && rm -rf gsd-v1.6.1 \
-    && rm gsd-v1.6.1.tar.gz \
+    && rm -rf gsd-v1.7.0 \
+    && rm gsd-v1.7.0.tar.gz \
     || exit 1
 
  curl -sSLO https://glotzerlab.engin.umich.edu/Downloads/libgetar/libgetar-v0.7.0.tar.gz \
@@ -156,28 +161,27 @@ ENV CXX=/usr/bin/g++-4.9
     && rm signac-v1.0.0.tar.gz \
     || exit 1
 
- curl -sSLO https://glotzerlab.engin.umich.edu/Downloads/signac-flow/signac-flow-v0.6.4.tar.gz \
-    && echo "c261204eef08c5e954179840cdb68795f2a464c213b58e67d7b502caada4d34c  signac-flow-v0.6.4.tar.gz" | sha256sum -c - \
-    && tar -xzf signac-flow-v0.6.4.tar.gz -C . \
+ curl -sSLO https://glotzerlab.engin.umich.edu/Downloads/signac-flow/signac-flow-v0.7.1.tar.gz \
+    && echo "970ea990d8c86143161670e7c260a66357323a55ee8a5b8d8d30fe00386a929c  signac-flow-v0.7.1.tar.gz" | sha256sum -c - \
+    && tar -xzf signac-flow-v0.7.1.tar.gz -C . \
     && export CFLAGS="-D_FORCE_INLINES" CXXFLAGS="-D_FORCE_INLINES" \
-    && python3 -m pip install --no-deps --ignore-installed ./signac-flow-v0.6.4 \
-    && chmod o+rX /usr/local/lib/**/dist-packages/flow/templates/* \
-    && rm -rf signac-flow-v0.6.4 \
-    && rm signac-flow-v0.6.4.tar.gz \
+    && python3 -m pip install --no-deps --ignore-installed ./signac-flow-v0.7.1 \
+    && rm -rf signac-flow-v0.7.1 \
+    && rm signac-flow-v0.7.1.tar.gz \
     || exit 1
 
- curl -sSLO https://glotzerlab.engin.umich.edu/Downloads/hoomd/hoomd-v2.5.1.tar.gz \
-    && echo "07fcc83f7fb48373fe485bf7b8ac71cb79a2a6c918da3498dd64a37f2dc2c964  hoomd-v2.5.1.tar.gz" | sha256sum -c - \
-    && tar -xzf hoomd-v2.5.1.tar.gz -C . \
-    && cd hoomd-v2.5.1 \
+ curl -sSLO https://glotzerlab.engin.umich.edu/Downloads/hoomd/hoomd-v2.5.2.tar.gz \
+    && echo "0822b944cb667ab8068b482022c71094762e5cba75964c125bbd54dd5a902b81  hoomd-v2.5.2.tar.gz" | sha256sum -c - \
+    && tar -xzf hoomd-v2.5.2.tar.gz -C . \
+    && cd hoomd-v2.5.2 \
     && mkdir build \
     && cd build \
     && export CFLAGS="-D_FORCE_INLINES" CXXFLAGS="-D_FORCE_INLINES" \
     && cmake ../ -DPYTHON_EXECUTABLE="`which python3`" -DENABLE_CUDA=on -DENABLE_MPI=on -DENABLE_TBB=off -DBUILD_JIT=off -DBUILD_TESTING=off -DENABLE_MPI_CUDA=off -DCMAKE_INSTALL_PREFIX=`python3 -c "import site; print(site.getsitepackages()[0])"` \
     && make install -j2 \
     && cd ../../ \
-    && rm -rf /root/hoomd-v2.5.1 \
-    && rm hoomd-v2.5.1.tar.gz \
+    && rm -rf /root/hoomd-v2.5.2 \
+    && rm hoomd-v2.5.2.tar.gz \
     || exit 1
 
 
@@ -191,7 +195,8 @@ RUN useradd --create-home --shell /bin/bash glotzerlab-software \
     && chown glotzerlab-software:glotzerlab-software -R /hoomd-examples \
     && chown glotzerlab-software:glotzerlab-software -R /fresnel-examples \
     && chown glotzerlab-software:glotzerlab-software -R /test \
-    && chmod o+rX -R /test
+    && chmod o+rX -R /test \
+    && chmod o+rX `python3 -c "import site; print(site.getsitepackages()[0])"`/flow/templates/*
 
 USER glotzerlab-software:glotzerlab-software
 
