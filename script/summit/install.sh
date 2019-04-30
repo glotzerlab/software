@@ -145,7 +145,6 @@ curl -sSLO https://github.com/scipy/scipy/releases/download/v1.2.0/scipy-1.2.0.t
     && tar -xzf signac-flow-v0.6.4.tar.gz -C . \
     && export CFLAGS="-mcpu=power9 -mtune=power9" CXXFLAGS="-mcpu=power9 -mtune=power9" \
     && python3 -m pip install --no-deps --ignore-installed ./signac-flow-v0.6.4 \
-    && chmod o+rX /usr/local/lib/**/dist-packages/flow/templates/* \
     && rm -rf signac-flow-v0.6.4 \
     && rm signac-flow-v0.6.4.tar.gz \
     || exit 1
