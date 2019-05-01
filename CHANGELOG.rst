@@ -2,7 +2,7 @@
 Change log
 ==========
 
-2019.04
+2019.05
 -------
 
 *Software updates:*

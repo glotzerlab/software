@@ -29,6 +29,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
   python3-setuptools \
   python3-sphinx \
   python3-sphinx-rtd-theme \
+  python3-tables \
   python3-yaml \
   zlib1g-dev \
   ca-certificates \

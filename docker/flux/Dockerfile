@@ -29,6 +29,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
   python3-setuptools \
   python3-sphinx \
   python3-sphinx-rtd-theme \
+  python3-tables \
   python3-yaml \
   zlib1g-dev \
   ca-certificates \
@@ -133,33 +134,33 @@ RUN curl -sSLO https://glotzerlab.engin.umich.edu/Downloads/freud/freud-v1.0.0.t
     || exit 1
 
 
-RUN curl -sSLO https://glotzerlab.engin.umich.edu/Downloads/fresnel/fresnel-v0.8.0.tar.gz \
-    && echo "0bdb1f2249717b56f351492a06a0eb3bfe9f8ed0b4f490fdd73ef4cde922de31  fresnel-v0.8.0.tar.gz" | sha256sum -c - \
-    && tar -xzf fresnel-v0.8.0.tar.gz -C . \
-    && cd fresnel-v0.8.0 \
+RUN curl -sSLO https://glotzerlab.engin.umich.edu/Downloads/fresnel/fresnel-v0.9.0.tar.gz \
+    && echo "8f3d49bbb0c8410772f9d5a997b77b9546d512b8fba01ce5604dbf2b1499dd4e  fresnel-v0.9.0.tar.gz" | sha256sum -c - \
+    && tar -xzf fresnel-v0.9.0.tar.gz -C . \
+    && cd fresnel-v0.9.0 \
     && mkdir build \
     && cd build \
     && export CFLAGS="" CXXFLAGS="" \
     && cmake ../ -DENABLE_EMBREE=on -DENABLE_OPTIX=off -Dembree_DIR=/opt/embree-3.5.2.x86_64.linux -DCMAKE_INSTALL_PREFIX=`python3 -c "import site; print(site.getsitepackages()[0])"` \
     && make install -j10 \
     && cd ../../ \
-    && rm -rf fresnel-v0.8.0 \
-    && rm fresnel-v0.8.0.tar.gz \
+    && rm -rf fresnel-v0.9.0 \
+    && rm fresnel-v0.9.0.tar.gz \
     || exit 1
 
 
-RUN curl -sSLO https://glotzerlab.engin.umich.edu/Downloads/gsd/gsd-v1.6.1.tar.gz \
-    && echo "45edc981a5899ca7fb81205a3c1a3a07d58ea955f877fdd63e2a3e15d5ead41e  gsd-v1.6.1.tar.gz" | sha256sum -c - \
-    && tar -xzf gsd-v1.6.1.tar.gz -C . \
-    && cd gsd-v1.6.1 \
+RUN curl -sSLO https://glotzerlab.engin.umich.edu/Downloads/gsd/gsd-v1.7.0.tar.gz \
+    && echo "6c496bf6c64bada82dfd4524dd16d273523f2a4ea93c3a2608ff30bd25076a85  gsd-v1.7.0.tar.gz" | sha256sum -c - \
+    && tar -xzf gsd-v1.7.0.tar.gz -C . \
+    && cd gsd-v1.7.0 \
     && mkdir build \
     && cd build \
     && export CFLAGS="" CXXFLAGS="" \
     && cmake ../ -DPYTHON_EXECUTABLE="`which python3`" -DCMAKE_INSTALL_PREFIX=`python3 -c "import site; print(site.getsitepackages()[0])"` \
     && make install -j10 \
     && cd ../../ \
-    && rm -rf gsd-v1.6.1 \
-    && rm gsd-v1.6.1.tar.gz \
+    && rm -rf gsd-v1.7.0 \
+    && rm gsd-v1.7.0.tar.gz \
     || exit 1
 
 RUN curl -sSLO https://glotzerlab.engin.umich.edu/Downloads/libgetar/libgetar-v0.7.0.tar.gz \
@@ -208,28 +209,27 @@ RUN curl -sSLO https://glotzerlab.engin.umich.edu/Downloads/signac/signac-v1.0.0
     && rm signac-v1.0.0.tar.gz \
     || exit 1
 
-RUN curl -sSLO https://glotzerlab.engin.umich.edu/Downloads/signac-flow/signac-flow-v0.6.4.tar.gz \
-    && echo "c261204eef08c5e954179840cdb68795f2a464c213b58e67d7b502caada4d34c  signac-flow-v0.6.4.tar.gz" | sha256sum -c - \
-    && tar -xzf signac-flow-v0.6.4.tar.gz -C . \
+RUN curl -sSLO https://glotzerlab.engin.umich.edu/Downloads/signac-flow/signac-flow-v0.7.1.tar.gz \
+    && echo "970ea990d8c86143161670e7c260a66357323a55ee8a5b8d8d30fe00386a929c  signac-flow-v0.7.1.tar.gz" | sha256sum -c - \
+    && tar -xzf signac-flow-v0.7.1.tar.gz -C . \
     && export CFLAGS="" CXXFLAGS="" \
-    && python3 -m pip install --no-deps --ignore-installed ./signac-flow-v0.6.4 \
-    && chmod o+rX /usr/local/lib/**/dist-packages/flow/templates/* \
-    && rm -rf signac-flow-v0.6.4 \
-    && rm signac-flow-v0.6.4.tar.gz \
+    && python3 -m pip install --no-deps --ignore-installed ./signac-flow-v0.7.1 \
+    && rm -rf signac-flow-v0.7.1 \
+    && rm signac-flow-v0.7.1.tar.gz \
     || exit 1
 
-RUN curl -sSLO https://glotzerlab.engin.umich.edu/Downloads/hoomd/hoomd-v2.5.1.tar.gz \
-    && echo "07fcc83f7fb48373fe485bf7b8ac71cb79a2a6c918da3498dd64a37f2dc2c964  hoomd-v2.5.1.tar.gz" | sha256sum -c - \
-    && tar -xzf hoomd-v2.5.1.tar.gz -C . \
-    && cd hoomd-v2.5.1 \
+RUN curl -sSLO https://glotzerlab.engin.umich.edu/Downloads/hoomd/hoomd-v2.5.2.tar.gz \
+    && echo "0822b944cb667ab8068b482022c71094762e5cba75964c125bbd54dd5a902b81  hoomd-v2.5.2.tar.gz" | sha256sum -c - \
+    && tar -xzf hoomd-v2.5.2.tar.gz -C . \
+    && cd hoomd-v2.5.2 \
     && mkdir build \
     && cd build \
     && export CFLAGS="" CXXFLAGS="" \
     && cmake ../ -DPYTHON_EXECUTABLE="`which python3`" -DENABLE_CUDA=on -DENABLE_MPI=on -DENABLE_TBB=on -DBUILD_JIT=on -DBUILD_TESTING=off -DENABLE_MPI_CUDA=off -DCMAKE_INSTALL_PREFIX=`python3 -c "import site; print(site.getsitepackages()[0])"` \
     && make install -j10 \
     && cd ../../ \
-    && rm -rf /root/hoomd-v2.5.1 \
-    && rm hoomd-v2.5.1.tar.gz \
+    && rm -rf /root/hoomd-v2.5.2 \
+    && rm hoomd-v2.5.2.tar.gz \
     || exit 1
 
 
@@ -251,7 +251,8 @@ RUN useradd --create-home --shell /bin/bash glotzerlab-software \
     && chown glotzerlab-software:glotzerlab-software -R /hoomd-examples \
     && chown glotzerlab-software:glotzerlab-software -R /fresnel-examples \
     && chown glotzerlab-software:glotzerlab-software -R /test \
-    && chmod o+rX -R /test
+    && chmod o+rX -R /test \
+    && chmod o+rX `python3 -c "import site; print(site.getsitepackages()[0])"`/flow/templates/*
 
 USER glotzerlab-software:glotzerlab-software
 
