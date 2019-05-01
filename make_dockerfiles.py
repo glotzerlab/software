@@ -77,21 +77,21 @@ if __name__ == '__main__':
     finalize_template = env.get_template('finalize.jinja')
 
     write('docker/Dockerfile', [base_template],
-          FROM='nvidia/cuda:9.2-devel-ubuntu18.04',
+          FROM='nvidia/cuda:9.2-devel-ubuntu16.04',
           ENABLE_MPI='off',
           MAKEJOBS=10,
           **versions,
           **shas)
 
     write('docker/nompi/Dockerfile', [base_template, glotzerlab_software_template, finalize_template],
-          FROM='nvidia/cuda:9.2-devel-ubuntu18.04',
+          FROM='nvidia/cuda:9.2-devel-ubuntu16.04',
           ENABLE_MPI='off',
           MAKEJOBS=10,
           **versions,
           **shas)
 
     write('docker/flux/Dockerfile', [base_template, ib_mlx_template, openmpi_template, glotzerlab_software_template, finalize_template],
-          FROM='nvidia/cuda:9.2-devel-ubuntu18.04',
+          FROM='nvidia/cuda:9.1-devel-ubuntu16.04',
           system='flux',
           OPENMPI_VERSION='3.0',
           OPENMPI_PATCHLEVEL='0',
@@ -105,7 +105,7 @@ if __name__ == '__main__':
     # for information on obtaining CFLAGS settings for specific machines
     # gcc -'###' -E - -march=native 2>&1 | sed -r '/cc1/!d;s/(")|(^.* - )|( -mno-[^\ ]+)//g'
     write('docker/comet/Dockerfile', [base_template, ib_mlx_template, openmpi_template, glotzerlab_software_template, finalize_template],
-          FROM='nvidia/cuda:9.2-devel-ubuntu18.04',
+          FROM='nvidia/cuda:9.2-devel-ubuntu16.04',
           system='comet',
           OPENMPI_VERSION='1.8',
           OPENMPI_PATCHLEVEL='4',
@@ -117,7 +117,7 @@ if __name__ == '__main__':
           **shas)
 
     write('docker/bridges/Dockerfile', [base_template, ib_hfi1_template, openmpi_template, glotzerlab_software_template, finalize_template],
-          FROM='nvidia/cuda:9.2-devel-ubuntu18.04',
+          FROM='nvidia/cuda:9.2-devel-ubuntu16.04',
           system='bridges',
           OPENMPI_VERSION='2.1',
           OPENMPI_PATCHLEVEL='2',
@@ -130,7 +130,7 @@ if __name__ == '__main__':
 
     # TODO: update cflags after switching to newer compiler
     write('docker/stampede2/Dockerfile', [base_template, ib_hfi1_stampede2_template, mvapich2_template, glotzerlab_software_template, finalize_template],
-          FROM='nvidia/cuda:9.2-devel-ubuntu18.04',
+          FROM='nvidia/cuda:9.2-devel-ubuntu16.04',
           system='stampede2',
           MVAPICH_VERSION='2.3',
           MVAPICH_PATCHLEVEL='',
