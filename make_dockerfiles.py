@@ -71,7 +71,6 @@ if __name__ == '__main__':
     ib_hfi1_stampede2_template = env.get_template('ib-hfi1-stampede2.jinja')
     openmpi_template = env.get_template('openmpi.jinja')
     mvapich2_template = env.get_template('mvapich2.jinja')
-    titan_template = env.get_template('titan.jinja')
     summit_template = env.get_template('summit.jinja')
     glotzerlab_software_template = env.get_template('glotzerlab-software.jinja')
     finalize_template = env.get_template('finalize.jinja')
@@ -139,18 +138,6 @@ if __name__ == '__main__':
           ENABLE_MPI='on',
           MAKEJOBS=10,
           CFLAGS='-march=knl -mmmx -msse -msse2 -msse3 -mssse3 -mcx16 -msahf -mmovbe -maes -mpclmul -mpopcnt -mabm -mfma -mbmi -mbmi2 -mavx -mavx2 -msse4.2 -msse4.1 -mlzcnt -mrtm -mhle -mrdrnd -mf16c -mfsgsbase -mrdseed -mprfchw -madx -mfxsr -mxsave -mxsaveopt -mavx512f -mavx512cd -mclflushopt -mxsavec -mxsaves -mavx512dq -mavx512bw -mclwb --param l1-cache-size=32 --param l1-cache-line-size=64 --param l2-cache-size=33792 -mtune=generic',
-          **versions,
-          **shas)
-
-    write('script/titan/install.sh', [base_template, titan_template, glotzerlab_software_template, finalize_template],
-          FROM='olcf/titan:ubuntu-16.04_2018-01-18',
-          ENABLE_MPI='on',
-          output='script',
-          system='titan',
-          MAKEJOBS=2,
-          CFLAGS='-D_FORCE_INLINES',
-          ENABLE_TBB='off',
-          BUILD_JIT='off',
           **versions,
           **shas)
 
