@@ -201,7 +201,7 @@ RUN useradd --create-home --shell /bin/bash glotzerlab-software \
 
 USER glotzerlab-software:glotzerlab-software
 
+LABEL maintainer="glotzerlab: http://glotzerlab.engin.umich.edu"
+
 RUN cd /test && \
     python3 serial-cpu.py
-
-LABEL maintainer="glotzerlab: http://glotzerlab.engin.umich.edu"

@@ -74,6 +74,7 @@ if __name__ == '__main__':
     summit_template = env.get_template('summit.jinja')
     glotzerlab_software_template = env.get_template('glotzerlab-software.jinja')
     finalize_template = env.get_template('finalize.jinja')
+    test_template = env.get_template('test.jinja')
 
     write('docker/Dockerfile', [base_template],
           FROM='nvidia/cuda:9.2-devel-ubuntu16.04',
@@ -82,7 +83,7 @@ if __name__ == '__main__':
           **versions,
           **shas)
 
-    write('docker/nompi/Dockerfile', [base_template, glotzerlab_software_template, finalize_template],
+    write('docker/nompi/Dockerfile', [base_template, glotzerlab_software_template, finalize_template, test_template],
           FROM='nvidia/cuda:9.2-devel-ubuntu16.04',
           ENABLE_MPI='off',
           MAKEJOBS=10,
