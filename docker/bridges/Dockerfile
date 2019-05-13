@@ -34,7 +34,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
   zlib1g-dev \
   ca-certificates \
   && rm -rf /var/lib/apt/lists/* \
-  && pip3 install --no-cache-dir jupyter pillow pyhull
+  && pip3 install --no-cache-dir jupyter pillow pyhull deprecation
 
 # prevent python from loading packages from outside the container
 # default empty pythonpath
@@ -256,5 +256,8 @@ RUN useradd --create-home --shell /bin/bash glotzerlab-software \
     && chmod o+rX `python3 -c "import site; print(site.getsitepackages()[0])"`/flow/templates/*
 
 USER glotzerlab-software:glotzerlab-software
+
+RUN cd /test && \
+    python3 serial-cpu.py
 
 LABEL maintainer="glotzerlab: http://glotzerlab.engin.umich.edu"
