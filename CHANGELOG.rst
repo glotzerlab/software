@@ -2,6 +2,17 @@
 Change log
 ==========
 
+2019.07
+-------
+
+*Software updates:*
+
+* freud v1.2.0
+* HOOMD-blue v2.6.0
+* rowan v1.2.1
+* plato v1.6.0
+* siganc v1.1.0
+
 2019.05
 -------
 

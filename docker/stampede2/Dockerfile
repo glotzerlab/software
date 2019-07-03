@@ -140,14 +140,14 @@ RUN curl -sSLO https://bitbucket.org/mpi4py/mpi4py/downloads/mpi4py-3.0.0.tar.gz
 
 
 
-RUN curl -sSLO https://glotzerlab.engin.umich.edu/Downloads/freud/freud-v1.0.0.tar.gz \
-    && echo "71599d85be07e6ed9afc3c85ec9a5ab5eafa8c8185fd4b306eb4ae43d5e127f2  freud-v1.0.0.tar.gz" | sha256sum -c - \
-    && tar -xzf freud-v1.0.0.tar.gz -C . \
-    && rm -f freud-v1.0.0/*.toml \
+RUN curl -sSLO https://glotzerlab.engin.umich.edu/Downloads/freud/freud-v1.2.0.tar.gz \
+    && echo "d5569f044d35573e5e9a2fb6864331a94cb4a2275bf6ecf3a175171aa4687c38  freud-v1.2.0.tar.gz" | sha256sum -c - \
+    && tar -xzf freud-v1.2.0.tar.gz -C . \
+    && rm -f freud-v1.2.0/*.toml \
     && export CFLAGS="-march=knl -mmmx -msse -msse2 -msse3 -mssse3 -mcx16 -msahf -mmovbe -maes -mpclmul -mpopcnt -mabm -mfma -mbmi -mbmi2 -mavx -mavx2 -msse4.2 -msse4.1 -mlzcnt -mrtm -mhle -mrdrnd -mf16c -mfsgsbase -mrdseed -mprfchw -madx -mfxsr -mxsave -mxsaveopt -mavx512f -mavx512cd -mclflushopt -mxsavec -mxsaves -mavx512dq -mavx512bw -mclwb --param l1-cache-size=32 --param l1-cache-line-size=64 --param l2-cache-size=33792 -mtune=generic" CXXFLAGS="-march=knl -mmmx -msse -msse2 -msse3 -mssse3 -mcx16 -msahf -mmovbe -maes -mpclmul -mpopcnt -mabm -mfma -mbmi -mbmi2 -mavx -mavx2 -msse4.2 -msse4.1 -mlzcnt -mrtm -mhle -mrdrnd -mf16c -mfsgsbase -mrdseed -mprfchw -madx -mfxsr -mxsave -mxsaveopt -mavx512f -mavx512cd -mclflushopt -mxsavec -mxsaves -mavx512dq -mavx512bw -mclwb --param l1-cache-size=32 --param l1-cache-line-size=64 --param l2-cache-size=33792 -mtune=generic" \
-    && python3 -m pip install --no-deps --ignore-installed ./freud-v1.0.0 \
-    && rm -rf freud-v1.0.0 \
-    && rm freud-v1.0.0.tar.gz \
+    && python3 -m pip install --no-deps --ignore-installed ./freud-v1.2.0 \
+    && rm -rf freud-v1.2.0 \
+    && rm freud-v1.2.0.tar.gz \
     || exit 1
 
 
@@ -190,22 +190,22 @@ RUN curl -sSLO https://glotzerlab.engin.umich.edu/Downloads/libgetar/libgetar-v0
     && rm libgetar-v0.7.0.tar.gz \
     || exit 1
 
-RUN curl -sSLO https://glotzerlab.engin.umich.edu/Downloads/rowan/rowan-v1.2.0.tar.gz \
-    && echo "68f27a6d7d1fd735a1cb0d465fd339ad137ea053fe7ccc56786464c33245dbeb  rowan-v1.2.0.tar.gz" | sha256sum -c - \
-    && tar -xzf rowan-v1.2.0.tar.gz -C . \
+RUN curl -sSLO https://glotzerlab.engin.umich.edu/Downloads/rowan/rowan-v1.2.1.tar.gz \
+    && echo "c59ad2dded288e5626db19869ed2915852734520347f7e0afd9dd08171d4541b  rowan-v1.2.1.tar.gz" | sha256sum -c - \
+    && tar -xzf rowan-v1.2.1.tar.gz -C . \
     && export CFLAGS="-march=knl -mmmx -msse -msse2 -msse3 -mssse3 -mcx16 -msahf -mmovbe -maes -mpclmul -mpopcnt -mabm -mfma -mbmi -mbmi2 -mavx -mavx2 -msse4.2 -msse4.1 -mlzcnt -mrtm -mhle -mrdrnd -mf16c -mfsgsbase -mrdseed -mprfchw -madx -mfxsr -mxsave -mxsaveopt -mavx512f -mavx512cd -mclflushopt -mxsavec -mxsaves -mavx512dq -mavx512bw -mclwb --param l1-cache-size=32 --param l1-cache-line-size=64 --param l2-cache-size=33792 -mtune=generic" CXXFLAGS="-march=knl -mmmx -msse -msse2 -msse3 -mssse3 -mcx16 -msahf -mmovbe -maes -mpclmul -mpopcnt -mabm -mfma -mbmi -mbmi2 -mavx -mavx2 -msse4.2 -msse4.1 -mlzcnt -mrtm -mhle -mrdrnd -mf16c -mfsgsbase -mrdseed -mprfchw -madx -mfxsr -mxsave -mxsaveopt -mavx512f -mavx512cd -mclflushopt -mxsavec -mxsaves -mavx512dq -mavx512bw -mclwb --param l1-cache-size=32 --param l1-cache-line-size=64 --param l2-cache-size=33792 -mtune=generic" \
-    && python3 -m pip install --no-deps --ignore-installed ./rowan-v1.2.0 \
-    && rm -rf rowan-v1.2.0 \
-    && rm rowan-v1.2.0.tar.gz \
+    && python3 -m pip install --no-deps --ignore-installed ./rowan-v1.2.1 \
+    && rm -rf rowan-v1.2.1 \
+    && rm rowan-v1.2.1.tar.gz \
     || exit 1
 
-RUN curl -sSLO https://glotzerlab.engin.umich.edu/Downloads/plato/plato-v1.4.0.tar.gz \
-    && echo "fd5b764da5fdca9e704b22629b12c83fbf482db95fe7050e2b7b7661c8e57cdf  plato-v1.4.0.tar.gz" | sha256sum -c - \
-    && tar -xzf plato-v1.4.0.tar.gz -C . \
+RUN curl -sSLO https://glotzerlab.engin.umich.edu/Downloads/plato/plato-v1.6.0.tar.gz \
+    && echo "d7282e2b7a8cd641e41a845f1a7075031b821440ab1ea9ad11a0dc991b86f91d  plato-v1.6.0.tar.gz" | sha256sum -c - \
+    && tar -xzf plato-v1.6.0.tar.gz -C . \
     && export CFLAGS="-march=knl -mmmx -msse -msse2 -msse3 -mssse3 -mcx16 -msahf -mmovbe -maes -mpclmul -mpopcnt -mabm -mfma -mbmi -mbmi2 -mavx -mavx2 -msse4.2 -msse4.1 -mlzcnt -mrtm -mhle -mrdrnd -mf16c -mfsgsbase -mrdseed -mprfchw -madx -mfxsr -mxsave -mxsaveopt -mavx512f -mavx512cd -mclflushopt -mxsavec -mxsaves -mavx512dq -mavx512bw -mclwb --param l1-cache-size=32 --param l1-cache-line-size=64 --param l2-cache-size=33792 -mtune=generic" CXXFLAGS="-march=knl -mmmx -msse -msse2 -msse3 -mssse3 -mcx16 -msahf -mmovbe -maes -mpclmul -mpopcnt -mabm -mfma -mbmi -mbmi2 -mavx -mavx2 -msse4.2 -msse4.1 -mlzcnt -mrtm -mhle -mrdrnd -mf16c -mfsgsbase -mrdseed -mprfchw -madx -mfxsr -mxsave -mxsaveopt -mavx512f -mavx512cd -mclflushopt -mxsavec -mxsaves -mavx512dq -mavx512bw -mclwb --param l1-cache-size=32 --param l1-cache-line-size=64 --param l2-cache-size=33792 -mtune=generic" \
-    && python3 -m pip install --no-deps --ignore-installed ./plato-v1.4.0 \
-    && rm -rf plato-v1.4.0 \
-    && rm plato-v1.4.0.tar.gz \
+    && python3 -m pip install --no-deps --ignore-installed ./plato-v1.6.0 \
+    && rm -rf plato-v1.6.0 \
+    && rm plato-v1.6.0.tar.gz \
     || exit 1
 
 RUN curl -sSLO https://glotzerlab.engin.umich.edu/Downloads/pythia/pythia-v0.2.4.tar.gz \
@@ -217,13 +217,13 @@ RUN curl -sSLO https://glotzerlab.engin.umich.edu/Downloads/pythia/pythia-v0.2.4
     && rm pythia-v0.2.4.tar.gz \
     || exit 1
 
-RUN curl -sSLO https://glotzerlab.engin.umich.edu/Downloads/signac/signac-v1.0.0.tar.gz \
-    && echo "7eff681ec328a106ae9682697d2ed74565270a93410bab8583414fa756728ed0  signac-v1.0.0.tar.gz" | sha256sum -c - \
-    && tar -xzf signac-v1.0.0.tar.gz -C . \
+RUN curl -sSLO https://glotzerlab.engin.umich.edu/Downloads/signac/signac-v1.1.0.tar.gz \
+    && echo "580ecc9586d92f2049ce6d1f3175265ae00731decc0d415105556beac72b388c  signac-v1.1.0.tar.gz" | sha256sum -c - \
+    && tar -xzf signac-v1.1.0.tar.gz -C . \
     && export CFLAGS="-march=knl -mmmx -msse -msse2 -msse3 -mssse3 -mcx16 -msahf -mmovbe -maes -mpclmul -mpopcnt -mabm -mfma -mbmi -mbmi2 -mavx -mavx2 -msse4.2 -msse4.1 -mlzcnt -mrtm -mhle -mrdrnd -mf16c -mfsgsbase -mrdseed -mprfchw -madx -mfxsr -mxsave -mxsaveopt -mavx512f -mavx512cd -mclflushopt -mxsavec -mxsaves -mavx512dq -mavx512bw -mclwb --param l1-cache-size=32 --param l1-cache-line-size=64 --param l2-cache-size=33792 -mtune=generic" CXXFLAGS="-march=knl -mmmx -msse -msse2 -msse3 -mssse3 -mcx16 -msahf -mmovbe -maes -mpclmul -mpopcnt -mabm -mfma -mbmi -mbmi2 -mavx -mavx2 -msse4.2 -msse4.1 -mlzcnt -mrtm -mhle -mrdrnd -mf16c -mfsgsbase -mrdseed -mprfchw -madx -mfxsr -mxsave -mxsaveopt -mavx512f -mavx512cd -mclflushopt -mxsavec -mxsaves -mavx512dq -mavx512bw -mclwb --param l1-cache-size=32 --param l1-cache-line-size=64 --param l2-cache-size=33792 -mtune=generic" \
-    && python3 -m pip install --no-deps --ignore-installed ./signac-v1.0.0 \
-    && rm -rf signac-v1.0.0 \
-    && rm signac-v1.0.0.tar.gz \
+    && python3 -m pip install --no-deps --ignore-installed ./signac-v1.1.0 \
+    && rm -rf signac-v1.1.0 \
+    && rm signac-v1.1.0.tar.gz \
     || exit 1
 
 RUN curl -sSLO https://glotzerlab.engin.umich.edu/Downloads/signac-flow/signac-flow-v0.7.1.tar.gz \
@@ -235,18 +235,18 @@ RUN curl -sSLO https://glotzerlab.engin.umich.edu/Downloads/signac-flow/signac-f
     && rm signac-flow-v0.7.1.tar.gz \
     || exit 1
 
-RUN curl -sSLO https://glotzerlab.engin.umich.edu/Downloads/hoomd/hoomd-v2.5.2.tar.gz \
-    && echo "0822b944cb667ab8068b482022c71094762e5cba75964c125bbd54dd5a902b81  hoomd-v2.5.2.tar.gz" | sha256sum -c - \
-    && tar -xzf hoomd-v2.5.2.tar.gz -C . \
-    && cd hoomd-v2.5.2 \
+RUN curl -sSLO https://glotzerlab.engin.umich.edu/Downloads/hoomd/hoomd-v2.6.0.tar.gz \
+    && echo "f926b2d39cf58916794edbf4c619d0542a9b1e66b6c6a1b6a01b70f5617ec728  hoomd-v2.6.0.tar.gz" | sha256sum -c - \
+    && tar -xzf hoomd-v2.6.0.tar.gz -C . \
+    && cd hoomd-v2.6.0 \
     && mkdir build \
     && cd build \
     && export CFLAGS="-march=knl -mmmx -msse -msse2 -msse3 -mssse3 -mcx16 -msahf -mmovbe -maes -mpclmul -mpopcnt -mabm -mfma -mbmi -mbmi2 -mavx -mavx2 -msse4.2 -msse4.1 -mlzcnt -mrtm -mhle -mrdrnd -mf16c -mfsgsbase -mrdseed -mprfchw -madx -mfxsr -mxsave -mxsaveopt -mavx512f -mavx512cd -mclflushopt -mxsavec -mxsaves -mavx512dq -mavx512bw -mclwb --param l1-cache-size=32 --param l1-cache-line-size=64 --param l2-cache-size=33792 -mtune=generic" CXXFLAGS="-march=knl -mmmx -msse -msse2 -msse3 -mssse3 -mcx16 -msahf -mmovbe -maes -mpclmul -mpopcnt -mabm -mfma -mbmi -mbmi2 -mavx -mavx2 -msse4.2 -msse4.1 -mlzcnt -mrtm -mhle -mrdrnd -mf16c -mfsgsbase -mrdseed -mprfchw -madx -mfxsr -mxsave -mxsaveopt -mavx512f -mavx512cd -mclflushopt -mxsavec -mxsaves -mavx512dq -mavx512bw -mclwb --param l1-cache-size=32 --param l1-cache-line-size=64 --param l2-cache-size=33792 -mtune=generic" \
     && cmake ../ -DPYTHON_EXECUTABLE="`which python3`" -DENABLE_CUDA=on -DENABLE_MPI=on -DENABLE_TBB=on -DBUILD_JIT=on -DBUILD_TESTING=off -DENABLE_MPI_CUDA=off -DCMAKE_INSTALL_PREFIX=`python3 -c "import site; print(site.getsitepackages()[0])"` \
     && make install -j10 \
     && cd ../../ \
-    && rm -rf /root/hoomd-v2.5.2 \
-    && rm hoomd-v2.5.2.tar.gz \
+    && rm -rf /root/hoomd-v2.6.0 \
+    && rm hoomd-v2.6.0.tar.gz \
     || exit 1
 
 
