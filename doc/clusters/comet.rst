@@ -4,16 +4,14 @@ Comet (SDSC)
 `Comet <https://www.sdsc.edu/support/user_guides/comet.html>`_ is an HPC cluster at SDSC with GPU and CPU nodes.
 Apply for resources on Comet through the `XSEDE <https://www.xsede.org/>`_ program.
 
-The **glotzerlab-software** container is large, store it in your scratch directory::
+The **glotzerlab-software** image is large, store it in your scratch directory::
 
     ▶ cd /oasis/scratch/comet/$USER/temp_project
 
-Pull the container with support for Comet::
+Download the image with support for Comet::
 
     ▶ module load singularity
-    ▶ singularity pull --name "software.simg" shub://glotzerlab/software:comet
-    Progress |===================================| 100.0%
-    Done. Container is at: software.simg
+    ▶ curl -o software.simg https://glotzerlab.engin.umich.edu/downloads/glotzerlab/software-comet.simg
 
 Use the following commands in your job scripts or interactively to execute software inside the container:
 

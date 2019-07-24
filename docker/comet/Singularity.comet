@@ -1,3 +1,0 @@
-BootStrap: docker
-From: glotzerlab/software:2019.07-haswell-cuda9-mlx-openmpi1.8.4
-

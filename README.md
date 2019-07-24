@@ -59,12 +59,12 @@ prior to deploying them on the docker and singularity hubs.
 
 ## Singularity
 
-Singularity's docker pull support is flaky. ``build.sh`` generates a ``Singulartiy`` file for each cluster for
-[singularity hub](https://www.singularity-hub.org/) to build. Each just pulls from the docker image that ``build.sh``
-produces, so one must ``docker push`` before ``git push``, or the singularity build will fail.
+Singularity's docker pull support is flaky. ``build.sh`` generates a ``Singulartiy`` image file for each cluster using
+docker2singularity and stores them in ``/nfs/turbo/glotzer/containers/glotzerlab``. ``sync.sh`` uploads these to
+https://glotzerlab.engin.umich.edu/downloads/glotzerlab for distribution.
 
-Previous builds are not frozen on singularity hub. Users are strongly encouraged to use the latest images, but sometimes
-there is reason to delay updating. If users need a previous image, they can build it from the archive on Docker hub.
+Previous builds are not available for download. Users are strongly encouraged to use the latest images. If users need a
+previous image, they can build it from the archive on Docker hub.
 
 ## Benchmarking
 

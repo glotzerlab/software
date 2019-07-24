@@ -1,2 +1,0 @@
-BootStrap: docker
-From: glotzerlab/software:2018.09-cuda8

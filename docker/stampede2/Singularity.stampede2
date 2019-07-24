@@ -1,3 +1,0 @@
-BootStrap: docker
-From: glotzerlab/software:2019.07-skylakex-cuda9-hfi1-mvapich2.3
-

@@ -3,7 +3,7 @@ Flux (UMich)
 
 `Flux <https://arc-ts.umich.edu/flux/>`_ is the University of Michigan campus cluster.
 
-The **glotzerlab-software** container is large, store it in your scratch directory::
+The **glotzerlab-software** image is large, store it in your scratch directory::
 
     ▶ cd /scratch/your-account/$USER
 
@@ -11,11 +11,9 @@ The **glotzerlab-software** container is large, store it in your scratch directo
 
     replace ``your-account`` with your flux account name
 
-Pull the container with support for Flux::
+Download the image with support for Flux::
 
-    ▶ singularity pull --name "software.simg" shub://glotzerlab/software:flux
-    Progress |===================================| 100.0%
-    Done. Container is at: software.simg
+    ▶ curl -o software.simg https://glotzerlab.engin.umich.edu/downloads/glotzerlab/software-flux.simg
 
 Use the following commands in your job scripts or interactively to execute software inside the container:
 

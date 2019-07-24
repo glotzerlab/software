@@ -24,17 +24,16 @@ If you already have a clone, update it::
 Per OLCF policies, you should install your software in NFS under ``/ccs/proj/``. Set the installation root directory to
 ``/ccs/proj/your-project/glotzerlab-software`` to share a single software installation with your project.
 Include your username in the directory name (e.g. ``/ccs/proj/your-project/glotzerlab-software-$USER}``)
-to install a user-specific set of software. The rest of this document will refer to this
-root directory as ``${GLOTZERLAB_SOFTWARE_ROOT}``. You should replace this variable with the location you choose.
+to install a user-specific set of software.
 
 Build the software environment and install it into the root::
 
-    ▶ script/summit/install.sh ${GLOTZERLAB_SOFTWARE_ROOT}
+    ▶ script/summit/install.sh /ccs/proj/your-project/glotzerlab-software
     ... compiling software will take several minutes ...
 
 Activate the environment with::
 
-    ▶ source ${GLOTZERLAB_SOFTWARE_ROOT}/environment.sh
+    ▶ source /ccs/proj/your-project/glotzerlab-software/environment.sh
 
 The summit environment is intended to execute HOOMD simulations. Compared to the containerized environments,
 the following packages are missing because they do not yet support the ppc64le architecture:
@@ -57,7 +56,7 @@ The following packages are missing because we have not yet tested these on summi
 The summit environment is a `python3 venv <https://docs.python.org/3/library/venv.html>`_. You may extend it with
 additional python packages using ``python3 -m pip install``::
 
-    ▶ source ${GLOTZERLAB_SOFTWARE_ROOT}/environment.sh
+    ▶ source /ccs/proj/your-project/glotzerlab-software/environment.sh
     ▶ python3 -m pip install package
 
 .. note::
@@ -66,7 +65,7 @@ additional python packages using ``python3 -m pip install``::
 
 Use the following commands in your job scripts or interactively to execute software inside the container::
 
-    source ${GLOTZERLAB_SOFTWARE_ROOT}/environment.sh
+    source /ccs/proj/your-project/glotzerlab-software/environment.sh
     jsrun <jsrun options> command arguments
 
 .. note::

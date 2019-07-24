@@ -6,8 +6,6 @@ set -e
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 OUTPUT=`mktemp -d -t singularity.XXXXXXX`
 
-mkdir -p /tmp/
-
 cp $DIR/test/*.py $DIR/docker/nompi
 docker build $DIR/docker/nompi \
              -t software/vislab

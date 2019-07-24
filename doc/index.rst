@@ -13,15 +13,13 @@ root access.
 Quick start
 ===========
 
-First, pull the **glotzerlab/software** image::
+First, download the **glotzerlab/software** image::
 
-    ▶ singularity pull --name "software.simg" shub://glotzerlab/software
-    Progress |===================================| 100.0%
-    Done. Container is at: software.simg
+    ▶ curl -o software.simg https://glotzerlab.engin.umich.edu/downloads/glotzerlab/software-nompi.simg
 
 .. note::
 
-    On HPC clusters, pull the cluster specific image. See :doc:`cluster` for details.
+    On HPC clusters, download the cluster specific image. See :doc:`cluster` for details.
 
 **singularity exec** executes software from inside the container::
 
@@ -61,13 +59,10 @@ Add the ``--nv`` option to **enable NVIDIA GPUs** inside the container::
     HOOMD-blue is running on the following GPU(s):
      [0]          Quadro GP100  56 SM_6.0 @ 1.44 GHz, 16278 MiB DRAM
 
-**glotzerlab-software** :doc:`updates monthly <changes>` with the latest versions of included software. Delete your existing image and
-pull the latest image to update::
+**glotzerlab-software** :doc:`updates monthly <changes>` with the latest versions of included software.
+Download the latest image to update::
 
-    ▶ rm software.simg
-    ▶ singularity pull --name "software.simg" shub://glotzerlab/software
-    Progress |===================================| 100.0%
-    Done. Container is at: software.simg
+    ▶ curl -o software.simg https://glotzerlab.engin.umich.edu/downloads/glotzerlab/software-nompi.simg
 
 .. seealso::
 

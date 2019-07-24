@@ -2,8 +2,11 @@
 Change log
 ==========
 
+2019
+----
+
 2019.07
--------
++++++++
 
 *Software updates:*
 
@@ -14,7 +17,7 @@ Change log
 * siganc v1.1.0
 
 2019.05
--------
++++++++
 
 *Software updates:*
 
@@ -24,7 +27,7 @@ Change log
 * signac-flow v0.7.1
 
 2019.03
--------
++++++++
 
 *Software updates:*
 
@@ -40,7 +43,7 @@ Change log
 * embree 3.5.2
 
 2019.02
--------
++++++++
 
 *Software updates:*
 
@@ -60,7 +63,7 @@ Change log
 * Stampede2 multi-node MPI now works
 
 2019.01
--------
++++++++
 
 *Software updates:*
 
@@ -69,8 +72,11 @@ Change log
 * plato v1.4.0
 * signac-flow v0.6.4
 
+2018
+----
+
 2018.12
--------
++++++++
 
 *Software updates:*
 
@@ -85,7 +91,7 @@ Change log
 * Added Summit build scripts
 
 2018.11
--------
++++++++
 
 *Software updates:*
 
@@ -98,7 +104,7 @@ Change log
 * signac v0.9.4
 
 2018.10
--------
++++++++
 
 *Software updates:*
 
@@ -108,7 +114,7 @@ Change log
 * HOOMD-blue v2.3.5
 
 2018.09
--------
++++++++
 
 *Changes:*
 
@@ -123,7 +129,7 @@ Change log
 * Signac-flow v0.6.3
 
 2018.08
--------
++++++++
 
 *Software updates:*
 
@@ -132,7 +138,7 @@ Change log
 * HOOMD-blue v2.3.4
 
 2018.07
--------
++++++++
 
 Added:
 
@@ -146,7 +152,7 @@ Added:
 * Signac-flow v0.6.1
 
 2018.06
--------
++++++++
 
 Added:
 
@@ -173,7 +179,7 @@ Added:
 * Signac-flow v0.6.0
 
 2018.04
--------
++++++++
 
 *Changes:*
 
@@ -187,7 +193,7 @@ Added:
 * HOOMD-blue v2.3.0
 
 2018.03
--------
++++++++
 
 The initial release includes:
 

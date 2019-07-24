@@ -4,21 +4,14 @@ Bridges (PSC)
 `Bridges <https://psc.edu/resources/computing/bridges>`_ is an HPC cluster at PSC with GPU and CPU nodes.
 Apply for resources on Bridges through the `XSEDE <https://www.xsede.org/>`_ program.
 
-The **glotzerlab-software** container is large, store it in your scratch directory::
+The **glotzerlab-software** image is large, store it in your scratch directory::
 
     ▶ cd $SCRATCH
 
-Pull the container with support for Bridges::
+Download the image with support for Bridges::
 
     ▶ module load singularity/2.6.0
-    ▶ singularity pull --name "software.simg" shub://glotzerlab/software:bridges
-    Progress |===================================| 100.0%
-    Done. Container is at: software.simg
-
-.. warning::
-
-    Use ``singularity`` 2.6.0, **not the default 3.0**. Singularity 3.0 will not execute **glotzerlab-software**
-    images correctly.
+    ▶ curl -o software.simg https://glotzerlab.engin.umich.edu/downloads/glotzerlab/software-bridges.simg
 
 Use the following commands in your job scripts or interactively to execute software inside the container:
 
