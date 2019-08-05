@@ -30,20 +30,23 @@ shas['SCIPY_SHA'] = '51a2424c8ed80e60bdb9a896806e7adaf24a58253b326fbad10f80a6d06
 repo_version['fresnel']     = versions['FRESNEL_VERSION']     = 'v0.9.0'
 shas['FRESNEL_SHA'] = '8f3d49bbb0c8410772f9d5a997b77b9546d512b8fba01ce5604dbf2b1499dd4e'
 
-repo_version['freud']       = versions['FREUD_VERSION']       = 'v1.2.0'
-shas['FREUD_SHA'] = 'd5569f044d35573e5e9a2fb6864331a94cb4a2275bf6ecf3a175171aa4687c38'
+repo_version['freud']       = versions['FREUD_VERSION']       = 'v1.2.1'
+shas['FREUD_SHA'] = '4234ba0304742a8a2dd70df0663c23485c9cdd415789d34a434a76c116212d2e'
 
-repo_version['gsd']         = versions['GSD_VERSION']         = 'v1.7.0'
-shas['GSD_SHA'] = '6c496bf6c64bada82dfd4524dd16d273523f2a4ea93c3a2608ff30bd25076a85'
+repo_version['garnett']     = versions['GARNETT_VERSION']     = 'v0.4.1'
+shas['GARNETT_SHA'] = '8e4860f676f92bc252d8ebc915c0ba6aeb35156f0105a685aebeb19ae54955b4'
+
+repo_version['gsd']         = versions['GSD_VERSION']         = 'v1.8.0'
+shas['GSD_SHA'] = 'f6a99e86198a2f01e9a33b6d5eafed5ed82fa7084e1661316ac06a660e2f809d'
 
 repo_version['hoomd-blue']  = versions['HOOMD_VERSION']       = 'v2.6.0'
 shas['HOOMD_SHA'] = 'f926b2d39cf58916794edbf4c619d0542a9b1e66b6c6a1b6a01b70f5617ec728'
 
-repo_version['libgetar']    = versions['LIBGETAR_VERSION']    = 'v0.7.0'
-shas['LIBGETAR_SHA'] = '2a33809981b7a99c856ca60a1a7b9b1a0b3978fd8315ab3ab07b7b279a7c55e7'
+repo_version['libgetar']    = versions['LIBGETAR_VERSION']    = 'v1.0.1'
+shas['LIBGETAR_SHA'] = '0a438dc8336103158fc4dbb7ebcbc011279d7a8ae134824dda5946e6b9042039'
 
-repo_version['pythia']      = versions['PYTHIA_VERSION']      = 'v0.2.4'
-shas['PYTHIA_SHA'] = 'cebc1033759f518aa4f9c41d4660c7748b646f6f6117be9e4dcb9e53ef2f0251'
+repo_version['pythia']      = versions['PYTHIA_VERSION']      = 'v0.2.5'
+shas['PYTHIA_SHA'] = '5dfe1efeb7343fbfc7260dc6f05a8ee17908add288c67094d3740c7056627140'
 
 repo_version['rowan']       = versions['ROWAN_VERSION']       = 'v1.2.1'
 shas['ROWAN_SHA'] = 'c59ad2dded288e5626db19869ed2915852734520347f7e0afd9dd08171d4541b'
@@ -51,8 +54,8 @@ shas['ROWAN_SHA'] = 'c59ad2dded288e5626db19869ed2915852734520347f7e0afd9dd08171d
 repo_version['plato']       = versions['PLATO_VERSION']       = 'v1.6.0'
 shas['PLATO_SHA'] = 'd7282e2b7a8cd641e41a845f1a7075031b821440ab1ea9ad11a0dc991b86f91d'
 
-repo_version['signac']      = versions['SIGNAC_VERSION']      = 'v1.1.0'
-shas['SIGNAC_SHA'] = '580ecc9586d92f2049ce6d1f3175265ae00731decc0d415105556beac72b388c'
+repo_version['signac']      = versions['SIGNAC_VERSION']      = 'v1.2.0'
+shas['SIGNAC_SHA'] = '38591f2c0dcb77d28dfeb7906b2c25bfc3df39d67486ff819872ba69be4fa187'
 
 repo_version['signac-flow'] = versions['SIGNAC_FLOW_VERSION'] = 'v0.7.1'
 shas['SIGNAC_FLOW_SHA'] = '970ea990d8c86143161670e7c260a66357323a55ee8a5b8d8d30fe00386a929c'

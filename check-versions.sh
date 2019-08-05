@@ -1,6 +1,6 @@
 #!/bin/bash
 
-packages="fresnel freud gsd hoomd-blue libgetar pythia rowan plato signac signac-flow"
+packages="fresnel freud garnett gsd hoomd-blue libgetar pythia rowan plato signac signac-flow"
 
 output="package git-version pkgver needs-update\n"
 for package in ${packages}

@@ -5,6 +5,21 @@ Change log
 2019
 ----
 
+2019.08
++++++++
+
+*New software:*
+
+* garnett v0.4.1
+
+*Software updates:*
+
+* freud v1.2.1
+* gsd v1.8.0
+* libgetar v1.0.1
+* pythia v0.2.5
+* siganc v1.2.0
+
 2019.07
 +++++++
 

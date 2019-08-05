@@ -30,6 +30,16 @@
     || exit 1
 {% endif %}
 
+{{ RUN }} curl -sSLO https://glotzerlab.engin.umich.edu/downloads/garnett/garnett-{{ GARNETT_VERSION }}.tar.gz \
+    && echo "{{ GARNETT_SHA }}  garnett-{{ GARNETT_VERSION }}.tar.gz" | sha256sum -c - \
+    && tar -xzf garnett-{{ GARNETT_VERSION }}.tar.gz -C . \
+    && rm -f garnett-{{ GARNETT_VERSION }}/*.toml \
+    && export CFLAGS="{{CFLAGS}}" CXXFLAGS="{{CFLAGS}}" \
+    && python3 -m pip install --no-deps --ignore-installed ./garnett-{{ GARNETT_VERSION }} \
+    && rm -rf garnett-{{ GARNETT_VERSION }} \
+    && rm garnett-{{ GARNETT_VERSION }}.tar.gz \
+    || exit 1
+
 {{ RUN }} curl -sSLO https://glotzerlab.engin.umich.edu/Downloads/gsd/gsd-{{ GSD_VERSION }}.tar.gz \
     && echo "{{ GSD_SHA }}  gsd-{{ GSD_VERSION }}.tar.gz" | sha256sum -c - \
     && tar -xzf gsd-{{ GSD_VERSION }}.tar.gz -C . \

@@ -70,40 +70,50 @@ curl -sSLO https://github.com/scipy/scipy/releases/download/v1.2.0/scipy-1.2.0.t
 
 
 
- curl -sSLO https://glotzerlab.engin.umich.edu/Downloads/freud/freud-v1.2.0.tar.gz \
-    && echo "d5569f044d35573e5e9a2fb6864331a94cb4a2275bf6ecf3a175171aa4687c38  freud-v1.2.0.tar.gz" | sha256sum -c - \
-    && tar -xzf freud-v1.2.0.tar.gz -C . \
-    && rm -f freud-v1.2.0/*.toml \
+ curl -sSLO https://glotzerlab.engin.umich.edu/Downloads/freud/freud-v1.2.1.tar.gz \
+    && echo "4234ba0304742a8a2dd70df0663c23485c9cdd415789d34a434a76c116212d2e  freud-v1.2.1.tar.gz" | sha256sum -c - \
+    && tar -xzf freud-v1.2.1.tar.gz -C . \
+    && rm -f freud-v1.2.1/*.toml \
     && export CFLAGS="-mcpu=power9 -mtune=power9" CXXFLAGS="-mcpu=power9 -mtune=power9" \
-    && python3 -m pip install --no-deps --ignore-installed ./freud-v1.2.0 \
-    && rm -rf freud-v1.2.0 \
-    && rm freud-v1.2.0.tar.gz \
+    && python3 -m pip install --no-deps --ignore-installed ./freud-v1.2.1 \
+    && rm -rf freud-v1.2.1 \
+    && rm freud-v1.2.1.tar.gz \
     || exit 1
 
 
 
- curl -sSLO https://glotzerlab.engin.umich.edu/Downloads/gsd/gsd-v1.7.0.tar.gz \
-    && echo "6c496bf6c64bada82dfd4524dd16d273523f2a4ea93c3a2608ff30bd25076a85  gsd-v1.7.0.tar.gz" | sha256sum -c - \
-    && tar -xzf gsd-v1.7.0.tar.gz -C . \
-    && cd gsd-v1.7.0 \
+ curl -sSLO https://glotzerlab.engin.umich.edu/downloads/garnett/garnett-v0.4.1.tar.gz \
+    && echo "8e4860f676f92bc252d8ebc915c0ba6aeb35156f0105a685aebeb19ae54955b4  garnett-v0.4.1.tar.gz" | sha256sum -c - \
+    && tar -xzf garnett-v0.4.1.tar.gz -C . \
+    && rm -f garnett-v0.4.1/*.toml \
+    && export CFLAGS="-mcpu=power9 -mtune=power9" CXXFLAGS="-mcpu=power9 -mtune=power9" \
+    && python3 -m pip install --no-deps --ignore-installed ./garnett-v0.4.1 \
+    && rm -rf garnett-v0.4.1 \
+    && rm garnett-v0.4.1.tar.gz \
+    || exit 1
+
+ curl -sSLO https://glotzerlab.engin.umich.edu/Downloads/gsd/gsd-v1.8.0.tar.gz \
+    && echo "f6a99e86198a2f01e9a33b6d5eafed5ed82fa7084e1661316ac06a660e2f809d  gsd-v1.8.0.tar.gz" | sha256sum -c - \
+    && tar -xzf gsd-v1.8.0.tar.gz -C . \
+    && cd gsd-v1.8.0 \
     && mkdir build \
     && cd build \
     && export CFLAGS="-mcpu=power9 -mtune=power9" CXXFLAGS="-mcpu=power9 -mtune=power9" \
     && cmake ../ -DPYTHON_EXECUTABLE="`which python3`" -DCMAKE_INSTALL_PREFIX=`python3 -c "import site; print(site.getsitepackages()[0])"` \
     && make install -j20 \
     && cd ../../ \
-    && rm -rf gsd-v1.7.0 \
-    && rm gsd-v1.7.0.tar.gz \
+    && rm -rf gsd-v1.8.0 \
+    && rm gsd-v1.8.0.tar.gz \
     || exit 1
 
- curl -sSLO https://glotzerlab.engin.umich.edu/Downloads/libgetar/libgetar-v0.7.0.tar.gz \
-    && echo "2a33809981b7a99c856ca60a1a7b9b1a0b3978fd8315ab3ab07b7b279a7c55e7  libgetar-v0.7.0.tar.gz" | sha256sum -c - \
-    && tar -xzf libgetar-v0.7.0.tar.gz -C . \
-    && rm -f libgetar-v0.7.0/*.toml \
+ curl -sSLO https://glotzerlab.engin.umich.edu/Downloads/libgetar/libgetar-v1.0.1.tar.gz \
+    && echo "0a438dc8336103158fc4dbb7ebcbc011279d7a8ae134824dda5946e6b9042039  libgetar-v1.0.1.tar.gz" | sha256sum -c - \
+    && tar -xzf libgetar-v1.0.1.tar.gz -C . \
+    && rm -f libgetar-v1.0.1/*.toml \
     && export CFLAGS="-mcpu=power9 -mtune=power9" CXXFLAGS="-mcpu=power9 -mtune=power9" \
-    && python3 -m pip install --no-deps --ignore-installed ./libgetar-v0.7.0 \
-    && rm -rf libgetar-v0.7.0 \
-    && rm libgetar-v0.7.0.tar.gz \
+    && python3 -m pip install --no-deps --ignore-installed ./libgetar-v1.0.1 \
+    && rm -rf libgetar-v1.0.1 \
+    && rm libgetar-v1.0.1.tar.gz \
     || exit 1
 
  curl -sSLO https://glotzerlab.engin.umich.edu/Downloads/rowan/rowan-v1.2.1.tar.gz \
@@ -124,22 +134,22 @@ curl -sSLO https://github.com/scipy/scipy/releases/download/v1.2.0/scipy-1.2.0.t
     && rm plato-v1.6.0.tar.gz \
     || exit 1
 
- curl -sSLO https://glotzerlab.engin.umich.edu/Downloads/pythia/pythia-v0.2.4.tar.gz \
-    && echo "cebc1033759f518aa4f9c41d4660c7748b646f6f6117be9e4dcb9e53ef2f0251  pythia-v0.2.4.tar.gz" | sha256sum -c - \
-    && tar -xzf pythia-v0.2.4.tar.gz -C . \
+ curl -sSLO https://glotzerlab.engin.umich.edu/Downloads/pythia/pythia-v0.2.5.tar.gz \
+    && echo "5dfe1efeb7343fbfc7260dc6f05a8ee17908add288c67094d3740c7056627140  pythia-v0.2.5.tar.gz" | sha256sum -c - \
+    && tar -xzf pythia-v0.2.5.tar.gz -C . \
     && export CFLAGS="-mcpu=power9 -mtune=power9" CXXFLAGS="-mcpu=power9 -mtune=power9" \
-    && python3 -m pip install --no-deps --ignore-installed ./pythia-v0.2.4 \
-    && rm -rf pythia-v0.2.4 \
-    && rm pythia-v0.2.4.tar.gz \
+    && python3 -m pip install --no-deps --ignore-installed ./pythia-v0.2.5 \
+    && rm -rf pythia-v0.2.5 \
+    && rm pythia-v0.2.5.tar.gz \
     || exit 1
 
- curl -sSLO https://glotzerlab.engin.umich.edu/Downloads/signac/signac-v1.1.0.tar.gz \
-    && echo "580ecc9586d92f2049ce6d1f3175265ae00731decc0d415105556beac72b388c  signac-v1.1.0.tar.gz" | sha256sum -c - \
-    && tar -xzf signac-v1.1.0.tar.gz -C . \
+ curl -sSLO https://glotzerlab.engin.umich.edu/Downloads/signac/signac-v1.2.0.tar.gz \
+    && echo "38591f2c0dcb77d28dfeb7906b2c25bfc3df39d67486ff819872ba69be4fa187  signac-v1.2.0.tar.gz" | sha256sum -c - \
+    && tar -xzf signac-v1.2.0.tar.gz -C . \
     && export CFLAGS="-mcpu=power9 -mtune=power9" CXXFLAGS="-mcpu=power9 -mtune=power9" \
-    && python3 -m pip install --no-deps --ignore-installed ./signac-v1.1.0 \
-    && rm -rf signac-v1.1.0 \
-    && rm signac-v1.1.0.tar.gz \
+    && python3 -m pip install --no-deps --ignore-installed ./signac-v1.2.0 \
+    && rm -rf signac-v1.2.0 \
+    && rm signac-v1.2.0.tar.gz \
     || exit 1
 
  curl -sSLO https://glotzerlab.engin.umich.edu/Downloads/signac-flow/signac-flow-v0.7.1.tar.gz \
