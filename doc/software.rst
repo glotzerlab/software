@@ -3,12 +3,13 @@ Installed software
 
 **glotzerlab-software** includes the following installed inside the container.
 
-* `Ubuntu 16.04 <https://www.ubuntu.com/>`_
-* `python 3.5 <https://www.python.org/>`_
+* `Ubuntu 16.04 <https://www.ubuntu.com/>`_ (18.04 on :doc:`clusters/greatlakes`)
+* `python 3.5 <https://www.python.org/>`_ (3.6 on :doc:`clusters/greatlakes`)
 * `Glotzer lab <http://glotzerlab.engin.umich.edu/home/>`_ open-source software:
 
     * `Fresnel <https://fresnel.readthedocs.io>`_
     * `Freud <https://freud.readthedocs.io>`_
+    * `garnett <https://garnett.readthedocs.io>`_
     * `GSD <https://gsd.readthedocs.io>`_
     * `HOOMD-blue <http://glotzerlab.engin.umich.edu/hoomd-blue/>`_
     * `libgetar <https://libgetar.readthedocs.io>`_
@@ -43,7 +44,9 @@ Installed software
     * `embree <https://embree.github.io/>`_
     * `git <https://git-scm.com/>`_
     * `LLVM/clang <https://llvm.org/>`_
+    * `pybind11 <https://pybind11.readthedocs.io>`_
     * `pytest <https://pytest.readthedocs.io>`_
+    * `qhull <http://www.qhull.org/>`_
     * `sqlite3 <https://sqlite.org/index.html>`_
     * `sphinx <http://www.sphinx-doc.org>`_
     * `TBB <https://www.threadingbuildingblocks.org/>`_

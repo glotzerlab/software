@@ -12,5 +12,6 @@ cluster, contact the :doc:`user community <community>` for suggestions.
     clusters/bridges
     clusters/comet
     clusters/flux
+    clusters/greatlakes
     clusters/stampede2
     clusters/summit
