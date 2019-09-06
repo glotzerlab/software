@@ -17,8 +17,11 @@ shas['EMBREE_SHA'] = '76e9c619e11c2baace2935b14f1d6ee8ff085fd12c72b7d62d6fcb9a4f
 versions['OSU_MICROBENCHMARK_VERSION'] ='5.4.1'
 shas['OSU_MICROBENCHMARK_SHA'] ='e90cb683a01744377f77d420de401431242593d8376b25b120950266e140e83c'
 
-versions['MPI4PY_VERSION'] = '3.0.0'
-shas['MPI4PY_SHA'] = 'b457b02d85bdd9a4775a097fac5234a20397b43e073f14d9e29b6cd78c68efd7'
+versions['MPI4PY_VERSION'] = '3.0.2'
+versions['PYBIND11_VERSION'] = '2.3.0'
+versions['QHULL_VERSION'] = '2019.1'
+versions['UCX_VERSION'] = '1.6.0'
+versions['PMIX_VERSION'] = '2.2.3'
 
 # Summit-only dependencies
 versions['TBB_VERSION'] = '2019_U8'
@@ -82,6 +85,7 @@ if __name__ == '__main__':
 
     write('docker/Dockerfile', [base_template],
           FROM='nvidia/cuda:9.2-devel-ubuntu16.04',
+          ubuntu_version=16,
           ENABLE_MPI='off',
           MAKEJOBS=10,
           **versions,
@@ -89,6 +93,7 @@ if __name__ == '__main__':
 
     write('docker/nompi/Dockerfile', [base_template, glotzerlab_software_template, finalize_template, test_template],
           FROM='nvidia/cuda:9.2-devel-ubuntu16.04',
+          ubuntu_version=16,
           ENABLE_MPI='off',
           MAKEJOBS=10,
           **versions,
@@ -105,11 +110,25 @@ if __name__ == '__main__':
           **versions,
           **shas)
 
+    write('docker/greatlakes/Dockerfile', [base_template, ib_mlx_template, openmpi_template, glotzerlab_software_template, finalize_template],
+          FROM='nvidia/cuda:10.1-devel-ubuntu18.04',
+          ubuntu_version=18,
+          system='greatlakes',
+          OPENMPI_VERSION='4.0',
+          OPENMPI_PATCHLEVEL='1',
+          OPENMPI_SHA = 'cce7b6d20522849301727f81282201d609553103ac0b09162cf28d102efb9709',
+          ENABLE_MPI='on',
+          MAKEJOBS=10,
+          CFLAGS='-march=skylake-avx512 -mmmx -msse -msse2 -msse3 -mssse3 -mcx16 -msahf -mmovbe -maes -mpclmul -mpopcnt -mabm -mfma -mbmi -mbmi2 -mavx -mavx2 -msse4.2 -msse4.1 -mlzcnt -mrtm -mhle -mrdrnd -mf16c -mfsgsbase -mrdseed -mprfchw -madx -mfxsr -mxsave -mxsaveopt -mavx512f -mavx512cd -mclflushopt -mxsavec -mxsaves -mavx512dq -mavx512bw -mavx512vl -mclwb -mpku --param l1-cache-size=32 --param l1-cache-line-size=64 --param l2-cache-size=25344 -mtune=skylake-avx512',
+          **versions,
+          **shas)
+
     # see https://stackoverflow.com/questions/5470257/how-to-see-which-flags-march-native-will-activate
     # for information on obtaining CFLAGS settings for specific machines
     # gcc -'###' -E - -march=native 2>&1 | sed -r '/cc1/!d;s/(")|(^.* - )|( -mno-[^\ ]+)//g'
     write('docker/comet/Dockerfile', [base_template, ib_mlx_template, openmpi_template, glotzerlab_software_template, finalize_template],
           FROM='nvidia/cuda:9.2-devel-ubuntu16.04',
+          ubuntu_version=16,
           system='comet',
           OPENMPI_VERSION='1.8',
           OPENMPI_PATCHLEVEL='4',
@@ -122,6 +141,7 @@ if __name__ == '__main__':
 
     write('docker/bridges/Dockerfile', [base_template, ib_hfi1_template, openmpi_template, glotzerlab_software_template, finalize_template],
           FROM='nvidia/cuda:9.2-devel-ubuntu16.04',
+          ubuntu_version=16,
           system='bridges',
           OPENMPI_VERSION='2.1',
           OPENMPI_PATCHLEVEL='2',
@@ -135,6 +155,7 @@ if __name__ == '__main__':
     # TODO: update cflags after switching to newer compiler
     write('docker/stampede2/Dockerfile', [base_template, ib_hfi1_stampede2_template, mvapich2_template, glotzerlab_software_template, finalize_template],
           FROM='nvidia/cuda:9.2-devel-ubuntu16.04',
+          ubuntu_version=16,
           system='stampede2',
           MVAPICH_VERSION='2.3',
           MVAPICH_PATCHLEVEL='',

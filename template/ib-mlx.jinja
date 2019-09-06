@@ -1,5 +1,45 @@
 
 
+{% if ubuntu_version == 18 %}
+RUN apt-get update && apt-get install -y --no-install-recommends \
+  dkms \
+  infiniband-diags \
+  ibacm \
+  mstflint \
+  libibmad-dev \
+  libibumad-dev \
+  opensm \
+  srptools \
+  ibutils \
+  ibverbs-utils \
+  rdmacm-utils \
+  perftest \
+  numactl \
+  libnuma-dev \
+  libnl-3-200 \
+  libnl-route-3-200 \
+  libnl-route-3-dev \
+  libnl-utils \
+  && rm -rf /var/lib/apt/lists/*
+
+{% if system == 'greatlakes' %}
+RUN rm -f /usr/lib/x86_64-linux-gnu/libibverbs* /usr/lib/x86_64-linux-gnu/librdmacm* /lib/x86_64-linux-gnu/libnl*
+COPY mlx4.driver mlx5.driver rxe.driver /etc/libibverbs.d/
+COPY libmlx4-rdmav2.so libmlx5-rdmav2.so libmlx5.so librxe-rdmav2.so /usr/lib/
+COPY librdmacm.so /usr/lib/x86_64-linux-gnu/librdmacm.so.1.1.20
+RUN ln -s /usr/lib/x86_64-linux-gnu/librdmacm.so.1.1.20 /usr/lib/x86_64-linux-gnu/librdmacm.so && \
+    ln -s /usr/lib/x86_64-linux-gnu/librdmacm.so.1.1.20 /usr/lib/x86_64-linux-gnu/librdmacm.so.1
+COPY libibverbs.so /usr/lib/x86_64-linux-gnu/libibverbs.so.1.1.20
+RUN ln -s /usr/lib/x86_64-linux-gnu/libibverbs.so.1.1.20 /usr/lib/x86_64-linux-gnu/libibverbs.so && \
+    ln -s /usr/lib/x86_64-linux-gnu/libibverbs.so.1.1.20 /usr/lib/x86_64-linux-gnu/libibverbs.so.1
+COPY libnl-3.so.200 libnl-route-3.so.200 /usr/lib/x86_64-linux-gnu/
+COPY infiniband/ /usr/include/infiniband/
+{% endif %}
+
+{% endif %}
+
+
+{% if ubuntu_version == 16 %}
 # packages needed to support IB on Comet
 # https://github.com/mkandes/naked-singularity/blob/master/definition-files/us/ucsd/sdsc/comet/ubuntu/ubuntu-openmpi.def
 RUN apt-get update && apt-get install -y --no-install-recommends \
@@ -27,3 +67,4 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
   libnl-route-3-dev \
   libnl-utils \
   && rm -rf /var/lib/apt/lists/*
+{% endif %}

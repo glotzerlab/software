@@ -5,6 +5,29 @@ Change log
 2019
 ----
 
+2019.09
++++++++
+
+*Software updates:*
+
+* fresnel v0.10.0
+* freud v1.2.2
+* garnett v0.5.0
+* gsd v1.8.1
+* signac-flow v0.8.0
+
+*Library/OS updates:*
+
+* embree v3.6.1
+* [summit] TBB 2019_U8
+* [summit] scipy v1.3.1
+* [greatlakes] Ubuntu 18.04
+* [greatlakes] Python 3.6
+
+*Supported systems:*
+
+* Added UMich Great Lakes
+
 2019.08
 +++++++
 
