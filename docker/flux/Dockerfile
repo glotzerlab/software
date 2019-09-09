@@ -5,6 +5,52 @@ ENV DEBIAN_FRONTEND=noninteractive
 
 
 
+RUN apt-get update && apt-get install -y --no-install-recommends \
+  clang-5.0 \
+  curl \
+  cython3 \
+  ffmpeg \
+  git \
+  libboost-dev \
+  libedit-dev \
+  libtbb-dev \
+  libsqlite3-dev \
+  llvm-5.0-dev \
+  python3 \
+  python3-dev \
+  python3-h5py \
+  python3-matplotlib \
+  python3-nose \
+  python3-numpy \
+  python3-pandas \
+  python3-pip \
+  python3-pytest \
+  python3-pyqt5 \
+  python3-scipy \
+  python3-sklearn-lib \
+  python3-sklearn-pandas \
+  python3-skimage-lib \
+  python3-setuptools \
+  python3-sphinx \
+  python3-sphinx-rtd-theme \
+  python3-tables \
+  python3-yaml \
+  zlib1g-dev \
+  ca-certificates \
+  && rm -rf /var/lib/apt/lists/* \
+  && pip3 install --no-cache-dir jupyter pillow pyhull deprecation
+
+# install modern cmake
+RUN curl -SL https://github.com/Kitware/CMake/releases/download/v3.15.3/cmake-3.15.3.tar.gz | tar -xzC /root && \
+    cd /root/cmake-3.15.3 && \
+    ./bootstrap && \
+    make && \
+    make install && \
+    cd / && rm -rf /root/cmake-*
+
+# put clang on the path
+ENV PATH=$PATH:/usr/lib/llvm-5.0/bin
+
 
 # prevent python from loading packages from outside the container
 # default empty pythonpath
@@ -53,9 +99,46 @@ RUN mkdir -p /nfs \
 
 
 
+# packages needed to support IB on Comet
+# https://github.com/mkandes/naked-singularity/blob/master/definition-files/us/ucsd/sdsc/comet/ubuntu/ubuntu-openmpi.def
+RUN apt-get update && apt-get install -y --no-install-recommends \
+  dkms \
+  infiniband-diags \
+  libibverbs-dev \
+  ibacm \
+  librdmacm-dev \
+  libmlx4-dev \
+  libmlx5-dev \
+  mstflint \
+  libibcm-dev \
+  libibmad-dev \
+  libibumad-dev \
+  opensm \
+  srptools \
+  ibutils \
+  ibverbs-utils \
+  rdmacm-utils \
+  perftest \
+  numactl \
+  libnuma-dev \
+  libnl-3-200 \
+  libnl-route-3-200 \
+  libnl-route-3-dev \
+  libnl-utils \
+  && rm -rf /var/lib/apt/lists/*
 
 
 
+
+
+RUN curl -sSLO https://www.open-mpi.org/software/ompi/v3.0/downloads/openmpi-3.0.0.tar.bz2 \
+   && echo "f699bff21db0125d8cccfe79518b77641cd83628725a1e1ed3e45633496a82d7  openmpi-3.0.0.tar.bz2" | sha256sum -c - \
+   && tar -xjf openmpi-3.0.0.tar.bz2 -C /root \
+   && cd /root/openmpi-3.0.0 \
+   && ./configure --prefix=/usr \
+   && make all install \
+   && rm -rf /root/openmpi-3.0.0 \
+   && rm /openmpi-3.0.0.tar.bz2
 
 
 

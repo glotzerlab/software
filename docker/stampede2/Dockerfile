@@ -7,7 +7,6 @@ ENV DEBIAN_FRONTEND=noninteractive
 
 RUN apt-get update && apt-get install -y --no-install-recommends \
   clang-5.0 \
-  cmake \
   curl \
   cython3 \
   ffmpeg \
@@ -40,6 +39,14 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
   ca-certificates \
   && rm -rf /var/lib/apt/lists/* \
   && pip3 install --no-cache-dir jupyter pillow pyhull deprecation
+
+# install modern cmake
+RUN curl -SL https://github.com/Kitware/CMake/releases/download/v3.15.3/cmake-3.15.3.tar.gz | tar -xzC /root && \
+    cd /root/cmake-3.15.3 && \
+    ./bootstrap && \
+    make && \
+    make install && \
+    cd / && rm -rf /root/cmake-*
 
 # put clang on the path
 ENV PATH=$PATH:/usr/lib/llvm-5.0/bin
@@ -153,7 +160,6 @@ RUN curl -sSLO http://mvapich.cse.ohio-state.edu/download/mvapich/osu-micro-benc
    && rm /osu-micro-benchmarks-5.4.1.tar.gz
 
 RUN curl -sSLO https://bitbucket.org/mpi4py/mpi4py/downloads/mpi4py-3.0.2.tar.gz \
-    && echo "  mpi4py-3.0.2.tar.gz" | sha256sum -c - \
     && tar -xz -f mpi4py-3.0.2.tar.gz -C /root \
     && cd /root/mpi4py-3.0.2 \
     && python3 -m pip install --no-deps --ignore-installed . \

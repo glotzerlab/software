@@ -13,7 +13,7 @@ try:
     results.write('Freud version     : {}\n'.format(freud.__version__))
 
     # garnett
-    import garnet
+    import garnett
     results.write('garnett version       : {}\n'.format(garnett.__version__))
 
     # GSD

@@ -30,6 +30,9 @@ shas['TBB_SHA'] = '7b1fd8caea14be72ae4175896510bf99c809cd7031306a1917565e6de7382
 versions['SCIPY_VERSION'] = '1.3.1'
 shas['SCIPY_SHA'] = '2643cfb46d97b7797d1dbdb6f3c23fe3402904e3c90e6facfe6a9b98d808c1b5'
 
+# ubuntu 16 only dependencies
+versions['CMAKE_VERSION'] = '3.15.3'
+
 # glotzer lab
 repo_version['fresnel']     = versions['FRESNEL_VERSION']     = 'v0.10.0'
 shas['FRESNEL_SHA'] = '98a6555b4423cd8184a5f6120ee7d5bbb5bd0d5ca70b5f476eb0f12034f4882a'
@@ -101,6 +104,7 @@ if __name__ == '__main__':
 
     write('docker/flux/Dockerfile', [base_template, ib_mlx_template, openmpi_template, glotzerlab_software_template, finalize_template],
           FROM='nvidia/cuda:9.1-devel-ubuntu16.04',
+          ubuntu_version=16,
           system='flux',
           OPENMPI_VERSION='3.0',
           OPENMPI_PATCHLEVEL='0',
