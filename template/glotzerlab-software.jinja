@@ -19,7 +19,7 @@
     && echo "{{ FRESNEL_SHA }}  fresnel-{{ FRESNEL_VERSION }}.tar.gz" | sha256sum -c - \
     && tar -xzf fresnel-{{ FRESNEL_VERSION }}.tar.gz -C . \
     && cd fresnel-{{ FRESNEL_VERSION }} \
-    && mkdir build \
+    && mkdir -p build \
     && cd build \
     && export CFLAGS="{{CFLAGS}}" CXXFLAGS="{{CFLAGS}}" \
     && cmake ../ -DENABLE_EMBREE=on -DENABLE_OPTIX=off -Dembree_DIR=/opt/embree-{{ EMBREE_VERSION }}.x86_64.linux -DCMAKE_INSTALL_PREFIX=`python3 -c "import site; print(site.getsitepackages()[0])"` \
@@ -44,7 +44,7 @@
     && echo "{{ GSD_SHA }}  gsd-{{ GSD_VERSION }}.tar.gz" | sha256sum -c - \
     && tar -xzf gsd-{{ GSD_VERSION }}.tar.gz -C . \
     && cd gsd-{{ GSD_VERSION }} \
-    && mkdir build \
+    && mkdir -p build \
     && cd build \
     && export CFLAGS="{{CFLAGS}}" CXXFLAGS="{{CFLAGS}}" \
     && cmake ../ -DPYTHON_EXECUTABLE="`which python3`" -DCMAKE_INSTALL_PREFIX=`python3 -c "import site; print(site.getsitepackages()[0])"` \
@@ -113,7 +113,7 @@
     && echo "{{ HOOMD_SHA }}  hoomd-{{ HOOMD_VERSION }}.tar.gz" | sha256sum -c - \
     && tar -xzf hoomd-{{ HOOMD_VERSION }}.tar.gz -C . \
     && cd hoomd-{{ HOOMD_VERSION }} \
-    && mkdir build \
+    && mkdir -p build \
     && cd build \
     && export CFLAGS="{{CFLAGS}}" CXXFLAGS="{{CFLAGS}}" \
     && cmake ../ -DPYTHON_EXECUTABLE="`which python3`" -DENABLE_CUDA=on -DENABLE_MPI={{ ENABLE_MPI }} -DENABLE_TBB={{ ENABLE_TBB|default('on') }} -DBUILD_JIT={{ BUILD_JIT|default('on') }} -DBUILD_TESTING=off -DENABLE_MPI_CUDA={{ ENABLE_MPI_CUDA|default('off') }} -DCMAKE_INSTALL_PREFIX=`python3 -c "import site; print(site.getsitepackages()[0])"` \
