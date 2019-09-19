@@ -32,6 +32,7 @@ export CPATH=$ROOT/include:\$CPATH
 export LIBRARY_PATH=$ROOT/lib:\$LIBRARY_PATH
 export CC=\${OLCF_GCC_ROOT}/bin/gcc
 export CXX=\${OLCF_GCC_ROOT}/bin/g++
+export LDSHARED="\${OLCF_GCC_ROOT}/bin/gcc -shared"
 export VIRTUAL_ENV=$ROOT
 EOL
 
