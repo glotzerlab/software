@@ -12,7 +12,6 @@ repo_version = {}
 
 # dependencies
 versions['EMBREE_VERSION'] = '3.6.1'
-shas['EMBREE_SHA'] = '76e9c619e11c2baace2935b14f1d6ee8ff085fd12c72b7d62d6fcb9a4ffaca3e'
 
 versions['OSU_MICROBENCHMARK_VERSION'] ='5.4.1'
 shas['OSU_MICROBENCHMARK_SHA'] ='e90cb683a01744377f77d420de401431242593d8376b25b120950266e140e83c'

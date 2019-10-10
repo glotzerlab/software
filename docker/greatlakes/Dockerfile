@@ -63,7 +63,6 @@ ENV CPATH=/opt/embree-3.6.1.x86_64.linux/include:$CPATH \
     EMBREE3_LINK=/opt/embree-3.6.1.x86_64.linux/lib
 
 RUN curl -sSLO https://github.com/embree/embree/releases/download/v3.6.1/embree-3.6.1.x86_64.linux.tar.gz \
-    && echo "76e9c619e11c2baace2935b14f1d6ee8ff085fd12c72b7d62d6fcb9a4ffaca3e  embree-3.6.1.x86_64.linux.tar.gz" | sha256sum -c - \
     && tar -xzf embree-3.6.1.x86_64.linux.tar.gz -C /opt \
     && rm -rf /opt/embree-3.6.1.x86_64.linux/bin \
     && rm -rf /opt/embree-3.6.1.x86_64.linux/doc \
@@ -197,18 +196,18 @@ RUN curl -sSLO https://glotzerlab.engin.umich.edu/Downloads/freud/freud-v1.2.2.t
     || exit 1
 
 
-RUN curl -sSLO https://glotzerlab.engin.umich.edu/Downloads/fresnel/fresnel-v0.10.0.tar.gz \
-    && echo "98a6555b4423cd8184a5f6120ee7d5bbb5bd0d5ca70b5f476eb0f12034f4882a  fresnel-v0.10.0.tar.gz" | sha256sum -c - \
-    && tar -xzf fresnel-v0.10.0.tar.gz -C . \
-    && cd fresnel-v0.10.0 \
-    && mkdir build \
+RUN curl -sSLO https://glotzerlab.engin.umich.edu/Downloads/fresnel/fresnel-v0.10.1.tar.gz \
+    && echo "2ba1f85f3599f349a7a20d5dcc19a84ea43bb8dd707cad22bbf9f4767ca4b955  fresnel-v0.10.1.tar.gz" | sha256sum -c - \
+    && tar -xzf fresnel-v0.10.1.tar.gz -C . \
+    && cd fresnel-v0.10.1 \
+    && mkdir -p build \
     && cd build \
     && export CFLAGS="-march=skylake-avx512 -mmmx -msse -msse2 -msse3 -mssse3 -mcx16 -msahf -mmovbe -maes -mpclmul -mpopcnt -mabm -mfma -mbmi -mbmi2 -mavx -mavx2 -msse4.2 -msse4.1 -mlzcnt -mrtm -mhle -mrdrnd -mf16c -mfsgsbase -mrdseed -mprfchw -madx -mfxsr -mxsave -mxsaveopt -mavx512f -mavx512cd -mclflushopt -mxsavec -mxsaves -mavx512dq -mavx512bw -mavx512vl -mclwb -mpku --param l1-cache-size=32 --param l1-cache-line-size=64 --param l2-cache-size=25344 -mtune=skylake-avx512" CXXFLAGS="-march=skylake-avx512 -mmmx -msse -msse2 -msse3 -mssse3 -mcx16 -msahf -mmovbe -maes -mpclmul -mpopcnt -mabm -mfma -mbmi -mbmi2 -mavx -mavx2 -msse4.2 -msse4.1 -mlzcnt -mrtm -mhle -mrdrnd -mf16c -mfsgsbase -mrdseed -mprfchw -madx -mfxsr -mxsave -mxsaveopt -mavx512f -mavx512cd -mclflushopt -mxsavec -mxsaves -mavx512dq -mavx512bw -mavx512vl -mclwb -mpku --param l1-cache-size=32 --param l1-cache-line-size=64 --param l2-cache-size=25344 -mtune=skylake-avx512" \
     && cmake ../ -DENABLE_EMBREE=on -DENABLE_OPTIX=off -Dembree_DIR=/opt/embree-3.6.1.x86_64.linux -DCMAKE_INSTALL_PREFIX=`python3 -c "import site; print(site.getsitepackages()[0])"` \
     && make install -j10 \
     && cd ../../ \
-    && rm -rf fresnel-v0.10.0 \
-    && rm fresnel-v0.10.0.tar.gz \
+    && rm -rf fresnel-v0.10.1 \
+    && rm fresnel-v0.10.1.tar.gz \
     || exit 1
 
 
@@ -222,18 +221,18 @@ RUN curl -sSLO https://glotzerlab.engin.umich.edu/downloads/garnett/garnett-v0.5
     && rm garnett-v0.5.0.tar.gz \
     || exit 1
 
-RUN curl -sSLO https://glotzerlab.engin.umich.edu/Downloads/gsd/gsd-v1.8.1.tar.gz \
-    && echo "bb38d00b83b982904aade2013d0072f66c84faa52cec01df1b23cbbf62707b68  gsd-v1.8.1.tar.gz" | sha256sum -c - \
-    && tar -xzf gsd-v1.8.1.tar.gz -C . \
-    && cd gsd-v1.8.1 \
-    && mkdir build \
+RUN curl -sSLO https://glotzerlab.engin.umich.edu/Downloads/gsd/gsd-v1.9.3.tar.gz \
+    && echo "89db85565b87d7a167ecf01881382ec4bc7280f07fe0295c2cf74af5db949231  gsd-v1.9.3.tar.gz" | sha256sum -c - \
+    && tar -xzf gsd-v1.9.3.tar.gz -C . \
+    && cd gsd-v1.9.3 \
+    && mkdir -p build \
     && cd build \
     && export CFLAGS="-march=skylake-avx512 -mmmx -msse -msse2 -msse3 -mssse3 -mcx16 -msahf -mmovbe -maes -mpclmul -mpopcnt -mabm -mfma -mbmi -mbmi2 -mavx -mavx2 -msse4.2 -msse4.1 -mlzcnt -mrtm -mhle -mrdrnd -mf16c -mfsgsbase -mrdseed -mprfchw -madx -mfxsr -mxsave -mxsaveopt -mavx512f -mavx512cd -mclflushopt -mxsavec -mxsaves -mavx512dq -mavx512bw -mavx512vl -mclwb -mpku --param l1-cache-size=32 --param l1-cache-line-size=64 --param l2-cache-size=25344 -mtune=skylake-avx512" CXXFLAGS="-march=skylake-avx512 -mmmx -msse -msse2 -msse3 -mssse3 -mcx16 -msahf -mmovbe -maes -mpclmul -mpopcnt -mabm -mfma -mbmi -mbmi2 -mavx -mavx2 -msse4.2 -msse4.1 -mlzcnt -mrtm -mhle -mrdrnd -mf16c -mfsgsbase -mrdseed -mprfchw -madx -mfxsr -mxsave -mxsaveopt -mavx512f -mavx512cd -mclflushopt -mxsavec -mxsaves -mavx512dq -mavx512bw -mavx512vl -mclwb -mpku --param l1-cache-size=32 --param l1-cache-line-size=64 --param l2-cache-size=25344 -mtune=skylake-avx512" \
     && cmake ../ -DPYTHON_EXECUTABLE="`which python3`" -DCMAKE_INSTALL_PREFIX=`python3 -c "import site; print(site.getsitepackages()[0])"` \
     && make install -j10 \
     && cd ../../ \
-    && rm -rf gsd-v1.8.1 \
-    && rm gsd-v1.8.1.tar.gz \
+    && rm -rf gsd-v1.9.3 \
+    && rm gsd-v1.9.3.tar.gz \
     || exit 1
 
 RUN curl -sSLO https://glotzerlab.engin.umich.edu/Downloads/libgetar/libgetar-v1.0.1.tar.gz \
@@ -246,22 +245,22 @@ RUN curl -sSLO https://glotzerlab.engin.umich.edu/Downloads/libgetar/libgetar-v1
     && rm libgetar-v1.0.1.tar.gz \
     || exit 1
 
-RUN curl -sSLO https://glotzerlab.engin.umich.edu/Downloads/rowan/rowan-v1.2.1.tar.gz \
-    && echo "c59ad2dded288e5626db19869ed2915852734520347f7e0afd9dd08171d4541b  rowan-v1.2.1.tar.gz" | sha256sum -c - \
-    && tar -xzf rowan-v1.2.1.tar.gz -C . \
+RUN curl -sSLO https://glotzerlab.engin.umich.edu/Downloads/rowan/rowan-v1.2.2.tar.gz \
+    && echo "88ed2c0003543d3154374f741a04fcb21cce32180e7b29152dc93c4c887e0c51  rowan-v1.2.2.tar.gz" | sha256sum -c - \
+    && tar -xzf rowan-v1.2.2.tar.gz -C . \
     && export CFLAGS="-march=skylake-avx512 -mmmx -msse -msse2 -msse3 -mssse3 -mcx16 -msahf -mmovbe -maes -mpclmul -mpopcnt -mabm -mfma -mbmi -mbmi2 -mavx -mavx2 -msse4.2 -msse4.1 -mlzcnt -mrtm -mhle -mrdrnd -mf16c -mfsgsbase -mrdseed -mprfchw -madx -mfxsr -mxsave -mxsaveopt -mavx512f -mavx512cd -mclflushopt -mxsavec -mxsaves -mavx512dq -mavx512bw -mavx512vl -mclwb -mpku --param l1-cache-size=32 --param l1-cache-line-size=64 --param l2-cache-size=25344 -mtune=skylake-avx512" CXXFLAGS="-march=skylake-avx512 -mmmx -msse -msse2 -msse3 -mssse3 -mcx16 -msahf -mmovbe -maes -mpclmul -mpopcnt -mabm -mfma -mbmi -mbmi2 -mavx -mavx2 -msse4.2 -msse4.1 -mlzcnt -mrtm -mhle -mrdrnd -mf16c -mfsgsbase -mrdseed -mprfchw -madx -mfxsr -mxsave -mxsaveopt -mavx512f -mavx512cd -mclflushopt -mxsavec -mxsaves -mavx512dq -mavx512bw -mavx512vl -mclwb -mpku --param l1-cache-size=32 --param l1-cache-line-size=64 --param l2-cache-size=25344 -mtune=skylake-avx512" \
-    && python3 -m pip install --no-deps --ignore-installed ./rowan-v1.2.1 \
-    && rm -rf rowan-v1.2.1 \
-    && rm rowan-v1.2.1.tar.gz \
+    && python3 -m pip install --no-deps --ignore-installed ./rowan-v1.2.2 \
+    && rm -rf rowan-v1.2.2 \
+    && rm rowan-v1.2.2.tar.gz \
     || exit 1
 
-RUN curl -sSLO https://glotzerlab.engin.umich.edu/Downloads/plato/plato-v1.6.0.tar.gz \
-    && echo "d7282e2b7a8cd641e41a845f1a7075031b821440ab1ea9ad11a0dc991b86f91d  plato-v1.6.0.tar.gz" | sha256sum -c - \
-    && tar -xzf plato-v1.6.0.tar.gz -C . \
+RUN curl -sSLO https://glotzerlab.engin.umich.edu/Downloads/plato/plato-v1.7.0.tar.gz \
+    && echo "8268ab6982f9135d1f7788309804eb15a1e98ef1d2f6d959733a3e23a1595def  plato-v1.7.0.tar.gz" | sha256sum -c - \
+    && tar -xzf plato-v1.7.0.tar.gz -C . \
     && export CFLAGS="-march=skylake-avx512 -mmmx -msse -msse2 -msse3 -mssse3 -mcx16 -msahf -mmovbe -maes -mpclmul -mpopcnt -mabm -mfma -mbmi -mbmi2 -mavx -mavx2 -msse4.2 -msse4.1 -mlzcnt -mrtm -mhle -mrdrnd -mf16c -mfsgsbase -mrdseed -mprfchw -madx -mfxsr -mxsave -mxsaveopt -mavx512f -mavx512cd -mclflushopt -mxsavec -mxsaves -mavx512dq -mavx512bw -mavx512vl -mclwb -mpku --param l1-cache-size=32 --param l1-cache-line-size=64 --param l2-cache-size=25344 -mtune=skylake-avx512" CXXFLAGS="-march=skylake-avx512 -mmmx -msse -msse2 -msse3 -mssse3 -mcx16 -msahf -mmovbe -maes -mpclmul -mpopcnt -mabm -mfma -mbmi -mbmi2 -mavx -mavx2 -msse4.2 -msse4.1 -mlzcnt -mrtm -mhle -mrdrnd -mf16c -mfsgsbase -mrdseed -mprfchw -madx -mfxsr -mxsave -mxsaveopt -mavx512f -mavx512cd -mclflushopt -mxsavec -mxsaves -mavx512dq -mavx512bw -mavx512vl -mclwb -mpku --param l1-cache-size=32 --param l1-cache-line-size=64 --param l2-cache-size=25344 -mtune=skylake-avx512" \
-    && python3 -m pip install --no-deps --ignore-installed ./plato-v1.6.0 \
-    && rm -rf plato-v1.6.0 \
-    && rm plato-v1.6.0.tar.gz \
+    && python3 -m pip install --no-deps --ignore-installed ./plato-v1.7.0 \
+    && rm -rf plato-v1.7.0 \
+    && rm plato-v1.7.0.tar.gz \
     || exit 1
 
 RUN curl -sSLO https://glotzerlab.engin.umich.edu/Downloads/pythia/pythia-v0.2.5.tar.gz \
@@ -291,18 +290,18 @@ RUN curl -sSLO https://glotzerlab.engin.umich.edu/Downloads/signac-flow/signac-f
     && rm signac-flow-v0.8.0.tar.gz \
     || exit 1
 
-RUN curl -sSLO https://glotzerlab.engin.umich.edu/Downloads/hoomd/hoomd-v2.6.0.tar.gz \
-    && echo "f926b2d39cf58916794edbf4c619d0542a9b1e66b6c6a1b6a01b70f5617ec728  hoomd-v2.6.0.tar.gz" | sha256sum -c - \
-    && tar -xzf hoomd-v2.6.0.tar.gz -C . \
-    && cd hoomd-v2.6.0 \
-    && mkdir build \
+RUN curl -sSLO https://glotzerlab.engin.umich.edu/Downloads/hoomd/hoomd-v2.7.0.tar.gz \
+    && echo "f884583b4d16bc630e177aefc198fb8361e644f6cad1b0c0474e840f00a4e4e1  hoomd-v2.7.0.tar.gz" | sha256sum -c - \
+    && tar -xzf hoomd-v2.7.0.tar.gz -C . \
+    && cd hoomd-v2.7.0 \
+    && mkdir -p build \
     && cd build \
     && export CFLAGS="-march=skylake-avx512 -mmmx -msse -msse2 -msse3 -mssse3 -mcx16 -msahf -mmovbe -maes -mpclmul -mpopcnt -mabm -mfma -mbmi -mbmi2 -mavx -mavx2 -msse4.2 -msse4.1 -mlzcnt -mrtm -mhle -mrdrnd -mf16c -mfsgsbase -mrdseed -mprfchw -madx -mfxsr -mxsave -mxsaveopt -mavx512f -mavx512cd -mclflushopt -mxsavec -mxsaves -mavx512dq -mavx512bw -mavx512vl -mclwb -mpku --param l1-cache-size=32 --param l1-cache-line-size=64 --param l2-cache-size=25344 -mtune=skylake-avx512" CXXFLAGS="-march=skylake-avx512 -mmmx -msse -msse2 -msse3 -mssse3 -mcx16 -msahf -mmovbe -maes -mpclmul -mpopcnt -mabm -mfma -mbmi -mbmi2 -mavx -mavx2 -msse4.2 -msse4.1 -mlzcnt -mrtm -mhle -mrdrnd -mf16c -mfsgsbase -mrdseed -mprfchw -madx -mfxsr -mxsave -mxsaveopt -mavx512f -mavx512cd -mclflushopt -mxsavec -mxsaves -mavx512dq -mavx512bw -mavx512vl -mclwb -mpku --param l1-cache-size=32 --param l1-cache-line-size=64 --param l2-cache-size=25344 -mtune=skylake-avx512" \
     && cmake ../ -DPYTHON_EXECUTABLE="`which python3`" -DENABLE_CUDA=on -DENABLE_MPI=on -DENABLE_TBB=on -DBUILD_JIT=on -DBUILD_TESTING=off -DENABLE_MPI_CUDA=off -DCMAKE_INSTALL_PREFIX=`python3 -c "import site; print(site.getsitepackages()[0])"` \
     && make install -j10 \
     && cd ../../ \
-    && rm -rf /root/hoomd-v2.6.0 \
-    && rm hoomd-v2.6.0.tar.gz \
+    && rm -rf /root/hoomd-v2.7.0 \
+    && rm hoomd-v2.7.0.tar.gz \
     || exit 1
 
 

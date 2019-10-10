@@ -65,7 +65,6 @@ ENV CPATH=/opt/embree-3.6.1.x86_64.linux/include:$CPATH \
     EMBREE3_LINK=/opt/embree-3.6.1.x86_64.linux/lib
 
 RUN curl -sSLO https://github.com/embree/embree/releases/download/v3.6.1/embree-3.6.1.x86_64.linux.tar.gz \
-    && echo "76e9c619e11c2baace2935b14f1d6ee8ff085fd12c72b7d62d6fcb9a4ffaca3e  embree-3.6.1.x86_64.linux.tar.gz" | sha256sum -c - \
     && tar -xzf embree-3.6.1.x86_64.linux.tar.gz -C /opt \
     && rm -rf /opt/embree-3.6.1.x86_64.linux/bin \
     && rm -rf /opt/embree-3.6.1.x86_64.linux/doc \
