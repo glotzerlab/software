@@ -5,6 +5,17 @@ Change log
 2019
 ----
 
+2019.10
++++++++
+
+*Software updates:*
+
+* fresnel v0.10.1
+* gsd v1.9.3
+* HOOMD-blue v2.7.0
+* rowan v1.2.2
+* plato v1.7.0
+
 2019.09
 +++++++
 
