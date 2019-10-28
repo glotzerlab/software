@@ -13,7 +13,9 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
   hwloc \
   jupyter \
   libboost-dev \
+  libcereal-dev \
   libedit-dev \
+  libeigen3-dev \
   libevent-dev \
   libhwloc-dev \
   libtbb-dev \
@@ -129,6 +131,27 @@ RUN curl -SL https://github.com/qhull/qhull/archive/{{QHULL_VERSION}}.tar.gz | t
     cmake ../ -DCMAKE_INSTALL_PREFIX=/usr -DLIB_INSTALL_DIR=/usr/lib/x86_64-linux-gnu -DCMAKE_BUILD_TYPE=Release -DCMAKE_CXX_FLAGS=-fPIC -DCMAKE_C_FLAGS=-fPIC && \
     make install -j {{ MAKEJOBS }} && \
     cd / && rm -rf /root/qhull-*
+
+{% if ubuntu_version == 16 %}
+# ubuntu16 needs a newer eigen
+RUN mkdir /root/eigen-{{EIGEN_VERSION}} && \
+    curl -SL http://bitbucket.org/eigen/eigen/get/{{EIGEN_VERSION}}.tar.gz | tar -xzC /root/eigen-{{EIGEN_VERSION}} --strip-components 1 && \
+    cd /root/eigen-{{EIGEN_VERSION}} && \
+    mkdir build2 && cd build2 && \
+    cmake ../ -DCMAKE_INSTALL_PREFIX=/usr -DBUILD_TESTING=off -DEIGEN_TEST_NOQT=on && \
+    make install -j {{ MAKEJOBS }} && \
+    cd / && rm -rf /root/eigen-*
+
+# ubuntu16 needs a newer cereal
+RUN mkdir /root/cereal-{{CEREAL_VERSION}} && \
+    curl -SL https://github.com/USCiLab/cereal/archive/{{CEREAL_VERSION}}.tar.gz | tar -xzC /root/cereal-{{CEREAL_VERSION}} --strip-components 1 && \
+    cd /root/cereal-{{CEREAL_VERSION}} && \
+    mkdir build2 && cd build2 && \
+    cmake ../ -DCMAKE_INSTALL_PREFIX=/usr -DJUST_INSTALL_CEREAL=on && \
+    make install -j {{ MAKEJOBS }} && \
+    cd / && rm -rf /root/cereal-*
+
+{% endif %}
 
 # mount points for filesystems on clusters
 RUN mkdir -p /nfs \

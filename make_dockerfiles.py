@@ -31,6 +31,8 @@ shas['SCIPY_SHA'] = '2643cfb46d97b7797d1dbdb6f3c23fe3402904e3c90e6facfe6a9b98d80
 
 # ubuntu 16 only dependencies
 versions['CMAKE_VERSION'] = '3.15.3'
+versions['EIGEN_VERSION'] = '3.3.7'
+versions['CEREAL_VERSION'] = 'v1.2.2'
 
 # glotzer lab
 repo_version['fresnel']     = versions['FRESNEL_VERSION']     = 'v0.10.1'
