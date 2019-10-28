@@ -87,30 +87,10 @@ if __name__ == '__main__':
     finalize_template = env.get_template('finalize.jinja')
     test_template = env.get_template('test.jinja')
 
-    write('docker/Dockerfile', [base_template],
-          FROM='nvidia/cuda:9.2-devel-ubuntu16.04',
-          ubuntu_version=16,
-          ENABLE_MPI='off',
-          MAKEJOBS=10,
-          **versions,
-          **shas)
-
     write('docker/nompi/Dockerfile', [base_template, glotzerlab_software_template, finalize_template, test_template],
-          FROM='nvidia/cuda:9.2-devel-ubuntu16.04',
+          FROM='nvidia/cuda:10.1-devel-ubuntu18.04',
           ubuntu_version=16,
           ENABLE_MPI='off',
-          MAKEJOBS=10,
-          **versions,
-          **shas)
-
-    write('docker/flux/Dockerfile', [base_template, ib_mlx_template, openmpi_template, glotzerlab_software_template, finalize_template],
-          FROM='nvidia/cuda:9.1-devel-ubuntu16.04',
-          ubuntu_version=16,
-          system='flux',
-          OPENMPI_VERSION='3.0',
-          OPENMPI_PATCHLEVEL='0',
-          OPENMPI_SHA = 'f699bff21db0125d8cccfe79518b77641cd83628725a1e1ed3e45633496a82d7',
-          ENABLE_MPI='on',
           MAKEJOBS=10,
           **versions,
           **shas)
@@ -145,7 +125,7 @@ if __name__ == '__main__':
           **shas)
 
     write('docker/bridges/Dockerfile', [base_template, ib_hfi1_template, openmpi_template, glotzerlab_software_template, finalize_template],
-          FROM='nvidia/cuda:9.2-devel-ubuntu16.04',
+          FROM='nvidia/cuda:10.1-devel-ubuntu18.04',
           ubuntu_version=16,
           system='bridges',
           OPENMPI_VERSION='2.1',
@@ -157,9 +137,8 @@ if __name__ == '__main__':
           **versions,
           **shas)
 
-    # TODO: update cflags after switching to newer compiler
     write('docker/stampede2/Dockerfile', [base_template, ib_hfi1_stampede2_template, mvapich2_template, glotzerlab_software_template, finalize_template],
-          FROM='nvidia/cuda:9.2-devel-ubuntu16.04',
+          FROM='nvidia/cuda:10.1-devel-ubuntu18.04',
           ubuntu_version=16,
           system='stampede2',
           MVAPICH_VERSION='2.3',
@@ -168,7 +147,7 @@ if __name__ == '__main__':
           MVAPICH_EXTRA_OPTS='--with-device=ch3:psm --with-ch3-rank-bits=32 --enable-cxx --enable-romio --enable-fast=O3 --enable-g=dbg',
           ENABLE_MPI='on',
           MAKEJOBS=10,
-          CFLAGS='-march=knl -mmmx -msse -msse2 -msse3 -mssse3 -mcx16 -msahf -mmovbe -maes -mpclmul -mpopcnt -mabm -mfma -mbmi -mbmi2 -mavx -mavx2 -msse4.2 -msse4.1 -mlzcnt -mrtm -mhle -mrdrnd -mf16c -mfsgsbase -mrdseed -mprfchw -madx -mfxsr -mxsave -mxsaveopt -mavx512f -mavx512cd -mclflushopt -mxsavec -mxsaves -mavx512dq -mavx512bw -mclwb --param l1-cache-size=32 --param l1-cache-line-size=64 --param l2-cache-size=33792 -mtune=generic',
+          CFLAGS='-march=skylake-avx512 -mmmx -msse -msse2 -msse3 -mssse3 -mcx16 -msahf -mmovbe -maes -mpclmul -mpopcnt -mabm -mfma -mbmi -mbmi2 -mavx -mavx2 -msse4.2 -msse4.1 -mlzcnt -mrtm -mhle -mrdrnd -mf16c -mfsgsbase -mrdseed -mprfchw -madx -mfxsr -mxsave -mxsaveopt -mavx512f -mavx512cd -mclflushopt -mxsavec -mxsaves -mavx512dq -mavx512bw -mavx512vl -mclwb -mpku --param l1-cache-size=32 --param l1-cache-line-size=64 --param l2-cache-size=25344 -mtune=skylake-avx512',
           **versions,
           **shas)
 

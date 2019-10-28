@@ -3,6 +3,8 @@
 set -u
 set -e
 
+python make_dockerfiles.py
+
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 OUTPUT=`mktemp -d -t singularity.XXXXXXX`
 
@@ -22,12 +24,6 @@ cp $DIR/test/*.py $DIR/docker/comet
 docker build $DIR/docker/comet \
              -t software/comet
 docker run -t --rm --privileged -v /var/run/docker.sock:/var/run/docker.sock -v ${OUTPUT}:/output singularityware/docker2singularity:v2.6 --name software-comet-testing software/comet
-mv ${OUTPUT}/*.simg /nfs/turbo/glotzer/containers/testing
-
-cp $DIR/test/*.py $DIR/docker/flux
-docker build $DIR/docker/flux \
-             -t software/flux
-docker run -t --rm --privileged -v /var/run/docker.sock:/var/run/docker.sock -v ${OUTPUT}:/output singularityware/docker2singularity:v2.6 --name software-flux-testing software/flux
 mv ${OUTPUT}/*.simg /nfs/turbo/glotzer/containers/testing
 
 cp $DIR/test/*.py $DIR/docker/bridges

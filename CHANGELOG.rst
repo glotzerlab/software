@@ -5,6 +5,19 @@ Change log
 2019
 ----
 
+2019.11 (not yet released)
+++++++++++++++++++++++++++
+
+*Library/OS updates:*
+
+* Ubuntu 18.04 [not on comet]
+* Python 3.6 [not on comet]
+
+*Supported systems:*
+
+* Removed UMich Great Flux
+
+
 2019.10
 +++++++
 
