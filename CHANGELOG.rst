@@ -5,8 +5,15 @@ Change log
 2019
 ----
 
-2019.11 (not yet released)
-++++++++++++++++++++++++++
+2019.11
++++++++
+
+*Software updates:*
+
+* fresnel v0.11.0
+* freud v2.0.0
+* garnett v0.6.1
+* HOOMD-blue v2.8.0
 
 *Library/OS updates:*
 
