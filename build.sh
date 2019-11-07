@@ -11,9 +11,6 @@ OUTPUT=`mktemp -d -t singularity.XXXXXXX`
 
 umask 022
 
-docker build $DIR/docker \
-             -t glotzerlab/software:devel \
-
 cp $DIR/test/*.py $DIR/docker/nompi
 docker build $DIR/docker/nompi \
              -t glotzerlab/software:latest \
