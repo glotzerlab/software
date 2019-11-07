@@ -22,7 +22,7 @@ Change log
 
 *Supported systems:*
 
-* Removed UMich Great Flux
+* Removed UMich Flux
 
 
 2019.10
