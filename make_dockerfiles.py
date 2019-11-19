@@ -89,7 +89,7 @@ if __name__ == '__main__':
 
     write('docker/nompi/Dockerfile', [base_template, glotzerlab_software_template, finalize_template, test_template],
           FROM='nvidia/cuda:10.1-devel-ubuntu18.04',
-          ubuntu_version=16,
+          ubuntu_version=18,
           ENABLE_MPI='off',
           MAKEJOBS=10,
           **versions,
@@ -130,7 +130,7 @@ if __name__ == '__main__':
 
     write('docker/bridges/Dockerfile', [base_template, ib_hfi1_template, openmpi_template, glotzerlab_software_template, finalize_template],
           FROM='nvidia/cuda:10.1-devel-ubuntu18.04',
-          ubuntu_version=16,
+          ubuntu_version=18,
           system='bridges',
           OPENMPI_VERSION='2.1',
           OPENMPI_PATCHLEVEL='2',
@@ -143,7 +143,7 @@ if __name__ == '__main__':
 
     write('docker/stampede2/Dockerfile', [base_template, ib_hfi1_stampede2_template, mvapich2_template, glotzerlab_software_template, finalize_template],
           FROM='nvidia/cuda:10.1-devel-ubuntu18.04',
-          ubuntu_version=16,
+          ubuntu_version=18,
           system='stampede2',
           MVAPICH_VERSION='2.3',
           MVAPICH_PATCHLEVEL='',

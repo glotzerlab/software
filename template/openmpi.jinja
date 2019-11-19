@@ -1,6 +1,8 @@
 
 
-{% if ubuntu_version == 18 %}
+{% if ubuntu_version == 18 and system == 'greatlakes' %}
+
+# great lakes needs PMIx and UCX
 
 RUN curl -sSLO https://github.com/pmix/pmix/releases/download/v{{ PMIX_VERSION }}/pmix-{{ PMIX_VERSION }}.tar.bz2 \
    && tar -xjf pmix-{{ PMIX_VERSION }}.tar.bz2 -C /root \
@@ -21,24 +23,23 @@ RUN curl -sSLO https://github.com/openucx/ucx/releases/download/v{{UCX_VERSION}}
    && rm /ucx-{{UCX_VERSION}}.tar.gz
 
 RUN curl -sSLO https://www.open-mpi.org/software/ompi/v{{ OPENMPI_VERSION }}/downloads/openmpi-{{ OPENMPI_VERSION }}.{{ OPENMPI_PATCHLEVEL }}.tar.bz2 \
-   && echo "{{ OPENMPI_SHA }}  openmpi-{{ OPENMPI_VERSION }}.{{ OPENMPI_PATCHLEVEL }}.tar.bz2" | sha256sum -c - \
    && tar -xjf openmpi-{{ OPENMPI_VERSION }}.{{ OPENMPI_PATCHLEVEL }}.tar.bz2 -C /root \
    && cd /root/openmpi-{{ OPENMPI_VERSION }}.{{ OPENMPI_PATCHLEVEL }} \
    && ./configure --prefix=/usr --with-pmix=/usr --with-libevent=external --with-hwloc=/usr --without-verbs --enable-shared --with-ucx\
    && make all install \
    && rm -rf /root/openmpi-{{ OPENMPI_VERSION }}.{{ OPENMPI_PATCHLEVEL }} \
    && rm /openmpi-{{ OPENMPI_VERSION }}.{{ OPENMPI_PATCHLEVEL }}.tar.bz2
-{% endif %}
 
-{% if ubuntu_version == 16 %}
+{% else %}
+
 RUN curl -sSLO https://www.open-mpi.org/software/ompi/v{{ OPENMPI_VERSION }}/downloads/openmpi-{{ OPENMPI_VERSION }}.{{ OPENMPI_PATCHLEVEL }}.tar.bz2 \
-   && echo "{{ OPENMPI_SHA }}  openmpi-{{ OPENMPI_VERSION }}.{{ OPENMPI_PATCHLEVEL }}.tar.bz2" | sha256sum -c - \
    && tar -xjf openmpi-{{ OPENMPI_VERSION }}.{{ OPENMPI_PATCHLEVEL }}.tar.bz2 -C /root \
    && cd /root/openmpi-{{ OPENMPI_VERSION }}.{{ OPENMPI_PATCHLEVEL }} \
    && ./configure --prefix=/usr \
    && make all install \
    && rm -rf /root/openmpi-{{ OPENMPI_VERSION }}.{{ OPENMPI_PATCHLEVEL }} \
    && rm /openmpi-{{ OPENMPI_VERSION }}.{{ OPENMPI_PATCHLEVEL }}.tar.bz2
+
 {% endif %}
 
 
