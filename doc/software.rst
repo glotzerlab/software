@@ -3,8 +3,8 @@ Installed software
 
 **glotzerlab-software** includes the following installed inside the container.
 
-* `Ubuntu 16.04 <https://www.ubuntu.com/>`_ (18.04 on :doc:`clusters/greatlakes`)
-* `python 3.5 <https://www.python.org/>`_ (3.6 on :doc:`clusters/greatlakes`)
+* `Ubuntu 18.04 <https://www.ubuntu.com/>`_
+* `python 3.6 <https://www.python.org/>`_
 * `Glotzer lab <http://glotzerlab.engin.umich.edu/home/>`_ open-source software:
 
     * `Fresnel <https://fresnel.readthedocs.io>`_
