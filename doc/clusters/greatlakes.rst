@@ -24,12 +24,12 @@ Use the following commands in your job scripts or interactively to execute softw
 
 Serial (or multithreaded) CPU jobs::
 
-    module load gcc/8.2.0 openmpi/3.1.4
+    module load gcc/8.2.0 openmpi/4.0.2 singularity
     mpirun -n 1 singularity exec /scratch/your-account_root/your-account/$USER/software.simg command arguments
 
 Single GPU jobs::
 
-    module load gcc/8.2.0 openmpi/3.1.4
+    module load gcc/8.2.0 openmpi/4.0.2 singularity
     mpirun -n 1 singularity exec --nv /scratch/your-account_root/your-account/$USER/software.simg command arguments
 
 MPI parallel CPU jobs::

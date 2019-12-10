@@ -71,14 +71,14 @@ curl -sSLO https://github.com/scipy/scipy/releases/download/v1.3.1/scipy-1.3.1.t
 
 
 
- curl -sSLO https://glotzerlab.engin.umich.edu/Downloads/freud/freud-v2.0.0.tar.gz \
-    && echo "29c6eef2c173c04a14d773ca3b0aaba5b537b2f311d5ccd0b12db218c9cf0239  freud-v2.0.0.tar.gz" | sha256sum -c - \
-    && tar -xzf freud-v2.0.0.tar.gz -C . \
-    && rm -f freud-v2.0.0/*.toml \
+ curl -sSLO https://glotzerlab.engin.umich.edu/Downloads/freud/freud-v2.0.1.tar.gz \
+    && echo "332bc720ad6de2cebafe7999ce21d42024e858a5e79d53b8d269111a05ec779a  freud-v2.0.1.tar.gz" | sha256sum -c - \
+    && tar -xzf freud-v2.0.1.tar.gz -C . \
+    && rm -f freud-v2.0.1/*.toml \
     && export CFLAGS="-mcpu=power9 -mtune=power9" CXXFLAGS="-mcpu=power9 -mtune=power9" \
-    && python3 -m pip install --no-deps --ignore-installed ./freud-v2.0.0 \
-    && rm -rf freud-v2.0.0 \
-    && rm freud-v2.0.0.tar.gz \
+    && python3 -m pip install --no-deps --ignore-installed ./freud-v2.0.1 \
+    && rm -rf freud-v2.0.1 \
+    && rm freud-v2.0.1.tar.gz \
     || exit 1
 
 
@@ -93,18 +93,18 @@ curl -sSLO https://github.com/scipy/scipy/releases/download/v1.3.1/scipy-1.3.1.t
     && rm garnett-v0.6.1.tar.gz \
     || exit 1
 
- curl -sSLO https://glotzerlab.engin.umich.edu/Downloads/gsd/gsd-v1.9.3.tar.gz \
-    && echo "89db85565b87d7a167ecf01881382ec4bc7280f07fe0295c2cf74af5db949231  gsd-v1.9.3.tar.gz" | sha256sum -c - \
-    && tar -xzf gsd-v1.9.3.tar.gz -C . \
-    && cd gsd-v1.9.3 \
+ curl -sSLO https://glotzerlab.engin.umich.edu/Downloads/gsd/gsd-v1.10.0.tar.gz \
+    && echo "6c121775106ee9073787fd3ea7c5608710f62a041d5e82b171247b057410aec3  gsd-v1.10.0.tar.gz" | sha256sum -c - \
+    && tar -xzf gsd-v1.10.0.tar.gz -C . \
+    && cd gsd-v1.10.0 \
     && mkdir -p build \
     && cd build \
     && export CFLAGS="-mcpu=power9 -mtune=power9" CXXFLAGS="-mcpu=power9 -mtune=power9" \
     && cmake ../ -DPYTHON_EXECUTABLE="`which python3`" -DCMAKE_INSTALL_PREFIX=`python3 -c "import site; print(site.getsitepackages()[0])"` \
     && make install -j20 \
     && cd ../../ \
-    && rm -rf gsd-v1.9.3 \
-    && rm gsd-v1.9.3.tar.gz \
+    && rm -rf gsd-v1.10.0 \
+    && rm gsd-v1.10.0.tar.gz \
     || exit 1
 
  curl -sSLO https://glotzerlab.engin.umich.edu/Downloads/libgetar/libgetar-v1.0.1.tar.gz \
@@ -162,17 +162,17 @@ curl -sSLO https://github.com/scipy/scipy/releases/download/v1.3.1/scipy-1.3.1.t
     && rm signac-flow-v0.8.0.tar.gz \
     || exit 1
 
- curl -sSLO https://glotzerlab.engin.umich.edu/Downloads/hoomd/hoomd-v2.8.0.tar.gz \
-    && echo "f3cd733bb9a8932a30d65927897eaff894bf5ddb7a95c507ee47e124a7a4f541  hoomd-v2.8.0.tar.gz" | sha256sum -c - \
-    && tar -xzf hoomd-v2.8.0.tar.gz -C . \
-    && cd hoomd-v2.8.0 \
+ curl -sSLO https://glotzerlab.engin.umich.edu/Downloads/hoomd/hoomd-v2.8.1.tar.gz \
+    && echo "9c8899eee4fd8ba48df2d9b9f85ed4d7c00ec288225dbcce6316c16d46798331  hoomd-v2.8.1.tar.gz" | sha256sum -c - \
+    && tar -xzf hoomd-v2.8.1.tar.gz -C . \
+    && cd hoomd-v2.8.1 \
     && mkdir -p build \
     && cd build \
     && export CFLAGS="-mcpu=power9 -mtune=power9" CXXFLAGS="-mcpu=power9 -mtune=power9" \
     && cmake ../ -DPYTHON_EXECUTABLE="`which python3`" -DENABLE_CUDA=on -DENABLE_MPI=on -DENABLE_TBB=off -DBUILD_JIT=off -DBUILD_TESTING=off -DENABLE_MPI_CUDA=on -DCMAKE_INSTALL_PREFIX=`python3 -c "import site; print(site.getsitepackages()[0])"` \
     && make install -j20 \
     && cd ../../ \
-    && rm -rf /root/hoomd-v2.8.0 \
-    && rm hoomd-v2.8.0.tar.gz \
+    && rm -rf /root/hoomd-v2.8.1 \
+    && rm hoomd-v2.8.1.tar.gz \
     || exit 1
 

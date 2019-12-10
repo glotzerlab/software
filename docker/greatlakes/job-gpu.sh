@@ -7,7 +7,7 @@
 #SBATCH --export=ALL
 #SBATCH -t 0:10:00
 
-module load gcc/8.2.0 openmpi/3.1.4
+module load gcc/8.2.0 openmpi/4.0.2 singularity
 
 rm -f test-results-gpu.out
 

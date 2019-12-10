@@ -5,6 +5,22 @@ Change log
 2019
 ----
 
+2019.12
++++++++
+
+*Software updates:*
+
+* freud v2.0.1
+* gsd v1.20.0
+* HOOMD-blue v2.8.1
+
+*Library/OS updates:*
+
+* Ubuntu 18.04 and Python 3.6 now on all systems
+* Great Lakes now requires ``module load openmpi/4.0.2``
+* Bridges images are broken. Please use the ``nompi`` images on Bridges until
+  we can resolve MPI support issues on Bridges.
+
 2019.11
 +++++++
 

@@ -38,17 +38,17 @@ versions['CEREAL_VERSION'] = 'v1.2.2'
 repo_version['fresnel']     = versions['FRESNEL_VERSION']     = 'v0.11.0'
 shas['FRESNEL_SHA'] = 'e0c6568ea461b00ca720eef3376a0cbe61ffeb3f1ccf63c86a0565591680a733'
 
-repo_version['freud']       = versions['FREUD_VERSION']       = 'v2.0.0'
-shas['FREUD_SHA'] = '29c6eef2c173c04a14d773ca3b0aaba5b537b2f311d5ccd0b12db218c9cf0239'
+repo_version['freud']       = versions['FREUD_VERSION']       = 'v2.0.1'
+shas['FREUD_SHA'] = '332bc720ad6de2cebafe7999ce21d42024e858a5e79d53b8d269111a05ec779a'
 
 repo_version['garnett']     = versions['GARNETT_VERSION']     = 'v0.6.1'
 shas['GARNETT_SHA'] = '47d4c59d2042bdb8ded415e8a5782d50777c112196070401d744df494ac3e134'
 
-repo_version['gsd']         = versions['GSD_VERSION']         = 'v1.9.3'
-shas['GSD_SHA'] = '89db85565b87d7a167ecf01881382ec4bc7280f07fe0295c2cf74af5db949231'
+repo_version['gsd']         = versions['GSD_VERSION']         = 'v1.10.0'
+shas['GSD_SHA'] = '6c121775106ee9073787fd3ea7c5608710f62a041d5e82b171247b057410aec3'
 
-repo_version['hoomd-blue']  = versions['HOOMD_VERSION']       = 'v2.8.0'
-shas['HOOMD_SHA'] = 'f3cd733bb9a8932a30d65927897eaff894bf5ddb7a95c507ee47e124a7a4f541'
+repo_version['hoomd-blue']  = versions['HOOMD_VERSION']       = 'v2.8.1'
+shas['HOOMD_SHA'] = '9c8899eee4fd8ba48df2d9b9f85ed4d7c00ec288225dbcce6316c16d46798331'
 
 repo_version['libgetar']    = versions['LIBGETAR_VERSION']    = 'v1.0.1'
 shas['LIBGETAR_SHA'] = '0a438dc8336103158fc4dbb7ebcbc011279d7a8ae134824dda5946e6b9042039'
@@ -100,8 +100,7 @@ if __name__ == '__main__':
           ubuntu_version=18,
           system='greatlakes',
           OPENMPI_VERSION='4.0',
-          OPENMPI_PATCHLEVEL='1',
-          OPENMPI_SHA = 'cce7b6d20522849301727f81282201d609553103ac0b09162cf28d102efb9709',
+          OPENMPI_PATCHLEVEL='2',
           ENABLE_MPI='on',
           MAKEJOBS=10,
           CFLAGS='-march=sandybridge -mmmx -msse -msse2 -msse3 -mssse3 -mcx16 -msahf -maes -mpclmul -mpopcnt -mavx -msse4.2 -msse4.1 -mfxsr -mxsave -mxsaveopt --param l1-cache-size=32 --param l1-cache-line-size=64 --param l2-cache-size=20480 -mtune=sandybridge',
@@ -116,12 +115,11 @@ if __name__ == '__main__':
     # for information on obtaining CFLAGS settings for specific machines
     # gcc -'###' -E - -march=native 2>&1 | sed -r '/cc1/!d;s/(")|(^.* - )|( -mno-[^\ ]+)//g'
     write('docker/comet/Dockerfile', [base_template, ib_mlx_template, openmpi_template, glotzerlab_software_template, finalize_template],
-          FROM='nvidia/cuda:9.2-devel-ubuntu16.04',
-          ubuntu_version=16,
+          FROM='nvidia/cuda:10.1-devel-ubuntu18.04',
+          ubuntu_version=18,
           system='comet',
-          OPENMPI_VERSION='1.8',
+          OPENMPI_VERSION='3.1',
           OPENMPI_PATCHLEVEL='4',
-          OPENMPI_SHA='23158d916e92c80e2924016b746a93913ba7fae9fff51bf68d5c2a0ae39a2f8a',
           ENABLE_MPI='on',
           MAKEJOBS=10,
           CFLAGS='-march=haswell -mmmx -msse -msse2 -msse3 -mssse3 -mcx16 -msahf -mmovbe -maes -mpclmul -mpopcnt -mabm -mfma -mbmi -mbmi2 -mavx -mavx2 -msse4.2 -msse4.1 -mlzcnt -mrdrnd -mf16c -mfsgsbase -mfxsr -mxsave -mxsaveopt --param l1-cache-size=32 --param l1-cache-line-size=64 --param l2-cache-size=30720 -mtune=haswell -fstack-protector-strong -Wformat -Wformat-security',
@@ -134,7 +132,6 @@ if __name__ == '__main__':
           system='bridges',
           OPENMPI_VERSION='2.1',
           OPENMPI_PATCHLEVEL='2',
-          OPENMPI_SHA='3cc5804984c5329bdf88effc44f2971ed244a29b256e0011b8deda02178dd635',
           ENABLE_MPI='on',
           MAKEJOBS=10,
           CFLAGS='-march=haswell -mmmx -msse -msse2 -msse3 -mssse3 -mcx16 -msahf -mmovbe -maes -mpclmul -mpopcnt -mabm -mfma -mbmi -mbmi2 -mavx -mavx2 -msse4.2 -msse4.1 -mlzcnt -mrdrnd -mf16c -mfsgsbase -mfxsr -mxsave -mxsaveopt --param l1-cache-size=32 --param l1-cache-line-size=64 --param l2-cache-size=35840 -mtune=haswell -fstack-protector-strong -Wformat -Wformat-security',

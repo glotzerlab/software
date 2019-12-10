@@ -34,37 +34,13 @@ RUN ln -s /usr/lib/x86_64-linux-gnu/libibverbs.so.1.1.20 /usr/lib/x86_64-linux-g
     ln -s /usr/lib/x86_64-linux-gnu/libibverbs.so.1.1.20 /usr/lib/x86_64-linux-gnu/libibverbs.so.1
 COPY libnl-3.so.200 libnl-route-3.so.200 /usr/lib/x86_64-linux-gnu/
 COPY infiniband/ /usr/include/infiniband/
-{% endif %}
-
-{% endif %}
-
-
-{% if ubuntu_version == 16 %}
-# packages needed to support IB on Comet
-# https://github.com/mkandes/naked-singularity/blob/master/definition-files/us/ucsd/sdsc/comet/ubuntu/ubuntu-openmpi.def
+{% else %}
+# testing ubuntu provided ibverbs on comet and bridges
 RUN apt-get update && apt-get install -y --no-install-recommends \
-  dkms \
-  infiniband-diags \
   libibverbs-dev \
-  ibacm \
+  ibverbs-providers \
   librdmacm-dev \
-  libmlx4-dev \
-  libmlx5-dev \
-  mstflint \
-  libibcm-dev \
-  libibmad-dev \
-  libibumad-dev \
-  opensm \
-  srptools \
-  ibutils \
-  ibverbs-utils \
-  rdmacm-utils \
-  perftest \
-  numactl \
-  libnuma-dev \
-  libnl-3-200 \
-  libnl-route-3-200 \
-  libnl-route-3-dev \
-  libnl-utils \
   && rm -rf /var/lib/apt/lists/*
+{% endif %}
+
 {% endif %}
