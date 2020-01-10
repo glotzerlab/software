@@ -34,10 +34,10 @@ Single GPU jobs::
 
 MPI parallel CPU jobs::
 
-    module load gcc/8.2.0 openmpi/3.1.4
+    module load gcc/8.2.0 openmpi/4.0.2 singularity
     mpirun singularity exec /scratch/your-account_root/your-account/$USER/software.simg command arguments
 
 MPI parallel GPU jobs::
 
-    module load gcc/8.2.0 openmpi/3.1.4
+    module load gcc/8.2.0 openmpi/4.0.2 singularity
     mpirun singularity exec --nv /scratch/your-account_root/your-account/$USER/software.simg command arguments
