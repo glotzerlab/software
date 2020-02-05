@@ -43,13 +43,8 @@
 {{ RUN }} curl -sSLO https://glotzerlab.engin.umich.edu/Downloads/gsd/gsd-{{ GSD_VERSION }}.tar.gz \
     && echo "{{ GSD_SHA }}  gsd-{{ GSD_VERSION }}.tar.gz" | sha256sum -c - \
     && tar -xzf gsd-{{ GSD_VERSION }}.tar.gz -C . \
-    && cd gsd-{{ GSD_VERSION }} \
-    && mkdir -p build \
-    && cd build \
     && export CFLAGS="{{CFLAGS}}" CXXFLAGS="{{CFLAGS}}" \
-    && cmake ../ -DPYTHON_EXECUTABLE="`which python3`" -DCMAKE_INSTALL_PREFIX=`python3 -c "import site; print(site.getsitepackages()[0])"` \
-    && make install -j{{ MAKEJOBS }} \
-    && cd ../../ \
+    && python3 -m pip install --no-deps --ignore-installed ./gsd-{{ GSD_VERSION }} \
     && rm -rf gsd-{{ GSD_VERSION }} \
     && rm gsd-{{ GSD_VERSION }}.tar.gz \
     || exit 1

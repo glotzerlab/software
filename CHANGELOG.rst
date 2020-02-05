@@ -5,13 +5,24 @@ Change log
 2019
 ----
 
+2020.02
++++++++
+
+*Software updates:*
+
+* freud v2.1.0
+* gsd v2.0.0
+* HOOMD-blue v2.9.0
+* signac v1.3.0
+* signac-flow v0.9.0
+
 2019.12
 +++++++
 
 *Software updates:*
 
 * freud v2.0.1
-* gsd v1.20.0
+* gsd v1.10.0
 * HOOMD-blue v2.8.1
 
 *Library/OS updates:*

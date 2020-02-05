@@ -71,14 +71,14 @@ curl -sSLO https://github.com/scipy/scipy/releases/download/v1.3.1/scipy-1.3.1.t
 
 
 
- curl -sSLO https://glotzerlab.engin.umich.edu/Downloads/freud/freud-v2.0.1.tar.gz \
-    && echo "332bc720ad6de2cebafe7999ce21d42024e858a5e79d53b8d269111a05ec779a  freud-v2.0.1.tar.gz" | sha256sum -c - \
-    && tar -xzf freud-v2.0.1.tar.gz -C . \
-    && rm -f freud-v2.0.1/*.toml \
+ curl -sSLO https://glotzerlab.engin.umich.edu/Downloads/freud/freud-v2.1.0.tar.gz \
+    && echo "f75174e3885b9a00b44002b7b90b1a1d2b2b918cb69040f59aef8afea448075e  freud-v2.1.0.tar.gz" | sha256sum -c - \
+    && tar -xzf freud-v2.1.0.tar.gz -C . \
+    && rm -f freud-v2.1.0/*.toml \
     && export CFLAGS="-mcpu=power9 -mtune=power9" CXXFLAGS="-mcpu=power9 -mtune=power9" \
-    && python3 -m pip install --no-deps --ignore-installed ./freud-v2.0.1 \
-    && rm -rf freud-v2.0.1 \
-    && rm freud-v2.0.1.tar.gz \
+    && python3 -m pip install --no-deps --ignore-installed ./freud-v2.1.0 \
+    && rm -rf freud-v2.1.0 \
+    && rm freud-v2.1.0.tar.gz \
     || exit 1
 
 
@@ -93,18 +93,13 @@ curl -sSLO https://github.com/scipy/scipy/releases/download/v1.3.1/scipy-1.3.1.t
     && rm garnett-v0.6.1.tar.gz \
     || exit 1
 
- curl -sSLO https://glotzerlab.engin.umich.edu/Downloads/gsd/gsd-v1.10.0.tar.gz \
-    && echo "6c121775106ee9073787fd3ea7c5608710f62a041d5e82b171247b057410aec3  gsd-v1.10.0.tar.gz" | sha256sum -c - \
-    && tar -xzf gsd-v1.10.0.tar.gz -C . \
-    && cd gsd-v1.10.0 \
-    && mkdir -p build \
-    && cd build \
+ curl -sSLO https://glotzerlab.engin.umich.edu/Downloads/gsd/gsd-v2.0.0.tar.gz \
+    && echo "659221326bf09548f0c8c0e4f9a781585891da41c70a8a62f186895739957eef  gsd-v2.0.0.tar.gz" | sha256sum -c - \
+    && tar -xzf gsd-v2.0.0.tar.gz -C . \
     && export CFLAGS="-mcpu=power9 -mtune=power9" CXXFLAGS="-mcpu=power9 -mtune=power9" \
-    && cmake ../ -DPYTHON_EXECUTABLE="`which python3`" -DCMAKE_INSTALL_PREFIX=`python3 -c "import site; print(site.getsitepackages()[0])"` \
-    && make install -j20 \
-    && cd ../../ \
-    && rm -rf gsd-v1.10.0 \
-    && rm gsd-v1.10.0.tar.gz \
+    && python3 -m pip install --no-deps --ignore-installed ./gsd-v2.0.0 \
+    && rm -rf gsd-v2.0.0 \
+    && rm gsd-v2.0.0.tar.gz \
     || exit 1
 
  curl -sSLO https://glotzerlab.engin.umich.edu/Downloads/libgetar/libgetar-v1.0.1.tar.gz \
@@ -144,35 +139,35 @@ curl -sSLO https://github.com/scipy/scipy/releases/download/v1.3.1/scipy-1.3.1.t
     && rm pythia-v0.2.5.tar.gz \
     || exit 1
 
- curl -sSLO https://glotzerlab.engin.umich.edu/Downloads/signac/signac-v1.2.0.tar.gz \
-    && echo "38591f2c0dcb77d28dfeb7906b2c25bfc3df39d67486ff819872ba69be4fa187  signac-v1.2.0.tar.gz" | sha256sum -c - \
-    && tar -xzf signac-v1.2.0.tar.gz -C . \
+ curl -sSLO https://glotzerlab.engin.umich.edu/Downloads/signac/signac-v1.3.0.tar.gz \
+    && echo "cc9b1af90ee98746ead05e5d84adb662b60aa861953d71294bac9eb64175b61e  signac-v1.3.0.tar.gz" | sha256sum -c - \
+    && tar -xzf signac-v1.3.0.tar.gz -C . \
     && export CFLAGS="-mcpu=power9 -mtune=power9" CXXFLAGS="-mcpu=power9 -mtune=power9" \
-    && python3 -m pip install --no-deps --ignore-installed ./signac-v1.2.0 \
-    && rm -rf signac-v1.2.0 \
-    && rm signac-v1.2.0.tar.gz \
+    && python3 -m pip install --no-deps --ignore-installed ./signac-v1.3.0 \
+    && rm -rf signac-v1.3.0 \
+    && rm signac-v1.3.0.tar.gz \
     || exit 1
 
- curl -sSLO https://glotzerlab.engin.umich.edu/Downloads/signac-flow/signac-flow-v0.8.0.tar.gz \
-    && echo "ae933964e2786f22963f70ff147a2cbd152e7e32c903ba550154b91db890451b  signac-flow-v0.8.0.tar.gz" | sha256sum -c - \
-    && tar -xzf signac-flow-v0.8.0.tar.gz -C . \
+ curl -sSLO https://glotzerlab.engin.umich.edu/Downloads/signac-flow/signac-flow-v0.9.0.tar.gz \
+    && echo "59633ae44c37d77acde70af9a2be483a84ecb08eb742bdfc2f682b94466758b9  signac-flow-v0.9.0.tar.gz" | sha256sum -c - \
+    && tar -xzf signac-flow-v0.9.0.tar.gz -C . \
     && export CFLAGS="-mcpu=power9 -mtune=power9" CXXFLAGS="-mcpu=power9 -mtune=power9" \
-    && python3 -m pip install --no-deps --ignore-installed ./signac-flow-v0.8.0 \
-    && rm -rf signac-flow-v0.8.0 \
-    && rm signac-flow-v0.8.0.tar.gz \
+    && python3 -m pip install --no-deps --ignore-installed ./signac-flow-v0.9.0 \
+    && rm -rf signac-flow-v0.9.0 \
+    && rm signac-flow-v0.9.0.tar.gz \
     || exit 1
 
- curl -sSLO https://glotzerlab.engin.umich.edu/Downloads/hoomd/hoomd-v2.8.1.tar.gz \
-    && echo "9c8899eee4fd8ba48df2d9b9f85ed4d7c00ec288225dbcce6316c16d46798331  hoomd-v2.8.1.tar.gz" | sha256sum -c - \
-    && tar -xzf hoomd-v2.8.1.tar.gz -C . \
-    && cd hoomd-v2.8.1 \
+ curl -sSLO https://glotzerlab.engin.umich.edu/Downloads/hoomd/hoomd-v2.9.0.tar.gz \
+    && echo "e004da89657894e51c91359d85156debad1725291b69278c4eeb89401b0933da  hoomd-v2.9.0.tar.gz" | sha256sum -c - \
+    && tar -xzf hoomd-v2.9.0.tar.gz -C . \
+    && cd hoomd-v2.9.0 \
     && mkdir -p build \
     && cd build \
     && export CFLAGS="-mcpu=power9 -mtune=power9" CXXFLAGS="-mcpu=power9 -mtune=power9" \
     && cmake ../ -DPYTHON_EXECUTABLE="`which python3`" -DENABLE_CUDA=on -DENABLE_MPI=on -DENABLE_TBB=off -DBUILD_JIT=off -DBUILD_TESTING=off -DENABLE_MPI_CUDA=on -DCMAKE_INSTALL_PREFIX=`python3 -c "import site; print(site.getsitepackages()[0])"` \
     && make install -j20 \
     && cd ../../ \
-    && rm -rf /root/hoomd-v2.8.1 \
-    && rm hoomd-v2.8.1.tar.gz \
+    && rm -rf /root/hoomd-v2.9.0 \
+    && rm hoomd-v2.9.0.tar.gz \
     || exit 1
 
