@@ -2,7 +2,7 @@
 Change log
 ==========
 
-2019
+2020
 ----
 
 2020.02
@@ -15,6 +15,9 @@ Change log
 * HOOMD-blue v2.9.0
 * signac v1.3.0
 * signac-flow v0.9.0
+
+2019
+----
 
 2019.12
 +++++++
