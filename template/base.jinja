@@ -12,6 +12,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
   git \
   hwloc \
   jupyter \
+  jupyter-notebook \
   libboost-dev \
   libcereal-dev \
   libedit-dev \
@@ -26,6 +27,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
   python3-h5py \
   python3-matplotlib \
   python3-nose \
+  python3-notebook \
   python3-numpy \
   python3-pandas \
   python3-pillow \
@@ -84,7 +86,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
   zlib1g-dev \
   ca-certificates \
   && rm -rf /var/lib/apt/lists/* \
-  && pip3 install --no-cache-dir jupyter pillow pyhull deprecation
+  && pip3 install --no-cache-dir jupyter notebook pillow pyhull deprecation
 
 # install modern cmake
 RUN curl -SL https://github.com/Kitware/CMake/releases/download/v{{CMAKE_VERSION}}/cmake-{{CMAKE_VERSION}}.tar.gz | tar -xzC /root && \

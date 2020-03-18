@@ -17,10 +17,10 @@ docker build $DIR/docker/nompi \
              -t glotzerlab/software:nompi \
              -t glotzerlab/software:${DATE_TAG}-cuda10
 
-cp $DIR/test/*.py $DIR/docker/greatlakes
-docker build $DIR/docker/greatlakes \
-             -t glotzerlab/software:greatlakes \
-             -t glotzerlab/software:${DATE_TAG}-skylakex-cuda10-mlx-openmpi4.0.1
+# cp $DIR/test/*.py $DIR/docker/greatlakes
+# docker build $DIR/docker/greatlakes \
+#              -t glotzerlab/software:greatlakes \
+#              -t glotzerlab/software:${DATE_TAG}-skylakex-cuda10-mlx-openmpi4.0.1
 
 cp $DIR/test/*.py $DIR/docker/comet
 docker build $DIR/docker/comet \
@@ -37,7 +37,8 @@ docker build $DIR/docker/stampede2 \
              -t glotzerlab/software:stampede2 \
              -t glotzerlab/software:${DATE_TAG}-skylakex-cuda10-hfi1-mvapich2.3
 
-for label in nompi greatlakes comet bridges stampede2
+#for label in nompi greatlakes comet bridges stampede2
+for label in nompi comet bridges stampede2
 do
     docker run -t --rm --privileged -v /var/run/docker.sock:/var/run/docker.sock -v ${OUTPUT}:/output singularityware/docker2singularity:v2.6 --name software-${label} glotzerlab/software:${label}
     mv ${OUTPUT}/*.simg /nfs/turbo/glotzer/containers/glotzerlab
