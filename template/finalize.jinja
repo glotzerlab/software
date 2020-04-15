@@ -2,7 +2,7 @@
 
 # setup self test
 RUN mkdir /test
-COPY *.py job-*.sh /test/
+COPY test/* /test/
 
 # configure unprivileged user
 RUN useradd --create-home --shell /bin/bash glotzerlab-software \
@@ -13,5 +13,3 @@ RUN useradd --create-home --shell /bin/bash glotzerlab-software \
     && chmod o+rX `python3 -c "import site; print(site.getsitepackages()[0])"`/flow/templates/*
 
 USER glotzerlab-software:glotzerlab-software
-
-LABEL maintainer="glotzerlab: http://glotzerlab.engin.umich.edu"

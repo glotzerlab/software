@@ -13,8 +13,8 @@ try:
     results.write('Freud version     : {}\n'.format(freud.__version__))
 
     # garnett
-    import garnett
-    results.write('garnett version       : {}\n'.format(garnett.__version__))
+    # import garnett
+    # results.write('garnett version       : {}\n'.format(garnett.__version__))
 
     # GSD
     import gsd
@@ -72,10 +72,6 @@ try:
     # pillow
     import PIL
     results.write('pillow version    : {}\n'.format(PIL.__version__))
-
-    # pyhull
-    import pyhull
-    results.write('pyhull version    : {}\n'.format(pyhull.__version__))
 
     # scipy
     import scipy

@@ -23,9 +23,12 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
   libsqlite3-dev \
   llvm-7-dev \
   python3 \
+  python3-breathe \
+  python3-cloudpickle \
   python3-dev \
   python3-filelock \
   python3-h5py \
+  python3-jinja2 \
   python3-matplotlib \
   python3-nose \
   python3-notebook \
@@ -47,58 +50,10 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
   zlib1g-dev \
   ca-certificates \
   && rm -rf /var/lib/apt/lists/* \
-  && pip3 install --no-cache-dir pyhull deprecation
+  && pip3 install --no-cache-dir deprecation
 
 # put clang on the path
 ENV PATH=$PATH:/usr/lib/llvm-7/bin
-{% endif %}
-
-{% if ubuntu_version == 16 %}
-RUN apt-get update && apt-get install -y --no-install-recommends \
-  clang-5.0 \
-  curl \
-  cython3 \
-  ffmpeg \
-  git \
-  libboost-dev \
-  libedit-dev \
-  libtbb-dev \
-  libsqlite3-dev \
-  llvm-5.0-dev \
-  python3 \
-  python3-dev \
-  python3-h5py \
-  python3-matplotlib \
-  python3-nose \
-  python3-numpy \
-  python3-pandas \
-  python3-pip \
-  python3-pytest \
-  python3-pyqt5 \
-  python3-scipy \
-  python3-sklearn-lib \
-  python3-sklearn-pandas \
-  python3-skimage-lib \
-  python3-setuptools \
-  python3-sphinx \
-  python3-sphinx-rtd-theme \
-  python3-tables \
-  python3-yaml \
-  zlib1g-dev \
-  ca-certificates \
-  && rm -rf /var/lib/apt/lists/* \
-  && pip3 install --no-cache-dir jupyter notebook pillow pyhull deprecation
-
-# install modern cmake
-RUN curl -SL https://github.com/Kitware/CMake/releases/download/v{{CMAKE_VERSION}}/cmake-{{CMAKE_VERSION}}.tar.gz | tar -xzC /root && \
-    cd /root/cmake-{{CMAKE_VERSION}} && \
-    ./bootstrap && \
-    make && \
-    make install && \
-    cd / && rm -rf /root/cmake-*
-
-# put clang on the path
-ENV PATH=$PATH:/usr/lib/llvm-5.0/bin
 {% endif %}
 
 # prevent python from loading packages from outside the container
@@ -135,27 +90,6 @@ RUN curl -SL https://github.com/qhull/qhull/archive/{{QHULL_VERSION}}.tar.gz | t
     make install -j {{ MAKEJOBS }} && \
     cd / && rm -rf /root/qhull-*
 
-{% if ubuntu_version == 16 %}
-# ubuntu16 needs a newer eigen
-RUN mkdir /root/eigen-{{EIGEN_VERSION}} && \
-    curl -SL http://bitbucket.org/eigen/eigen/get/{{EIGEN_VERSION}}.tar.gz | tar -xzC /root/eigen-{{EIGEN_VERSION}} --strip-components 1 && \
-    cd /root/eigen-{{EIGEN_VERSION}} && \
-    mkdir build2 && cd build2 && \
-    cmake ../ -DCMAKE_INSTALL_PREFIX=/usr -DBUILD_TESTING=off -DEIGEN_TEST_NOQT=on && \
-    make install -j {{ MAKEJOBS }} && \
-    cd / && rm -rf /root/eigen-*
-
-# ubuntu16 needs a newer cereal
-RUN mkdir /root/cereal-{{CEREAL_VERSION}} && \
-    curl -SL https://github.com/USCiLab/cereal/archive/{{CEREAL_VERSION}}.tar.gz | tar -xzC /root/cereal-{{CEREAL_VERSION}} --strip-components 1 && \
-    cd /root/cereal-{{CEREAL_VERSION}} && \
-    mkdir build2 && cd build2 && \
-    cmake ../ -DCMAKE_INSTALL_PREFIX=/usr -DJUST_INSTALL_CEREAL=on && \
-    make install -j {{ MAKEJOBS }} && \
-    cd / && rm -rf /root/cereal-*
-
-{% endif %}
-
 # mount points for filesystems on clusters
 RUN mkdir -p /nfs \
     mkdir -p /oasis \
@@ -163,3 +97,5 @@ RUN mkdir -p /nfs \
     mkdir -p /work \
     mkdir -p /projects \
     mkdir -p /home1
+
+COPY check-requirements.py /

@@ -29,17 +29,15 @@ shas['TBB_SHA'] = '7b1fd8caea14be72ae4175896510bf99c809cd7031306a1917565e6de7382
 versions['SCIPY_VERSION'] = '1.3.1'
 shas['SCIPY_SHA'] = '2643cfb46d97b7797d1dbdb6f3c23fe3402904e3c90e6facfe6a9b98d808c1b5'
 
-# ubuntu 16 only dependencies
-versions['CMAKE_VERSION'] = '3.15.3'
-versions['EIGEN_VERSION'] = '3.3.7'
-versions['CEREAL_VERSION'] = 'v1.2.2'
-
 # glotzer lab
 repo_version['fresnel']     = versions['FRESNEL_VERSION']     = 'v0.12.0'
 shas['FRESNEL_SHA'] = '9d60508e238cbafe4c8af7aa1f493fc4953c4c852ed634287b7cddbcd8c45bd0'
 
 repo_version['freud']       = versions['FREUD_VERSION']       = 'v2.2.0'
 shas['FREUD_SHA'] = '806a0d6cf23d4c0b7a835959a37af8d013ce3f4ecfadbaafeacadad0bee258aa'
+
+repo_version['fsph']       = versions['FSPH_VERSION']       = 'v0.2.0'
+shas['FSPH_SHA'] = 'eb1c48137e7025dc856d11809d3e666e16d51736befa4aa772fcbffa546a0785'
 
 repo_version['garnett']     = versions['GARNETT_VERSION']     = 'v0.7.1'
 shas['GARNETT_SHA'] = 'a92e45f7f204334977629df3973124fdd0445ec9c7260b3746ae436b0f6a0031'
