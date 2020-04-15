@@ -35,17 +35,17 @@ versions['EIGEN_VERSION'] = '3.3.7'
 versions['CEREAL_VERSION'] = 'v1.2.2'
 
 # glotzer lab
-repo_version['fresnel']     = versions['FRESNEL_VERSION']     = 'v0.11.0'
-shas['FRESNEL_SHA'] = 'e0c6568ea461b00ca720eef3376a0cbe61ffeb3f1ccf63c86a0565591680a733'
+repo_version['fresnel']     = versions['FRESNEL_VERSION']     = 'v0.12.0'
+shas['FRESNEL_SHA'] = '9d60508e238cbafe4c8af7aa1f493fc4953c4c852ed634287b7cddbcd8c45bd0'
 
-repo_version['freud']       = versions['FREUD_VERSION']       = 'v2.1.0'
-shas['FREUD_SHA'] = 'f75174e3885b9a00b44002b7b90b1a1d2b2b918cb69040f59aef8afea448075e'
+repo_version['freud']       = versions['FREUD_VERSION']       = 'v2.2.0'
+shas['FREUD_SHA'] = '806a0d6cf23d4c0b7a835959a37af8d013ce3f4ecfadbaafeacadad0bee258aa'
 
-repo_version['garnett']     = versions['GARNETT_VERSION']     = 'v0.6.1'
-shas['GARNETT_SHA'] = '47d4c59d2042bdb8ded415e8a5782d50777c112196070401d744df494ac3e134'
+repo_version['garnett']     = versions['GARNETT_VERSION']     = 'v0.7.1'
+shas['GARNETT_SHA'] = 'a92e45f7f204334977629df3973124fdd0445ec9c7260b3746ae436b0f6a0031'
 
-repo_version['gsd']         = versions['GSD_VERSION']         = 'v2.0.0'
-shas['GSD_SHA'] = '659221326bf09548f0c8c0e4f9a781585891da41c70a8a62f186895739957eef'
+repo_version['gsd']         = versions['GSD_VERSION']         = 'v2.1.0'
+shas['GSD_SHA'] = 'bc7de11fe71cc3e866df2d82eb96447d0307a061292e6f479d6257be2d099641'
 
 repo_version['hoomd-blue']  = versions['HOOMD_VERSION']       = 'v2.9.0'
 shas['HOOMD_SHA'] = 'e004da89657894e51c91359d85156debad1725291b69278c4eeb89401b0933da'

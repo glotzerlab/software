@@ -5,6 +5,20 @@ Change log
 2020
 ----
 
+2020.04
++++++++
+
+*Software updates:*
+
+* fresnel v0.12.0
+* freud v2.2.0
+* garnett v0.7.1
+* gsd v2.1.0
+
+*Fixes:*
+
+* Add python3-filelock
+
 2020.02
 +++++++
 
