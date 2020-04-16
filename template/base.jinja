@@ -46,11 +46,12 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
   python3-sphinx \
   python3-sphinx-rtd-theme \
   python3-tables \
+  python3-venv \
   python3-yaml \
   zlib1g-dev \
   ca-certificates \
-  && rm -rf /var/lib/apt/lists/* \
-  && pip3 install --no-cache-dir deprecation
+  && rm -rf /var/lib/apt/lists/*
+
 
 # put clang on the path
 ENV PATH=$PATH:/usr/lib/llvm-7/bin
@@ -98,4 +99,14 @@ RUN mkdir -p /nfs \
     mkdir -p /projects \
     mkdir -p /home1
 
-COPY check-requirements.py /
+# make a python virtual environment to install packages into
+# many pip installable packages clobber scripts that ubuntu provides in bin/ and result
+# in broken packages
+ENV PATH=/opt/glotzerlab/bin:$PATH \
+    CMAKE_PREFIX_PATH=/opt/glotzerlab/bin
+
+RUN python3 -m venv /opt/glotzerlab --system-site-packages \
+    && /opt/glotzerlab/bin/pip3 install --no-cache-dir deprecation
+
+# Install the check-requirements script
+COPY check-requirements.py /opt/glotzerlab/bin
