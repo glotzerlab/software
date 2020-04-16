@@ -76,22 +76,22 @@ don't support containers.
 
 ## Building images
 
-The ``build.sh`` script builds all of the images and tags them with the current
-date code.
+``build.sh -r repository [ -s ] [ -t tag ] [ system [ system [ ... ] ] ]``
+builds the images.
 
-``build_testing.sh`` builds all of the images as local singularity images for
-testing. Use this script to test images prior to deploying them on the docker
-and singularity hubs.
-
-You can also examine these scripts and adapt them to your configuration or test
-system.
+* ``-r repository`` sets the docker repository to label the builds
+* ``-s`` enables the docker->singularity conversion and copying the images to
+  ``/nfs/turbo/glotzer/containers/${repository}``
+* ``-t`` set the tag name (the default is the date in ``YYYY-MM`` format).
+* system is one of the directories in ``docker`` to build
 
 ## Singularity
 
-Singularity's docker pull support is flaky. ``build.sh`` generates a
-``Singulartiy`` image file for each cluster using docker2singularity and stores
-them in ``/nfs/turbo/glotzer/containers/glotzerlab``. ``sync.sh`` uploads these
-to https://glotzerlab.engin.umich.edu/downloads/glotzerlab for distribution.
+Singularity's docker pull support is flaky. When requested, ``build.sh``
+generates a ``Singulartiy`` image file for each cluster using docker2singularity
+and stores them in ``/nfs/turbo/glotzer/containers/${repository}``. ``sync.sh``
+uploads these to https://glotzerlab.engin.umich.edu/downloads/glotzerlab for
+distribution.
 
 Previous builds are not available for download. Users are strongly encouraged to
 use the latest images. If users need a previous image, they can build it from
