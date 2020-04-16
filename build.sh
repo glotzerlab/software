@@ -35,7 +35,7 @@ if [ -z "${repository}" ]; then
     usage
 fi
 
-python make_dockerfiles.py
+python3 make_dockerfiles.py
 
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 OUTPUT=`mktemp -d -t singularity.XXXXXXX`
