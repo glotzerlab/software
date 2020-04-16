@@ -8,7 +8,7 @@
     && echo "{{ ROWAN_SHA }}  rowan-{{ ROWAN_VERSION }}.tar.gz" | sha256sum -c - \
     && tar -xzf rowan-{{ ROWAN_VERSION }}.tar.gz -C . \
     && export CFLAGS="{{CFLAGS}}" CXXFLAGS="{{CFLAGS}}" \
-    && python3 /check-requirements.py ./rowan-{{ ROWAN_VERSION }}/requirements.txt \
+    && check-requirements.py ./rowan-{{ ROWAN_VERSION }}/requirements.txt \
     && python3 -m pip install --no-deps --ignore-installed ./rowan-{{ ROWAN_VERSION }} \
     && rm -rf rowan-{{ ROWAN_VERSION }} \
     && rm rowan-{{ ROWAN_VERSION }}.tar.gz \
@@ -19,7 +19,7 @@
 #    && tar -xzf garnett-{{ GARNETT_VERSION }}.tar.gz -C . \
 #    && rm -f garnett-{{ GARNETT_VERSION }}/*.toml \
 #    && export CFLAGS="{{CFLAGS}}" CXXFLAGS="{{CFLAGS}}" \
-#    && python3 /check-requirements.py ./garnett-{{ GARNETT_VERSION }}/requirements.txt \
+#    && check-requirements.py ./garnett-{{ GARNETT_VERSION }}/requirements.txt \
 #    && python3 -m pip install --no-deps --ignore-installed ./garnett-{{ GARNETT_VERSION }} \
 #    && rm -rf garnett-{{ GARNETT_VERSION }} \
 #    && rm garnett-{{ GARNETT_VERSION }}.tar.gz \
@@ -39,7 +39,7 @@
     && tar -xzf libgetar-{{ LIBGETAR_VERSION }}.tar.gz -C . \
     && rm -f libgetar-{{ LIBGETAR_VERSION }}/*.toml \
     && export CFLAGS="{{CFLAGS}}" CXXFLAGS="{{CFLAGS}}" \
-    && python3 /check-requirements.py ./libgetar-{{ LIBGETAR_VERSION }}/requirements.txt \
+    && check-requirements.py ./libgetar-{{ LIBGETAR_VERSION }}/requirements.txt \
     && python3 -m pip install --no-deps --ignore-installed ./libgetar-{{ LIBGETAR_VERSION }} \
     && rm -rf libgetar-{{ LIBGETAR_VERSION }} \
     && rm libgetar-{{ LIBGETAR_VERSION }}.tar.gz \
@@ -58,7 +58,7 @@
     && echo "{{ SIGNAC_SHA }}  signac-{{ SIGNAC_VERSION }}.tar.gz" | sha256sum -c - \
     && tar -xzf signac-{{ SIGNAC_VERSION }}.tar.gz -C . \
     && export CFLAGS="{{CFLAGS}}" CXXFLAGS="{{CFLAGS}}" \
-    && python3 /check-requirements.py ./signac-{{ SIGNAC_VERSION }}/requirements.txt \
+    && check-requirements.py ./signac-{{ SIGNAC_VERSION }}/requirements.txt \
     && python3 -m pip install --no-deps --ignore-installed ./signac-{{ SIGNAC_VERSION }} \
     && rm -rf signac-{{ SIGNAC_VERSION }} \
     && rm signac-{{ SIGNAC_VERSION }}.tar.gz \
@@ -68,7 +68,7 @@
     && echo "{{ SIGNAC_FLOW_SHA }}  signac-flow-{{ SIGNAC_FLOW_VERSION }}.tar.gz" | sha256sum -c - \
     && tar -xzf signac-flow-{{ SIGNAC_FLOW_VERSION }}.tar.gz -C . \
     && export CFLAGS="{{CFLAGS}}" CXXFLAGS="{{CFLAGS}}" \
-    && python3 /check-requirements.py ./signac-flow-{{ SIGNAC_FLOW_VERSION }}/requirements.txt \
+    && check-requirements.py ./signac-flow-{{ SIGNAC_FLOW_VERSION }}/requirements.txt \
     && python3 -m pip install --no-deps --ignore-installed ./signac-flow-{{ SIGNAC_FLOW_VERSION }} \
     && rm -rf signac-flow-{{ SIGNAC_FLOW_VERSION }} \
     && rm signac-flow-{{ SIGNAC_FLOW_VERSION }}.tar.gz \
@@ -95,7 +95,7 @@
     && tar -xzf freud-{{ FREUD_VERSION }}.tar.gz -C . \
     && rm -f freud-{{ FREUD_VERSION }}/*.toml \
     && export CFLAGS="{{CFLAGS}}" CXXFLAGS="{{CFLAGS}}" \
-    && python3 /check-requirements.py ./freud-{{ FREUD_VERSION }}/requirements.txt \
+    && check-requirements.py ./freud-{{ FREUD_VERSION }}/requirements.txt \
     && python3 -m pip install --no-deps --ignore-installed ./freud-{{ FREUD_VERSION }} \
     && rm -rf freud-{{ FREUD_VERSION }} \
     && rm freud-{{ FREUD_VERSION }}.tar.gz \
@@ -114,7 +114,7 @@
     && echo "{{ PYTHIA_SHA }}  pythia-{{ PYTHIA_VERSION }}.tar.gz" | sha256sum -c - \
     && tar -xzf pythia-{{ PYTHIA_VERSION }}.tar.gz -C . \
     && export CFLAGS="{{CFLAGS}}" CXXFLAGS="{{CFLAGS}}" \
-    && python3 /check-requirements.py ./pythia-{{ PYTHIA_VERSION }}/requirements.txt \
+    && check-requirements.py ./pythia-{{ PYTHIA_VERSION }}/requirements.txt \
     && python3 -m pip install --no-deps --ignore-installed ./pythia-{{ PYTHIA_VERSION }} \
     && rm -rf pythia-{{ PYTHIA_VERSION }} \
     && rm pythia-{{ PYTHIA_VERSION }}.tar.gz \

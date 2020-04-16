@@ -75,7 +75,7 @@ curl -sSLO https://github.com/scipy/scipy/releases/download/v1.3.1/scipy-1.3.1.t
     && echo "88ed2c0003543d3154374f741a04fcb21cce32180e7b29152dc93c4c887e0c51  rowan-v1.2.2.tar.gz" | sha256sum -c - \
     && tar -xzf rowan-v1.2.2.tar.gz -C . \
     && export CFLAGS="-mcpu=power9 -mtune=power9" CXXFLAGS="-mcpu=power9 -mtune=power9" \
-    && python3 /check-requirements.py ./rowan-v1.2.2/requirements.txt \
+    && check-requirements.py ./rowan-v1.2.2/requirements.txt \
     && python3 -m pip install --no-deps --ignore-installed ./rowan-v1.2.2 \
     && rm -rf rowan-v1.2.2 \
     && rm rowan-v1.2.2.tar.gz \
@@ -86,7 +86,7 @@ curl -sSLO https://github.com/scipy/scipy/releases/download/v1.3.1/scipy-1.3.1.t
 #    && tar -xzf garnett-v0.7.1.tar.gz -C . \
 #    && rm -f garnett-v0.7.1/*.toml \
 #    && export CFLAGS="-mcpu=power9 -mtune=power9" CXXFLAGS="-mcpu=power9 -mtune=power9" \
-#    && python3 /check-requirements.py ./garnett-v0.7.1/requirements.txt \
+#    && check-requirements.py ./garnett-v0.7.1/requirements.txt \
 #    && python3 -m pip install --no-deps --ignore-installed ./garnett-v0.7.1 \
 #    && rm -rf garnett-v0.7.1 \
 #    && rm garnett-v0.7.1.tar.gz \
@@ -106,7 +106,7 @@ curl -sSLO https://github.com/scipy/scipy/releases/download/v1.3.1/scipy-1.3.1.t
     && tar -xzf libgetar-v1.0.1.tar.gz -C . \
     && rm -f libgetar-v1.0.1/*.toml \
     && export CFLAGS="-mcpu=power9 -mtune=power9" CXXFLAGS="-mcpu=power9 -mtune=power9" \
-    && python3 /check-requirements.py ./libgetar-v1.0.1/requirements.txt \
+    && check-requirements.py ./libgetar-v1.0.1/requirements.txt \
     && python3 -m pip install --no-deps --ignore-installed ./libgetar-v1.0.1 \
     && rm -rf libgetar-v1.0.1 \
     && rm libgetar-v1.0.1.tar.gz \
@@ -125,7 +125,7 @@ curl -sSLO https://github.com/scipy/scipy/releases/download/v1.3.1/scipy-1.3.1.t
     && echo "cc9b1af90ee98746ead05e5d84adb662b60aa861953d71294bac9eb64175b61e  signac-v1.3.0.tar.gz" | sha256sum -c - \
     && tar -xzf signac-v1.3.0.tar.gz -C . \
     && export CFLAGS="-mcpu=power9 -mtune=power9" CXXFLAGS="-mcpu=power9 -mtune=power9" \
-    && python3 /check-requirements.py ./signac-v1.3.0/requirements.txt \
+    && check-requirements.py ./signac-v1.3.0/requirements.txt \
     && python3 -m pip install --no-deps --ignore-installed ./signac-v1.3.0 \
     && rm -rf signac-v1.3.0 \
     && rm signac-v1.3.0.tar.gz \
@@ -135,7 +135,7 @@ curl -sSLO https://github.com/scipy/scipy/releases/download/v1.3.1/scipy-1.3.1.t
     && echo "59633ae44c37d77acde70af9a2be483a84ecb08eb742bdfc2f682b94466758b9  signac-flow-v0.9.0.tar.gz" | sha256sum -c - \
     && tar -xzf signac-flow-v0.9.0.tar.gz -C . \
     && export CFLAGS="-mcpu=power9 -mtune=power9" CXXFLAGS="-mcpu=power9 -mtune=power9" \
-    && python3 /check-requirements.py ./signac-flow-v0.9.0/requirements.txt \
+    && check-requirements.py ./signac-flow-v0.9.0/requirements.txt \
     && python3 -m pip install --no-deps --ignore-installed ./signac-flow-v0.9.0 \
     && rm -rf signac-flow-v0.9.0 \
     && rm signac-flow-v0.9.0.tar.gz \
@@ -148,7 +148,7 @@ curl -sSLO https://github.com/scipy/scipy/releases/download/v1.3.1/scipy-1.3.1.t
     && tar -xzf freud-v2.2.0.tar.gz -C . \
     && rm -f freud-v2.2.0/*.toml \
     && export CFLAGS="-mcpu=power9 -mtune=power9" CXXFLAGS="-mcpu=power9 -mtune=power9" \
-    && python3 /check-requirements.py ./freud-v2.2.0/requirements.txt \
+    && check-requirements.py ./freud-v2.2.0/requirements.txt \
     && python3 -m pip install --no-deps --ignore-installed ./freud-v2.2.0 \
     && rm -rf freud-v2.2.0 \
     && rm freud-v2.2.0.tar.gz \
@@ -167,7 +167,7 @@ curl -sSLO https://github.com/scipy/scipy/releases/download/v1.3.1/scipy-1.3.1.t
     && echo "5dfe1efeb7343fbfc7260dc6f05a8ee17908add288c67094d3740c7056627140  pythia-v0.2.5.tar.gz" | sha256sum -c - \
     && tar -xzf pythia-v0.2.5.tar.gz -C . \
     && export CFLAGS="-mcpu=power9 -mtune=power9" CXXFLAGS="-mcpu=power9 -mtune=power9" \
-    && python3 /check-requirements.py ./pythia-v0.2.5/requirements.txt \
+    && check-requirements.py ./pythia-v0.2.5/requirements.txt \
     && python3 -m pip install --no-deps --ignore-installed ./pythia-v0.2.5 \
     && rm -rf pythia-v0.2.5 \
     && rm pythia-v0.2.5.tar.gz \
