@@ -11,6 +11,7 @@ then
     exit 0
 fi
 
+DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 ROOT=$1
 module reset
 module load gcc/7.4.0
@@ -36,7 +37,7 @@ export LDSHARED="\${OLCF_GCC_ROOT}/bin/gcc -shared"
 export VIRTUAL_ENV=$ROOT
 EOL
 
-cp -a ../check-requirements.py $ROOT/bin
+cp -a $DIR/check-requirements.py $ROOT/bin
 
 source $ROOT/environment.sh
 
