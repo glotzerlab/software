@@ -37,14 +37,15 @@ export LDSHARED="\${OLCF_GCC_ROOT}/bin/gcc -shared"
 export VIRTUAL_ENV=$ROOT
 EOL
 
-cp -a $DIR/check-requirements.py $ROOT/bin
+cp -a $DIR/../../check-requirements.py $ROOT/bin
 
 source $ROOT/environment.sh
 
 mkdir -p /tmp/$USER-glotzerlab-software
 cd /tmp/$USER-glotzerlab-software
 
-python3 -m pip install --progress-bar off --no-deps --no-binary :all: cython mpi4py six numpy tables numexpr deprecation
+python3 -m pip install --progress-bar off --no-binary :all: cython
+python3 -m pip install --progress-bar off --no-binary :all: mpi4py six numpy tables numexpr deprecation
 
 # TBB
 curl -sSLO https://github.com/01org/tbb/archive/2019_U8.tar.gz \
