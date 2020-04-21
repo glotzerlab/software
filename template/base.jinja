@@ -106,6 +106,7 @@ ENV PATH=/opt/glotzerlab/bin:$PATH \
     CMAKE_PREFIX_PATH=/opt/glotzerlab/bin
 
 RUN python3 -m venv /opt/glotzerlab --system-site-packages \
+    && /opt/glotzerlab/bin/pip3 install --no-cache-dir --upgrade pip \
     && /opt/glotzerlab/bin/pip3 install --no-cache-dir deprecation
 
 # Install the check-requirements script
