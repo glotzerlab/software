@@ -36,6 +36,8 @@ export LDSHARED="\${OLCF_GCC_ROOT}/bin/gcc -shared"
 export VIRTUAL_ENV=$ROOT
 EOL
 
+cp -a ../check-requirements.py $ROOT/bin
+
 source $ROOT/environment.sh
 
 mkdir -p /tmp/$USER-glotzerlab-software

@@ -36,6 +36,8 @@ export LDSHARED="\${OLCF_GCC_ROOT}/bin/gcc -shared"
 export VIRTUAL_ENV=$ROOT
 EOL
 
+cp -a ../check-requirements.py $ROOT/bin
+
 source $ROOT/environment.sh
 
 mkdir -p /tmp/$USER-glotzerlab-software
@@ -92,13 +94,13 @@ curl -sSLO https://github.com/scipy/scipy/releases/download/v1.3.1/scipy-1.3.1.t
 #    && rm garnett-v0.7.1.tar.gz \
 #    || exit 1
 
- curl -sSLO https://glotzerlab.engin.umich.edu/Downloads/gsd/gsd-v2.1.0.tar.gz \
-    && echo "bc7de11fe71cc3e866df2d82eb96447d0307a061292e6f479d6257be2d099641  gsd-v2.1.0.tar.gz" | sha256sum -c - \
-    && tar -xzf gsd-v2.1.0.tar.gz -C . \
+ curl -sSLO https://glotzerlab.engin.umich.edu/Downloads/gsd/gsd-v2.1.1.tar.gz \
+    && echo "6aa57c7c1a72a1d60442e5c4c057691d99a64fef83df9f0e9d94374068082fbf  gsd-v2.1.1.tar.gz" | sha256sum -c - \
+    && tar -xzf gsd-v2.1.1.tar.gz -C . \
     && export CFLAGS="-mcpu=power9 -mtune=power9" CXXFLAGS="-mcpu=power9 -mtune=power9" \
-    && python3 -m pip install --no-deps --ignore-installed ./gsd-v2.1.0 \
-    && rm -rf gsd-v2.1.0 \
-    && rm gsd-v2.1.0.tar.gz \
+    && python3 -m pip install --no-deps --ignore-installed ./gsd-v2.1.1 \
+    && rm -rf gsd-v2.1.1 \
+    && rm gsd-v2.1.1.tar.gz \
     || exit 1
 
  curl -sSLO https://glotzerlab.engin.umich.edu/Downloads/libgetar/libgetar-v1.0.1.tar.gz \
