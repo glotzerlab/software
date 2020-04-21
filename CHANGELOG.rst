@@ -8,21 +8,26 @@ Change log
 2020.04
 +++++++
 
-*Software updates:*
+*Updated:*
 
 * fresnel v0.12.0
 * freud v2.2.0
 * garnett v0.7.1
-* gsd v2.1.0
+* gsd v2.1.1
 
-*Fixes:*
+*Changed:*
+
+* Temporarily removed garnett: Ubuntu 18.04 does not provide a compatible
+  ``numpy`` or ``tqdm``.
+
+*Fixed:*
 
 * Add python3-filelock
 
 2020.02
 +++++++
 
-*Software updates:*
+*Updated:*
 
 * freud v2.1.0
 * gsd v2.0.0
@@ -36,7 +41,7 @@ Change log
 2019.12
 +++++++
 
-*Software updates:*
+*Updated:*
 
 * freud v2.0.1
 * gsd v1.10.0
@@ -52,7 +57,7 @@ Change log
 2019.11
 +++++++
 
-*Software updates:*
+*Updated:*
 
 * fresnel v0.11.0
 * freud v2.0.0
@@ -72,7 +77,7 @@ Change log
 2019.10
 +++++++
 
-*Software updates:*
+*Updated:*
 
 * fresnel v0.10.1
 * gsd v1.9.3
@@ -83,7 +88,7 @@ Change log
 2019.09
 +++++++
 
-*Software updates:*
+*Updated:*
 
 * fresnel v0.10.0
 * freud v1.2.2
@@ -110,7 +115,7 @@ Change log
 
 * garnett v0.4.1
 
-*Software updates:*
+*Updated:*
 
 * freud v1.2.1
 * gsd v1.8.0
@@ -121,7 +126,7 @@ Change log
 2019.07
 +++++++
 
-*Software updates:*
+*Updated:*
 
 * freud v1.2.0
 * HOOMD-blue v2.6.0
@@ -132,7 +137,7 @@ Change log
 2019.05
 +++++++
 
-*Software updates:*
+*Updated:*
 
 * fresnel v0.9.0
 * GSD v1.7.0
@@ -142,7 +147,7 @@ Change log
 2019.03
 +++++++
 
-*Software updates:*
+*Updated:*
 
 * fresnel v0.8.0
 * freud v1.0.0
@@ -158,7 +163,7 @@ Change log
 2019.02
 +++++++
 
-*Software updates:*
+*Updated:*
 
 * fresnel v0.7.1
 * HOOMD-blue v2.5.0
@@ -178,7 +183,7 @@ Change log
 2019.01
 +++++++
 
-*Software updates:*
+*Updated:*
 
 * gsd v1.6.0
 * HOOMD-blue v2.4.2
@@ -191,7 +196,7 @@ Change log
 2018.12
 +++++++
 
-*Software updates:*
+*Updated:*
 
 * Freud v0.11.4
 * gsd v1.5.5
@@ -206,7 +211,7 @@ Change log
 2018.11
 +++++++
 
-*Software updates:*
+*Updated:*
 
 * Freud v0.11.3
 * HOOMD-blue v2.4.0
@@ -219,7 +224,7 @@ Change log
 2018.10
 +++++++
 
-*Software updates:*
+*Updated:*
 
 * Embree v3.2.1
 * Freud v0.11.0
@@ -234,7 +239,7 @@ Change log
 * Documentation now on readthedocs.org
 * Latest images are now available directly from singularity-hub
 
-*Software updates:*
+*Updated:*
 
 * Freud v0.10.0
 * libgetar v0.6.1
@@ -244,7 +249,7 @@ Change log
 2018.08
 +++++++
 
-*Software updates:*
+*Updated:*
 
 * Fresnel v0.6.0
 * Freud v0.9.0
@@ -257,7 +262,7 @@ Added:
 
 * pyhull
 
-*Software updates:*
+*Updated:*
 
 * Freud v0.8.2
 * HOOMD-blue v2.3.3
@@ -284,7 +289,7 @@ Added:
 * Rowan v0.6.1
 * Plato v1.1.0
 
-*Software updates:*
+*Updated:*
 
 * Freud v0.8.1
 * GSD v1.5.3
@@ -299,7 +304,7 @@ Added:
 * Tag MPI enabled builds for specific clusters
 * Support SDSC Comet, PSC Bridges, TACC Stampede2, and University of Michigan Flux clusters.
 
-*Software updates:*
+*Updated:*
 
 * Freud v0.8.0
 * GSD v1.5.2

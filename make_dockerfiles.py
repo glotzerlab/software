@@ -42,8 +42,8 @@ shas['FSPH_SHA'] = 'eb1c48137e7025dc856d11809d3e666e16d51736befa4aa772fcbffa546a
 repo_version['garnett']     = versions['GARNETT_VERSION']     = 'v0.7.1'
 shas['GARNETT_SHA'] = 'a92e45f7f204334977629df3973124fdd0445ec9c7260b3746ae436b0f6a0031'
 
-repo_version['gsd']         = versions['GSD_VERSION']         = 'v2.1.0'
-shas['GSD_SHA'] = 'bc7de11fe71cc3e866df2d82eb96447d0307a061292e6f479d6257be2d099641'
+repo_version['gsd']         = versions['GSD_VERSION']         = 'v2.1.1'
+shas['GSD_SHA'] = '6aa57c7c1a72a1d60442e5c4c057691d99a64fef83df9f0e9d94374068082fbf'
 
 repo_version['hoomd-blue']  = versions['HOOMD_VERSION']       = 'v2.9.0'
 shas['HOOMD_SHA'] = 'e004da89657894e51c91359d85156debad1725291b69278c4eeb89401b0933da'
