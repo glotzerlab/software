@@ -9,7 +9,7 @@
     && tar -xzf rowan-{{ ROWAN_VERSION }}.tar.gz -C . \
     && export CFLAGS="{{CFLAGS}}" CXXFLAGS="{{CFLAGS}}" \
     && check-requirements.py ./rowan-{{ ROWAN_VERSION }}/requirements.txt \
-    && python3 -m pip install --no-deps --ignore-installed ./rowan-{{ ROWAN_VERSION }} \
+    && python3 -m pip install --no-use-pep517 --no-build-isolation --no-deps --ignore-installed ./rowan-{{ ROWAN_VERSION }} \
     && rm -rf rowan-{{ ROWAN_VERSION }} \
     && rm rowan-{{ ROWAN_VERSION }}.tar.gz \
     || exit 1
@@ -20,7 +20,7 @@
 #    && rm -f garnett-{{ GARNETT_VERSION }}/*.toml \
 #    && export CFLAGS="{{CFLAGS}}" CXXFLAGS="{{CFLAGS}}" \
 #    && check-requirements.py ./garnett-{{ GARNETT_VERSION }}/requirements.txt \
-#    && python3 -m pip install --no-deps --ignore-installed ./garnett-{{ GARNETT_VERSION }} \
+#    && python3 -m pip install --no-use-pep517 --no-build-isolation --no-deps --ignore-installed ./garnett-{{ GARNETT_VERSION }} \
 #    && rm -rf garnett-{{ GARNETT_VERSION }} \
 #    && rm garnett-{{ GARNETT_VERSION }}.tar.gz \
 #    || exit 1
@@ -29,7 +29,7 @@
     && echo "{{ GSD_SHA }}  gsd-{{ GSD_VERSION }}.tar.gz" | sha256sum -c - \
     && tar -xzf gsd-{{ GSD_VERSION }}.tar.gz -C . \
     && export CFLAGS="{{CFLAGS}}" CXXFLAGS="{{CFLAGS}}" \
-    && python3 -m pip install --no-deps --ignore-installed ./gsd-{{ GSD_VERSION }} \
+    && python3 -m pip install --no-use-pep517 --no-build-isolation --no-deps --ignore-installed ./gsd-{{ GSD_VERSION }} \
     && rm -rf gsd-{{ GSD_VERSION }} \
     && rm gsd-{{ GSD_VERSION }}.tar.gz \
     || exit 1
@@ -40,7 +40,7 @@
     && rm -f libgetar-{{ LIBGETAR_VERSION }}/*.toml \
     && export CFLAGS="{{CFLAGS}}" CXXFLAGS="{{CFLAGS}}" \
     && check-requirements.py ./libgetar-{{ LIBGETAR_VERSION }}/requirements.txt \
-    && python3 -m pip install --no-deps --ignore-installed ./libgetar-{{ LIBGETAR_VERSION }} \
+    && python3 -m pip install --no-use-pep517 --no-build-isolation --no-deps --ignore-installed ./libgetar-{{ LIBGETAR_VERSION }} \
     && rm -rf libgetar-{{ LIBGETAR_VERSION }} \
     && rm libgetar-{{ LIBGETAR_VERSION }}.tar.gz \
     || exit 1
@@ -49,7 +49,7 @@
     && echo "{{ PLATO_SHA }}  plato-{{ PLATO_VERSION }}.tar.gz" | sha256sum -c - \
     && tar -xzf plato-{{ PLATO_VERSION }}.tar.gz -C . \
     && export CFLAGS="{{CFLAGS}}" CXXFLAGS="{{CFLAGS}}" \
-    && python3 -m pip install --no-deps --ignore-installed ./plato-{{ PLATO_VERSION }} \
+    && python3 -m pip install --no-use-pep517 --no-build-isolation --no-deps --ignore-installed ./plato-{{ PLATO_VERSION }} \
     && rm -rf plato-{{ PLATO_VERSION }} \
     && rm plato-{{ PLATO_VERSION }}.tar.gz \
     || exit 1
@@ -59,7 +59,7 @@
     && tar -xzf signac-{{ SIGNAC_VERSION }}.tar.gz -C . \
     && export CFLAGS="{{CFLAGS}}" CXXFLAGS="{{CFLAGS}}" \
     && check-requirements.py ./signac-{{ SIGNAC_VERSION }}/requirements.txt \
-    && python3 -m pip install --no-deps --ignore-installed ./signac-{{ SIGNAC_VERSION }} \
+    && python3 -m pip install --no-use-pep517 --no-build-isolation --no-deps --ignore-installed ./signac-{{ SIGNAC_VERSION }} \
     && rm -rf signac-{{ SIGNAC_VERSION }} \
     && rm signac-{{ SIGNAC_VERSION }}.tar.gz \
     || exit 1
@@ -69,7 +69,7 @@
     && tar -xzf signac-flow-{{ SIGNAC_FLOW_VERSION }}.tar.gz -C . \
     && export CFLAGS="{{CFLAGS}}" CXXFLAGS="{{CFLAGS}}" \
     && check-requirements.py ./signac-flow-{{ SIGNAC_FLOW_VERSION }}/requirements.txt \
-    && python3 -m pip install --no-deps --ignore-installed ./signac-flow-{{ SIGNAC_FLOW_VERSION }} \
+    && python3 -m pip install --no-use-pep517 --no-build-isolation --no-deps --ignore-installed ./signac-flow-{{ SIGNAC_FLOW_VERSION }} \
     && rm -rf signac-flow-{{ SIGNAC_FLOW_VERSION }} \
     && rm signac-flow-{{ SIGNAC_FLOW_VERSION }}.tar.gz \
     || exit 1
@@ -96,7 +96,7 @@
     && rm -f freud-{{ FREUD_VERSION }}/*.toml \
     && export CFLAGS="{{CFLAGS}}" CXXFLAGS="{{CFLAGS}}" \
     && check-requirements.py ./freud-{{ FREUD_VERSION }}/requirements.txt \
-    && python3 -m pip install --no-deps --ignore-installed ./freud-{{ FREUD_VERSION }} \
+    && python3 -m pip install --no-use-pep517 --no-build-isolation --no-deps --ignore-installed ./freud-{{ FREUD_VERSION }} \
     && rm -rf freud-{{ FREUD_VERSION }} \
     && rm freud-{{ FREUD_VERSION }}.tar.gz \
     || exit 1
@@ -105,7 +105,7 @@
     && echo "{{ FSPH_SHA }}  fsph-{{ FSPH_VERSION }}.tar.gz" | sha256sum -c - \
     && tar -xzf fsph-{{ FSPH_VERSION }}.tar.gz -C . \
     && export CFLAGS="{{CFLAGS}}" CXXFLAGS="{{CFLAGS}}" \
-    && python3 -m pip install --no-deps --ignore-installed ./fsph-{{ FSPH_VERSION }} \
+    && python3 -m pip install --no-use-pep517 --no-build-isolation --no-deps --ignore-installed ./fsph-{{ FSPH_VERSION }} \
     && rm -rf fsph-{{ FSPH_VERSION }} \
     && rm fsph-{{ FSPH_VERSION }}.tar.gz \
     || exit 1
@@ -115,7 +115,7 @@
     && tar -xzf pythia-{{ PYTHIA_VERSION }}.tar.gz -C . \
     && export CFLAGS="{{CFLAGS}}" CXXFLAGS="{{CFLAGS}}" \
     && check-requirements.py ./pythia-{{ PYTHIA_VERSION }}/requirements.txt \
-    && python3 -m pip install --no-deps --ignore-installed ./pythia-{{ PYTHIA_VERSION }} \
+    && python3 -m pip install --no-use-pep517 --no-build-isolation --no-deps --ignore-installed ./pythia-{{ PYTHIA_VERSION }} \
     && rm -rf pythia-{{ PYTHIA_VERSION }} \
     && rm pythia-{{ PYTHIA_VERSION }}.tar.gz \
     || exit 1

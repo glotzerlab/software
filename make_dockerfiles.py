@@ -11,7 +11,7 @@ shas = {}
 repo_version = {}
 
 # dependencies
-versions['EMBREE_VERSION'] = '3.6.1'
+versions['EMBREE_VERSION'] = '3.9.0'
 
 versions['OSU_MICROBENCHMARK_VERSION'] ='5.4.1'
 shas['OSU_MICROBENCHMARK_SHA'] ='e90cb683a01744377f77d420de401431242593d8376b25b120950266e140e83c'
@@ -23,8 +23,8 @@ versions['UCX_VERSION'] = '1.6.0'
 versions['PMIX_VERSION'] = '2.2.3'
 
 # Summit-only dependencies
-versions['TBB_VERSION'] = '2019_U8'
-shas['TBB_SHA'] = '7b1fd8caea14be72ae4175896510bf99c809cd7031306a1917565e6de7382fba'
+versions['TBB_VERSION'] = '2020.2'
+shas['TBB_SHA'] = '4804320e1e6cbe3a5421997b52199e3c1a3829b2ecb6489641da4b8e32faf500'
 
 versions['SCIPY_VERSION'] = '1.3.1'
 shas['SCIPY_SHA'] = '2643cfb46d97b7797d1dbdb6f3c23fe3402904e3c90e6facfe6a9b98d808c1b5'

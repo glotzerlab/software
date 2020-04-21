@@ -45,21 +45,33 @@ mkdir -p /tmp/$USER-glotzerlab-software
 cd /tmp/$USER-glotzerlab-software
 
 python3 -m pip install --progress-bar off --no-binary :all: cython
-python3 -m pip install --progress-bar off --no-binary :all: mpi4py six numpy tables numexpr deprecation
+python3 -m pip install --progress-bar off --no-binary :all: \
+    mpi4py \
+    six \
+    numpy \
+    tables \
+    numexpr \
+    deprecation \
+    breathe \
+    cloudpickle \
+    filelock \
+    jinja2 \
+    tqdm \
+    packaging
 
 # TBB
-curl -sSLO https://github.com/01org/tbb/archive/{{ TBB_VERSION }}.tar.gz \
-    && echo "{{ TBB_SHA }}  {{ TBB_VERSION }}.tar.gz" | sha256sum -c - \
-    && tar -xzf {{ TBB_VERSION }}.tar.gz -C . \
-    && cd tbb-{{ TBB_VERSION }} \
+curl -sSLO https://github.com/oneapi-src/oneTBB/archive/v{{ TBB_VERSION }}.tar.gz \
+    && echo "{{ TBB_SHA }}  v{{ TBB_VERSION }}.tar.gz" | sha256sum -c - \
+    && tar -xzf v{{ TBB_VERSION }}.tar.gz -C . \
+    && cd oneTBB-{{ TBB_VERSION }} \
     && make \
     && install -d $ROOT/lib \
     && install -m755 build/linux_*release/*.so* ${ROOT}/lib \
     && install -d $ROOT/include \
     && cp -a include/tbb $ROOT/include \
     && cd .. \
-    && rm -rf tbb-{{ TBB_VERSION }} \
-    && rm {{ TBB_VERSION }}.tar.gz \
+    && rm -rf oneTBB-{{ TBB_VERSION }} \
+    && rm v{{ TBB_VERSION }}.tar.gz \
     || exit 1
 
 # embree is not available for power9

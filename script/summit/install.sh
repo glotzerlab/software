@@ -45,21 +45,33 @@ mkdir -p /tmp/$USER-glotzerlab-software
 cd /tmp/$USER-glotzerlab-software
 
 python3 -m pip install --progress-bar off --no-binary :all: cython
-python3 -m pip install --progress-bar off --no-binary :all: mpi4py six numpy tables numexpr deprecation
+python3 -m pip install --progress-bar off --no-binary :all: \
+    mpi4py \
+    six \
+    numpy \
+    tables \
+    numexpr \
+    deprecation \
+    breathe \
+    cloudpickle \
+    filelock \
+    jinja2 \
+    tqdm \
+    packaging
 
 # TBB
-curl -sSLO https://github.com/01org/tbb/archive/2019_U8.tar.gz \
-    && echo "7b1fd8caea14be72ae4175896510bf99c809cd7031306a1917565e6de7382fba  2019_U8.tar.gz" | sha256sum -c - \
-    && tar -xzf 2019_U8.tar.gz -C . \
-    && cd tbb-2019_U8 \
+curl -sSLO https://github.com/oneapi-src/oneTBB/archive/v2020.2.tar.gz \
+    && echo "4804320e1e6cbe3a5421997b52199e3c1a3829b2ecb6489641da4b8e32faf500  v2020.2.tar.gz" | sha256sum -c - \
+    && tar -xzf v2020.2.tar.gz -C . \
+    && cd oneTBB-2020.2 \
     && make \
     && install -d $ROOT/lib \
     && install -m755 build/linux_*release/*.so* ${ROOT}/lib \
     && install -d $ROOT/include \
     && cp -a include/tbb $ROOT/include \
     && cd .. \
-    && rm -rf tbb-2019_U8 \
-    && rm 2019_U8.tar.gz \
+    && rm -rf oneTBB-2020.2 \
+    && rm v2020.2.tar.gz \
     || exit 1
 
 # embree is not available for power9
@@ -80,7 +92,7 @@ curl -sSLO https://github.com/scipy/scipy/releases/download/v1.3.1/scipy-1.3.1.t
     && tar -xzf rowan-v1.2.2.tar.gz -C . \
     && export CFLAGS="-mcpu=power9 -mtune=power9" CXXFLAGS="-mcpu=power9 -mtune=power9" \
     && check-requirements.py ./rowan-v1.2.2/requirements.txt \
-    && python3 -m pip install --no-deps --ignore-installed ./rowan-v1.2.2 \
+    && python3 -m pip install --no-use-pep517 --no-build-isolation --no-deps --ignore-installed ./rowan-v1.2.2 \
     && rm -rf rowan-v1.2.2 \
     && rm rowan-v1.2.2.tar.gz \
     || exit 1
@@ -91,7 +103,7 @@ curl -sSLO https://github.com/scipy/scipy/releases/download/v1.3.1/scipy-1.3.1.t
 #    && rm -f garnett-v0.7.1/*.toml \
 #    && export CFLAGS="-mcpu=power9 -mtune=power9" CXXFLAGS="-mcpu=power9 -mtune=power9" \
 #    && check-requirements.py ./garnett-v0.7.1/requirements.txt \
-#    && python3 -m pip install --no-deps --ignore-installed ./garnett-v0.7.1 \
+#    && python3 -m pip install --no-use-pep517 --no-build-isolation --no-deps --ignore-installed ./garnett-v0.7.1 \
 #    && rm -rf garnett-v0.7.1 \
 #    && rm garnett-v0.7.1.tar.gz \
 #    || exit 1
@@ -100,7 +112,7 @@ curl -sSLO https://github.com/scipy/scipy/releases/download/v1.3.1/scipy-1.3.1.t
     && echo "6aa57c7c1a72a1d60442e5c4c057691d99a64fef83df9f0e9d94374068082fbf  gsd-v2.1.1.tar.gz" | sha256sum -c - \
     && tar -xzf gsd-v2.1.1.tar.gz -C . \
     && export CFLAGS="-mcpu=power9 -mtune=power9" CXXFLAGS="-mcpu=power9 -mtune=power9" \
-    && python3 -m pip install --no-deps --ignore-installed ./gsd-v2.1.1 \
+    && python3 -m pip install --no-use-pep517 --no-build-isolation --no-deps --ignore-installed ./gsd-v2.1.1 \
     && rm -rf gsd-v2.1.1 \
     && rm gsd-v2.1.1.tar.gz \
     || exit 1
@@ -111,7 +123,7 @@ curl -sSLO https://github.com/scipy/scipy/releases/download/v1.3.1/scipy-1.3.1.t
     && rm -f libgetar-v1.0.1/*.toml \
     && export CFLAGS="-mcpu=power9 -mtune=power9" CXXFLAGS="-mcpu=power9 -mtune=power9" \
     && check-requirements.py ./libgetar-v1.0.1/requirements.txt \
-    && python3 -m pip install --no-deps --ignore-installed ./libgetar-v1.0.1 \
+    && python3 -m pip install --no-use-pep517 --no-build-isolation --no-deps --ignore-installed ./libgetar-v1.0.1 \
     && rm -rf libgetar-v1.0.1 \
     && rm libgetar-v1.0.1.tar.gz \
     || exit 1
@@ -120,7 +132,7 @@ curl -sSLO https://github.com/scipy/scipy/releases/download/v1.3.1/scipy-1.3.1.t
     && echo "8268ab6982f9135d1f7788309804eb15a1e98ef1d2f6d959733a3e23a1595def  plato-v1.7.0.tar.gz" | sha256sum -c - \
     && tar -xzf plato-v1.7.0.tar.gz -C . \
     && export CFLAGS="-mcpu=power9 -mtune=power9" CXXFLAGS="-mcpu=power9 -mtune=power9" \
-    && python3 -m pip install --no-deps --ignore-installed ./plato-v1.7.0 \
+    && python3 -m pip install --no-use-pep517 --no-build-isolation --no-deps --ignore-installed ./plato-v1.7.0 \
     && rm -rf plato-v1.7.0 \
     && rm plato-v1.7.0.tar.gz \
     || exit 1
@@ -130,7 +142,7 @@ curl -sSLO https://github.com/scipy/scipy/releases/download/v1.3.1/scipy-1.3.1.t
     && tar -xzf signac-v1.3.0.tar.gz -C . \
     && export CFLAGS="-mcpu=power9 -mtune=power9" CXXFLAGS="-mcpu=power9 -mtune=power9" \
     && check-requirements.py ./signac-v1.3.0/requirements.txt \
-    && python3 -m pip install --no-deps --ignore-installed ./signac-v1.3.0 \
+    && python3 -m pip install --no-use-pep517 --no-build-isolation --no-deps --ignore-installed ./signac-v1.3.0 \
     && rm -rf signac-v1.3.0 \
     && rm signac-v1.3.0.tar.gz \
     || exit 1
@@ -140,7 +152,7 @@ curl -sSLO https://github.com/scipy/scipy/releases/download/v1.3.1/scipy-1.3.1.t
     && tar -xzf signac-flow-v0.9.0.tar.gz -C . \
     && export CFLAGS="-mcpu=power9 -mtune=power9" CXXFLAGS="-mcpu=power9 -mtune=power9" \
     && check-requirements.py ./signac-flow-v0.9.0/requirements.txt \
-    && python3 -m pip install --no-deps --ignore-installed ./signac-flow-v0.9.0 \
+    && python3 -m pip install --no-use-pep517 --no-build-isolation --no-deps --ignore-installed ./signac-flow-v0.9.0 \
     && rm -rf signac-flow-v0.9.0 \
     && rm signac-flow-v0.9.0.tar.gz \
     || exit 1
@@ -153,7 +165,7 @@ curl -sSLO https://github.com/scipy/scipy/releases/download/v1.3.1/scipy-1.3.1.t
     && rm -f freud-v2.2.0/*.toml \
     && export CFLAGS="-mcpu=power9 -mtune=power9" CXXFLAGS="-mcpu=power9 -mtune=power9" \
     && check-requirements.py ./freud-v2.2.0/requirements.txt \
-    && python3 -m pip install --no-deps --ignore-installed ./freud-v2.2.0 \
+    && python3 -m pip install --no-use-pep517 --no-build-isolation --no-deps --ignore-installed ./freud-v2.2.0 \
     && rm -rf freud-v2.2.0 \
     && rm freud-v2.2.0.tar.gz \
     || exit 1
@@ -162,7 +174,7 @@ curl -sSLO https://github.com/scipy/scipy/releases/download/v1.3.1/scipy-1.3.1.t
     && echo "eb1c48137e7025dc856d11809d3e666e16d51736befa4aa772fcbffa546a0785  fsph-v0.2.0.tar.gz" | sha256sum -c - \
     && tar -xzf fsph-v0.2.0.tar.gz -C . \
     && export CFLAGS="-mcpu=power9 -mtune=power9" CXXFLAGS="-mcpu=power9 -mtune=power9" \
-    && python3 -m pip install --no-deps --ignore-installed ./fsph-v0.2.0 \
+    && python3 -m pip install --no-use-pep517 --no-build-isolation --no-deps --ignore-installed ./fsph-v0.2.0 \
     && rm -rf fsph-v0.2.0 \
     && rm fsph-v0.2.0.tar.gz \
     || exit 1
@@ -172,7 +184,7 @@ curl -sSLO https://github.com/scipy/scipy/releases/download/v1.3.1/scipy-1.3.1.t
     && tar -xzf pythia-v0.2.5.tar.gz -C . \
     && export CFLAGS="-mcpu=power9 -mtune=power9" CXXFLAGS="-mcpu=power9 -mtune=power9" \
     && check-requirements.py ./pythia-v0.2.5/requirements.txt \
-    && python3 -m pip install --no-deps --ignore-installed ./pythia-v0.2.5 \
+    && python3 -m pip install --no-use-pep517 --no-build-isolation --no-deps --ignore-installed ./pythia-v0.2.5 \
     && rm -rf pythia-v0.2.5 \
     && rm pythia-v0.2.5.tar.gz \
     || exit 1
