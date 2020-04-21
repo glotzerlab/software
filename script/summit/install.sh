@@ -44,6 +44,7 @@ source $ROOT/environment.sh
 mkdir -p /tmp/$USER-glotzerlab-software
 cd /tmp/$USER-glotzerlab-software
 
+python3 -m pip install --upgrade pip
 python3 -m pip install --progress-bar off --no-binary :all: cython
 python3 -m pip install --progress-bar off --no-binary :all: \
     mpi4py \
