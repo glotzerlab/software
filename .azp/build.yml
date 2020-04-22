@@ -40,4 +40,4 @@ jobs:
     displayName: Build image
   - script: docker push glotzerlab/software
     displayName: Push image
-    condition: startsWith(variables['Build.SourceBranch'], 'refs/tags/v')
+    condition: startsWith(variables['Build.SourceBranch'], 'refs/tags/')
