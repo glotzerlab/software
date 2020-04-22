@@ -76,13 +76,14 @@ don't support containers.
 
 ## Building images
 
-``build.sh -r repository [ -s ] [ -t tag ] [ system [ system [ ... ] ] ]``
+``build.sh -r repository [ -t tag ] [ -s ] [ -k ] [ system [ system [ ... ] ] ]``
 builds the images.
 
 * ``-r repository`` sets the docker repository to label the builds
+* ``-t`` set the tag name (the default is the date in ``YYYY-MM`` format).
 * ``-s`` enables the docker->singularity conversion and copying the images to
   ``/nfs/turbo/glotzer/containers/${repository}``
-* ``-t`` set the tag name (the default is the date in ``YYYY-MM`` format).
+* ``-k`` skips building the docker image
 * system is one of the directories in ``docker`` to build
 
 ## Singularity

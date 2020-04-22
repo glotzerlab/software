@@ -5,15 +5,16 @@ set -e
 
 usage()
     {
-    echo "Usage: $0 -r repository [ -s ] [ -t tag ] [ system [ system [ ... ] ] ]"
+    echo "Usage: $0 -r repository [ -t tag ] [ -s ] [ -k ] [ system [ system [ ... ] ] ]"
     exit
     }
 
 tag="$(date +%Y.%m)"
 build_singularity=false
+skip_docker=false
 repository=""
 
-while getopts ":sr:t:" o; do
+while getopts ":skr:t:" o; do
     case "${o}" in
         s)
             build_singularity=true
@@ -23,6 +24,9 @@ while getopts ":sr:t:" o; do
             ;;
         t)
             tag=${OPTARG}
+            ;;
+        k)
+            skip_docker=true
             ;;
         *)
             usage
@@ -50,14 +54,16 @@ extra_tags=( ["nompi"]="-t ${repository}/software:latest -t ${repository}/softwa
              ["stampede2"]="-t ${repository}/software:${tag}-skylakex-cuda10-hfi1-mvapich2.3"
 )
 
-for cluster in "$@"
-do
-    cp -a $DIR/test/*.py $DIR/docker/${cluster}/test
-    cp -a $DIR/check-requirements.py $DIR/docker/${cluster}
-    docker build $DIR/docker/${cluster} \
-                -t ${repository}/software:${cluster} \
-                ${extra_tags[$cluster]}
-done
+if [ "$build_singularity" = false ] ; then
+    for cluster in "$@"
+    do
+        cp -a $DIR/test/*.py $DIR/docker/${cluster}/test
+        cp -a $DIR/check-requirements.py $DIR/docker/${cluster}
+        docker build $DIR/docker/${cluster} \
+                    -t ${repository}/software:${cluster} \
+                    ${extra_tags[$cluster]}
+    done
+fi
 
 if [ "$build_singularity" = true ] ; then
     for label in "$@"
