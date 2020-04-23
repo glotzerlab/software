@@ -54,13 +54,14 @@ extra_tags=( ["nompi"]="-t ${repository}/software:latest -t ${repository}/softwa
              ["stampede2"]="-t ${repository}/software:${tag}-skylakex-cuda10-hfi1-mvapich2.3"
 )
 
-if [ "$build_singularity" = false ] ; then
+if [ "$skip_docker" = false ] ; then
     for cluster in "$@"
     do
         cp -a $DIR/test/*.py $DIR/docker/${cluster}/test
         cp -a $DIR/check-requirements.py $DIR/docker/${cluster}
         docker build $DIR/docker/${cluster} \
                     -t ${repository}/software:${cluster} \
+                    -t ${repository}/software:${tag}-${cluster} \
                     ${extra_tags[$cluster]}
     done
 fi
@@ -70,7 +71,7 @@ if [ "$build_singularity" = true ] ; then
     do
         docker run -t --rm --privileged -v /var/run/docker.sock:/var/run/docker.sock \
                    -v ${OUTPUT}:/output singularityware/docker2singularity:v2.6 \
-                   --name software-${label} ${repository}/software:${label}
+                   --name software-${label} ${repository}/software:${tag}-${label}
         mkdir -p /nfs/turbo/glotzer/containers/${repository}
         mv ${OUTPUT}/*.simg /nfs/turbo/glotzer/containers/${repository}
     done
