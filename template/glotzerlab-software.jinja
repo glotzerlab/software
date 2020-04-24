@@ -4,16 +4,6 @@
 {% set RUN = 'RUN' %}
 {% endif %}
 
-{{ RUN }} curl -sSLO https://glotzerlab.engin.umich.edu/Downloads/coxeter/coxeter-{{ COXETER_VERSION }}.tar.gz \
-    && echo "{{ COXETER_SHA }}  coxeter-{{ COXETER_VERSION }}.tar.gz" | sha256sum -c - \
-    && tar -xzf coxeter-{{ COXETER_VERSION }}.tar.gz -C . \
-    && export CFLAGS="{{CFLAGS}}" CXXFLAGS="{{CFLAGS}}" \
-    && check-requirements.py ./coxeter-{{ COXETER_VERSION }}/requirements.txt \
-    && python3 -m pip install --no-cache-dir --no-use-pep517 --no-build-isolation --no-deps --ignore-installed ./coxeter-{{ COXETER_VERSION }} \
-    && rm -rf coxeter-{{ COXETER_VERSION }} \
-    && rm coxeter-{{ COXETER_VERSION }}.tar.gz \
-    || exit 1
-
 {{ RUN }} curl -sSLO https://glotzerlab.engin.umich.edu/Downloads/rowan/rowan-{{ ROWAN_VERSION }}.tar.gz \
     && echo "{{ ROWAN_SHA }}  rowan-{{ ROWAN_VERSION }}.tar.gz" | sha256sum -c - \
     && tar -xzf rowan-{{ ROWAN_VERSION }}.tar.gz -C . \
@@ -22,6 +12,16 @@
     && python3 -m pip install --no-cache-dir --no-use-pep517 --no-build-isolation --no-deps --ignore-installed ./rowan-{{ ROWAN_VERSION }} \
     && rm -rf rowan-{{ ROWAN_VERSION }} \
     && rm rowan-{{ ROWAN_VERSION }}.tar.gz \
+    || exit 1
+
+{{ RUN }} curl -sSLO https://glotzerlab.engin.umich.edu/Downloads/coxeter/coxeter-{{ COXETER_VERSION }}.tar.gz \
+    && echo "{{ COXETER_SHA }}  coxeter-{{ COXETER_VERSION }}.tar.gz" | sha256sum -c - \
+    && tar -xzf coxeter-{{ COXETER_VERSION }}.tar.gz -C . \
+    && export CFLAGS="{{CFLAGS}}" CXXFLAGS="{{CFLAGS}}" \
+    && check-requirements.py ./coxeter-{{ COXETER_VERSION }}/requirements.txt \
+    && python3 -m pip install --no-cache-dir --no-use-pep517 --no-build-isolation --no-deps --ignore-installed ./coxeter-{{ COXETER_VERSION }} \
+    && rm -rf coxeter-{{ COXETER_VERSION }} \
+    && rm coxeter-{{ COXETER_VERSION }}.tar.gz \
     || exit 1
 
 #{{ RUN }} curl -sSLO https://glotzerlab.engin.umich.edu/downloads/garnett/garnett-{{ GARNETT_VERSION }}.tar.gz \
