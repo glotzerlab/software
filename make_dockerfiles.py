@@ -57,7 +57,7 @@ shas['PYTHIA_SHA'] = '5dfe1efeb7343fbfc7260dc6f05a8ee17908add288c67094d3740c7056
 repo_version['rowan']       = versions['ROWAN_VERSION']       = 'v1.2.2'
 shas['ROWAN_SHA'] = '88ed2c0003543d3154374f741a04fcb21cce32180e7b29152dc93c4c887e0c51'
 
-repo_version['coxeter']       = versions['ROWAN_VERSION']       = 'v0.2.0'
+repo_version['coxeter']       = versions['COXETER_VERSION']       = 'v0.2.0'
 shas['COXETER_SHA'] = '83ac5f21377527a186404120598cc58a16411b06e4d866f970732287d07d0f2a'
 
 repo_version['plato']       = versions['PLATO_VERSION']       = 'v1.7.0'
