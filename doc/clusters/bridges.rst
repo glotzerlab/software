@@ -6,12 +6,12 @@ Apply for resources on Bridges through the `XSEDE <https://www.xsede.org/>`_ pro
 
 The **glotzerlab-software** image is large, store it in your scratch directory::
 
-    ▶ cd $SCRATCH
+    $ cd $SCRATCH
 
 Download the image with support for Bridges::
 
-    ▶ module load singularity/2.6.0
-    ▶ curl -o software.simg https://glotzerlab.engin.umich.edu/downloads/glotzerlab/software-bridges.simg
+    $ module load singularity/2.6.0
+    $ curl -o software.simg https://glotzerlab.engin.umich.edu/downloads/glotzerlab/software-bridges.simg
 
 Use the following commands in your job scripts or interactively to execute software inside the container:
 

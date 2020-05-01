@@ -15,7 +15,7 @@ Quick start
 
 First, download the **glotzerlab/software** image::
 
-    ▶ curl -o software.simg https://glotzerlab.engin.umich.edu/downloads/glotzerlab/software-nompi.simg
+    $ curl -o software.simg https://glotzerlab.engin.umich.edu/downloads/glotzerlab/software-nompi.simg
 
 .. note::
 
@@ -23,12 +23,12 @@ First, download the **glotzerlab/software** image::
 
 **singularity exec** executes software from inside the container::
 
-    ▶ singularity exec software.simg python3 --version
+    $ singularity exec software.simg python3 --version
     Python 3.5.2
 
 Add the ``--nv`` option to **enable NVIDIA GPUs** inside the container::
 
-    ▶ singularity exec --nv software.simg nvidia-smi
+    $ singularity exec --nv software.simg nvidia-smi
     Thu Sep 13 16:49:15 2018
     +-----------------------------------------------------------------------------+
     | NVIDIA-SMI 396.54                 Driver Version: 396.54                    |
@@ -42,7 +42,7 @@ Add the ``--nv`` option to **enable NVIDIA GPUs** inside the container::
 
 **singularity shell** launches an interactive shell::
 
-    ▶ singularity shell --nv software.simg
+    $ singularity shell --nv software.simg
     Singularity: Invoking an interactive shell within container...
 
     Singularity software.simg:~> python3
@@ -62,7 +62,7 @@ Add the ``--nv`` option to **enable NVIDIA GPUs** inside the container::
 **glotzerlab-software** :doc:`updates monthly <changes>` with the latest versions of included software.
 Download the latest image to update::
 
-    ▶ curl -o software.simg https://glotzerlab.engin.umich.edu/downloads/glotzerlab/software-nompi.simg
+    $ curl -o software.simg https://glotzerlab.engin.umich.edu/downloads/glotzerlab/software-nompi.simg
 
 .. seealso::
 

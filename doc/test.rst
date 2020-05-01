@@ -6,7 +6,7 @@ software inter-operates with the host system.
 
 Copy the test scripts to the current directory::
 
-    ▶ singularity exec software.simg bash -c "cp /test/* ."
+    $ singularity exec software.simg bash -c "cp /test/* ."
 
 .. note::
 
@@ -14,8 +14,8 @@ Copy the test scripts to the current directory::
 
 Submit the test jobs::
 
-    ▶ sbatch job-cpu.sh
-    ▶ sbatch job-gpu.sh
+    $ sbatch job-cpu.sh
+    $ sbatch job-gpu.sh
 
 .. note::
 
@@ -23,7 +23,7 @@ Submit the test jobs::
 
 After the jobs complete, examine the test output::
 
-    ▶ cat test-results-cpu.out
+    $ cat test-results-cpu.out
     ** Starting serial CPU tests **
     Fresnel version   : 0.6.0
     Fresnel device    : <fresnel.Device: All available CPU threads>
@@ -78,7 +78,7 @@ After the jobs complete, examine the test output::
     2097152              7377.73
     4194304              7640.81
 
-    ▶ cat test-results-gpu.out
+    $ cat test-results-gpu.out
     ** Starting serial GPU tests **
     HOOMD version     : 2.3.4
     HOOMD flags       : CUDA (8.0) DOUBLE HPMC_MIXED MPI TBB SSE SSE2 SSE3 SSE4_1 SSE4_2 AVX AVX2

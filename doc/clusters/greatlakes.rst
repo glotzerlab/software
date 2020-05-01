@@ -5,7 +5,7 @@ Great Lakes (UMich)
 
 The **glotzerlab-software** image is large, store it in your scratch directory::
 
-    ▶ cd /scratch/your-account_root/your-account/$USER
+    $ cd /scratch/your-account_root/your-account/$USER
 
 .. note::
 
@@ -13,7 +13,7 @@ The **glotzerlab-software** image is large, store it in your scratch directory::
 
 Download the image with support for Great Lakes::
 
-    ▶ curl -o software.simg https://glotzerlab.engin.umich.edu/downloads/glotzerlab/software-greatlakes.simg
+    $ curl -o software.simg https://glotzerlab.engin.umich.edu/downloads/glotzerlab/software-greatlakes.simg
 
 Use the following commands in your job scripts or interactively to execute software inside the container:
 

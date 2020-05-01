@@ -13,13 +13,13 @@ and a module environment to create an equivalent software stack.
 
 First, clone the **glotzerlab-software** repository::
 
-    ▶ git clone https://github.com/glotzerlab/software
-    ▶ cd software
+    $ git clone https://github.com/glotzerlab/software
+    $ cd software
 
 If you already have a clone, update it::
 
-    ▶ cd software
-    ▶ git pull origin master
+    $ cd software
+    $ git pull origin master
 
 Per OLCF policies, you should install your software in NFS under ``/ccs/proj/``. Set the installation root directory to
 ``/ccs/proj/your-project/glotzerlab-software`` to share a single software installation with your project.
@@ -28,12 +28,12 @@ to install a user-specific set of software.
 
 Build the software environment and install it into the root::
 
-    ▶ script/summit/install.sh /ccs/proj/your-project/glotzerlab-software
+    $ script/summit/install.sh /ccs/proj/your-project/glotzerlab-software
     ... compiling software will take several minutes ...
 
 Activate the environment with::
 
-    ▶ source /ccs/proj/your-project/glotzerlab-software/environment.sh
+    $ source /ccs/proj/your-project/glotzerlab-software/environment.sh
 
 The summit environment is intended to execute HOOMD simulations. Compared to the containerized environments,
 the following packages are missing because they do not yet support the ppc64le architecture:
@@ -56,8 +56,8 @@ The following packages are missing because we have not yet tested these on summi
 The summit environment is a `python3 venv <https://docs.python.org/3/library/venv.html>`_. You may extend it with
 additional python packages using ``python3 -m pip install``::
 
-    ▶ source /ccs/proj/your-project/glotzerlab-software/environment.sh
-    ▶ python3 -m pip install package
+    $ source /ccs/proj/your-project/glotzerlab-software/environment.sh
+    $ python3 -m pip install package
 
 .. note::
 

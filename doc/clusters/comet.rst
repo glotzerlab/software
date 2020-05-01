@@ -6,12 +6,12 @@ Apply for resources on Comet through the `XSEDE <https://www.xsede.org/>`_ progr
 
 The **glotzerlab-software** image is large, store it in your scratch directory::
 
-    ▶ cd /oasis/scratch/comet/$USER/temp_project
+    $ cd /oasis/scratch/comet/$USER/temp_project
 
 Download the image with support for Comet::
 
-    ▶ module load singularity
-    ▶ curl -o software.simg https://glotzerlab.engin.umich.edu/downloads/glotzerlab/software-comet.simg
+    $ module load singularity
+    $ curl -o software.simg https://glotzerlab.engin.umich.edu/downloads/glotzerlab/software-comet.simg
 
 Use the following commands in your job scripts or interactively to execute software inside the container:
 

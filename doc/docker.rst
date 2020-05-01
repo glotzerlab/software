@@ -6,7 +6,7 @@ docker based systems (for example: cloud platforms).
 
 You can start an interactive session of the glotzerlab/software image with the following command::
 
-    ▶ docker run --rm -it glotzerlab/software
+    $ docker run --rm -it glotzerlab/software
     glotzerlab-software@2f06ae2f7ce0:/$ python3
     Python 3.5.2 (default, Nov 23 2017, 16:37:01)
     [GCC 5.4.0 20160609] on linux
@@ -19,7 +19,7 @@ You can utilize NVIDIA GPUs on local and cloud systems with the NVIDIA container
 `NVIDIA GPU CLOUD documentation <http://docs.nvidia.com/ngc/index.html#ngc-with-nvidia-titan-pcs>`_ for more
 information::
 
-    ▶ docker run --runtime=nvidia --rm -it glotzerlab/software
+    $ docker run --runtime=nvidia --rm -it glotzerlab/software
     glotzerlab-software@b0cbab541230:/$ nvidia-smi
     Fri Sep 14 15:51:34 2018
     +-----------------------------------------------------------------------------+
