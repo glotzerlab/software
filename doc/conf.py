@@ -37,7 +37,7 @@ master_doc = 'index'
 
 # General information about the project.
 project = 'Glotzerlab software images'
-copyright = '2018, The Regents of the University of Michigan'
+copyright = '2018-2020, The Regents of the University of Michigan'
 author = 'The Regents of the University of Michigan'
 
 # The version info for the project you're documenting, acts as replacement for
@@ -127,7 +127,11 @@ html_theme = 'sphinx_rtd_theme'
 # Add any paths that contain custom static files (such as style sheets) here,
 # relative to this directory. They are copied after the builtin static files,
 # so a file named "default.css" will overwrite the builtin "default.css".
-# html_static_path = ['_static']
+html_static_path = ['_static']
+
+html_css_files = [
+    'css/glotzerlab-software-theme.css',
+]
 
 # Add any extra paths that contain custom files (such as robots.txt or
 # .htaccess) here, relative to this directory. These files are copied
@@ -212,7 +216,7 @@ latex_elements = {
 # (source start file, target name, title,
 #  author, documentclass [howto, manual, or own class]).
 latex_documents = [
-    (master_doc, 'glotzerlab-software.tex', 'Fresnel Documentation',
+    (master_doc, 'glotzerlab-software.tex', 'glotzerlab-software Documentation',
      'The Regents of the University of Michigan', 'manual'),
 ]
 
