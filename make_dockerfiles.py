@@ -42,11 +42,11 @@ shas['FSPH_SHA'] = 'eb1c48137e7025dc856d11809d3e666e16d51736befa4aa772fcbffa546a
 repo_version['garnett']     = versions['GARNETT_VERSION']     = 'v0.7.1'
 shas['GARNETT_SHA'] = 'a92e45f7f204334977629df3973124fdd0445ec9c7260b3746ae436b0f6a0031'
 
-repo_version['gsd']         = versions['GSD_VERSION']         = 'v2.1.1'
-shas['GSD_SHA'] = '6aa57c7c1a72a1d60442e5c4c057691d99a64fef83df9f0e9d94374068082fbf'
+repo_version['gsd']         = versions['GSD_VERSION']         = 'v2.1.2'
+shas['GSD_SHA'] = 'd6f7aaa095f347fab882062098313eff08a7302182815ab7b546ee2dc5c7d4f6'
 
-repo_version['hoomd-blue']  = versions['HOOMD_VERSION']       = 'v2.9.0'
-shas['HOOMD_SHA'] = 'e004da89657894e51c91359d85156debad1725291b69278c4eeb89401b0933da'
+repo_version['hoomd-blue']  = versions['HOOMD_VERSION']       = 'v2.9.2'
+shas['HOOMD_SHA'] = '1975f35807e690594a9f3f0d9a19461764cad45f052be08b1f71ef07caa56665'
 
 repo_version['libgetar']    = versions['LIBGETAR_VERSION']    = 'v1.0.1'
 shas['LIBGETAR_SHA'] = '0a438dc8336103158fc4dbb7ebcbc011279d7a8ae134824dda5946e6b9042039'
