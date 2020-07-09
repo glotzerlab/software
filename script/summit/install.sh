@@ -98,6 +98,16 @@ curl -sSLO https://github.com/scipy/scipy/releases/download/v1.3.1/scipy-1.3.1.t
     && rm rowan-v1.2.2.tar.gz \
     || exit 1
 
+ curl -sSLO https://glotzerlab.engin.umich.edu/Downloads/coxeter/coxeter-v0.2.0.tar.gz \
+    && echo "83ac5f21377527a186404120598cc58a16411b06e4d866f970732287d07d0f2a  coxeter-v0.2.0.tar.gz" | sha256sum -c - \
+    && tar -xzf coxeter-v0.2.0.tar.gz -C . \
+    && export CFLAGS="-mcpu=power9 -mtune=power9" CXXFLAGS="-mcpu=power9 -mtune=power9" \
+    && check-requirements.py ./coxeter-v0.2.0/requirements.txt \
+    && python3 -m pip install --no-cache-dir --no-use-pep517 --no-build-isolation --no-deps --ignore-installed ./coxeter-v0.2.0 \
+    && rm -rf coxeter-v0.2.0 \
+    && rm coxeter-v0.2.0.tar.gz \
+    || exit 1
+
 # curl -sSLO https://glotzerlab.engin.umich.edu/downloads/garnett/garnett-v0.7.1.tar.gz \
 #    && echo "a92e45f7f204334977629df3973124fdd0445ec9c7260b3746ae436b0f6a0031  garnett-v0.7.1.tar.gz" | sha256sum -c - \
 #    && tar -xzf garnett-v0.7.1.tar.gz -C . \
@@ -109,13 +119,13 @@ curl -sSLO https://github.com/scipy/scipy/releases/download/v1.3.1/scipy-1.3.1.t
 #    && rm garnett-v0.7.1.tar.gz \
 #    || exit 1
 
- curl -sSLO https://glotzerlab.engin.umich.edu/Downloads/gsd/gsd-v2.1.1.tar.gz \
-    && echo "6aa57c7c1a72a1d60442e5c4c057691d99a64fef83df9f0e9d94374068082fbf  gsd-v2.1.1.tar.gz" | sha256sum -c - \
-    && tar -xzf gsd-v2.1.1.tar.gz -C . \
+ curl -sSLO https://glotzerlab.engin.umich.edu/Downloads/gsd/gsd-v2.1.2.tar.gz \
+    && echo "d6f7aaa095f347fab882062098313eff08a7302182815ab7b546ee2dc5c7d4f6  gsd-v2.1.2.tar.gz" | sha256sum -c - \
+    && tar -xzf gsd-v2.1.2.tar.gz -C . \
     && export CFLAGS="-mcpu=power9 -mtune=power9" CXXFLAGS="-mcpu=power9 -mtune=power9" \
-    && python3 -m pip install --no-cache-dir --no-use-pep517 --no-build-isolation --no-deps --ignore-installed ./gsd-v2.1.1 \
-    && rm -rf gsd-v2.1.1 \
-    && rm gsd-v2.1.1.tar.gz \
+    && python3 -m pip install --no-cache-dir --no-use-pep517 --no-build-isolation --no-deps --ignore-installed ./gsd-v2.1.2 \
+    && rm -rf gsd-v2.1.2 \
+    && rm gsd-v2.1.2.tar.gz \
     || exit 1
 
  curl -sSLO https://glotzerlab.engin.umich.edu/Downloads/libgetar/libgetar-v1.0.1.tar.gz \
@@ -190,17 +200,17 @@ curl -sSLO https://github.com/scipy/scipy/releases/download/v1.3.1/scipy-1.3.1.t
     && rm pythia-v0.2.5.tar.gz \
     || exit 1
 
- curl -sSLO https://glotzerlab.engin.umich.edu/Downloads/hoomd/hoomd-v2.9.0.tar.gz \
-    && echo "e004da89657894e51c91359d85156debad1725291b69278c4eeb89401b0933da  hoomd-v2.9.0.tar.gz" | sha256sum -c - \
-    && tar -xzf hoomd-v2.9.0.tar.gz -C . \
-    && cd hoomd-v2.9.0 \
+ curl -sSLO https://glotzerlab.engin.umich.edu/Downloads/hoomd/hoomd-v2.9.2.tar.gz \
+    && echo "1975f35807e690594a9f3f0d9a19461764cad45f052be08b1f71ef07caa56665  hoomd-v2.9.2.tar.gz" | sha256sum -c - \
+    && tar -xzf hoomd-v2.9.2.tar.gz -C . \
+    && cd hoomd-v2.9.2 \
     && mkdir -p build \
     && cd build \
     && export CFLAGS="-mcpu=power9 -mtune=power9" CXXFLAGS="-mcpu=power9 -mtune=power9" \
     && cmake ../ -DPYTHON_EXECUTABLE="`which python3`" -DENABLE_CUDA=on -DENABLE_MPI=on -DENABLE_TBB=off -DBUILD_JIT=off -DBUILD_TESTING=off -DENABLE_MPI_CUDA=on -DCMAKE_INSTALL_PREFIX=`python3 -c "import site; print(site.getsitepackages()[0])"` \
     && make install -j4 \
     && cd ../../ \
-    && rm -rf /root/hoomd-v2.9.0 \
-    && rm hoomd-v2.9.0.tar.gz \
+    && rm -rf /root/hoomd-v2.9.2 \
+    && rm hoomd-v2.9.2.tar.gz \
     || exit 1
 

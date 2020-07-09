@@ -4,7 +4,7 @@
 {% set RUN = 'RUN' %}
 {% endif %}
 
-{{ RUN }} curl -sSLO https://glotzerlab.engin.umich.edu/Downloads/rowan/rowan-{{ ROWAN_VERSION }}.tar.gz \
+{{ RUN }} curl -sSLO http://glotzerlab.engin.umich.edu/Downloads/rowan/rowan-{{ ROWAN_VERSION }}.tar.gz \
     && echo "{{ ROWAN_SHA }}  rowan-{{ ROWAN_VERSION }}.tar.gz" | sha256sum -c - \
     && tar -xzf rowan-{{ ROWAN_VERSION }}.tar.gz -C . \
     && export CFLAGS="{{CFLAGS}}" CXXFLAGS="{{CFLAGS}}" \
@@ -14,7 +14,7 @@
     && rm rowan-{{ ROWAN_VERSION }}.tar.gz \
     || exit 1
 
-{{ RUN }} curl -sSLO https://glotzerlab.engin.umich.edu/Downloads/coxeter/coxeter-{{ COXETER_VERSION }}.tar.gz \
+{{ RUN }} curl -sSLO http://glotzerlab.engin.umich.edu/Downloads/coxeter/coxeter-{{ COXETER_VERSION }}.tar.gz \
     && echo "{{ COXETER_SHA }}  coxeter-{{ COXETER_VERSION }}.tar.gz" | sha256sum -c - \
     && tar -xzf coxeter-{{ COXETER_VERSION }}.tar.gz -C . \
     && export CFLAGS="{{CFLAGS}}" CXXFLAGS="{{CFLAGS}}" \
@@ -24,7 +24,7 @@
     && rm coxeter-{{ COXETER_VERSION }}.tar.gz \
     || exit 1
 
-#{{ RUN }} curl -sSLO https://glotzerlab.engin.umich.edu/downloads/garnett/garnett-{{ GARNETT_VERSION }}.tar.gz \
+#{{ RUN }} curl -sSLO http://glotzerlab.engin.umich.edu/downloads/garnett/garnett-{{ GARNETT_VERSION }}.tar.gz \
 #    && echo "{{ GARNETT_SHA }}  garnett-{{ GARNETT_VERSION }}.tar.gz" | sha256sum -c - \
 #    && tar -xzf garnett-{{ GARNETT_VERSION }}.tar.gz -C . \
 #    && rm -f garnett-{{ GARNETT_VERSION }}/*.toml \
@@ -35,7 +35,7 @@
 #    && rm garnett-{{ GARNETT_VERSION }}.tar.gz \
 #    || exit 1
 
-{{ RUN }} curl -sSLO https://glotzerlab.engin.umich.edu/Downloads/gsd/gsd-{{ GSD_VERSION }}.tar.gz \
+{{ RUN }} curl -sSLO http://glotzerlab.engin.umich.edu/Downloads/gsd/gsd-{{ GSD_VERSION }}.tar.gz \
     && echo "{{ GSD_SHA }}  gsd-{{ GSD_VERSION }}.tar.gz" | sha256sum -c - \
     && tar -xzf gsd-{{ GSD_VERSION }}.tar.gz -C . \
     && export CFLAGS="{{CFLAGS}}" CXXFLAGS="{{CFLAGS}}" \
@@ -44,7 +44,7 @@
     && rm gsd-{{ GSD_VERSION }}.tar.gz \
     || exit 1
 
-{{ RUN }} curl -sSLO https://glotzerlab.engin.umich.edu/Downloads/libgetar/libgetar-{{ LIBGETAR_VERSION }}.tar.gz \
+{{ RUN }} curl -sSLO http://glotzerlab.engin.umich.edu/Downloads/libgetar/libgetar-{{ LIBGETAR_VERSION }}.tar.gz \
     && echo "{{ LIBGETAR_SHA }}  libgetar-{{ LIBGETAR_VERSION }}.tar.gz" | sha256sum -c - \
     && tar -xzf libgetar-{{ LIBGETAR_VERSION }}.tar.gz -C . \
     && rm -f libgetar-{{ LIBGETAR_VERSION }}/*.toml \
@@ -55,7 +55,7 @@
     && rm libgetar-{{ LIBGETAR_VERSION }}.tar.gz \
     || exit 1
 
-{{ RUN }} curl -sSLO https://glotzerlab.engin.umich.edu/Downloads/plato/plato-{{ PLATO_VERSION }}.tar.gz \
+{{ RUN }} curl -sSLO http://glotzerlab.engin.umich.edu/Downloads/plato/plato-{{ PLATO_VERSION }}.tar.gz \
     && echo "{{ PLATO_SHA }}  plato-{{ PLATO_VERSION }}.tar.gz" | sha256sum -c - \
     && tar -xzf plato-{{ PLATO_VERSION }}.tar.gz -C . \
     && export CFLAGS="{{CFLAGS}}" CXXFLAGS="{{CFLAGS}}" \
@@ -64,7 +64,7 @@
     && rm plato-{{ PLATO_VERSION }}.tar.gz \
     || exit 1
 
-{{ RUN }} curl -sSLO https://glotzerlab.engin.umich.edu/Downloads/signac/signac-{{ SIGNAC_VERSION }}.tar.gz \
+{{ RUN }} curl -sSLO http://glotzerlab.engin.umich.edu/Downloads/signac/signac-{{ SIGNAC_VERSION }}.tar.gz \
     && echo "{{ SIGNAC_SHA }}  signac-{{ SIGNAC_VERSION }}.tar.gz" | sha256sum -c - \
     && tar -xzf signac-{{ SIGNAC_VERSION }}.tar.gz -C . \
     && export CFLAGS="{{CFLAGS}}" CXXFLAGS="{{CFLAGS}}" \
@@ -74,7 +74,7 @@
     && rm signac-{{ SIGNAC_VERSION }}.tar.gz \
     || exit 1
 
-{{ RUN }} curl -sSLO https://glotzerlab.engin.umich.edu/Downloads/signac-flow/signac-flow-{{ SIGNAC_FLOW_VERSION }}.tar.gz \
+{{ RUN }} curl -sSLO http://glotzerlab.engin.umich.edu/Downloads/signac-flow/signac-flow-{{ SIGNAC_FLOW_VERSION }}.tar.gz \
     && echo "{{ SIGNAC_FLOW_SHA }}  signac-flow-{{ SIGNAC_FLOW_VERSION }}.tar.gz" | sha256sum -c - \
     && tar -xzf signac-flow-{{ SIGNAC_FLOW_VERSION }}.tar.gz -C . \
     && export CFLAGS="{{CFLAGS}}" CXXFLAGS="{{CFLAGS}}" \
@@ -85,7 +85,7 @@
     || exit 1
 
 {% if system != 'summit' %}
-{{ RUN }} curl -sSLO https://glotzerlab.engin.umich.edu/Downloads/fresnel/fresnel-{{ FRESNEL_VERSION }}.tar.gz \
+{{ RUN }} curl -sSLO http://glotzerlab.engin.umich.edu/Downloads/fresnel/fresnel-{{ FRESNEL_VERSION }}.tar.gz \
     && echo "{{ FRESNEL_SHA }}  fresnel-{{ FRESNEL_VERSION }}.tar.gz" | sha256sum -c - \
     && tar -xzf fresnel-{{ FRESNEL_VERSION }}.tar.gz -C . \
     && cd fresnel-{{ FRESNEL_VERSION }} \
@@ -100,7 +100,7 @@
     || exit 1
 {% endif %}
 
-{{ RUN }} curl -sSLO https://glotzerlab.engin.umich.edu/Downloads/freud/freud-{{ FREUD_VERSION }}.tar.gz \
+{{ RUN }} curl -sSLO http://glotzerlab.engin.umich.edu/Downloads/freud/freud-{{ FREUD_VERSION }}.tar.gz \
     && echo "{{ FREUD_SHA }}  freud-{{ FREUD_VERSION }}.tar.gz" | sha256sum -c - \
     && tar -xzf freud-{{ FREUD_VERSION }}.tar.gz -C . \
     && rm -f freud-{{ FREUD_VERSION }}/*.toml \
@@ -111,7 +111,7 @@
     && rm freud-{{ FREUD_VERSION }}.tar.gz \
     || exit 1
 
-{{ RUN }} curl -sSLO https://glotzerlab.engin.umich.edu/Downloads/fsph/fsph-{{ FSPH_VERSION }}.tar.gz \
+{{ RUN }} curl -sSLO http://glotzerlab.engin.umich.edu/Downloads/fsph/fsph-{{ FSPH_VERSION }}.tar.gz \
     && echo "{{ FSPH_SHA }}  fsph-{{ FSPH_VERSION }}.tar.gz" | sha256sum -c - \
     && tar -xzf fsph-{{ FSPH_VERSION }}.tar.gz -C . \
     && export CFLAGS="{{CFLAGS}}" CXXFLAGS="{{CFLAGS}}" \
@@ -120,7 +120,7 @@
     && rm fsph-{{ FSPH_VERSION }}.tar.gz \
     || exit 1
 
-{{ RUN }} curl -sSLO https://glotzerlab.engin.umich.edu/Downloads/pythia/pythia-{{ PYTHIA_VERSION }}.tar.gz \
+{{ RUN }} curl -sSLO http://glotzerlab.engin.umich.edu/Downloads/pythia/pythia-{{ PYTHIA_VERSION }}.tar.gz \
     && echo "{{ PYTHIA_SHA }}  pythia-{{ PYTHIA_VERSION }}.tar.gz" | sha256sum -c - \
     && tar -xzf pythia-{{ PYTHIA_VERSION }}.tar.gz -C . \
     && export CFLAGS="{{CFLAGS}}" CXXFLAGS="{{CFLAGS}}" \
@@ -130,7 +130,7 @@
     && rm pythia-{{ PYTHIA_VERSION }}.tar.gz \
     || exit 1
 
-{{ RUN }} curl -sSLO https://glotzerlab.engin.umich.edu/Downloads/hoomd/hoomd-{{ HOOMD_VERSION }}.tar.gz \
+{{ RUN }} curl -sSLO http://glotzerlab.engin.umich.edu/Downloads/hoomd/hoomd-{{ HOOMD_VERSION }}.tar.gz \
     && echo "{{ HOOMD_SHA }}  hoomd-{{ HOOMD_VERSION }}.tar.gz" | sha256sum -c - \
     && tar -xzf hoomd-{{ HOOMD_VERSION }}.tar.gz -C . \
     && cd hoomd-{{ HOOMD_VERSION }} \
@@ -146,10 +146,10 @@
 
 {% if output != 'script' %}
 {{ RUN }} mkdir /hoomd-examples \
-    && curl -sSL https://bitbucket.org/glotzer/hoomd-examples/get/master.tar.gz \
+    && curl -sSL http://bitbucket.org/glotzer/hoomd-examples/get/master.tar.gz \
     | tar -xzC /hoomd-examples --strip-components=1
 
 {{ RUN }} mkdir /fresnel-examples \
-    && curl -sSL https://bitbucket.org/glotzer/fresnel-examples/get/master.tar.gz \
+    && curl -sSL http://bitbucket.org/glotzer/fresnel-examples/get/master.tar.gz \
     | tar -xzC /fresnel-examples --strip-components=1
 {% endif %}
