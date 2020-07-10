@@ -88,129 +88,92 @@ curl -sSLO https://github.com/scipy/scipy/releases/download/v1.3.1/scipy-1.3.1.t
 
 
 
- curl -sSLO https://glotzerlab.engin.umich.edu/Downloads/rowan/rowan-v1.2.2.tar.gz \
-    && echo "88ed2c0003543d3154374f741a04fcb21cce32180e7b29152dc93c4c887e0c51  rowan-v1.2.2.tar.gz" | sha256sum -c - \
-    && tar -xzf rowan-v1.2.2.tar.gz -C . \
+ git clone --recursive --branch v1.2.2 --depth 1 https://github.com/glotzerlab/rowan \
     && export CFLAGS="-mcpu=power9 -mtune=power9" CXXFLAGS="-mcpu=power9 -mtune=power9" \
-    && check-requirements.py ./rowan-v1.2.2/requirements.txt \
-    && python3 -m pip install --no-cache-dir --no-use-pep517 --no-build-isolation --no-deps --ignore-installed ./rowan-v1.2.2 \
-    && rm -rf rowan-v1.2.2 \
-    && rm rowan-v1.2.2.tar.gz \
+    && check-requirements.py ./rowan/requirements.txt \
+    && python3 -m pip install --no-cache-dir --no-use-pep517 --no-build-isolation --no-deps --ignore-installed ./rowan \
+    && rm -rf rowan \
     || exit 1
 
- curl -sSLO https://glotzerlab.engin.umich.edu/Downloads/coxeter/coxeter-v0.2.0.tar.gz \
-    && echo "83ac5f21377527a186404120598cc58a16411b06e4d866f970732287d07d0f2a  coxeter-v0.2.0.tar.gz" | sha256sum -c - \
-    && tar -xzf coxeter-v0.2.0.tar.gz -C . \
+ git clone --recursive --branch v0.2.0 --depth 1 https://github.com/glotzerlab/coxeter \
     && export CFLAGS="-mcpu=power9 -mtune=power9" CXXFLAGS="-mcpu=power9 -mtune=power9" \
-    && check-requirements.py ./coxeter-v0.2.0/requirements.txt \
-    && python3 -m pip install --no-cache-dir --no-use-pep517 --no-build-isolation --no-deps --ignore-installed ./coxeter-v0.2.0 \
-    && rm -rf coxeter-v0.2.0 \
-    && rm coxeter-v0.2.0.tar.gz \
+    && check-requirements.py ./coxeter/requirements.txt \
+    && python3 -m pip install --no-cache-dir --no-use-pep517 --no-build-isolation --no-deps --ignore-installed ./coxeter \
+    && rm -rf coxeter \
     || exit 1
 
-# curl -sSLO https://glotzerlab.engin.umich.edu/downloads/garnett/garnett-v0.7.1.tar.gz \
-#    && echo "a92e45f7f204334977629df3973124fdd0445ec9c7260b3746ae436b0f6a0031  garnett-v0.7.1.tar.gz" | sha256sum -c - \
-#    && tar -xzf garnett-v0.7.1.tar.gz -C . \
-#    && rm -f garnett-v0.7.1/*.toml \
+# git clone --recursive --branch v0.7.1 --depth 1 https://github.com/glotzerlab/garnett \
+#    && rm -f garnett/*.toml \
 #    && export CFLAGS="-mcpu=power9 -mtune=power9" CXXFLAGS="-mcpu=power9 -mtune=power9" \
-#    && check-requirements.py ./garnett-v0.7.1/requirements.txt \
-#    && python3 -m pip install --no-cache-dir --no-use-pep517 --no-build-isolation --no-deps --ignore-installed ./garnett-v0.7.1 \
-#    && rm -rf garnett-v0.7.1 \
-#    && rm garnett-v0.7.1.tar.gz \
+#    && check-requirements.py ./garnett/requirements.txt \
+#    && python3 -m pip install --no-cache-dir --no-use-pep517 --no-build-isolation --no-deps --ignore-installed ./garnett \
+#    && rm -rf garnett \
 #    || exit 1
 
- curl -sSLO https://glotzerlab.engin.umich.edu/Downloads/gsd/gsd-v2.1.2.tar.gz \
-    && echo "d6f7aaa095f347fab882062098313eff08a7302182815ab7b546ee2dc5c7d4f6  gsd-v2.1.2.tar.gz" | sha256sum -c - \
-    && tar -xzf gsd-v2.1.2.tar.gz -C . \
+ git clone --recursive --branch v2.1.2 --depth 1 https://github.com/glotzerlab/gsd \
     && export CFLAGS="-mcpu=power9 -mtune=power9" CXXFLAGS="-mcpu=power9 -mtune=power9" \
-    && python3 -m pip install --no-cache-dir --no-use-pep517 --no-build-isolation --no-deps --ignore-installed ./gsd-v2.1.2 \
-    && rm -rf gsd-v2.1.2 \
-    && rm gsd-v2.1.2.tar.gz \
+    && python3 -m pip install --no-cache-dir --no-use-pep517 --no-build-isolation --no-deps --ignore-installed ./gsd \
+    && rm -rf gsd \
     || exit 1
 
- curl -sSLO https://glotzerlab.engin.umich.edu/Downloads/libgetar/libgetar-v1.0.1.tar.gz \
-    && echo "0a438dc8336103158fc4dbb7ebcbc011279d7a8ae134824dda5946e6b9042039  libgetar-v1.0.1.tar.gz" | sha256sum -c - \
-    && tar -xzf libgetar-v1.0.1.tar.gz -C . \
-    && rm -f libgetar-v1.0.1/*.toml \
+ git clone --recursive --branch v1.0.1 --depth 1 https://github.com/glotzerlab/libgetar \
+    && rm -f libgetar/*.toml \
     && export CFLAGS="-mcpu=power9 -mtune=power9" CXXFLAGS="-mcpu=power9 -mtune=power9" \
-    && check-requirements.py ./libgetar-v1.0.1/requirements.txt \
-    && python3 -m pip install --no-cache-dir --no-use-pep517 --no-build-isolation --no-deps --ignore-installed ./libgetar-v1.0.1 \
-    && rm -rf libgetar-v1.0.1 \
-    && rm libgetar-v1.0.1.tar.gz \
+    && check-requirements.py ./libgetar/requirements.txt \
+    && python3 -m pip install --no-cache-dir --no-use-pep517 --no-build-isolation --no-deps --ignore-installed ./libgetar \
+    && rm -rf libgetar \
     || exit 1
 
- curl -sSLO https://glotzerlab.engin.umich.edu/Downloads/plato/plato-v1.7.0.tar.gz \
-    && echo "8268ab6982f9135d1f7788309804eb15a1e98ef1d2f6d959733a3e23a1595def  plato-v1.7.0.tar.gz" | sha256sum -c - \
-    && tar -xzf plato-v1.7.0.tar.gz -C . \
+ git clone --recursive --branch v1.7.0 --depth 1 https://github.com/glotzerlab/plato \
     && export CFLAGS="-mcpu=power9 -mtune=power9" CXXFLAGS="-mcpu=power9 -mtune=power9" \
-    && python3 -m pip install --no-cache-dir --no-use-pep517 --no-build-isolation --no-deps --ignore-installed ./plato-v1.7.0 \
-    && rm -rf plato-v1.7.0 \
-    && rm plato-v1.7.0.tar.gz \
+    && python3 -m pip install --no-cache-dir --no-use-pep517 --no-build-isolation --no-deps --ignore-installed ./plato \
+    && rm -rf plato \
     || exit 1
 
- curl -sSLO https://glotzerlab.engin.umich.edu/Downloads/signac/signac-v1.3.0.tar.gz \
-    && echo "cc9b1af90ee98746ead05e5d84adb662b60aa861953d71294bac9eb64175b61e  signac-v1.3.0.tar.gz" | sha256sum -c - \
-    && tar -xzf signac-v1.3.0.tar.gz -C . \
+ git clone --recursive --branch v1.3.0 --depth 1 https://github.com/glotzerlab/signac \
     && export CFLAGS="-mcpu=power9 -mtune=power9" CXXFLAGS="-mcpu=power9 -mtune=power9" \
-    && check-requirements.py ./signac-v1.3.0/requirements.txt \
-    && python3 -m pip install --no-cache-dir --no-use-pep517 --no-build-isolation --no-deps --ignore-installed ./signac-v1.3.0 \
-    && rm -rf signac-v1.3.0 \
-    && rm signac-v1.3.0.tar.gz \
+    && check-requirements.py ./signac/requirements.txt \
+    && python3 -m pip install --no-cache-dir --no-use-pep517 --no-build-isolation --no-deps --ignore-installed ./signac \
+    && rm -rf signac \
     || exit 1
 
- curl -sSLO https://glotzerlab.engin.umich.edu/Downloads/signac-flow/signac-flow-v0.9.0.tar.gz \
-    && echo "59633ae44c37d77acde70af9a2be483a84ecb08eb742bdfc2f682b94466758b9  signac-flow-v0.9.0.tar.gz" | sha256sum -c - \
-    && tar -xzf signac-flow-v0.9.0.tar.gz -C . \
+ git clone --recursive --branch v0.9.0 --depth 1 https://github.com/glotzerlab/signac-flow \
     && export CFLAGS="-mcpu=power9 -mtune=power9" CXXFLAGS="-mcpu=power9 -mtune=power9" \
-    && check-requirements.py ./signac-flow-v0.9.0/requirements.txt \
-    && python3 -m pip install --no-cache-dir --no-use-pep517 --no-build-isolation --no-deps --ignore-installed ./signac-flow-v0.9.0 \
-    && rm -rf signac-flow-v0.9.0 \
-    && rm signac-flow-v0.9.0.tar.gz \
+    && check-requirements.py ./signac-flow/requirements.txt \
+    && python3 -m pip install --no-cache-dir --no-use-pep517 --no-build-isolation --no-deps --ignore-installed ./signac-flow \
+    && rm -rf signac-flow \
     || exit 1
 
 
 
- curl -sSLO https://glotzerlab.engin.umich.edu/Downloads/freud/freud-v2.2.0.tar.gz \
-    && echo "806a0d6cf23d4c0b7a835959a37af8d013ce3f4ecfadbaafeacadad0bee258aa  freud-v2.2.0.tar.gz" | sha256sum -c - \
-    && tar -xzf freud-v2.2.0.tar.gz -C . \
-    && rm -f freud-v2.2.0/*.toml \
+ git clone --recursive --branch v2.2.0 --depth 1 https://github.com/glotzerlab/freud \
+    && rm -f freud/*.toml \
     && export CFLAGS="-mcpu=power9 -mtune=power9" CXXFLAGS="-mcpu=power9 -mtune=power9" \
-    && check-requirements.py ./freud-v2.2.0/requirements.txt \
-    && python3 -m pip install --no-cache-dir --no-use-pep517 --no-build-isolation --no-deps --ignore-installed ./freud-v2.2.0 \
-    && rm -rf freud-v2.2.0 \
-    && rm freud-v2.2.0.tar.gz \
+    && check-requirements.py ./freud/requirements.txt \
+    && python3 -m pip install --no-cache-dir --no-use-pep517 --no-build-isolation --no-deps --ignore-installed ./freud \
+    && rm -rf freud \
     || exit 1
 
- curl -sSLO https://glotzerlab.engin.umich.edu/Downloads/fsph/fsph-v0.2.0.tar.gz \
-    && echo "eb1c48137e7025dc856d11809d3e666e16d51736befa4aa772fcbffa546a0785  fsph-v0.2.0.tar.gz" | sha256sum -c - \
-    && tar -xzf fsph-v0.2.0.tar.gz -C . \
+ git clone --recursive --branch v0.2.0 --depth 1 https://github.com/glotzerlab/fsph \
     && export CFLAGS="-mcpu=power9 -mtune=power9" CXXFLAGS="-mcpu=power9 -mtune=power9" \
-    && python3 -m pip install --no-cache-dir --no-use-pep517 --no-build-isolation --no-deps --ignore-installed ./fsph-v0.2.0 \
-    && rm -rf fsph-v0.2.0 \
-    && rm fsph-v0.2.0.tar.gz \
+    && python3 -m pip install --no-cache-dir --no-use-pep517 --no-build-isolation --no-deps --ignore-installed ./fsph \
+    && rm -rf fsph \
     || exit 1
 
- curl -sSLO https://glotzerlab.engin.umich.edu/Downloads/pythia/pythia-v0.2.5.tar.gz \
-    && echo "5dfe1efeb7343fbfc7260dc6f05a8ee17908add288c67094d3740c7056627140  pythia-v0.2.5.tar.gz" | sha256sum -c - \
-    && tar -xzf pythia-v0.2.5.tar.gz -C . \
+ git clone --recursive --branch v0.2.5 --depth 1 https://github.com/glotzerlab/pythia \
     && export CFLAGS="-mcpu=power9 -mtune=power9" CXXFLAGS="-mcpu=power9 -mtune=power9" \
-    && check-requirements.py ./pythia-v0.2.5/requirements.txt \
-    && python3 -m pip install --no-cache-dir --no-use-pep517 --no-build-isolation --no-deps --ignore-installed ./pythia-v0.2.5 \
-    && rm -rf pythia-v0.2.5 \
-    && rm pythia-v0.2.5.tar.gz \
+    && check-requirements.py ./pythia/requirements.txt \
+    && python3 -m pip install --no-cache-dir --no-use-pep517 --no-build-isolation --no-deps --ignore-installed ./pythia \
+    && rm -rf pythia \
     || exit 1
 
- curl -sSLO https://glotzerlab.engin.umich.edu/Downloads/hoomd/hoomd-v2.9.2.tar.gz \
-    && echo "1975f35807e690594a9f3f0d9a19461764cad45f052be08b1f71ef07caa56665  hoomd-v2.9.2.tar.gz" | sha256sum -c - \
-    && tar -xzf hoomd-v2.9.2.tar.gz -C . \
-    && cd hoomd-v2.9.2 \
+ git clone --recursive --branch v2.9.2 --depth 1 https://github.com/glotzerlab/hoomd-blue hoomd \
+    && cd hoomd \
     && mkdir -p build \
     && cd build \
     && export CFLAGS="-mcpu=power9 -mtune=power9" CXXFLAGS="-mcpu=power9 -mtune=power9" \
     && cmake ../ -DPYTHON_EXECUTABLE="`which python3`" -DENABLE_CUDA=on -DENABLE_MPI=on -DENABLE_TBB=off -DBUILD_JIT=off -DBUILD_TESTING=off -DENABLE_MPI_CUDA=on -DCMAKE_INSTALL_PREFIX=`python3 -c "import site; print(site.getsitepackages()[0])"` \
     && make install -j4 \
     && cd ../../ \
-    && rm -rf /root/hoomd-v2.9.2 \
-    && rm hoomd-v2.9.2.tar.gz \
+    && rm -rf hoomd \
     || exit 1
-

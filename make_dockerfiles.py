@@ -31,43 +31,18 @@ shas['SCIPY_SHA'] = '2643cfb46d97b7797d1dbdb6f3c23fe3402904e3c90e6facfe6a9b98d80
 
 # glotzer lab
 repo_version['fresnel']     = versions['FRESNEL_VERSION']     = 'v0.12.0'
-shas['FRESNEL_SHA'] = '9d60508e238cbafe4c8af7aa1f493fc4953c4c852ed634287b7cddbcd8c45bd0'
-
 repo_version['freud']       = versions['FREUD_VERSION']       = 'v2.2.0'
-shas['FREUD_SHA'] = '806a0d6cf23d4c0b7a835959a37af8d013ce3f4ecfadbaafeacadad0bee258aa'
-
-repo_version['fsph']       = versions['FSPH_VERSION']       = 'v0.2.0'
-shas['FSPH_SHA'] = 'eb1c48137e7025dc856d11809d3e666e16d51736befa4aa772fcbffa546a0785'
-
+repo_version['fsph']        = versions['FSPH_VERSION']        = 'v0.2.0'
 repo_version['garnett']     = versions['GARNETT_VERSION']     = 'v0.7.1'
-shas['GARNETT_SHA'] = 'a92e45f7f204334977629df3973124fdd0445ec9c7260b3746ae436b0f6a0031'
-
 repo_version['gsd']         = versions['GSD_VERSION']         = 'v2.1.2'
-shas['GSD_SHA'] = 'd6f7aaa095f347fab882062098313eff08a7302182815ab7b546ee2dc5c7d4f6'
-
 repo_version['hoomd-blue']  = versions['HOOMD_VERSION']       = 'v2.9.2'
-shas['HOOMD_SHA'] = '1975f35807e690594a9f3f0d9a19461764cad45f052be08b1f71ef07caa56665'
-
 repo_version['libgetar']    = versions['LIBGETAR_VERSION']    = 'v1.0.1'
-shas['LIBGETAR_SHA'] = '0a438dc8336103158fc4dbb7ebcbc011279d7a8ae134824dda5946e6b9042039'
-
 repo_version['pythia']      = versions['PYTHIA_VERSION']      = 'v0.2.5'
-shas['PYTHIA_SHA'] = '5dfe1efeb7343fbfc7260dc6f05a8ee17908add288c67094d3740c7056627140'
-
 repo_version['rowan']       = versions['ROWAN_VERSION']       = 'v1.2.2'
-shas['ROWAN_SHA'] = '88ed2c0003543d3154374f741a04fcb21cce32180e7b29152dc93c4c887e0c51'
-
-repo_version['coxeter']       = versions['COXETER_VERSION']       = 'v0.2.0'
-shas['COXETER_SHA'] = '83ac5f21377527a186404120598cc58a16411b06e4d866f970732287d07d0f2a'
-
+repo_version['coxeter']     = versions['COXETER_VERSION']     = 'v0.2.0'
 repo_version['plato']       = versions['PLATO_VERSION']       = 'v1.7.0'
-shas['PLATO_SHA'] = '8268ab6982f9135d1f7788309804eb15a1e98ef1d2f6d959733a3e23a1595def'
-
 repo_version['signac']      = versions['SIGNAC_VERSION']      = 'v1.3.0'
-shas['SIGNAC_SHA'] = 'cc9b1af90ee98746ead05e5d84adb662b60aa861953d71294bac9eb64175b61e'
-
 repo_version['signac-flow'] = versions['SIGNAC_FLOW_VERSION'] = 'v0.9.0'
-shas['SIGNAC_FLOW_SHA'] = '59633ae44c37d77acde70af9a2be483a84ecb08eb742bdfc2f682b94466758b9'
 
 if __name__ == '__main__':
 
