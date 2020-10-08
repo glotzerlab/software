@@ -78,12 +78,12 @@ curl -sSLO https://github.com/oneapi-src/oneTBB/archive/v2020.2.tar.gz \
 # embree is not available for power9
 
 # scipy
-curl -sSLO https://github.com/scipy/scipy/releases/download/v1.3.1/scipy-1.3.1.tar.gz \
-    && echo "2643cfb46d97b7797d1dbdb6f3c23fe3402904e3c90e6facfe6a9b98d808c1b5  scipy-1.3.1.tar.gz" | sha256sum -c - \
-    && tar -xzf scipy-1.3.1.tar.gz -C . \
-    && cd scipy-1.3.1 \
+curl -sSLO https://github.com/scipy/scipy/releases/download/v1.5.2/scipy-1.5.2.tar.gz \
+    && echo "066c513d90eb3fd7567a9e150828d39111ebd88d3e924cdfc9f8ce19ab6f90c9  scipy-1.5.2.tar.gz" | sha256sum -c - \
+    && tar -xzf scipy-1.5.2.tar.gz -C . \
+    && cd scipy-1.5.2 \
     && LAPACK=${OLCF_NETLIB_LAPACK_ROOT}/lib64/liblapack.so BLAS=${OLCF_NETLIB_LAPACK_ROOT}/lib64/libblas.so python3 setup.py install \
-    && rm -rf scipy-1.3.1 \
+    && rm -rf scipy-1.5.2 \
     || exit 1
 
 
@@ -110,7 +110,7 @@ curl -sSLO https://github.com/scipy/scipy/releases/download/v1.3.1/scipy-1.3.1.t
 #    && rm -rf garnett \
 #    || exit 1
 
- git clone --recursive --branch v2.1.2 --depth 1 https://github.com/glotzerlab/gsd \
+ git clone --recursive --branch v2.2.0 --depth 1 https://github.com/glotzerlab/gsd \
     && export CFLAGS="-mcpu=power9 -mtune=power9" CXXFLAGS="-mcpu=power9 -mtune=power9" \
     && python3 -m pip install --no-cache-dir --no-use-pep517 --no-build-isolation --no-deps --ignore-installed ./gsd \
     && rm -rf gsd \
@@ -167,7 +167,7 @@ curl -sSLO https://github.com/scipy/scipy/releases/download/v1.3.1/scipy-1.3.1.t
     && rm -rf pythia \
     || exit 1
 
- git clone --recursive --branch v2.9.2 --depth 1 https://github.com/glotzerlab/hoomd-blue hoomd \
+ git clone --recursive --branch v2.9.3 --depth 1 https://github.com/glotzerlab/hoomd-blue hoomd \
     && cd hoomd \
     && mkdir -p build \
     && cd build \

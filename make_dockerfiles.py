@@ -11,14 +11,14 @@ shas = {}
 repo_version = {}
 
 # dependencies
-versions['EMBREE_VERSION'] = '3.9.0'
+versions['EMBREE_VERSION'] = '3.12.0'
 
 versions['OSU_MICROBENCHMARK_VERSION'] ='5.4.1'
 shas['OSU_MICROBENCHMARK_SHA'] ='e90cb683a01744377f77d420de401431242593d8376b25b120950266e140e83c'
 
-versions['MPI4PY_VERSION'] = '3.0.2'
-versions['PYBIND11_VERSION'] = '2.3.0'
-versions['QHULL_VERSION'] = '2019.1'
+versions['MPI4PY_VERSION'] = '3.0.3'
+versions['PYBIND11_VERSION'] = '2.5.0'
+versions['QHULL_VERSION'] = '2020.2'
 versions['UCX_VERSION'] = '1.6.0'
 versions['PMIX_VERSION'] = '2.2.3'
 
@@ -26,16 +26,16 @@ versions['PMIX_VERSION'] = '2.2.3'
 versions['TBB_VERSION'] = '2020.2'
 shas['TBB_SHA'] = '4804320e1e6cbe3a5421997b52199e3c1a3829b2ecb6489641da4b8e32faf500'
 
-versions['SCIPY_VERSION'] = '1.3.1'
-shas['SCIPY_SHA'] = '2643cfb46d97b7797d1dbdb6f3c23fe3402904e3c90e6facfe6a9b98d808c1b5'
+versions['SCIPY_VERSION'] = '1.5.2'
+shas['SCIPY_SHA'] = '066c513d90eb3fd7567a9e150828d39111ebd88d3e924cdfc9f8ce19ab6f90c9'
 
 # glotzer lab
 repo_version['fresnel']     = versions['FRESNEL_VERSION']     = 'v0.12.0'
 repo_version['freud']       = versions['FREUD_VERSION']       = 'v2.2.0'
 repo_version['fsph']        = versions['FSPH_VERSION']        = 'v0.2.0'
 repo_version['garnett']     = versions['GARNETT_VERSION']     = 'v0.7.1'
-repo_version['gsd']         = versions['GSD_VERSION']         = 'v2.1.2'
-repo_version['hoomd-blue']  = versions['HOOMD_VERSION']       = 'v2.9.2'
+repo_version['gsd']         = versions['GSD_VERSION']         = 'v2.2.0'
+repo_version['hoomd-blue']  = versions['HOOMD_VERSION']       = 'v2.9.3'
 repo_version['libgetar']    = versions['LIBGETAR_VERSION']    = 'v1.0.1'
 repo_version['pythia']      = versions['PYTHIA_VERSION']      = 'v0.2.5'
 repo_version['rowan']       = versions['ROWAN_VERSION']       = 'v1.2.2'
