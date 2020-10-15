@@ -13,6 +13,10 @@ Download the image with support for Comet::
     $ module load singularity
     $ curl -o software.simg https://glotzerlab.engin.umich.edu/downloads/glotzerlab/software-comet.simg
 
+Or the beta (with HOOMD v3.0.0-beta)::
+
+    $ curl -o software.simg https://glotzerlab.engin.umich.edu/downloads/glotzerlab/software-beta-comet.simg
+
 Use the following commands in your job scripts or interactively to execute software inside the container:
 
 .. note::

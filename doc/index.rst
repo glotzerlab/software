@@ -13,9 +13,13 @@ root access.
 Quick start
 ===========
 
-First, download the **glotzerlab/software** image::
+First, download the stable **glotzerlab/software** image::
 
     $ curl -o software.simg https://glotzerlab.engin.umich.edu/downloads/glotzerlab/software-nompi.simg
+
+Or the beta (with HOOMD v3.0.0-beta)::
+
+    $ curl -o software.simg https://glotzerlab.engin.umich.edu/downloads/glotzerlab/software-beta-nompi.simg
 
 .. note::
 

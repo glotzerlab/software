@@ -54,7 +54,7 @@ declare -A extra_tags
 #              ["stampede2"]="-t ${repository}/software:${tag}-skylakex-cuda10-hfi1-mvapich2.3"
 # )
 
-# Don't tag beta buidls with extra tags
+# Don't tag beta builds with extra tags
 extra_tags=( ["nompi"]=""
              ["greatlakes"]=""
              ["comet"]=""
@@ -68,8 +68,8 @@ if [ "$skip_docker" = false ] ; then
         cp -a $DIR/test/*.py $DIR/docker/${cluster}/test
         cp -a $DIR/check-requirements.py $DIR/docker/${cluster}
         docker build $DIR/docker/${cluster} \
-                    -t ${repository}/software:${cluster}-beta \
-                    -t ${repository}/software:${tag}-${cluster}-beta \
+                    -t ${repository}/software:beta-${cluster} \
+                    -t ${repository}/software:${tag}-${cluster} \
                     ${extra_tags[$cluster]}
     done
 fi
@@ -79,7 +79,7 @@ if [ "$build_singularity" = true ] ; then
     do
         docker run -t --rm --privileged -v /var/run/docker.sock:/var/run/docker.sock \
                    -v ${OUTPUT}:/output singularityware/docker2singularity:v2.6 \
-                   --name software-${label}-beta ${repository}/software:${tag}-${label}-beta
+                   --name software-beta-${label} ${repository}/software:${tag}-${label}
         mkdir -p /nfs/turbo/glotzer/containers/${repository}
         mv ${OUTPUT}/*.simg /nfs/turbo/glotzer/containers/${repository}
     done

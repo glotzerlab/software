@@ -13,6 +13,10 @@ Download the image with support for Bridges::
     $ module load singularity/2.6.0
     $ curl -o software.simg https://glotzerlab.engin.umich.edu/downloads/glotzerlab/software-bridges.simg
 
+Or the beta (with HOOMD v3.0.0-beta)::
+
+    $ curl -o software.simg https://glotzerlab.engin.umich.edu/downloads/glotzerlab/software-beta-bridges.simg
+
 Use the following commands in your job scripts or interactively to execute software inside the container:
 
 .. note::

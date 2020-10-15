@@ -1,9 +1,9 @@
 try:
     import hoomd
-    hoomd.context.initialize('--mode=cpu')
-    assert(hoomd.comm.get_num_ranks() == 2)
+    dev = hoomd.device.CPU
+    assert(dev.communicator.num_ranks == 2)
 
-    if (hoomd.comm.get_rank() == 0):
+    if (dev.communicator.rank == 0):
         results = open('test-results-cpu.out', 'a')
         results.write('** Starting MPI CPU tests **\n')
         results.write('HOOMD version     : {}\n'.format(hoomd.__version__))

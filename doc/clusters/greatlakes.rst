@@ -15,6 +15,10 @@ Download the image with support for Great Lakes::
 
     $ curl -o software.simg https://glotzerlab.engin.umich.edu/downloads/glotzerlab/software-greatlakes.simg
 
+Or the beta (with HOOMD v3.0.0-beta)::
+
+    $ curl -o software.simg https://glotzerlab.engin.umich.edu/downloads/glotzerlab/software-beta-greatlakes.simg
+
 Use the following commands in your job scripts or interactively to execute software inside the container:
 
 .. note::
