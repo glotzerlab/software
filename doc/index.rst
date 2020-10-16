@@ -1,21 +1,25 @@
 Glotzerlab software images
 ++++++++++++++++++++++++++
 
-**glotzerlab-software** is a set of container images that provide software developed by the
-`Glotzer group <http://glotzerlab.engin.umich.edu>`_ at the `University of Michigan <https://www.umich.edu/>`_ along
-with related software commonly used in simulation and data analysis workflows. An *image* bundles these tools into
-a single file which can be copied, moved, shared with others, and published to provide a completely
-reproducible workflow. A *host* system provides the resources to execute software inside containers.
-`Singularity <https://www.sylabs.io/docs/>`_ provides a high performance solution, supporting NVIDIA GPUs and MPI
-parallel execution. Singularity is available on most HPC resources. You can install it on your linux system if you have
-root access.
+**glotzerlab-software** is a set of container images that provide software developed by the `Glotzer
+group <http://glotzerlab.engin.umich.edu>`_ at the `University of Michigan
+<https://www.umich.edu/>`_ along with related software commonly used in simulation and data analysis
+workflows. An *image* bundles these tools into a single file which can be copied, moved, shared with
+others, and published to provide a completely reproducible workflow. A *host* system provides the
+resources to execute software inside containers. `Singularity <https://www.sylabs.io/docs/>`_
+provides a high performance solution, supporting NVIDIA GPUs and MPI parallel execution. Singularity
+is available on most HPC resources. You can install it on your linux system if you have root access.
 
 Quick start
 ===========
 
-First, download the **glotzerlab/software** image::
+First, download the stable **glotzerlab/software** image::
 
     $ curl -o software.simg https://glotzerlab.engin.umich.edu/downloads/glotzerlab/software-nompi.simg
+
+Or the beta (with HOOMD v3.0.0-beta)::
+
+    $ curl -o software.simg https://glotzerlab.engin.umich.edu/downloads/glotzerlab/software-beta-nompi.simg
 
 .. note::
 
@@ -59,14 +63,15 @@ Add the ``--nv`` option to **enable NVIDIA GPUs** inside the container::
     HOOMD-blue is running on the following GPU(s):
      [0]          Quadro GP100  56 SM_6.0 @ 1.44 GHz, 16278 MiB DRAM
 
-**glotzerlab-software** :doc:`updates monthly <changes>` with the latest versions of included software.
-Download the latest image to update::
+**glotzerlab-software** :doc:`updates monthly <changes>` with the latest versions of included
+software. Download the latest image to update::
 
     $ curl -o software.simg https://glotzerlab.engin.umich.edu/downloads/glotzerlab/software-nompi.simg
 
 .. seealso::
 
-    See the `Singularity documentation <https://www.sylabs.io/docs/>`_ for more information on ``singularity`` commands.
+    See the `Singularity documentation <https://www.sylabs.io/docs/>`_ for more information on
+    ``singularity`` commands.
 
 Documentation
 _____________

@@ -1,8 +1,9 @@
 Docker
 ======
 
-**glotzerlab-software** is available on the `Docker Hub <https://hub.docker.com/r/glotzerlab/software/>`_ for use on
-docker based systems (for example: cloud platforms).
+**glotzerlab-software** is available on the `Docker Hub
+<https://hub.docker.com/r/glotzerlab/software/>`_ for use on docker based systems (for example:
+cloud platforms).
 
 You can start an interactive session of the glotzerlab/software image with the following command::
 
@@ -16,8 +17,8 @@ You can start an interactive session of the glotzerlab/software image with the f
     >>> import signac
 
 You can utilize NVIDIA GPUs on local and cloud systems with the NVIDIA container runtime. See the
-`NVIDIA GPU CLOUD documentation <http://docs.nvidia.com/ngc/index.html#ngc-with-nvidia-titan-pcs>`_ for more
-information::
+`NVIDIA GPU CLOUD documentation <http://docs.nvidia.com/ngc/index.html#ngc-with-nvidia-titan-pcs>`_
+for more information::
 
     $ docker run --runtime=nvidia --rm -it glotzerlab/software
     glotzerlab-software@b0cbab541230:/$ nvidia-smi
@@ -32,10 +33,10 @@ information::
     | 33%   50C    P0    37W / 235W |      2MiB / 16278MiB |      0%      Default |
     +-------------------------------+----------------------+----------------------+
 
-Tutorials on accessing files, executing parallel jobs, and extending docker images are beyond the scope of this
-documentation.
+Tutorials on accessing files, executing parallel jobs, and extending docker images are beyond the
+scope of this documentation.
 
 .. seealso::
 
-    The `Docker documentation <https://docs.docker.com/>`_ and the documentation for the docker based platform you
-    are using.
+    The `Docker documentation <https://docs.docker.com/>`_ and the documentation for the docker
+    based platform you are using.

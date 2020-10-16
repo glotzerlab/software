@@ -11,7 +11,9 @@ Change log
 *Updated:*
 
 * gsd v2.2.0
-* HOOMD-blue v2.9.3
+* HOOMD-blue
+  * Stable: v2.9.3
+  * Beta: v3.0.0-beta.1
 
 2020.07
 +++++++
