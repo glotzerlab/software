@@ -13,7 +13,13 @@ The **glotzerlab-software** image is large, store it in your scratch directory::
 
 Download the image with support for Great Lakes::
 
-    $ curl -o software.simg https://glotzerlab.engin.umich.edu/downloads/glotzerlab/software-greatlakes.simg
+    $ curl -o software.simg \
+      https://glotzerlab.engin.umich.edu/downloads/glotzerlab/software-greatlakes.simg
+
+Or the beta (with HOOMD v3.0.0-beta)::
+
+    $ curl -o software.simg \
+      https://glotzerlab.engin.umich.edu/downloads/glotzerlab/software-beta-greatlakes.simg
 
 Or the beta (with HOOMD v3.0.0-beta)::
 
@@ -29,19 +35,23 @@ Use the following commands in your job scripts or interactively to execute softw
 Serial (or multithreaded) CPU jobs::
 
     module load gcc/8.2.0 openmpi/4.0.2 singularity
-    mpirun -n 1 singularity exec /scratch/your-account_root/your-account/$USER/software.simg command arguments
+    mpirun -n 1 singularity exec \
+      /scratch/your-account_root/your-account/$USER/software.simg command arguments
 
 Single GPU jobs::
 
     module load gcc/8.2.0 openmpi/4.0.2 singularity
-    mpirun -n 1 singularity exec --nv /scratch/your-account_root/your-account/$USER/software.simg command arguments
+    mpirun -n 1 singularity exec --nv \
+      /scratch/your-account_root/your-account/$USER/software.simg command arguments
 
 MPI parallel CPU jobs::
 
     module load gcc/8.2.0 openmpi/4.0.2 singularity
-    mpirun singularity exec /scratch/your-account_root/your-account/$USER/software.simg command arguments
+    mpirun singularity exec \
+      /scratch/your-account_root/your-account/$USER/software.simg command arguments
 
 MPI parallel GPU jobs::
 
     module load gcc/8.2.0 openmpi/4.0.2 singularity
-    mpirun singularity exec --nv /scratch/your-account_root/your-account/$USER/software.simg command arguments
+    mpirun singularity exec --nv \
+      /scratch/your-account_root/your-account/$USER/software.simg command arguments

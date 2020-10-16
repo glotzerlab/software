@@ -1,8 +1,14 @@
 Bridges (PSC)
 -------------
 
-`Bridges <https://psc.edu/resources/computing/bridges>`_ is an HPC cluster at PSC with GPU and CPU nodes.
-Apply for resources on Bridges through the `XSEDE <https://www.xsede.org/>`_ program.
+`Bridges <https://psc.edu/resources/computing/bridges>`_ is an HPC cluster at PSC with GPU and CPU
+nodes. Apply for resources on Bridges through the `XSEDE <https://www.xsede.org/>`_ program.
+
+.. attention::
+
+    The Bridges MPI stack is not compatible with Singularity. Use the ``nompi`` containers on
+    bridges to execute serial jobs.
+
 
 The **glotzerlab-software** image is large, store it in your scratch directory::
 
@@ -11,13 +17,16 @@ The **glotzerlab-software** image is large, store it in your scratch directory::
 Download the image with support for Bridges::
 
     $ module load singularity/2.6.0
-    $ curl -o software.simg https://glotzerlab.engin.umich.edu/downloads/glotzerlab/software-bridges.simg
+    $ curl -o software.simg \
+      https://glotzerlab.engin.umich.edu/downloads/glotzerlab/software-bridges.simg
 
 Or the beta (with HOOMD v3.0.0-beta)::
 
-    $ curl -o software.simg https://glotzerlab.engin.umich.edu/downloads/glotzerlab/software-beta-bridges.simg
+    $ curl -o software.simg \
+      https://glotzerlab.engin.umich.edu/downloads/glotzerlab/software-beta-bridges.simg
 
-Use the following commands in your job scripts or interactively to execute software inside the container:
+Use the following commands in your job scripts or interactively to execute software inside the
+container:
 
 .. note::
 

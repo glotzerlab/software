@@ -7,17 +7,18 @@ Installed software
 * `python 3.6 <https://www.python.org/>`_
 * `Glotzer lab <http://glotzerlab.engin.umich.edu/home/>`_ open-source software:
 
-    * `Fresnel <https://fresnel.readthedocs.io>`_
-    * `Freud <https://freud.readthedocs.io>`_
+    * `fresnel <https://fresnel.readthedocs.io>`_
+    * `freud <https://freud.readthedocs.io>`_
     * `garnett <https://garnett.readthedocs.io>`_
     * `GSD <https://gsd.readthedocs.io>`_
     * `HOOMD-blue <http://glotzerlab.engin.umich.edu/hoomd-blue/>`_
     * `libgetar <https://libgetar.readthedocs.io>`_
-    * `Plato <https://plato-draw.readthedocs.io>`_
-    * `Pythia <https://pythia-learn.readthedocs.io/>`_
-    * `Rowan <https://rowan.readthedocs.io/>`_
-    * `Signac <http://signac.io>`_
-    * `Signac-flow <http://signac.io>`_
+    * `plato <https://plato-draw.readthedocs.io>`_
+    * `pythia <https://pythia-learn.readthedocs.io/>`_
+    * `rowan <https://rowan.readthedocs.io/>`_
+    * `coxeter <https://coxeter.readthedocs.io/>`_
+    * `signac <http://signac.io>`_
+    * `signac-flow <http://signac.io>`_
 
 * Additional tools commonly used in simulation/analysis workflows:
 

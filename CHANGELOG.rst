@@ -2,6 +2,9 @@
 Change log
 ==========
 
+**glotzerlab-software** releases on a regular schedule. Releases are numbered by the year, month,
+and optionally the day separated by periods.
+
 2020
 ----
 
@@ -11,7 +14,9 @@ Change log
 *Updated:*
 
 * gsd v2.2.0
-* HOOMD-blue v2.9.3  (2020.10-beta includes HOOMD-blue v3.0.0-beta.1)
+* HOOMD-blue
+  * Stable: v2.9.3
+  * Beta: v3.0.0-beta.1
 
 2020.07
 +++++++
