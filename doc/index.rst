@@ -15,11 +15,13 @@ Quick start
 
 First, download the stable **glotzerlab/software** image::
 
-    $ curl -o software.simg https://glotzerlab.engin.umich.edu/downloads/glotzerlab/software-nompi.simg
+    $ curl -o software.simg \
+      https://glotzerlab.engin.umich.edu/downloads/glotzerlab/software-nompi.simg
 
 Or the beta (with HOOMD v3.0.0-beta)::
 
-    $ curl -o software.simg https://glotzerlab.engin.umich.edu/downloads/glotzerlab/software-beta-nompi.simg
+    $ curl -o software.simg \
+      https://glotzerlab.engin.umich.edu/downloads/glotzerlab/software-beta-nompi.simg
 
 .. note::
 
@@ -28,20 +30,21 @@ Or the beta (with HOOMD v3.0.0-beta)::
 **singularity exec** executes software from inside the container::
 
     $ singularity exec software.simg python3 --version
-    Python 3.5.2
+    Python 3.6.9
 
 Add the ``--nv`` option to **enable NVIDIA GPUs** inside the container::
 
     $ singularity exec --nv software.simg nvidia-smi
-    Thu Sep 13 16:49:15 2018
     +-----------------------------------------------------------------------------+
-    | NVIDIA-SMI 396.54                 Driver Version: 396.54                    |
+    | NVIDIA-SMI 450.57       Driver Version: 450.57       CUDA Version: 11.0     |
     |-------------------------------+----------------------+----------------------+
     | GPU  Name        Persistence-M| Bus-Id        Disp.A | Volatile Uncorr. ECC |
     | Fan  Temp  Perf  Pwr:Usage/Cap|         Memory-Usage | GPU-Util  Compute M. |
+    |                               |                      |               MIG M. |
     |===============================+======================+======================|
-    |   0  Quadro GP100        Off  | 00000000:03:00.0 Off |                  Off |
-    | 33%   50C    P0    37W / 235W |      2MiB / 16278MiB |      0%      Default |
+    |   0  Quadro RTX 5000     On   | 00000000:02:00.0 Off |                  Off |
+    | 33%   29C    P8    16W / 230W |      1MiB / 16124MiB |      0%      Default |
+    |                               |                      |                  N/A |
     +-------------------------------+----------------------+----------------------+
 
 **singularity shell** launches an interactive shell::
@@ -49,24 +52,23 @@ Add the ``--nv`` option to **enable NVIDIA GPUs** inside the container::
     $ singularity shell --nv software.simg
     Singularity: Invoking an interactive shell within container...
 
-    Singularity software.simg:~> python3
-    Python 3.5.2 (default, Nov 23 2017, 16:37:01)
-    [GCC 5.4.0 20160609] on linux
+    Singularity> python3
+    Python 3.6.9 (default, Oct  8 2020, 12:12:24)
+    [GCC 8.4.0] on linux
     Type "help", "copyright", "credits" or "license" for more information.
     >>> import hoomd
     >>> import freud
     >>> import signac
-    >>> hoomd.context.initialize()
-    HOOMD-blue 2.3.4 CUDA (8.0) DOUBLE HPMC_MIXED TBB SSE SSE2
-    Compiled: 09/12/18
-    Copyright 2009-2018 The Regents of the University of Michigan.
-    HOOMD-blue is running on the following GPU(s):
-     [0]          Quadro GP100  56 SM_6.0 @ 1.44 GHz, 16278 MiB DRAM
+    >>> gpu = hoomd.device.GPU()
+    >>> print(gpu.devices)
+    ['[0]       Quadro RTX 5000  48 SM_7.5 @ 1.82 GHz, 16124 MiB DRAM']
+    >>>
 
 **glotzerlab-software** :doc:`updates monthly <changes>` with the latest versions of included
 software. Download the latest image to update::
 
-    $ curl -o software.simg https://glotzerlab.engin.umich.edu/downloads/glotzerlab/software-nompi.simg
+    $ curl -o software.simg \
+      https://glotzerlab.engin.umich.edu/downloads/glotzerlab/software-nompi.simg
 
 .. seealso::
 

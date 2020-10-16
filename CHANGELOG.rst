@@ -2,6 +2,9 @@
 Change log
 ==========
 
+**glotzerlab-software** releases on a regular schedule. Releases are numbered by the year, month,
+and optionally the day separated by periods.
+
 2020
 ----
 
