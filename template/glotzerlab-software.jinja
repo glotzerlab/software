@@ -5,7 +5,7 @@
 {% endif %}
 
 {{ RUN }} git clone --recursive --branch {{ COXETER_VERSION }} --depth 1 https://github.com/glotzerlab/coxeter \
-    && python3 -m pytest ./coxeter
+    && python3 -m pytest ./coxeter \
     && rm -rf coxeter \
     || exit 1
 
