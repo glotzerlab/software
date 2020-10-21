@@ -4,10 +4,6 @@
 {% set RUN = 'RUN' %}
 {% endif %}
 
-{{ RUN }} git clone --recursive --branch {{ COXETER_VERSION }} --depth 1 https://github.com/glotzerlab/coxeter \
-    && python3 -m pytest ./coxeter \
-    && rm -rf coxeter \
-    || exit 1
 
 {{ RUN }} git clone --recursive --branch {{ ROWAN_VERSION }} --depth 1 https://github.com/glotzerlab/rowan \
     && export CFLAGS="{{CFLAGS}}" CXXFLAGS="{{CFLAGS}}" \
