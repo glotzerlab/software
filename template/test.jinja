@@ -3,7 +3,7 @@
 RUN cd /test && \
     python3 serial-cpu.py
 
-{{ RUN }} git clone --recursive --branch {{ COXETER_VERSION }} --depth 1 https://github.com/glotzerlab/coxeter \
+RUN git clone --recursive --branch {{ COXETER_VERSION }} --depth 1 https://github.com/glotzerlab/coxeter \
     && python3 -m pytest ./coxeter \
     && rm -rf coxeter \
     || exit 1
