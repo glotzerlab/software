@@ -88,6 +88,7 @@ curl -sSLO https://github.com/scipy/scipy/releases/download/v1.5.2/scipy-1.5.2.t
 
 
 
+
  git clone --recursive --branch v1.2.2 --depth 1 https://github.com/glotzerlab/rowan \
     && export CFLAGS="-mcpu=power9 -mtune=power9" CXXFLAGS="-mcpu=power9 -mtune=power9" \
     && check-requirements.py ./rowan/requirements.txt \
@@ -95,7 +96,7 @@ curl -sSLO https://github.com/scipy/scipy/releases/download/v1.5.2/scipy-1.5.2.t
     && rm -rf rowan \
     || exit 1
 
- git clone --recursive --branch v0.2.0 --depth 1 https://github.com/glotzerlab/coxeter \
+ git clone --recursive --branch v0.4.0 --depth 1 https://github.com/glotzerlab/coxeter \
     && export CFLAGS="-mcpu=power9 -mtune=power9" CXXFLAGS="-mcpu=power9 -mtune=power9" \
     && check-requirements.py ./coxeter/requirements.txt \
     && python3 -m pip install --no-cache-dir --no-use-pep517 --no-build-isolation --no-deps --ignore-installed ./coxeter \
