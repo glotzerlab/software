@@ -106,7 +106,7 @@ curl -SL https://github.com/pybind/pybind11/archive/v{{PYBIND11_VERSION}}.tar.gz
     cd $BUILDDIR && rm -rf pybind11-*
 
 # install cereal headers
-curl -SL https://github.com/USCiLab/cereal/archive/v${{CEREAL_VERSION}}.tar.gz | tar -xzC $BUILDDIR && \
+curl -SL https://github.com/USCiLab/cereal/archive/v{{CEREAL_VERSION}}.tar.gz | tar -xzC $BUILDDIR && \
     cd cereal-{{CEREAL_VERSION}} && \
     mkdir build && cd build && \
     cmake ../ -DCMAKE_INSTALL_PREFIX=$ROOT -DJUST_INSTALL_CEREAL=on && \
@@ -114,9 +114,9 @@ curl -SL https://github.com/USCiLab/cereal/archive/v${{CEREAL_VERSION}}.tar.gz |
     cd $BUILDDIR && rm -rf cereal-*
 
 # install eigen headers
-curl -SL https://gitlab.com/libeigen/eigen/-/archive/${{EIGEN_VERSION}}/eigen-${{EIGEN_VERSION}}.tar.gz | tar -xzC $BUILDDIR && \
+curl -SL https://gitlab.com/libeigen/eigen/-/archive/{{EIGEN_VERSION}}/eigen-{{EIGEN_VERSION}}.tar.gz | tar -xzC $BUILDDIR && \
     cd eigen-{{EIGEN_VERSION}} && \
     mkdir build && cd build && \
     cmake ../ -DCMAKE_INSTALL_PREFIX=$ROOT -DBUILD_TESTING=off, -DEIGEN_TEST_NOQT=on && \
     make install && \
-    cd $BUILDDIR && rm -rf cereal-*
+    cd $BUILDDIR && rm -rf eigen-*
