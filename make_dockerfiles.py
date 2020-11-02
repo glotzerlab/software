@@ -18,6 +18,8 @@ shas['OSU_MICROBENCHMARK_SHA'] ='e90cb683a01744377f77d420de401431242593d8376b25b
 
 versions['MPI4PY_VERSION'] = '3.0.3'
 versions['PYBIND11_VERSION'] = '2.5.0'
+versions['CEREAL_VERSION'] = '1.2.2'
+versions['EIGEN_VERSION'] = '3.3.7'
 versions['QHULL_VERSION'] = '2020.2'
 versions['UCX_VERSION'] = '1.6.0'
 versions['PMIX_VERSION'] = '2.2.3'

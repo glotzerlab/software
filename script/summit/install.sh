@@ -41,11 +41,12 @@ cp -a $DIR/../../check-requirements.py $ROOT/bin
 
 source $ROOT/environment.sh
 
-mkdir -p /tmp/$USER-glotzerlab-software
-cd /tmp/$USER-glotzerlab-software
+BUILDDIR=/tmp/$USER-glotzerlab-software
+mkdir -p $BUILDDIR
+cd $BUILDDIR
 
 python3 -m pip install --upgrade pip
-python3 -m pip install --progress-bar off --no-binary :all: --no-use-pep517 --no-build-isolation cython
+python3 -m pip install --progress-bar off --no-binary :all: --no-use-pep517 --no-build-isolation cython sphinx
 python3 -m pip install --progress-bar off --no-binary :all: --no-use-pep517 --no-build-isolation \
     mpi4py \
     six \
@@ -85,6 +86,30 @@ curl -sSLO https://github.com/scipy/scipy/releases/download/v1.5.2/scipy-1.5.2.t
     && LAPACK=${OLCF_NETLIB_LAPACK_ROOT}/lib64/liblapack.so BLAS=${OLCF_NETLIB_LAPACK_ROOT}/lib64/libblas.so python3 setup.py install \
     && rm -rf scipy-1.5.2 \
     || exit 1
+
+# install pybind11 headers
+curl -SL https://github.com/pybind/pybind11/archive/v2.5.0.tar.gz | tar -xzC $BUILDDIR && \
+    cd pybind11-2.5.0 && \
+    mkdir build && cd build && \
+    cmake ../ -DCMAKE_INSTALL_PREFIX=$ROOT -DPYBIND11_TEST=off && \
+    make install && \
+    cd $BUILDDIR && rm -rf pybind11-*
+
+# install cereal headers
+curl -SL https://github.com/USCiLab/cereal/archive/v${CEREAL_VERSION}.tar.gz | tar -xzC $BUILDDIR && \
+    cd cereal-1.2.2 && \
+    mkdir build && cd build && \
+    cmake ../ -DCMAKE_INSTALL_PREFIX=$ROOT -DJUST_INSTALL_CEREAL=on && \
+    make install && \
+    cd $BUILDDIR && rm -rf cereal-*
+
+# install eigen headers
+curl -SL https://gitlab.com/libeigen/eigen/-/archive/${EIGEN_VERSION}/eigen-${EIGEN_VERSION}.tar.gz | tar -xzC $BUILDDIR && \
+    cd eigen-3.3.7 && \
+    mkdir build && cd build && \
+    cmake ../ -DCMAKE_INSTALL_PREFIX=$ROOT -DBUILD_TESTING=off, -DEIGEN_TEST_NOQT=on && \
+    make install && \
+    cd $BUILDDIR && rm -rf cereal-*
 
 
 
