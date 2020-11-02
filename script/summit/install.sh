@@ -44,7 +44,14 @@ source $ROOT/environment.sh
 
 BUILDDIR=`mktemp -d`
 mkdir -p $BUILDDIR
-trap "rm -rf $BUILDDIR" ERR EXIT
+
+# deletes the temp directory
+function cleanup {
+  rm -rf "$BUILDDIR"
+  echo "Deleted temp working directory $BUILDDIR"
+}
+
+trap cleanup EXIT
 cd $BUILDDIR
 
 python3 -m pip install --upgrade pip
@@ -99,16 +106,16 @@ curl -SL https://github.com/pybind/pybind11/archive/v2.5.0.tar.gz | tar -xzC $BU
     cd $BUILDDIR && rm -rf pybind11-*
 
 # install cereal headers
-curl -SL https://github.com/USCiLab/cereal/archive/v${CEREAL_VERSION}.tar.gz | tar -xzC $BUILDDIR && \
-    cd cereal-1.2.2 && \
+curl -SL https://github.com/USCiLab/cereal/archive/v$1.3.0.tar.gz | tar -xzC $BUILDDIR && \
+    cd cereal-1.3.0 && \
     mkdir build && cd build && \
     cmake ../ -DCMAKE_INSTALL_PREFIX=$ROOT -DJUST_INSTALL_CEREAL=on && \
     make install && \
     cd $BUILDDIR && rm -rf cereal-*
 
 # install eigen headers
-curl -SL https://gitlab.com/libeigen/eigen/-/archive/${EIGEN_VERSION}/eigen-${EIGEN_VERSION}.tar.gz | tar -xzC $BUILDDIR && \
-    cd eigen-3.3.7 && \
+curl -SL https://gitlab.com/libeigen/eigen/-/archive/$3.3.8/eigen-$3.3.8.tar.gz | tar -xzC $BUILDDIR && \
+    cd eigen-3.3.8 && \
     mkdir build && cd build && \
     cmake ../ -DCMAKE_INSTALL_PREFIX=$ROOT -DBUILD_TESTING=off, -DEIGEN_TEST_NOQT=on && \
     make install && \
