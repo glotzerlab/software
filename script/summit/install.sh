@@ -41,8 +41,9 @@ cp -a $DIR/../../check-requirements.py $ROOT/bin
 
 source $ROOT/environment.sh
 
-BUILDDIR=/tmp/$USER-glotzerlab-software
+BUILDDIR=`mktemp -d`
 mkdir -p $BUILDDIR
+trap "rm -rf $BUILDDIR" ERR EXIT
 cd $BUILDDIR
 
 python3 -m pip install --upgrade pip
@@ -84,6 +85,7 @@ curl -sSLO https://github.com/scipy/scipy/releases/download/v1.5.2/scipy-1.5.2.t
     && tar -xzf scipy-1.5.2.tar.gz -C . \
     && cd scipy-1.5.2 \
     && LAPACK=${OLCF_NETLIB_LAPACK_ROOT}/lib64/liblapack.so BLAS=${OLCF_NETLIB_LAPACK_ROOT}/lib64/libblas.so python3 setup.py install \
+    && cd $BUILDDIR \
     && rm -rf scipy-1.5.2 \
     || exit 1
 
