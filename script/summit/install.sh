@@ -98,8 +98,8 @@ curl -sSLO https://github.com/scipy/scipy/releases/download/v1.5.2/scipy-1.5.2.t
     || exit 1
 
 # install pybind11 headers
-curl -SL https://github.com/pybind/pybind11/archive/v2.5.0.tar.gz | tar -xzC $BUILDDIR && \
-    cd pybind11-2.5.0 && \
+curl -SL https://github.com/pybind/pybind11/archive/v2.4.0.tar.gz | tar -xzC $BUILDDIR && \
+    cd pybind11-2.4.0 && \
     mkdir build && cd build && \
     cmake ../ -DCMAKE_INSTALL_PREFIX=$ROOT -DPYBIND11_TEST=off && \
     make install && \
