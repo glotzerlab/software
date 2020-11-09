@@ -28,7 +28,6 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
   python3-dev \
   python3-filelock \
   python3-h5py \
-  python3-hypothesis \
   python3-jinja2 \
   python3-matplotlib \
   python3-nose \
@@ -37,7 +36,6 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
   python3-pandas \
   python3-pillow \
   python3-pip \
-  python3-pytest \
   python3-pyqt5 \
   python3-scipy \
   python3-sklearn-lib \
@@ -108,7 +106,7 @@ ENV PATH=/opt/glotzerlab/bin:$PATH \
 
 RUN python3 -m venv /opt/glotzerlab --system-site-packages \
     && /opt/glotzerlab/bin/pip3 install --no-cache-dir --upgrade pip \
-    && /opt/glotzerlab/bin/pip3 install --no-cache-dir deprecation
+    && /opt/glotzerlab/bin/pip3 install --no-cache-dir deprecation hypothesis pytest miniball
 
 # Install the check-requirements script
 COPY check-requirements.py /opt/glotzerlab/bin
