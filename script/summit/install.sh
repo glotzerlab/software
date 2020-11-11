@@ -88,84 +88,36 @@ curl -sSLO https://github.com/scipy/scipy/releases/download/v1.5.2/scipy-1.5.2.t
 
 
 
- git clone --recursive --branch v1.2.2 --depth 1 https://github.com/glotzerlab/rowan \
-    && export CFLAGS="-mcpu=power9 -mtune=power9" CXXFLAGS="-mcpu=power9 -mtune=power9" \
-    && check-requirements.py ./rowan/requirements.txt \
-    && python3 -m pip install --no-cache-dir --no-use-pep517 --no-build-isolation --no-deps --ignore-installed ./rowan \
-    && rm -rf rowan \
-    || exit 1
-
- git clone --recursive --branch v0.2.0 --depth 1 https://github.com/glotzerlab/coxeter \
-    && export CFLAGS="-mcpu=power9 -mtune=power9" CXXFLAGS="-mcpu=power9 -mtune=power9" \
-    && check-requirements.py ./coxeter/requirements.txt \
-    && python3 -m pip install --no-cache-dir --no-use-pep517 --no-build-isolation --no-deps --ignore-installed ./coxeter \
-    && rm -rf coxeter \
-    || exit 1
-
-# git clone --recursive --branch v0.7.1 --depth 1 https://github.com/glotzerlab/garnett \
-#    && rm -f garnett/*.toml \
-#    && export CFLAGS="-mcpu=power9 -mtune=power9" CXXFLAGS="-mcpu=power9 -mtune=power9" \
-#    && check-requirements.py ./garnett/requirements.txt \
-#    && python3 -m pip install --no-cache-dir --no-use-pep517 --no-build-isolation --no-deps --ignore-installed ./garnett \
-#    && rm -rf garnett \
-#    || exit 1
-
- git clone --recursive --branch v2.2.0 --depth 1 https://github.com/glotzerlab/gsd \
+ git clone --recursive --branch v2.4.0 --depth 1 https://github.com/glotzerlab/gsd \
     && export CFLAGS="-mcpu=power9 -mtune=power9" CXXFLAGS="-mcpu=power9 -mtune=power9" \
     && python3 -m pip install --no-cache-dir --no-use-pep517 --no-build-isolation --no-deps --ignore-installed ./gsd \
     && rm -rf gsd \
     || exit 1
 
- git clone --recursive --branch v1.0.1 --depth 1 https://github.com/glotzerlab/libgetar \
-    && rm -f libgetar/*.toml \
+# freud requires rowan
+RUN /opt/glotzerlab/bin/pip3 install --no-cache-dir \
+    rowan==v1.2.2
+
+ curl -SL http://glotzerlab.engin.umich.edu/downloads/freud/freud-v2.2.0.tar.gz | tar -xzC . \
+    && rm -f freud-v2.2.0/*.toml \
     && export CFLAGS="-mcpu=power9 -mtune=power9" CXXFLAGS="-mcpu=power9 -mtune=power9" \
-    && check-requirements.py ./libgetar/requirements.txt \
-    && python3 -m pip install --no-cache-dir --no-use-pep517 --no-build-isolation --no-deps --ignore-installed ./libgetar \
-    && rm -rf libgetar \
+    && check-requirements.py ./freud-v2.2.0/requirements.txt \
+    && python3 -m pip install --no-cache-dir --no-use-pep517 --no-build-isolation --no-deps --ignore-installed ./freud-v2.2.0 \
+    && rm -rf freud-v2.2.0 \
     || exit 1
 
- git clone --recursive --branch v1.7.0 --depth 1 https://github.com/glotzerlab/plato \
-    && export CFLAGS="-mcpu=power9 -mtune=power9" CXXFLAGS="-mcpu=power9 -mtune=power9" \
-    && python3 -m pip install --no-cache-dir --no-use-pep517 --no-build-isolation --no-deps --ignore-installed ./plato \
-    && rm -rf plato \
-    || exit 1
-
- git clone --recursive --branch v1.3.0 --depth 1 https://github.com/glotzerlab/signac \
-    && export CFLAGS="-mcpu=power9 -mtune=power9" CXXFLAGS="-mcpu=power9 -mtune=power9" \
-    && check-requirements.py ./signac/requirements.txt \
-    && python3 -m pip install --no-cache-dir --no-use-pep517 --no-build-isolation --no-deps --ignore-installed ./signac \
-    && rm -rf signac \
-    || exit 1
-
- git clone --recursive --branch v0.9.0 --depth 1 https://github.com/glotzerlab/signac-flow \
-    && export CFLAGS="-mcpu=power9 -mtune=power9" CXXFLAGS="-mcpu=power9 -mtune=power9" \
-    && check-requirements.py ./signac-flow/requirements.txt \
-    && python3 -m pip install --no-cache-dir --no-use-pep517 --no-build-isolation --no-deps --ignore-installed ./signac-flow \
-    && rm -rf signac-flow \
-    || exit 1
+RUN /opt/glotzerlab/bin/pip3 install --no-cache-dir \
+    rowan==v1.2.2 \
+    coxeter==v0.2.0 \
+    garnett==v0.7.1 \
+    gtar==v1.0.1 \
+    plato-draw==v1.7.0 \
+    signac==v1.3.0 \
+    signac-flow==v0.9.0 \
+    fsph==v0.2.0 \
+    pythia-learn==v0.2.5
 
 
-
- git clone --recursive --branch v2.2.0 --depth 1 https://github.com/glotzerlab/freud \
-    && rm -f freud/*.toml \
-    && export CFLAGS="-mcpu=power9 -mtune=power9" CXXFLAGS="-mcpu=power9 -mtune=power9" \
-    && check-requirements.py ./freud/requirements.txt \
-    && python3 -m pip install --no-cache-dir --no-use-pep517 --no-build-isolation --no-deps --ignore-installed ./freud \
-    && rm -rf freud \
-    || exit 1
-
- git clone --recursive --branch v0.2.0 --depth 1 https://github.com/glotzerlab/fsph \
-    && export CFLAGS="-mcpu=power9 -mtune=power9" CXXFLAGS="-mcpu=power9 -mtune=power9" \
-    && python3 -m pip install --no-cache-dir --no-use-pep517 --no-build-isolation --no-deps --ignore-installed ./fsph \
-    && rm -rf fsph \
-    || exit 1
-
- git clone --recursive --branch v0.2.5 --depth 1 https://github.com/glotzerlab/pythia \
-    && export CFLAGS="-mcpu=power9 -mtune=power9" CXXFLAGS="-mcpu=power9 -mtune=power9" \
-    && check-requirements.py ./pythia/requirements.txt \
-    && python3 -m pip install --no-cache-dir --no-use-pep517 --no-build-isolation --no-deps --ignore-installed ./pythia \
-    && rm -rf pythia \
-    || exit 1
 
  git clone --recursive --branch v2.9.3 --depth 1 https://github.com/glotzerlab/hoomd-blue hoomd \
     && cd hoomd \
