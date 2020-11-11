@@ -10,7 +10,4 @@ RUN cd \
     || exit 1
 
 RUN cd && \
-    python3 -m pytest --pyargs gsd
-
-RUN cd && \
-    python3 -m pytest --pyargs hoomd
+    python3 -m pytest -v --pyargs gsd

@@ -98,12 +98,12 @@ curl -sSLO https://github.com/scipy/scipy/releases/download/v1.5.2/scipy-1.5.2.t
 RUN /opt/glotzerlab/bin/pip3 install --no-cache-dir \
     rowan==v1.2.2
 
- curl -SL http://glotzerlab.engin.umich.edu/downloads/freud/freud-v2.2.0.tar.gz | tar -xzC . \
-    && rm -f freud-v2.2.0/*.toml \
+ git clone --recursive --branch v2.2.0 --depth 1 https://github.com/glotzerlab/freud \
+    && rm -f freud/*.toml \
     && export CFLAGS="-mcpu=power9 -mtune=power9" CXXFLAGS="-mcpu=power9 -mtune=power9" \
-    && check-requirements.py ./freud-v2.2.0/requirements.txt \
-    && python3 -m pip install --no-cache-dir --no-use-pep517 --no-build-isolation --no-deps --ignore-installed ./freud-v2.2.0 \
-    && rm -rf freud-v2.2.0 \
+    && check-requirements.py ./freud/requirements.txt \
+    && python3 -m pip install --no-cache-dir --no-use-pep517 --no-build-isolation --no-deps --ignore-installed ./freud \
+    && rm -rf freud \
     || exit 1
 
 RUN /opt/glotzerlab/bin/pip3 install --no-cache-dir \
