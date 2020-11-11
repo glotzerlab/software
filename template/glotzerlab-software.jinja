@@ -14,12 +14,12 @@
 RUN /opt/glotzerlab/bin/pip3 install --no-cache-dir \
     rowan=={{ ROWAN_VERSION }}
 
-{{ RUN }} curl -SL http://glotzerlab.engin.umich.edu/downloads/freud/freud-{{FREUD_VERSION}}.tar.gz | tar -xzC . \
-    && rm -f freud-{{FREUD_VERSION}}/*.toml \
+{{ RUN }} git clone --recursive --branch {{ FREUD_VERSION }} --depth 1 https://github.com/glotzerlab/freud \
+    && rm -f freud/*.toml \
     && export CFLAGS="{{CFLAGS}}" CXXFLAGS="{{CFLAGS}}" \
-    && check-requirements.py ./freud-{{FREUD_VERSION}}/requirements.txt \
-    && python3 -m pip install --no-cache-dir --no-use-pep517 --no-build-isolation --no-deps --ignore-installed ./freud-{{FREUD_VERSION}} \
-    && rm -rf freud-{{FREUD_VERSION}} \
+    && check-requirements.py ./freud/requirements.txt \
+    && python3 -m pip install --no-cache-dir --no-use-pep517 --no-build-isolation --no-deps --ignore-installed ./freud \
+    && rm -rf freud \
     || exit 1
 
 RUN /opt/glotzerlab/bin/pip3 install --no-cache-dir \
