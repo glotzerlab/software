@@ -5,7 +5,7 @@ RUN cd /test && \
 
 RUN cd \
     && git clone --recursive --branch {{ COXETER_VERSION }} --depth 1 https://github.com/glotzerlab/coxeter \
-    && python3 -m pytest ./coxeter/tests \
+    && python3 -m pytest -v ./coxeter/tests \
     && rm -rf coxeter \
     || exit 1
 
