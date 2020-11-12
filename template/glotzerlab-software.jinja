@@ -4,61 +4,34 @@
 {% set RUN = 'RUN' %}
 {% endif %}
 
-{{ RUN }} git clone --recursive --branch {{ ROWAN_VERSION }} --depth 1 https://github.com/glotzerlab/rowan \
-    && export CFLAGS="{{CFLAGS}}" CXXFLAGS="{{CFLAGS}}" \
-    && check-requirements.py ./rowan/requirements.txt \
-    && python3 -m pip install --no-cache-dir --no-use-pep517 --no-build-isolation --no-deps --ignore-installed ./rowan \
-    && rm -rf rowan \
-    || exit 1
-
-{{ RUN }} git clone --recursive --branch {{ COXETER_VERSION }} --depth 1 https://github.com/glotzerlab/coxeter \
-    && export CFLAGS="{{CFLAGS}}" CXXFLAGS="{{CFLAGS}}" \
-    && check-requirements.py ./coxeter/requirements.txt \
-    && python3 -m pip install --no-cache-dir --no-use-pep517 --no-build-isolation --no-deps --ignore-installed ./coxeter \
-    && rm -rf coxeter \
-    || exit 1
-
-#{{ RUN }} git clone --recursive --branch {{ GARNETT_VERSION }} --depth 1 https://github.com/glotzerlab/garnett \
-#    && rm -f garnett/*.toml \
-#    && export CFLAGS="{{CFLAGS}}" CXXFLAGS="{{CFLAGS}}" \
-#    && check-requirements.py ./garnett/requirements.txt \
-#    && python3 -m pip install --no-cache-dir --no-use-pep517 --no-build-isolation --no-deps --ignore-installed ./garnett \
-#    && rm -rf garnett \
-#    || exit 1
-
 {{ RUN }} git clone --recursive --branch {{ GSD_VERSION }} --depth 1 https://github.com/glotzerlab/gsd \
     && export CFLAGS="{{CFLAGS}}" CXXFLAGS="{{CFLAGS}}" \
     && python3 -m pip install --no-cache-dir --no-use-pep517 --no-build-isolation --no-deps --ignore-installed ./gsd \
     && rm -rf gsd \
     || exit 1
 
-{{ RUN }} git clone --recursive --branch {{ LIBGETAR_VERSION }} --depth 1 https://github.com/glotzerlab/libgetar \
-    && rm -f libgetar/*.toml \
+# freud requires rowan
+RUN /opt/glotzerlab/bin/pip3 install --no-cache-dir \
+    rowan=={{ ROWAN_VERSION }}
+
+{{ RUN }} git clone --recursive --branch {{ FREUD_VERSION }} --depth 1 https://github.com/glotzerlab/freud \
+    && rm -f freud/*.toml \
     && export CFLAGS="{{CFLAGS}}" CXXFLAGS="{{CFLAGS}}" \
-    && check-requirements.py ./libgetar/requirements.txt \
-    && python3 -m pip install --no-cache-dir --no-use-pep517 --no-build-isolation --no-deps --ignore-installed ./libgetar \
-    && rm -rf libgetar \
+    && check-requirements.py ./freud/requirements.txt \
+    && python3 -m pip install --no-cache-dir --no-use-pep517 --no-build-isolation --no-deps --ignore-installed ./freud \
+    && rm -rf freud \
     || exit 1
 
-{{ RUN }} git clone --recursive --branch {{ PLATO_VERSION }} --depth 1 https://github.com/glotzerlab/plato \
-    && export CFLAGS="{{CFLAGS}}" CXXFLAGS="{{CFLAGS}}" \
-    && python3 -m pip install --no-cache-dir --no-use-pep517 --no-build-isolation --no-deps --ignore-installed ./plato \
-    && rm -rf plato \
-    || exit 1
-
-{{ RUN }} git clone --recursive --branch {{ SIGNAC_VERSION }} --depth 1 https://github.com/glotzerlab/signac \
-    && export CFLAGS="{{CFLAGS}}" CXXFLAGS="{{CFLAGS}}" \
-    && check-requirements.py ./signac/requirements.txt \
-    && python3 -m pip install --no-cache-dir --no-use-pep517 --no-build-isolation --no-deps --ignore-installed ./signac \
-    && rm -rf signac \
-    || exit 1
-
-{{ RUN }} git clone --recursive --branch {{ SIGNAC_FLOW_VERSION }} --depth 1 https://github.com/glotzerlab/signac-flow \
-    && export CFLAGS="{{CFLAGS}}" CXXFLAGS="{{CFLAGS}}" \
-    && check-requirements.py ./signac-flow/requirements.txt \
-    && python3 -m pip install --no-cache-dir --no-use-pep517 --no-build-isolation --no-deps --ignore-installed ./signac-flow \
-    && rm -rf signac-flow \
-    || exit 1
+RUN /opt/glotzerlab/bin/pip3 install --no-cache-dir \
+    rowan=={{ ROWAN_VERSION }} \
+    coxeter=={{ COXETER_VERSION }} \
+    garnett=={{ GARNETT_VERSION }} \
+    gtar=={{ LIBGETAR_VERSION }} \
+    plato-draw=={{ PLATO_VERSION }} \
+    signac=={{ SIGNAC_VERSION }} \
+    signac-flow=={{ SIGNAC_FLOW_VERSION }} \
+    fsph=={{ FSPH_VERSION }} \
+    pythia-learn=={{ PYTHIA_VERSION }}
 
 {% if system != 'summit' %}
 {{ RUN }} git clone --recursive --branch {{ FRESNEL_VERSION }} --depth 1 https://github.com/glotzerlab/fresnel \
@@ -72,27 +45,6 @@
     && rm -rf fresnel \
     || exit 1
 {% endif %}
-
-{{ RUN }} git clone --recursive --branch {{ FREUD_VERSION }} --depth 1 https://github.com/glotzerlab/freud \
-    && rm -f freud/*.toml \
-    && export CFLAGS="{{CFLAGS}}" CXXFLAGS="{{CFLAGS}}" \
-    && check-requirements.py ./freud/requirements.txt \
-    && python3 -m pip install --no-cache-dir --no-use-pep517 --no-build-isolation --no-deps --ignore-installed ./freud \
-    && rm -rf freud \
-    || exit 1
-
-{{ RUN }} git clone --recursive --branch {{ FSPH_VERSION }} --depth 1 https://github.com/glotzerlab/fsph \
-    && export CFLAGS="{{CFLAGS}}" CXXFLAGS="{{CFLAGS}}" \
-    && python3 -m pip install --no-cache-dir --no-use-pep517 --no-build-isolation --no-deps --ignore-installed ./fsph \
-    && rm -rf fsph \
-    || exit 1
-
-{{ RUN }} git clone --recursive --branch {{ PYTHIA_VERSION }} --depth 1 https://github.com/glotzerlab/pythia \
-    && export CFLAGS="{{CFLAGS}}" CXXFLAGS="{{CFLAGS}}" \
-    && check-requirements.py ./pythia/requirements.txt \
-    && python3 -m pip install --no-cache-dir --no-use-pep517 --no-build-isolation --no-deps --ignore-installed ./pythia \
-    && rm -rf pythia \
-    || exit 1
 
 {{ RUN }} git clone --recursive --branch {{ HOOMD_VERSION }} --depth 1 https://github.com/glotzerlab/hoomd-blue hoomd \
     && cd hoomd \
