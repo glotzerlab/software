@@ -9,7 +9,7 @@ usage()
     exit
     }
 
-tag="$(date +%Y.%m)"
+tag="$(date +%Y.%m.%d)"
 build_singularity=false
 skip_docker=false
 repository=""

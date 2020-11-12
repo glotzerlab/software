@@ -8,6 +8,15 @@ and optionally the day separated by periods.
 2020
 ----
 
+2020.11 (not yet released)
+++++++++++++++++++++++++++
+
+*Updated:*
+
+* coxeter v0.4.0
+* garnett v0.7.1
+* gsd v2.4.0
+
 2020.10
 +++++++
 
