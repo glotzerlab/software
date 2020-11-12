@@ -108,7 +108,7 @@ RUN /opt/glotzerlab/bin/pip3 install --no-cache-dir \
 
 RUN /opt/glotzerlab/bin/pip3 install --no-cache-dir \
     rowan==v1.2.2 \
-    coxeter==v0.2.0 \
+    coxeter==v0.4.0 \
     garnett==v0.7.1 \
     gtar==v1.0.1 \
     plato-draw==v1.7.0 \
