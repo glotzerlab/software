@@ -7,6 +7,7 @@ Installed software
 * `python 3.6 <https://www.python.org/>`_
 * `Glotzer lab <http://glotzerlab.engin.umich.edu/home/>`_ open-source software:
 
+    * `coxeter <https://coxeter.readthedocs.io/>`_
     * `fresnel <https://fresnel.readthedocs.io>`_
     * `freud <https://freud.readthedocs.io>`_
     * `garnett <https://garnett.readthedocs.io>`_
@@ -16,7 +17,6 @@ Installed software
     * `plato <https://plato-draw.readthedocs.io>`_
     * `pythia <https://pythia-learn.readthedocs.io/>`_
     * `rowan <https://rowan.readthedocs.io/>`_
-    * `coxeter <https://coxeter.readthedocs.io/>`_
     * `signac <http://signac.io>`_
     * `signac-flow <http://signac.io>`_
 
