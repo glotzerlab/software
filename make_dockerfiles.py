@@ -41,8 +41,8 @@ repo_version['pythia']      = versions['PYTHIA_VERSION']      = 'v0.2.5'
 repo_version['rowan']       = versions['ROWAN_VERSION']       = 'v1.2.2'
 repo_version['coxeter']     = versions['COXETER_VERSION']     = 'v0.4.0'
 repo_version['plato']       = versions['PLATO_VERSION']       = 'v1.7.0'
-repo_version['signac']      = versions['SIGNAC_VERSION']      = 'v1.3.0'
-repo_version['signac-flow'] = versions['SIGNAC_FLOW_VERSION'] = 'v0.9.0'
+repo_version['signac']      = versions['SIGNAC_VERSION']      = 'v1.5.0'
+repo_version['signac-flow'] = versions['SIGNAC_FLOW_VERSION'] = 'v0.11.0'
 
 if __name__ == '__main__':
 
