@@ -127,8 +127,6 @@ issues (e.g. mpi4py, pyside).
 To update a package to a new release:
 
 1. Update `version` and `sha` in `make_dockerfiles.py`
-2. Add any new dependencies to `base.jinja`. Prefer `apt-get` installations when
-   an Ubuntu package exists. If not, add to the `pip install` line, but double
-   check the build output to ensure it doesn't result in overwriting the
-   `apt-get` installed packages.
-3. Build and test the image.
+2. Add any new dependencies to `base.jinja`.
+3. Add unit tests to `test.jinja` if needed.
+4. Build and test the image.
