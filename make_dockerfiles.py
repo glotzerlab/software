@@ -31,7 +31,7 @@ shas['SCIPY_SHA'] = '066c513d90eb3fd7567a9e150828d39111ebd88d3e924cdfc9f8ce19ab6
 
 # glotzer lab
 repo_version['fresnel']     = versions['FRESNEL_VERSION']     = 'v0.12.0'
-repo_version['freud']       = versions['FREUD_VERSION']       = 'v2.2.0'
+repo_version['freud']       = versions['FREUD_VERSION']       = 'v2.4.0'
 repo_version['fsph']        = versions['FSPH_VERSION']        = 'v0.2.0'
 repo_version['garnett']     = versions['GARNETT_VERSION']     = 'v0.7.1'
 repo_version['gsd']         = versions['GSD_VERSION']         = 'v2.4.0'
