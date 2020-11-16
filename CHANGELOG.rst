@@ -14,6 +14,7 @@ and optionally the day separated by periods.
 *Updated:*
 
 * coxeter v0.4.0
+* freud v2.4.0
 * garnett v0.7.1
 * gsd v2.4.0
 
