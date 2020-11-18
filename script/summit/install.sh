@@ -147,14 +147,14 @@ RUN /opt/glotzerlab/bin/pip3 install --no-cache-dir \
     garnett==v0.7.1 \
     gtar==v1.0.1 \
     plato-draw==v1.7.0 \
-    signac==v1.3.0 \
-    signac-flow==v0.9.0 \
+    signac==v1.5.0 \
+    signac-flow==v0.11.0 \
     fsph==v0.2.0 \
     pythia-learn==v0.2.5
 
 
 
- git clone --recursive --branch skip-gpu-tests --depth 1 https://github.com/glotzerlab/hoomd-blue hoomd \
+ git clone --recursive --branch v3.0.0-beta.1 --depth 1 https://github.com/glotzerlab/hoomd-blue hoomd \
     && cd hoomd \
     && mkdir -p build \
     && cd build \
