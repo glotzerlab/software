@@ -108,7 +108,10 @@ RUN python3 -m venv /opt/glotzerlab --system-site-packages \
        setuptools \
        sphinx \
        sphinx-rtd-theme \
-       tables
+       tables \
+       scikit-build \
+       unittest2 \
+       sympy
 
 # Install the check-requirements script
 COPY check-requirements.py /opt/glotzerlab/bin

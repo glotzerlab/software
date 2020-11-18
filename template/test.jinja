@@ -9,6 +9,14 @@ RUN cd \
     && rm -rf coxeter \
     || exit 1
 
+RUN cd \
+    && git clone --recursive --branch {{ FREUD_VERSION }} --depth 1 https://github.com/glotzerlab/freud \
+    && cd freud/tests/ \
+    && python -m unittest discover \
+    && cd ../../ \
+    && rm -rf freud \
+    || exit 1
+
 RUN cd && \
     python3 -m pytest -v --pyargs gsd
 

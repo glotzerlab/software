@@ -33,7 +33,7 @@ shas['SCIPY_SHA'] = '066c513d90eb3fd7567a9e150828d39111ebd88d3e924cdfc9f8ce19ab6
 
 # glotzer lab
 repo_version['fresnel']     = versions['FRESNEL_VERSION']     = 'v0.12.0'
-repo_version['freud']       = versions['FREUD_VERSION']       = 'v2.2.0'
+repo_version['freud']       = versions['FREUD_VERSION']       = 'v2.4.0'
 repo_version['fsph']        = versions['FSPH_VERSION']        = 'v0.2.0'
 repo_version['garnett']     = versions['GARNETT_VERSION']     = 'v0.7.1'
 repo_version['hoomd-blue']  = versions['HOOMD_VERSION']       = 'skip-gpu-tests'
@@ -43,8 +43,8 @@ repo_version['pythia']      = versions['PYTHIA_VERSION']      = 'v0.2.5'
 repo_version['rowan']       = versions['ROWAN_VERSION']       = 'v1.2.2'
 repo_version['coxeter']     = versions['COXETER_VERSION']     = 'v0.4.0'
 repo_version['plato']       = versions['PLATO_VERSION']       = 'v1.7.0'
-repo_version['signac']      = versions['SIGNAC_VERSION']      = 'v1.3.0'
-repo_version['signac-flow'] = versions['SIGNAC_FLOW_VERSION'] = 'v0.9.0'
+repo_version['signac']      = versions['SIGNAC_VERSION']      = 'v1.5.0'
+repo_version['signac-flow'] = versions['SIGNAC_FLOW_VERSION'] = 'v0.11.0'
 
 if __name__ == '__main__':
 

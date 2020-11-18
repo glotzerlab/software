@@ -133,7 +133,7 @@ curl -SL https://gitlab.com/libeigen/eigen/-/archive/3.3.8/eigen-3.3.8.tar.gz | 
 RUN /opt/glotzerlab/bin/pip3 install --no-cache-dir \
     rowan==v1.2.2
 
- git clone --recursive --branch v2.2.0 --depth 1 https://github.com/glotzerlab/freud \
+ git clone --recursive --branch v2.4.0 --depth 1 https://github.com/glotzerlab/freud \
     && rm -f freud/*.toml \
     && export CFLAGS="-mcpu=power9 -mtune=power9" CXXFLAGS="-mcpu=power9 -mtune=power9" \
     && check-requirements.py ./freud/requirements.txt \
