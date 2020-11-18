@@ -8,8 +8,8 @@ and optionally the day separated by periods.
 2020
 ----
 
-2020.11 (not yet released)
-++++++++++++++++++++++++++
+2020.11.18
+++++++++++
 
 *Updated:*
 
@@ -17,6 +17,8 @@ and optionally the day separated by periods.
 * freud v2.4.0
 * garnett v0.7.1
 * gsd v2.4.0
+* signac v1.5.0
+* signac-flow v0.11.0
 
 2020.10
 +++++++
