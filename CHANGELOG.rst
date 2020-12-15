@@ -8,6 +8,16 @@ and optionally the day separated by periods.
 2020
 ----
 
+2020.12.15
+++++++++++
+
+*Updated:*
+
+* HOOMD-blue
+
+  * Beta: v3.0.0-beta.2
+
+
 2020.11.18
 ++++++++++
 
