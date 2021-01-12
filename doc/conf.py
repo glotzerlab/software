@@ -37,7 +37,7 @@ master_doc = 'index'
 
 # General information about the project.
 project = 'glotzerlab-software'
-copyright = '2018-2020 The Regents of the University of Michigan'
+copyright = '2018-2021 The Regents of the University of Michigan'
 author = 'The Regents of the University of Michigan'
 
 # The version info for the project you're documenting, acts as replacement for
