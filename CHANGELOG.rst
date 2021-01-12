@@ -5,6 +5,18 @@ Change log
 **glotzerlab-software** releases on a regular schedule. Releases are numbered by the year, month,
 and optionally the day separated by periods.
 
+2021
+----
+
+2020.01.15
+++++++++++
+
+*Updated:*
+
+* HOOMD-blue
+
+  * Beta: v3.0.0-beta.3
+
 2020
 ----
 
