@@ -13,6 +13,9 @@ and optionally the day separated by periods.
 
 *Updated:*
 
+* freud v2.4.1
+* rowan v1.3.0.post1
+* signac v1.5.1
 * HOOMD-blue
 
   * Beta: v3.0.0-beta.3
