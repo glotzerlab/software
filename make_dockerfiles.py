@@ -19,8 +19,6 @@ shas['OSU_MICROBENCHMARK_SHA'] ='e90cb683a01744377f77d420de401431242593d8376b25b
 versions['MPI4PY_VERSION'] = '3.0.3'
 versions['PYBIND11_VERSION'] = '2.5.0'
 versions['QHULL_VERSION'] = '2020.2'
-versions['UCX_VERSION'] = '1.6.0'
-versions['PMIX_VERSION'] = '2.2.3'
 
 # Summit-only dependencies
 versions['TBB_VERSION'] = '2020.2'
@@ -77,6 +75,8 @@ if __name__ == '__main__':
           system='greatlakes',
           OPENMPI_VERSION='4.0',
           OPENMPI_PATCHLEVEL='2',
+          UCX_VERSION='1.6.0',
+          PMIX_VERSION='2.2.3',
           ENABLE_MPI='on',
           MAKEJOBS=4,
           CFLAGS='-march=sandybridge -mmmx -msse -msse2 -msse3 -mssse3 -mcx16 -msahf -maes -mpclmul -mpopcnt -mavx -msse4.2 -msse4.1 -mfxsr -mxsave -mxsaveopt --param l1-cache-size=32 --param l1-cache-line-size=64 --param l2-cache-size=20480 -mtune=sandybridge',
@@ -99,18 +99,6 @@ if __name__ == '__main__':
           ENABLE_MPI='on',
           MAKEJOBS=4,
           CFLAGS='-march=haswell -mmmx -msse -msse2 -msse3 -mssse3 -mcx16 -msahf -mmovbe -maes -mpclmul -mpopcnt -mabm -mfma -mbmi -mbmi2 -mavx -mavx2 -msse4.2 -msse4.1 -mlzcnt -mrdrnd -mf16c -mfsgsbase -mfxsr -mxsave -mxsaveopt --param l1-cache-size=32 --param l1-cache-line-size=64 --param l2-cache-size=30720 -mtune=haswell -fstack-protector-strong -Wformat -Wformat-security',
-          **versions,
-          **shas)
-
-    write('docker/bridges/Dockerfile', [base_template, ib_hfi1_template, openmpi_template, glotzerlab_software_template, finalize_template],
-          FROM='nvidia/cuda:10.1-devel-ubuntu18.04',
-          ubuntu_version=18,
-          system='bridges',
-          OPENMPI_VERSION='2.1',
-          OPENMPI_PATCHLEVEL='2',
-          ENABLE_MPI='on',
-          MAKEJOBS=4,
-          CFLAGS='-march=haswell -mmmx -msse -msse2 -msse3 -mssse3 -mcx16 -msahf -mmovbe -maes -mpclmul -mpopcnt -mabm -mfma -mbmi -mbmi2 -mavx -mavx2 -msse4.2 -msse4.1 -mlzcnt -mrdrnd -mf16c -mfsgsbase -mfxsr -mxsave -mxsaveopt --param l1-cache-size=32 --param l1-cache-line-size=64 --param l2-cache-size=35840 -mtune=haswell -fstack-protector-strong -Wformat -Wformat-security',
           **versions,
           **shas)
 
@@ -137,5 +125,18 @@ if __name__ == '__main__':
           ENABLE_TBB='off',
           BUILD_JIT='off',
           ENABLE_MPI_CUDA='on',
+          **versions,
+          **shas)
+
+    write('docker/bridges2/Dockerfile', [base_template, ib_mlx_template, openmpi_template, glotzerlab_software_template, finalize_template],
+          FROM='nvidia/cuda:10.1-devel-ubuntu18.04',
+          ubuntu_version=18,
+          system='bridges2',
+          OPENMPI_VERSION='4.0',
+          OPENMPI_PATCHLEVEL='2',
+          UCX_VERSION='1.9.0',
+          ENABLE_MPI='on',
+          MAKEJOBS=4,
+          CFLAGS='-march=znver1 -mmmx -msse -msse2 -msse3 -mssse3 -msse4a -mcx16 -msahf -mmovbe -maes -msha -mpclmul -mpopcnt -mabm -mfma -mbmi -mbmi2 -mavx -mavx2 -msse4.2 -msse4.1 -mlzcnt -mrdrnd -mf16c -mfsgsbase -mrdseed -mprfchw -madx -mfxsr -mxsave -mxsaveopt -mclflushopt -mxsavec -mxsaves -mclwb -mmwaitx -mclzero -mrdpid --param l1-cache-size=32 --param l1-cache-line-size=64 --param l2-cache-size=512 -mtune=znver1',
           **versions,
           **shas)
