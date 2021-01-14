@@ -11,6 +11,10 @@ and optionally the day separated by periods.
 2020.01.15
 ++++++++++
 
+*Added:*
+
+* Support PSC Bridges-2
+
 *Updated:*
 
 * freud v2.4.1
@@ -19,6 +23,10 @@ and optionally the day separated by periods.
 * HOOMD-blue
 
   * Beta: v3.0.0-beta.3
+
+*Removed:*
+
+* Support for PCC Bridges
 
 2020
 ----
