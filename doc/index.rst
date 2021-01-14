@@ -29,8 +29,7 @@ Or the beta (with HOOMD v3.0.0-beta)::
 
 **singularity exec** executes software from inside the container::
 
-    $ singularity exec software.simg python3 --version
-    Python 3.6.9
+    $ singularity exec software.simg python3 script.py
 
 Add the ``--nv`` option to **enable NVIDIA GPUs** inside the container::
 
@@ -64,7 +63,7 @@ Add the ``--nv`` option to **enable NVIDIA GPUs** inside the container::
     ['[0]       Quadro RTX 5000  48 SM_7.5 @ 1.82 GHz, 16124 MiB DRAM']
     >>>
 
-**glotzerlab-software** :doc:`updates monthly <changes>` with the latest versions of included
+**glotzerlab-software** :doc:`updates regularly <changes>` with the latest versions of included
 software. Download the latest image to update::
 
     $ curl -o software.simg \
