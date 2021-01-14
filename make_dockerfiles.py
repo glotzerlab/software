@@ -102,18 +102,6 @@ if __name__ == '__main__':
           **versions,
           **shas)
 
-    write('docker/bridges/Dockerfile', [base_template, ib_hfi1_template, openmpi_template, glotzerlab_software_template, finalize_template],
-          FROM='nvidia/cuda:10.1-devel-ubuntu18.04',
-          ubuntu_version=18,
-          system='bridges',
-          OPENMPI_VERSION='2.1',
-          OPENMPI_PATCHLEVEL='2',
-          ENABLE_MPI='on',
-          MAKEJOBS=4,
-          CFLAGS='-march=haswell -mmmx -msse -msse2 -msse3 -mssse3 -mcx16 -msahf -mmovbe -maes -mpclmul -mpopcnt -mabm -mfma -mbmi -mbmi2 -mavx -mavx2 -msse4.2 -msse4.1 -mlzcnt -mrdrnd -mf16c -mfsgsbase -mfxsr -mxsave -mxsaveopt --param l1-cache-size=32 --param l1-cache-line-size=64 --param l2-cache-size=35840 -mtune=haswell -fstack-protector-strong -Wformat -Wformat-security',
-          **versions,
-          **shas)
-
     write('docker/stampede2/Dockerfile', [base_template, ib_hfi1_stampede2_template, mvapich2_template, glotzerlab_software_template, finalize_template],
           FROM='nvidia/cuda:10.1-devel-ubuntu18.04',
           ubuntu_version=18,
