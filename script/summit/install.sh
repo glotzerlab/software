@@ -131,9 +131,9 @@ curl -SL https://gitlab.com/libeigen/eigen/-/archive/3.3.8/eigen-3.3.8.tar.gz | 
 
 # freud requires rowan
 RUN /opt/glotzerlab/bin/pip3 install --no-cache-dir \
-    rowan==v1.2.2
+    rowan==v1.3.0.post1
 
- git clone --recursive --branch v2.4.0 --depth 1 https://github.com/glotzerlab/freud \
+ git clone --recursive --branch v2.4.1 --depth 1 https://github.com/glotzerlab/freud \
     && rm -f freud/*.toml \
     && export CFLAGS="-mcpu=power9 -mtune=power9" CXXFLAGS="-mcpu=power9 -mtune=power9" \
     && check-requirements.py ./freud/requirements.txt \
@@ -142,12 +142,12 @@ RUN /opt/glotzerlab/bin/pip3 install --no-cache-dir \
     || exit 1
 
 RUN /opt/glotzerlab/bin/pip3 install --no-cache-dir \
-    rowan==v1.2.2 \
+    rowan==v1.3.0.post1 \
     coxeter==v0.4.0 \
     garnett==v0.7.1 \
     gtar==v1.0.1 \
     plato-draw==v1.7.0 \
-    signac==v1.5.0 \
+    signac==v1.5.1 \
     signac-flow==v0.11.0 \
     fsph==v0.2.0 \
     pythia-learn==v0.2.5

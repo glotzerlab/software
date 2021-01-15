@@ -10,7 +10,7 @@ community <community>` for suggestions.
 .. toctree::
     :maxdepth: 2
 
-    clusters/bridges
+    clusters/bridges2
     clusters/comet
     clusters/greatlakes
     clusters/stampede2

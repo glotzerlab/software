@@ -8,14 +8,25 @@ and optionally the day separated by periods.
 2021
 ----
 
-2020.01.15
+2021.01.15
 ++++++++++
+
+*Added:*
+
+* Support PSC Bridges-2
 
 *Updated:*
 
+* freud v2.4.1
+* rowan v1.3.0.post1
+* signac v1.5.1
 * HOOMD-blue
 
   * Beta: v3.0.0-beta.3
+
+*Removed:*
+
+* Support for PSC Bridges
 
 2020
 ----

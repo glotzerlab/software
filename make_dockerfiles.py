@@ -21,8 +21,6 @@ versions['PYBIND11_VERSION'] = '2.4.0'
 versions['CEREAL_VERSION'] = '1.3.0'
 versions['EIGEN_VERSION'] = '3.3.8'
 versions['QHULL_VERSION'] = '2020.2'
-versions['UCX_VERSION'] = '1.6.0'
-versions['PMIX_VERSION'] = '2.2.3'
 
 # Summit-only dependencies
 versions['TBB_VERSION'] = '2020.2'
@@ -33,17 +31,17 @@ shas['SCIPY_SHA'] = '066c513d90eb3fd7567a9e150828d39111ebd88d3e924cdfc9f8ce19ab6
 
 # glotzer lab
 repo_version['fresnel']     = versions['FRESNEL_VERSION']     = 'v0.12.0'
-repo_version['freud']       = versions['FREUD_VERSION']       = 'v2.4.0'
+repo_version['freud']       = versions['FREUD_VERSION']       = 'v2.4.1'
 repo_version['fsph']        = versions['FSPH_VERSION']        = 'v0.2.0'
 repo_version['garnett']     = versions['GARNETT_VERSION']     = 'v0.7.1'
 repo_version['hoomd-blue']  = versions['HOOMD_VERSION']       = 'v3.0.0-beta.3'
 repo_version['gsd']         = versions['GSD_VERSION']         = 'v2.4.0'
 repo_version['libgetar']    = versions['LIBGETAR_VERSION']    = 'v1.0.1'
 repo_version['pythia']      = versions['PYTHIA_VERSION']      = 'v0.2.5'
-repo_version['rowan']       = versions['ROWAN_VERSION']       = 'v1.2.2'
+repo_version['rowan']       = versions['ROWAN_VERSION']       = 'v1.3.0.post1'
 repo_version['coxeter']     = versions['COXETER_VERSION']     = 'v0.4.0'
 repo_version['plato']       = versions['PLATO_VERSION']       = 'v1.7.0'
-repo_version['signac']      = versions['SIGNAC_VERSION']      = 'v1.5.0'
+repo_version['signac']      = versions['SIGNAC_VERSION']      = 'v1.5.1'
 repo_version['signac-flow'] = versions['SIGNAC_FLOW_VERSION'] = 'v0.11.0'
 
 if __name__ == '__main__':
@@ -80,6 +78,8 @@ if __name__ == '__main__':
           system='greatlakes',
           OPENMPI_VERSION='4.0',
           OPENMPI_PATCHLEVEL='2',
+          UCX_VERSION='1.6.0',
+          PMIX_VERSION='2.2.3',
           ENABLE_MPI='on',
           BUILD_JIT='off',
           MAKEJOBS=4,
@@ -107,19 +107,6 @@ if __name__ == '__main__':
           **versions,
           **shas)
 
-    write('docker/bridges/Dockerfile', [base_template, ib_hfi1_template, openmpi_template, glotzerlab_software_template, finalize_template],
-          FROM='nvidia/cuda:10.1-devel-ubuntu18.04',
-          ubuntu_version=18,
-          system='bridges',
-          OPENMPI_VERSION='2.1',
-          OPENMPI_PATCHLEVEL='2',
-          ENABLE_MPI='on',
-          BUILD_JIT='off',
-          MAKEJOBS=4,
-          CFLAGS='-march=haswell -mmmx -msse -msse2 -msse3 -mssse3 -mcx16 -msahf -mmovbe -maes -mpclmul -mpopcnt -mabm -mfma -mbmi -mbmi2 -mavx -mavx2 -msse4.2 -msse4.1 -mlzcnt -mrdrnd -mf16c -mfsgsbase -mfxsr -mxsave -mxsaveopt --param l1-cache-size=32 --param l1-cache-line-size=64 --param l2-cache-size=35840 -mtune=haswell -fstack-protector-strong -Wformat -Wformat-security',
-          **versions,
-          **shas)
-
     write('docker/stampede2/Dockerfile', [base_template, ib_hfi1_stampede2_template, mvapich2_template, glotzerlab_software_template, finalize_template],
           FROM='nvidia/cuda:10.1-devel-ubuntu18.04',
           ubuntu_version=18,
@@ -144,5 +131,18 @@ if __name__ == '__main__':
           ENABLE_TBB='off',
           BUILD_JIT='off',
           ENABLE_MPI_CUDA='on',
+          **versions,
+          **shas)
+
+    write('docker/bridges2/Dockerfile', [base_template, ib_mlx_template, openmpi_template, glotzerlab_software_template, finalize_template],
+          FROM='nvidia/cuda:10.1-devel-ubuntu18.04',
+          ubuntu_version=18,
+          system='bridges2',
+          OPENMPI_VERSION='4.0',
+          OPENMPI_PATCHLEVEL='2',
+          UCX_VERSION='1.9.0',
+          ENABLE_MPI='on',
+          MAKEJOBS=4,
+          CFLAGS='-march=znver1 -mmmx -msse -msse2 -msse3 -mssse3 -msse4a -mcx16 -msahf -mmovbe -maes -msha -mpclmul -mpopcnt -mabm -mfma -mbmi -mbmi2 -mavx -mavx2 -msse4.2 -msse4.1 -mlzcnt -mrdrnd -mf16c -mfsgsbase -mrdseed -mprfchw -madx -mfxsr -mxsave -mxsaveopt -mclflushopt -mxsavec -mxsaves -mclwb -mmwaitx -mclzero -mrdpid --param l1-cache-size=32 --param l1-cache-line-size=64 --param l2-cache-size=512 -mtune=znver1',
           **versions,
           **shas)
