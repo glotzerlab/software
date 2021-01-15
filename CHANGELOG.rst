@@ -8,7 +8,7 @@ and optionally the day separated by periods.
 2021
 ----
 
-2020.01.15
+2021.01.15
 ++++++++++
 
 *Added:*
@@ -26,7 +26,7 @@ and optionally the day separated by periods.
 
 *Removed:*
 
-* Support for PCC Bridges
+* Support for PSC Bridges
 
 2020
 ----
