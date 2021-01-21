@@ -28,20 +28,20 @@ container:
 
 Serial (or multithreaded) CPU jobs (``RM-shared`` partitions)::
 
-    module load openmpi
+    module load openmpi/4.0.2-clang2.1
     mpirun -n 1 singularity exec $PROJECT/software.simg command arguments
 
 Single GPU jobs (``GPU-shared`` partition)::
 
-    module load openmpi
+    module load openmpi/4.0.2-clang2.1
     mpirun -n 1 singularity exec --nv $PROJECT/software.simg command arguments
 
 MPI parallel CPU jobs (``RM`` partition, ``RM-shared`` partition with more than 1 core)::
 
-    module load openmpi
+    module load openmpi/4.0.2-clang2.1
     mpirun singularity exec $PROJECT/software.simg command arguments
 
 MPI parallel GPU jobs (``GPU`` partition)::
 
-    module load openmpi
+    module load openmpi/4.0.2-clang2.1
     mpirun singularity exec --nv $PROJECT/software.simg command arguments
