@@ -133,7 +133,7 @@ if __name__ == '__main__':
           ubuntu_version=18,
           system='bridges2',
           OPENMPI_VERSION='4.0',
-          OPENMPI_PATCHLEVEL='2',
+          OPENMPI_PATCHLEVEL='5',
           UCX_VERSION='1.9.0',
           ENABLE_MPI='on',
           MAKEJOBS=4,

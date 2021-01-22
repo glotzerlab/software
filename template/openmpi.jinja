@@ -66,7 +66,27 @@ RUN curl -sSLO https://github.com/openucx/ucx/releases/download/v{{UCX_VERSION}}
 RUN curl -sSLO https://www.open-mpi.org/software/ompi/v{{ OPENMPI_VERSION }}/downloads/openmpi-{{ OPENMPI_VERSION }}.{{ OPENMPI_PATCHLEVEL }}.tar.bz2 \
    && tar -xjf openmpi-{{ OPENMPI_VERSION }}.{{ OPENMPI_PATCHLEVEL }}.tar.bz2 -C /root \
    && cd /root/openmpi-{{ OPENMPI_VERSION }}.{{ OPENMPI_PATCHLEVEL }} \
-   && ./configure --prefix=/usr --enable-mpi-cxx --with-ucx --without-lsf --enable-mca-no-build=btl-usnic,btl-uct \
+   && ./configure --prefix=/usr \
+                  --enable-shared \
+                  --disable-silent-rules \
+                  --disable-builtin-atomics \
+                  --enable-static \
+                  --without-pmi \
+                  --enable-mpi1-compatibility \
+                  --without-verbs \
+                  --without-xpmem \
+                  --without-ofi \
+                  --without-mxm \
+                  --without-cma \
+                  --with-ucx \
+                  --without-psm \
+                  --without-knem \
+                  --without-psm2 \
+                  --without-hcoll \
+                  --without-fca \
+                  --disable-java \
+                  --disable-mpi-java \
+                  --without-cuda  \
    && make all install \
    && rm -rf /root/openmpi-{{ OPENMPI_VERSION }}.{{ OPENMPI_PATCHLEVEL }} \
    && rm /openmpi-{{ OPENMPI_VERSION }}.{{ OPENMPI_PATCHLEVEL }}.tar.bz2
