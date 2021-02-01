@@ -112,8 +112,8 @@ RUN /opt/glotzerlab/bin/pip3 install --no-cache-dir \
     garnett==v0.7.1 \
     gtar==v1.0.1 \
     plato-draw==v1.7.0 \
-    signac==v1.5.1 \
-    signac-flow==v0.11.0 \
+    signac==v1.6.0 \
+    signac-flow==v0.12.0 \
     fsph==v0.2.0 \
     pythia-learn==v0.2.5
 
