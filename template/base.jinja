@@ -22,6 +22,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
   python3.8 \
   python3.8-dev \
   python3.8-venv \
+  python3.8-distutils \
   zlib1g-dev \
   ca-certificates \
   && rm -rf /var/lib/apt/lists/*
@@ -32,7 +33,7 @@ ENV PATH=$PATH:/usr/lib/llvm-7/bin
 {% endif %}
 
 # Link python3.8 to python3 in user path
-RUN ln -s "$(which python3.8)" /usr/bin/python3
+RUN rm -f /usr/bin/python3 && ln -s "$(which python3.8)" /usr/bin/python3
 
 # prevent python from loading packages from outside the container
 # default empty pythonpath
