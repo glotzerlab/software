@@ -7,4 +7,4 @@ umask 022
 
 # docker push glotzerlab/software
 
-rsync -rvt --delete-after /nfs/turbo/glotzer/containers/glotzerlab login.itd.umich.edu:/afs/umich.edu/group/g/glotzweb/Downloads
+rsync -rvt --progress --delete-after /nfs/turbo/glotzer/containers/glotzerlab greatlakes.arc-ts.umich.edu:/afs/umich.edu/group/g/glotzweb/Downloads
