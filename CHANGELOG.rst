@@ -8,6 +8,17 @@ and optionally the day separated by periods.
 2021
 ----
 
+2021.02.24
+++++++++++
+
+*Updated:*
+
+* Python 3.8
+* HOOMD-blue
+
+  * v2.9.4
+  * Beta: v3.0.0-beta.4
+
 2021.01.15
 ++++++++++
 
