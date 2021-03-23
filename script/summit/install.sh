@@ -123,7 +123,7 @@ curl -SL https://gitlab.com/libeigen/eigen/-/archive/3.3.8/eigen-3.3.8.tar.gz | 
 
 
 
- git clone --recursive --branch v2.4.0 --depth 1 https://github.com/glotzerlab/gsd \
+ git clone --recursive --branch v2.4.1 --depth 1 https://github.com/glotzerlab/gsd \
     && export CFLAGS="-mcpu=power9 -mtune=power9" CXXFLAGS="-mcpu=power9 -mtune=power9" \
     && python3 -m pip install --no-cache-dir --no-use-pep517 --no-build-isolation --no-deps --ignore-installed ./gsd \
     && rm -rf gsd \
@@ -145,16 +145,16 @@ RUN /opt/glotzerlab/bin/pip3 install --no-cache-dir \
     rowan==v1.3.0.post1 \
     coxeter==v0.4.0 \
     garnett==v0.7.1 \
-    gtar==v1.0.1 \
+    gtar==v1.1.0 \
     plato-draw==v1.7.0 \
     signac==v1.6.0 \
-    signac-flow==v0.12.0 \
+    signac-flow==v0.13.0 \
     fsph==v0.2.0 \
     pythia-learn==v0.2.5
 
 
 
- git clone --recursive --branch v3.0.0-beta.4 --depth 1 https://github.com/glotzerlab/hoomd-blue hoomd \
+ git clone --recursive --branch v3.0.0-beta.5 --depth 1 https://github.com/glotzerlab/hoomd-blue hoomd \
     && cd hoomd \
     && mkdir -p build \
     && cd build \
