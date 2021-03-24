@@ -5,6 +5,7 @@ trigger:
 
 pr:
   - master
+  - hoomd-v3-beta
 
 schedules:
 - cron: "0 2 * * *"

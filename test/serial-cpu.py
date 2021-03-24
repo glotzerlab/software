@@ -4,7 +4,7 @@ results.write('** Starting serial CPU tests **\n')
 try:
     # Fresnel
     import fresnel
-    results.write('Fresnel version   : {}\n'.format(fresnel.__version__))
+    results.write('Fresnel version   : {}\n'.format(fresnel.version.version))
     dev = fresnel.Device(mode='cpu')
     results.write('Fresnel device    : {}\n'.format(dev))
 
@@ -13,8 +13,8 @@ try:
     results.write('Freud version     : {}\n'.format(freud.__version__))
 
     # garnett
-    # import garnett
-    # results.write('garnett version       : {}\n'.format(garnett.__version__))
+    import garnett
+    results.write('garnett version       : {}\n'.format(garnett.__version__))
 
     # GSD
     import gsd
