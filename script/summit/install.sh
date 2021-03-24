@@ -110,7 +110,7 @@ RUN /opt/glotzerlab/bin/pip3 install --no-cache-dir \
     rowan==v1.3.0.post1 \
     coxeter==v0.4.0 \
     garnett==v0.7.1 \
-    gtar==v1.0.1 \
+    gtar==v1.1.0 \
     plato-draw==v1.7.0 \
     signac==v1.6.0 \
     signac-flow==v0.13.0 \
