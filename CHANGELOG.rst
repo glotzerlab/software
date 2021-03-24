@@ -8,6 +8,23 @@ and optionally the day separated by periods.
 2021
 ----
 
+2021.03.24
+++++++++++
+
+*Updated:*
+
+* freud v2.5.0
+* fresnel v0.13.1
+* gsd v2.4.1
+* libgetar v1.1.0
+
+* HOOMD-blue
+
+  * v2.9.6
+  * Beta: v3.0.0-beta.5
+
+* signac-flow v0.13.0
+
 2021.02.25
 ++++++++++
 
