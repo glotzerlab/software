@@ -3,23 +3,27 @@ Great Lakes (UMich)
 
 `Great Lakes <https://arc-ts.umich.edu/greatlakes/>`_ is the University of Michigan campus cluster.
 
+Downloading
+***********
+
 The **glotzerlab-software** image is large, store it in your scratch directory::
 
-    $ cd /scratch/your-account_root/your-account/$USER
+    $ cd /scratch/your-account_root/<your-account>/$USER
 
 .. note::
 
-    replace ``your-account`` with your Great Lakes account name
+    replace ``<your-account>`` with your Great Lakes account name
 
 Download the image with support for Great Lakes::
 
-    $ curl -o software.simg \
-      https://glotzerlab.engin.umich.edu/downloads/glotzerlab/software-greatlakes.simg
+    $ singularity pull software.sif docker://glotzerlab/software:greatlakes
 
 Or the beta (with HOOMD v3.0.0-beta)::
 
-    $ curl -o software.simg \
-      https://glotzerlab.engin.umich.edu/downloads/glotzerlab/software-beta-greatlakes.simg
+    $ singularity pull software.sif docker://glotzerlab/software:beta-greatlakes
+
+Using
+*****
 
 Or the beta (with HOOMD v3.0.0-beta)::
 
@@ -36,22 +40,22 @@ Serial (or multithreaded) CPU jobs::
 
     module load gcc/8.2.0 openmpi/4.0.2 singularity
     mpirun -n 1 singularity exec \
-      /scratch/your-account_root/your-account/$USER/software.simg command arguments
+      /scratch/your-account_root/your-account/$USER/software.sif command arguments
 
 Single GPU jobs::
 
     module load gcc/8.2.0 openmpi/4.0.2 singularity
     mpirun -n 1 singularity exec --nv \
-      /scratch/your-account_root/your-account/$USER/software.simg command arguments
+      /scratch/your-account_root/your-account/$USER/software.sif command arguments
 
 MPI parallel CPU jobs::
 
     module load gcc/8.2.0 openmpi/4.0.2 singularity
     mpirun singularity exec \
-      /scratch/your-account_root/your-account/$USER/software.simg command arguments
+      /scratch/your-account_root/your-account/$USER/software.sif command arguments
 
 MPI parallel GPU jobs::
 
     module load gcc/8.2.0 openmpi/4.0.2 singularity
     mpirun singularity exec --nv \
-      /scratch/your-account_root/your-account/$USER/software.simg command arguments
+      /scratch/your-account_root/your-account/$USER/software.sif command arguments

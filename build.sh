@@ -5,28 +5,20 @@ set -e
 
 usage()
     {
-    echo "Usage: $0 -r repository [ -t tag ] [ -s ] [ -k ] [ system [ system [ ... ] ] ]"
+    echo "Usage: $0 -r repository [ -t tag ] [ system [ system [ ... ] ] ]"
     exit
     }
 
 tag="$(date +%Y.%m.%d)"
-build_singularity=false
-skip_docker=false
 repository=""
 
-while getopts ":skr:t:" o; do
+while getopts ":r:t:" o; do
     case "${o}" in
-        s)
-            build_singularity=true
-            ;;
         r)
             repository=${OPTARG}
             ;;
         t)
             tag=${OPTARG}
-            ;;
-        k)
-            skip_docker=true
             ;;
         *)
             usage
@@ -62,25 +54,12 @@ extra_tags=( ["nompi"]=""
              ["stampede2"]=""
 )
 
-if [ "$skip_docker" = false ] ; then
-    for cluster in "$@"
-    do
-        cp -a $DIR/test/*.py $DIR/docker/${cluster}/test
-        cp -a $DIR/check-requirements.py $DIR/docker/${cluster}
-        docker build $DIR/docker/${cluster} \
-                    -t ${repository}/software:beta-${cluster} \
-                    -t ${repository}/software:${tag}-${cluster} \
-                    ${extra_tags[$cluster]}
-    done
-fi
-
-if [ "$build_singularity" = true ] ; then
-    for label in "$@"
-    do
-        docker run -t --rm --privileged -v /var/run/docker.sock:/var/run/docker.sock \
-                   -v ${OUTPUT}:/output singularityware/docker2singularity:v2.6 \
-                   --name software-beta-${label} ${repository}/software:${tag}-${label}
-        mkdir -p /nfs/turbo/glotzer/containers/${repository}
-        mv ${OUTPUT}/*.simg /nfs/turbo/glotzer/containers/${repository}
-    done
-fi
+for cluster in "$@"
+do
+    cp -a $DIR/test/*.py $DIR/docker/${cluster}/test
+    cp -a $DIR/check-requirements.py $DIR/docker/${cluster}
+    docker build $DIR/docker/${cluster} \
+                -t ${repository}/software:beta-${cluster} \
+                -t ${repository}/software:${tag}-${cluster} \
+                ${extra_tags[$cluster]}
+done

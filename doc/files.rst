@@ -15,7 +15,7 @@ This starts at the root of the filesystem::
     $ ls /
     bin   dev  home  lib64       mnt  opt   root  sbin  sys  usr
     boot  etc  lib   lost+found  nfs  proc  run   srv   tmp  var
-    $ singularity exec software.simg ls /
+    $ singularity exec software.sif ls /
     bin          etc               lib    mkdir  opt       run          srv  var
     boot         fresnel-examples  lib32  mnt    proc      sbin         sys
     dev          home              lib64  nfs    projects  scratch      tmp
@@ -33,16 +33,16 @@ contents directly. On most systems, Singularity is configured to bind mount your
 directory by default::
 
     $ echo "print('hello world')" > script.py
-    $ singularity exec software.simg ls
-    script.py  software.simg
-    $ singularity exec software.simg python3 script.py
+    $ singularity exec software.sif ls
+    script.py  software.sif
+    $ singularity exec software.sif python3 script.py
     hello world
 
 Only specific directories are bind mounted. The above example was in ``testuser``'s home directory.
 Even though there are many users on this host system, singularity only sees ``/glotzerlab-software``
 (from the container image) and ``testuser`` (bind mounted) in ``/home``::
 
-    $ singularity exec software.simg ls /home
+    $ singularity exec software.sif ls /home
     glotzerlab-software  testuser
 
 .. tip::

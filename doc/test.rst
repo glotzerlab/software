@@ -6,11 +6,11 @@ software inter-operates with the host system.
 
 Copy the test scripts to the current directory::
 
-    $ singularity exec software.simg bash -c "cp /test/* ."
+    $ singularity exec software.sif bash -c "cp /test/* ."
 
 .. note::
 
-    The test scripts assume the image is named ``software.simg`` and is the same directory.
+    The test scripts assume the image is named ``software.sif`` and is the same directory.
 
 Submit the test jobs::
 
