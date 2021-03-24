@@ -12,7 +12,7 @@ usage()
 tag="$(date +%Y.%m.%d)"
 repository=""
 
-while getopts ":skr:t:" o; do
+while getopts ":r:t:" o; do
     case "${o}" in
         r)
             repository=${OPTARG}
