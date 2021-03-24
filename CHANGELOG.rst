@@ -11,6 +11,11 @@ and optionally the day separated by periods.
 2021.03.24
 ++++++++++
 
+*Changed:*
+
+* ``glotzerlab-software`` images are no longer hosted at https://glotzerlab.engin.umich.edu.
+  Use ``singularity pull software.sif docker://glotzerlab/software`` to download the image.
+
 *Updated:*
 
 * freud v2.5.0

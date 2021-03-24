@@ -13,5 +13,5 @@ module load openmpi_ib
 
 rm -f test-results-gpu.out
 
-ibrun -n 1 singularity exec --nv software.simg python3 serial-gpu.py
+ibrun -n 1 singularity exec --nv software.sif python3 serial-gpu.py
 

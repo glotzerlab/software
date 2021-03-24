@@ -15,25 +15,24 @@ Quick start
 
 First, download the stable **glotzerlab/software** image::
 
-    $ curl -o software.simg \
-      https://glotzerlab.engin.umich.edu/downloads/glotzerlab/software-nompi.simg
+    $ singularity pull software.sif docker://glotzerlab/software
 
 Or the beta (with HOOMD v3.0.0-beta)::
 
-    $ curl -o software.simg \
-      https://glotzerlab.engin.umich.edu/downloads/glotzerlab/software-beta-nompi.simg
+    $ singularity pull software.sif docker://glotzerlab/software:beta-nompi
 
 .. note::
 
     On HPC clusters, download the cluster specific image. See :doc:`cluster` for details.
 
-**singularity exec** executes software from inside the container::
+**singularity exec** executes software from inside the container. For example, run a Python script
+with::
 
-    $ singularity exec software.simg python3 script.py
+    $ singularity exec software.sif python3 script.py
 
 Add the ``--nv`` option to **enable NVIDIA GPUs** inside the container::
 
-    $ singularity exec --nv software.simg nvidia-smi
+    $ singularity exec --nv software.sif nvidia-smi
     +-----------------------------------------------------------------------------+
     | NVIDIA-SMI 450.57       Driver Version: 450.57       CUDA Version: 11.0     |
     |-------------------------------+----------------------+----------------------+
@@ -48,7 +47,7 @@ Add the ``--nv`` option to **enable NVIDIA GPUs** inside the container::
 
 **singularity shell** launches an interactive shell::
 
-    $ singularity shell --nv software.simg
+    $ singularity shell --nv software.sif
     Singularity: Invoking an interactive shell within container...
 
     Singularity> python3
@@ -66,8 +65,7 @@ Add the ``--nv`` option to **enable NVIDIA GPUs** inside the container::
 **glotzerlab-software** :doc:`updates regularly <changes>` with the latest versions of included
 software. Download the latest image to update::
 
-    $ curl -o software.simg \
-      https://glotzerlab.engin.umich.edu/downloads/glotzerlab/software-nompi.simg
+    $ singularity pull software.sif docker://glotzerlab/software
 
 .. seealso::
 
