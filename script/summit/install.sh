@@ -98,7 +98,7 @@ curl -sSLO https://github.com/scipy/scipy/releases/download/v1.5.2/scipy-1.5.2.t
 RUN /opt/glotzerlab/bin/pip3 install --no-cache-dir \
     rowan==v1.3.0.post1
 
- git clone --recursive --branch v2.4.1 --depth 1 https://github.com/glotzerlab/freud \
+ git clone --recursive --branch v2.5.0 --depth 1 https://github.com/glotzerlab/freud \
     && rm -f freud/*.toml \
     && export CFLAGS="-mcpu=power9 -mtune=power9" CXXFLAGS="-mcpu=power9 -mtune=power9" \
     && check-requirements.py ./freud/requirements.txt \
