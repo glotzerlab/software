@@ -3,8 +3,8 @@ Installed software
 
 **glotzerlab-software** includes the following installed inside the container.
 
-* `Ubuntu 18.04 <https://www.ubuntu.com/>`_
-* `python 3.6 <https://www.python.org/>`_
+* `Ubuntu <https://www.ubuntu.com/>`_
+* `python <https://www.python.org/>`_
 * `Glotzer lab <http://glotzerlab.engin.umich.edu/home/>`_ open-source software:
 
     * `coxeter <https://coxeter.readthedocs.io/>`_
