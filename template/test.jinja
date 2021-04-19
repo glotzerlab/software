@@ -12,7 +12,7 @@ RUN cd /test && \
 RUN cd \
     && git clone --recursive --branch {{ FREUD_VERSION }} --depth 1 https://github.com/glotzerlab/freud \
     && cd freud/tests/ \
-    && python -m unittest discover \
+    && python -m pytest -v \
     && cd ../../ \
     && rm -rf freud \
     || exit 1

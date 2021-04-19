@@ -62,7 +62,6 @@ python3 -m pip install --progress-bar off --no-binary :all: --no-use-pep517 --no
 
 # TBB
 curl -sSLO https://github.com/oneapi-src/oneTBB/archive/v2020.2.tar.gz \
-    && echo "4804320e1e6cbe3a5421997b52199e3c1a3829b2ecb6489641da4b8e32faf500  v2020.2.tar.gz" | sha256sum -c - \
     && tar -xzf v2020.2.tar.gz -C . \
     && cd oneTBB-2020.2 \
     && make \
@@ -79,7 +78,6 @@ curl -sSLO https://github.com/oneapi-src/oneTBB/archive/v2020.2.tar.gz \
 
 # scipy
 curl -sSLO https://github.com/scipy/scipy/releases/download/v1.5.2/scipy-1.5.2.tar.gz \
-    && echo "066c513d90eb3fd7567a9e150828d39111ebd88d3e924cdfc9f8ce19ab6f90c9  scipy-1.5.2.tar.gz" | sha256sum -c - \
     && tar -xzf scipy-1.5.2.tar.gz -C . \
     && cd scipy-1.5.2 \
     && LAPACK=${OLCF_NETLIB_LAPACK_ROOT}/lib64/liblapack.so BLAS=${OLCF_NETLIB_LAPACK_ROOT}/lib64/libblas.so python3 setup.py install \
@@ -88,33 +86,18 @@ curl -sSLO https://github.com/scipy/scipy/releases/download/v1.5.2/scipy-1.5.2.t
 
 
 
- git clone --recursive --branch v2.4.1 --depth 1 https://github.com/glotzerlab/gsd \
-    && export CFLAGS="-mcpu=power9 -mtune=power9" CXXFLAGS="-mcpu=power9 -mtune=power9" \
-    && python3 -m pip install --no-cache-dir --no-use-pep517 --no-build-isolation --no-deps --ignore-installed ./gsd \
-    && rm -rf gsd \
-    || exit 1
 
-# freud requires rowan
-RUN /opt/glotzerlab/bin/pip3 install --no-cache-dir \
-    rowan==v1.3.0.post1
+# build scipy from source on summit
+ export LAPACK=${OLCF_NETLIB_LAPACK_ROOT}/lib64/liblapack.so BLAS=${OLCF_NETLIB_LAPACK_ROOT}/lib64/libblas.so
+    && python3 -m pip install \
+       --no-cache-dir \
+       --no-binary freud-analysis,gsd,scipy \
+       -r requirements.txt
 
- git clone --recursive --branch v2.5.0 --depth 1 https://github.com/glotzerlab/freud \
-    && rm -f freud/*.toml \
-    && export CFLAGS="-mcpu=power9 -mtune=power9" CXXFLAGS="-mcpu=power9 -mtune=power9" \
-    && python3 -m pip install --no-cache-dir --no-use-pep517 --no-build-isolation --no-deps --ignore-installed ./freud \
-    && rm -rf freud \
-    || exit 1
 
-RUN /opt/glotzerlab/bin/pip3 install --no-cache-dir \
-    rowan==v1.3.0.post1 \
-    coxeter==v0.4.0 \
-    garnett==v0.7.1 \
-    gtar==v1.1.0 \
-    plato-draw==v1.7.0 \
-    signac==v1.6.0 \
-    signac-flow==v0.13.0 \
-    fsph==v0.2.0 \
-    pythia-learn==v0.2.5
+RUN python3 -m pip install \
+    --no-cache-dir \
+    -r requirements.txt
 
 
 

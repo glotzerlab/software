@@ -4,10 +4,24 @@
 {% set RUN = 'RUN' %}
 {% endif %}
 
+{% if system != 'summit' %}
 {{ RUN }} export CFLAGS="{{CFLAGS}}" CXXFLAGS="{{CFLAGS}}" \
-    && python3 -m pip install --no-cache-dir --no-use-pep517 --no-build-isolation -r requirements-source.txt
+    && python3 -m pip install \
+       --no-cache-dir \
+       --no-binary freud-analysis,gsd \
+       -r requirements-source.txt
+{% else %}
+# build scipy from source on summit
+{{ RUN }} export LAPACK=${OLCF_NETLIB_LAPACK_ROOT}/lib64/liblapack.so BLAS=${OLCF_NETLIB_LAPACK_ROOT}/lib64/libblas.so
+    && python3 -m pip install \
+       --no-cache-dir \
+       --no-binary freud-analysis,gsd,scipy \
+       -r requirements.txt
+{% endif %}
 
-RUN /opt/glotzerlab/bin/pip3 install --no-cache-dir -r requirements.txt
+RUN python3 -m pip install \
+    --no-cache-dir \
+    -r requirements.txt
 
 {% if system != 'summit' %}
 {{ RUN }} git clone --recursive --branch {{ FRESNEL_VERSION }} --depth 1 https://github.com/glotzerlab/fresnel \
