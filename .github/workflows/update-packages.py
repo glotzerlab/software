@@ -31,4 +31,5 @@ if __name__ == '__main__':
             if not p.get('include_v_prefix', True) and p['version'][0] == 'v':
                 p['version'] = p['version'][1:]
 
-    print(yaml.dump(packages))
+    with open('packages.yml', 'w') as f:
+        yaml.dump(packages, f)
