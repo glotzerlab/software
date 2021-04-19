@@ -12,28 +12,20 @@ repo_version = {}
 
 # dependencies
 versions['EMBREE_VERSION'] = '3.12.0'
-
 versions['OSU_MICROBENCHMARK_VERSION'] ='5.4.1'
-shas['OSU_MICROBENCHMARK_SHA'] ='e90cb683a01744377f77d420de401431242593d8376b25b120950266e140e83c'
-
-versions['MPI4PY_VERSION'] = '3.0.3'
-versions['PYBIND11_VERSION'] = '2.5.0'
+versions['PYBIND11_VERSION'] = '2.6.2'
 versions['QHULL_VERSION'] = '2020.2'
+versions['MPI4PY_VERSION'] = '3.0.3'
 
 # Summit-only dependencies
 versions['TBB_VERSION'] = '2020.2'
-shas['TBB_SHA'] = '4804320e1e6cbe3a5421997b52199e3c1a3829b2ecb6489641da4b8e32faf500'
-
 versions['SCIPY_VERSION'] = '1.5.2'
-shas['SCIPY_SHA'] = '066c513d90eb3fd7567a9e150828d39111ebd88d3e924cdfc9f8ce19ab6f90c9'
 
 # glotzer lab
-repo_version['fresnel']     = versions['FRESNEL_VERSION']     = 'v0.13.1'
 repo_version['freud']       = versions['FREUD_VERSION']       = 'v2.5.0'
 repo_version['fsph']        = versions['FSPH_VERSION']        = 'v0.2.0'
 repo_version['garnett']     = versions['GARNETT_VERSION']     = 'v0.7.1'
 repo_version['gsd']         = versions['GSD_VERSION']         = 'v2.4.1'
-repo_version['hoomd-blue']  = versions['HOOMD_VERSION']       = 'v2.9.6'
 repo_version['libgetar']    = versions['LIBGETAR_VERSION']    = 'v1.1.0'
 repo_version['pythia']      = versions['PYTHIA_VERSION']      = 'v0.2.5'
 repo_version['rowan']       = versions['ROWAN_VERSION']       = 'v1.3.0.post1'
@@ -41,6 +33,9 @@ repo_version['coxeter']     = versions['COXETER_VERSION']     = 'v0.4.0'
 repo_version['plato']       = versions['PLATO_VERSION']       = 'v1.7.0'
 repo_version['signac']      = versions['SIGNAC_VERSION']      = 'v1.6.0'
 repo_version['signac-flow'] = versions['SIGNAC_FLOW_VERSION'] = 'v0.13.0'
+
+repo_version['fresnel']     = versions['FRESNEL_VERSION']     = 'v0.13.1'
+repo_version['hoomd-blue']  = versions['HOOMD_VERSION']       = 'v2.9.6'
 
 if __name__ == '__main__':
 

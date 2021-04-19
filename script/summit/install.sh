@@ -101,7 +101,6 @@ RUN /opt/glotzerlab/bin/pip3 install --no-cache-dir \
  git clone --recursive --branch v2.5.0 --depth 1 https://github.com/glotzerlab/freud \
     && rm -f freud/*.toml \
     && export CFLAGS="-mcpu=power9 -mtune=power9" CXXFLAGS="-mcpu=power9 -mtune=power9" \
-    && check-requirements.py ./freud/requirements.txt \
     && python3 -m pip install --no-cache-dir --no-use-pep517 --no-build-isolation --no-deps --ignore-installed ./freud \
     && rm -rf freud \
     || exit 1

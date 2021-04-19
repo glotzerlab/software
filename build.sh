@@ -49,7 +49,7 @@ extra_tags=( ["nompi"]="-t ${repository}/software:latest -t ${repository}/softwa
 for cluster in "$@"
 do
     cp -a $DIR/test/*.py $DIR/docker/${cluster}/test
-    cp -a $DIR/check-requirements.py $DIR/docker/${cluster}
+    cp -a requirements*.txt $DIR/docker/${cluster}
     docker build $DIR/docker/${cluster} \
                 -t ${repository}/software:${cluster} \
                 -t ${repository}/software:${tag}-${cluster} \

@@ -117,5 +117,5 @@ RUN python3 -m venv /opt/glotzerlab --system-site-packages \
        unittest2 \
        sympy
 
-# Install the check-requirements script
-COPY check-requirements.py /opt/glotzerlab/bin
+# Install the requirements files
+COPY requirements*.txt /
