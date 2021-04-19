@@ -85,5 +85,6 @@ ENV PATH=/opt/glotzerlab/bin:$PATH \
 
 RUN python3 -m venv /opt/glotzerlab \
     && /opt/glotzerlab/bin/python3 -m pip install --no-cache-dir --upgrade pip
+
 # Install the requirements files
 COPY requirements*.txt /

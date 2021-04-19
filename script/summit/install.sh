@@ -77,11 +77,11 @@ curl -sSLO https://github.com/oneapi-src/oneTBB/archive/v2020.2.tar.gz \
 # embree is not available for power9
 
 # scipy
-curl -sSLO https://github.com/scipy/scipy/releases/download/v1.5.2/scipy-1.5.2.tar.gz \
-    && tar -xzf scipy-1.5.2.tar.gz -C . \
-    && cd scipy-1.5.2 \
+curl -sSLO https://github.com/scipy/scipy/releases/download/v/scipy-.tar.gz \
+    && tar -xzf scipy-.tar.gz -C . \
+    && cd scipy- \
     && LAPACK=${OLCF_NETLIB_LAPACK_ROOT}/lib64/liblapack.so BLAS=${OLCF_NETLIB_LAPACK_ROOT}/lib64/libblas.so python3 setup.py install \
-    && rm -rf scipy-1.5.2 \
+    && rm -rf scipy- \
     || exit 1
 
 
@@ -92,7 +92,8 @@ curl -sSLO https://github.com/scipy/scipy/releases/download/v1.5.2/scipy-1.5.2.t
     && python3 -m pip install \
        --no-cache-dir \
        --no-binary freud-analysis,gsd,scipy \
-       -r requirements.txt
+       -r requirements.txt \
+    || exit 1
 
 
 RUN python3 -m pip install \

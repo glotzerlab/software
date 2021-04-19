@@ -9,14 +9,16 @@
     && python3 -m pip install \
        --no-cache-dir \
        --no-binary freud-analysis,gsd \
-       -r requirements-source.txt
+       -r requirements-source.txt \
+    || exit 1
 {% else %}
 # build scipy from source on summit
 {{ RUN }} export LAPACK=${OLCF_NETLIB_LAPACK_ROOT}/lib64/liblapack.so BLAS=${OLCF_NETLIB_LAPACK_ROOT}/lib64/libblas.so
     && python3 -m pip install \
        --no-cache-dir \
        --no-binary freud-analysis,gsd,scipy \
-       -r requirements.txt
+       -r requirements.txt \
+    || exit 1
 {% endif %}
 
 RUN python3 -m pip install \
