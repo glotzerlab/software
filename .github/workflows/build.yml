@@ -1,9 +1,5 @@
 name: Build
 
-concurrency:
-  group: ${{ github.ref }}
-  cancel-in-progress: true
-
 on:
   # Trigger on pull requests.
   pull_request:
@@ -24,6 +20,9 @@ jobs:
     strategy:
       matrix:
         configuration: [nompi, greatlakes, bridges2, comet, stampede2]
+    concurrency:
+      group: ${{ github.ref }}
+      cancel-in-progress: true
     steps:
       - uses: actions/checkout@v2.3.4
       - name: Login to DockerHub
