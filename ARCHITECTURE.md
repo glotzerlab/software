@@ -29,22 +29,17 @@ Images are combined from a number of Jinja template files in `template/*.jinja` 
 
 ### Base templates
 
-The template `template/base.jinja` provides the base dependencies necessary to build Glotzer Lab
-software along with commonly used tools. This image is based on `nvidia/cuda-?.?-devel-ubuntu18.04`.
-
-The template `summit.jinja` provides the base dependencies through modules on summit and configures
-a software root directory for the build script.
-
-The templates `ib-mlx.jinja` and `ib-hfi1`.jinja adds high speed IB networking drivers.
-
-The templates `openmpi.jinja` and `mvapich2.jinja` build the corresponding MPI libraries.
-
-The template `glotzer-software.jinja` compiles and installs glotzer group software.
-
-The template `finalize.jinja` creates a `glotzerlab-software` user so that tools designed to run as
-non-root can run without any user intervention.
-
-The tempate `test.jinja` runs unit tests on some of the installed packages.
+* `template/base.jinja` provides the base dependencies necessary to build Glotzer Lab
+  software along with commonly used tools. This image is based on
+  `nvidia/cuda-?.?-devel-ubuntu18.04`.
+* `summit.jinja` provides the base dependencies through modules on summit and configures
+  a software root directory for the build script.
+* `ib-mlx.jinja` and `ib-hfi1.jinja` adds high speed IB networking drivers.
+* `openmpi.jinja` and `mvapich2.jinja` build the corresponding MPI libraries.
+* `glotzer-software.jinja` compiles and installs glotzer group software.
+* `finalize.jinja` creates a `glotzerlab-software` user so that tools designed to run as
+  non-root can run without any user intervention.
+* `test.jinja` runs unit tests on some of the installed packages.
 
 ### Software images
 
