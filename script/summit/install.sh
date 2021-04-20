@@ -37,28 +37,14 @@ export LDSHARED="\${OLCF_GCC_ROOT}/bin/gcc -shared"
 export VIRTUAL_ENV=$ROOT
 EOL
 
-cp -a $DIR/../../check-requirements.py $ROOT/bin
-
 source $ROOT/environment.sh
 
 mkdir -p /tmp/$USER-glotzerlab-software
+cp -a $DIR/../../*.txt /tmp/$USER-glotzerlab-software
 cd /tmp/$USER-glotzerlab-software
 
 python3 -m pip install --upgrade pip
-python3 -m pip install --progress-bar off --no-binary :all: --no-use-pep517 --no-build-isolation cython
-python3 -m pip install --progress-bar off --no-binary :all: --no-use-pep517 --no-build-isolation \
-    mpi4py \
-    six \
-    numpy \
-    tables \
-    numexpr \
-    deprecation \
-    breathe \
-    cloudpickle \
-    filelock \
-    jinja2 \
-    tqdm \
-    packaging
+python3 -m pip install --no-cache-dir --no-binary mpi4py -r requirements-mpi.txt
 
 # TBB
 curl -sSLO https://github.com/oneapi-src/oneTBB/archive/v2020.2.tar.gz \
@@ -76,14 +62,6 @@ curl -sSLO https://github.com/oneapi-src/oneTBB/archive/v2020.2.tar.gz \
 
 # embree is not available for power9
 
-# scipy
-curl -sSLO https://github.com/scipy/scipy/releases/download/v/scipy-.tar.gz \
-    && tar -xzf scipy-.tar.gz -C . \
-    && cd scipy- \
-    && LAPACK=${OLCF_NETLIB_LAPACK_ROOT}/lib64/liblapack.so BLAS=${OLCF_NETLIB_LAPACK_ROOT}/lib64/libblas.so python3 setup.py install \
-    && rm -rf scipy- \
-    || exit 1
-
 
 
 
@@ -91,7 +69,7 @@ curl -sSLO https://github.com/scipy/scipy/releases/download/v/scipy-.tar.gz \
  export LAPACK=${OLCF_NETLIB_LAPACK_ROOT}/lib64/liblapack.so BLAS=${OLCF_NETLIB_LAPACK_ROOT}/lib64/libblas.so
     && python3 -m pip install \
        --no-cache-dir \
-       --no-binary freud-analysis,gsd,scipy \
+       --no-binary freud-analysis,gsd,scipy,numpy \
        -r requirements.txt \
     || exit 1
 
