@@ -34,9 +34,6 @@ fi
 python3 make_dockerfiles.py
 
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
-OUTPUT=`mktemp -d -t singularity.XXXXXXX`
-
-umask 022
 
 declare -A extra_tags
 extra_tags=( ["nompi"]="-t ${repository}/software:latest"
