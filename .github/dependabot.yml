@@ -6,11 +6,3 @@ updates:
       interval: "monthly"
     pull-request-branch-name:
       separator: "-"
-
-  - package-ecosystem: "pip"
-    directory: "/"
-    schedule:
-      interval: "daily"
-      time: "05:00"
-    pull-request-branch-name:
-      separator: "-"
