@@ -2,20 +2,25 @@
 Change log
 ==========
 
-**glotzerlab-software** releases on a regular schedule. Releases are numbered by the year, month,
+**glotzerlab-software** releases update regularly. Releases are numbered by the year, month,
 and optionally the day separated by periods.
 
 2021
 ----
 
-next
+2021.04.21
 ++++++++++
 
 *Added:*
 
 * Environment variables that identify source commit and configuration of the image:
-  `GLOTZERLAB_SOFTWARE_GIT_SHA`, `GLOTZERLAB_SOFTWARE_GIT_BRANCH`, and
-  `GLOTZERLAB_SOFTWARE_CONFIGURATION`
+  `GLOTZERLAB_SOFTWARE_GIT_SHA`, `GLOTZERLAB_SOFTWARE_GIT_BRANCH`,
+  `GLOTZERLAB_SOFTWARE_CONFIGURATION`, and `GLOTZERLAB_SOFTWARE_TAG`
+
+*Changed:*
+
+* New images are now pushed to Docker Hub on every commit to the mainline branches.
+* Future change log entries will no longer document version bumps.
 
 2021.03.24
 ++++++++++
