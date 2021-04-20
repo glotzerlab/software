@@ -39,11 +39,11 @@ OUTPUT=`mktemp -d -t singularity.XXXXXXX`
 umask 022
 
 declare -A extra_tags
-extra_tags=( ["nompi"]="-t ${repository}/software:latest -t ${repository}/software:${tag}-cuda10"
-             ["greatlakes"]="-t ${repository}/software:${tag}-skylakex-cuda10-mlx-openmpi4.0.1"
-             ["comet"]="-t ${repository}/software:${tag}-haswell-cuda9-mlx-openmpi1.8.4"
-             ["bridges2"]="-t ${repository}/software:${tag}-rome-cuda10-mlx-openmpi3.6.2"
-             ["stampede2"]="-t ${repository}/software:${tag}-skylakex-cuda10-hfi1-mvapich2.3"
+extra_tags=( ["nompi"]="-t ${repository}/software:latest"
+             ["greatlakes"]=""
+             ["comet"]=""
+             ["bridges2"]=""
+             ["stampede2"]=""
 )
 
 for cluster in "$@"
