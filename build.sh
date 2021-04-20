@@ -50,5 +50,9 @@ do
     docker build $DIR/docker/${cluster} \
                 -t ${repository}/software:${cluster} \
                 -t ${repository}/software:${tag}-${cluster} \
-                ${extra_tags[$cluster]}
+                ${extra_tags[$cluster]} \
+                --build-arg GIT_SHA=$(git rev-parse HEAD) \
+                --build-arg GIT_BRANCH=$(git branch --show-current) \
+                --build-arg CONFIGURATION=${cluster} \
+                --build-arg TAG=${tag}
 done

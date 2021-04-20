@@ -8,6 +8,15 @@ and optionally the day separated by periods.
 2021
 ----
 
+next
+++++++++++
+
+*Added:*
+
+* Environment variables that identify source commit and configuration of the image:
+  `GLOTZERLAB_SOFTWARE_GIT_SHA`, `GLOTZERLAB_SOFTWARE_GIT_BRANCH`, and
+  `GLOTZERLAB_SOFTWARE_CONFIGURATION`
+
 2021.03.24
 ++++++++++
 
