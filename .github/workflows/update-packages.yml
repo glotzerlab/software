@@ -1,0 +1,22 @@
+name: Update packages
+
+on:
+  push:
+
+  # Trigger on request.
+  workflow_dispatch:
+
+  schedule:
+    - cron:  '0 6 * * 1-5'
+
+jobs:
+  update_packages:
+    name: Update packages
+    runs-on: ubuntu-latest
+
+  steps:
+    - uses: actions/checkout@v2.3.4
+    - name: Bump versions in packages.yml
+      run: python3 .github/workflows/update-packages.py
+    - name: Display updates to packages.yml
+      run: git diff

@@ -11,5 +11,6 @@ updates:
     directory: "/"
     schedule:
       interval: "daily"
+      time: "05:00"
     pull-request-branch-name:
       separator: "-"
