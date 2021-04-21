@@ -24,8 +24,9 @@ if __name__ == '__main__':
         packages = yaml.safe_load(f)
 
     for name, p in packages.items():
-        if 'repository' in p:
-            p['version'] = get_latest_git_tag(p['repository'], p.get('ignore', ''))
+        if 'repository' in p and p['repository'] is not None:
+            p['version'] = get_latest_git_tag(p['repository'],
+                                              p.get('ignore', ''))
 
             # remove 'v' prefix when requested
             if not p.get('include_v_prefix', True) and p['version'][0] == 'v':
