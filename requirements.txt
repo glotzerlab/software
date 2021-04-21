@@ -1,11 +1,10 @@
 # glotzer tools
 fsph==0.2.0
 garnett==0.7.1
-gtar==1.1.0
-pythia-learn==0.2.5
+pythia-learn==0.3.0
 rowan==1.3.0.post1
-coxeter==0.4.0
-plato-draw==1.7.0
+coxeter==0.5.0
+plato-draw==1.11.0
 signac==1.6.0
 signac-flow==0.13.0
 
@@ -23,7 +22,7 @@ scikit-image==0.18.1
 
 # test requirements
 hypothesis==6.10.0
-pytest==6.2.2
+pytest==6.2.3
 miniball==1.0.4
 sympy==1.8
 tables==3.6.1
