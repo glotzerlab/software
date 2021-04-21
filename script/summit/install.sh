@@ -47,17 +47,17 @@ python3 -m pip install --upgrade pip
 python3 -m pip install --no-cache-dir --no-binary mpi4py -r requirements-mpi.txt
 
 # TBB
-curl -sSLO https://github.com/oneapi-src/oneTBB/archive/v2020.2.tar.gz \
-    && tar -xzf v2020.2.tar.gz -C . \
-    && cd oneTBB-2020.2 \
+curl -sSLO https://github.com/oneapi-src/oneTBB/archive/v2021.2.0.tar.gz \
+    && tar -xzf v2021.2.0.tar.gz -C . \
+    && cd oneTBB-2021.2.0 \
     && make \
     && install -d $ROOT/lib \
     && install -m755 build/linux_*release/*.so* ${ROOT}/lib \
     && install -d $ROOT/include \
     && cp -a include/tbb $ROOT/include \
     && cd .. \
-    && rm -rf oneTBB-2020.2 \
-    && rm v2020.2.tar.gz \
+    && rm -rf oneTBB-2021.2.0 \
+    && rm v2021.2.0.tar.gz \
     || exit 1
 
 # embree is not available for power9

@@ -1,32 +1,32 @@
 embree:
-  version: 3.11.0
+  ignore: alpha,rc,beta
+  include_v_prefix: false
   repository: https://github.com/embree/embree
-  ignore: alpha,rc,beta
-  include_v_prefix: False
-osu_microbenchmark:
-  version: 5.4.1
-  repository: null
-pybind11:
-  version: 2.5.0
-  repository: https://github.com/pybind/pybind11
-  ignore: alpha,rc,beta
-  include_v_prefix: False
-qhull:
-  version: 8.0.2
-  repository: https://github.com/qhull/qhull
-  ignore: alpha,rc,beta
-  include_v_prefix: False
-tbb:
-  version: 2020.2
-  repository: https://github.com/oneapi-src/oneTBB
-  ignore: alpha,rc,beta
-  include_v_prefix: False
+  version: 3.12.2
 fresnel:
-  version: v0.13.1
+  ignore: alpha,rc,beta
   repository: https://github.com/glotzerlab/fresnel
-  ignore: alpha,rc,beta
+  version: v0.13.1
 hoomd:
-  version: v2.9.6
-  repository: https://github.com/glotzerlab/hoomd-blue
-  pinned: v2
   ignore: alpha,rc,beta
+  pinned: v2
+  repository: https://github.com/glotzerlab/hoomd-blue
+  version: v2.9.6
+osu_microbenchmark:
+  repository: null
+  version: 5.4.1
+pybind11:
+  ignore: alpha,rc,beta
+  include_v_prefix: false
+  repository: https://github.com/pybind/pybind11
+  version: 2.6.2
+qhull:
+  ignore: alpha,rc,beta
+  include_v_prefix: false
+  repository: https://github.com/qhull/qhull
+  version: 8.0.2
+tbb:
+  ignore: alpha,rc,beta
+  include_v_prefix: false
+  repository: https://github.com/oneapi-src/oneTBB
+  version: 2021.2.0
