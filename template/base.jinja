@@ -1,6 +1,16 @@
 FROM {{ FROM }}
 
-ENV DEBIAN_FRONTEND=noninteractive
+ARG GIT_SHA
+ARG GIT_BRANCH
+ARG CONFIGURATION
+ARG TAG
+
+ENV GLOTZERLAB_SOFTWARE_GIT_SHA=${GIT_SHA} \
+    GLOTZERLAB_SOFTWARE_GIT_BRANCH=${GIT_BRANCH} \
+    GLOTZERLAB_SOFTWARE_CONFIGURATION=${CONFIGURATION} \
+    GLOTZERLAB_SOFTWARE_TAG=${TAG}
+
+ARG DEBIAN_FRONTEND=noninteractive
 
 {% if ubuntu_version == 18 %}
 RUN apt-get update && apt-get install -y --no-install-recommends \
@@ -83,39 +93,8 @@ RUN mkdir -p /nfs \
 ENV PATH=/opt/glotzerlab/bin:$PATH \
     CMAKE_PREFIX_PATH=/opt/glotzerlab/bin
 
-RUN python3 -m venv /opt/glotzerlab --system-site-packages \
-    && /opt/glotzerlab/bin/pip3 install --no-cache-dir --upgrade pip \
-    && /opt/glotzerlab/bin/pip3 install --no-cache-dir \
-       breathe \
-       cloudpickle \
-       cython \
-       deprecation \
-       filelock \
-       h5py \
-       hypothesis \
-       jinja2 \
-       jupyter \
-       matplotlib \
-       miniball \
-       nose \
-       notebook \
-       numpy \
-       pandas \
-       pillow \
-       pip \
-       pytest \
-       pyqt5 \
-       pyyaml \
-       scipy \
-       scikit-learn \
-       scikit-image \
-       setuptools \
-       sphinx \
-       sphinx-rtd-theme \
-       tables \
-       scikit-build \
-       unittest2 \
-       sympy
+RUN python3 -m venv /opt/glotzerlab \
+    && /opt/glotzerlab/bin/python3 -m pip install --no-cache-dir --upgrade pip
 
-# Install the check-requirements script
-COPY check-requirements.py /opt/glotzerlab/bin
+# Install the requirements files
+COPY requirements*.txt /

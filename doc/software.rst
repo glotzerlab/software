@@ -30,7 +30,6 @@ Installed software
     * `numpy <http://www.numpy.org/>`_
     * `pandas <https://pandas.pydata.org/>`_
     * `pillow <https://pillow.readthedocs.io>`_
-    * `pyhull <https://pythonhosted.org/pyhull/>`_
     * `PyQt5 <https://riverbankcomputing.com/software/pyqt/intro>`_
     * `pyyaml <https://pyyaml.org/>`_
     * `scipy <https://www.scipy.org/>`_
