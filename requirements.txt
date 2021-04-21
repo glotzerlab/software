@@ -1,7 +1,6 @@
 # glotzer tools
 fsph==0.2.0
 garnett==0.7.1
-gtar==1.1.0
 pythia-learn==0.3.0
 rowan==1.3.0.post1
 coxeter==0.5.0

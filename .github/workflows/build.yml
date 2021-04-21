@@ -34,6 +34,6 @@ jobs:
           password: ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
       - name: Build image
         run: ./build.sh -r glotzerlab ${{ matrix.configuration }}
-      # - name: Push image
-      #   run: docker push -a glotzerlab/software
-      #   if: github.ref == 'refs/heads/master'
+      - name: Push image
+        run: docker push -a glotzerlab/software
+        if: github.ref == 'refs/heads/master'

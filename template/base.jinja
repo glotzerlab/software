@@ -51,17 +51,12 @@ ENV PYTHONPATH=/ignore/pythonpath
 # disable user site directories (https://docs.python.org/3/library/site.html#module-site)
 RUN sed -i -e 's/ENABLE_USER_SITE = None/ENABLE_USER_SITE = False/g' `python3 -c 'import site; print(site.__file__)'`
 
-# embree
-ENV CPATH=/opt/embree-{{ EMBREE_VERSION }}.x86_64.linux/include:$CPATH \
-    LIBRARY_PATH=/opt/embree-{{ EMBREE_VERSION }}.x86_64.linux/lib:$LIBRARY_PATH \
-    LD_LIBRARY_PATH=/opt/embree-{{ EMBREE_VERSION }}.x86_64.linux/lib:$LD_LIBRARY_PATH \
-    EMBREE3_LINK=/opt/embree-{{ EMBREE_VERSION }}.x86_64.linux/lib
-
-RUN curl -sSLO https://github.com/embree/embree/releases/download/v{{ EMBREE_VERSION }}/embree-{{ EMBREE_VERSION }}.x86_64.linux.tar.gz \
-    && tar -xzf embree-{{ EMBREE_VERSION }}.x86_64.linux.tar.gz -C /opt \
-    && rm -rf /opt/embree-{{ EMBREE_VERSION }}.x86_64.linux/bin \
-    && rm -rf /opt/embree-{{ EMBREE_VERSION }}.x86_64.linux/doc \
-    && rm embree-{{ EMBREE_VERSION }}.x86_64.linux.tar.gz
+RUN curl -sSL https://github.com/embree/embree/archive/v{{ EMBREE_VERSION }}/embree-{{ EMBREE_VERSION }}.tar.gz | tar -xzC /root \
+    && cd /root/embree-{{ EMBREE_VERSION }} \
+    && mkdir build && cd build \
+    && cmake ../ -DCMAKE_INSTALL_PREFIX=/usr/local -DCMAKE_INSTALL_LIBDIR=lib/ -DCMAKE_BUILD_TYPE=Release -DEMBREE_TUTORIALS=OFF -DEMBREE_MAX_ISA="AVX2" -DEMBREE_ISPC_SUPPORT=OFF \
+    && make install -j {{ MAKEJOBS }} \
+    && cd / && rm -rf /root/embree-*
 
 # install pybind11 headers
 RUN curl -SL https://github.com/pybind/pybind11/archive/v{{PYBIND11_VERSION}}.tar.gz | tar -xzC /root && \
@@ -91,7 +86,8 @@ RUN mkdir -p /nfs \
 # many pip installable packages clobber scripts that ubuntu provides in bin/ and result
 # in broken packages
 ENV PATH=/opt/glotzerlab/bin:$PATH \
-    CMAKE_PREFIX_PATH=/opt/glotzerlab/bin
+    CMAKE_PREFIX_PATH=/opt/glotzerlab/bin \
+    LD_LIBRARY_PATH=/usr/local/lib:${LD_LIBRARY_PATH}
 
 RUN python3 -m venv /opt/glotzerlab \
     && /opt/glotzerlab/bin/python3 -m pip install --no-cache-dir --upgrade pip
