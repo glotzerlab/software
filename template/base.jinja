@@ -72,7 +72,7 @@ RUN curl -SL https://github.com/pybind/pybind11/archive/v{{PYBIND11_VERSION}}.ta
     cd / && rm -rf /root/pybind11-*
 
 # ubuntu qhull doesn't provide qhullcpp, build it by hand
-RUN curl -SL https://github.com/qhull/qhull/archive/{{QHULL_VERSION}}.tar.gz | tar -xzC /root && \
+RUN curl -SL https://github.com/qhull/qhull/archive/v{{QHULL_VERSION}}.tar.gz | tar -xzC /root && \
     cd /root/qhull-{{QHULL_VERSION}} && \
     mkdir build2 && cd build2 && \
     cmake ../ -DCMAKE_INSTALL_PREFIX=/usr -DLIB_INSTALL_DIR=/usr/lib/x86_64-linux-gnu -DCMAKE_BUILD_TYPE=Release -DCMAKE_CXX_FLAGS=-fPIC -DCMAKE_C_FLAGS=-fPIC && \
