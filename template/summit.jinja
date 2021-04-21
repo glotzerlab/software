@@ -38,8 +38,6 @@ export VIRTUAL_ENV=$ROOT
 export CMAKE_PREFIX_PATH=$ROOT
 EOL
 
-cp -a $DIR/../../check-requirements.py $ROOT/bin
-
 source $ROOT/environment.sh
 
 BUILDDIR=`mktemp -d`
@@ -54,25 +52,14 @@ function cleanup {
 trap cleanup EXIT
 cd $BUILDDIR
 
+cp -a $DIR/../../*.txt $BUILDDIR
+cd $BUILDDIR
+
 python3 -m pip install --upgrade pip
-python3 -m pip install --progress-bar off --no-binary :all: --no-use-pep517 --no-build-isolation cython sphinx
-python3 -m pip install --progress-bar off --no-binary :all: --no-use-pep517 --no-build-isolation \
-    mpi4py \
-    six \
-    numpy \
-    tables \
-    numexpr \
-    deprecation \
-    breathe \
-    cloudpickle \
-    filelock \
-    jinja2 \
-    tqdm \
-    packaging
+python3 -m pip install --no-cache-dir --no-binary mpi4py -r requirements-mpi.txt
 
 # TBB
 curl -sSLO https://github.com/oneapi-src/oneTBB/archive/v{{ TBB_VERSION }}.tar.gz \
-    && echo "{{ TBB_SHA }}  v{{ TBB_VERSION }}.tar.gz" | sha256sum -c - \
     && tar -xzf v{{ TBB_VERSION }}.tar.gz -C . \
     && cd oneTBB-{{ TBB_VERSION }} \
     && make \
@@ -86,16 +73,6 @@ curl -sSLO https://github.com/oneapi-src/oneTBB/archive/v{{ TBB_VERSION }}.tar.g
     || exit 1
 
 # embree is not available for power9
-
-# scipy
-curl -sSLO https://github.com/scipy/scipy/releases/download/v{{ SCIPY_VERSION }}/scipy-{{ SCIPY_VERSION }}.tar.gz \
-    && echo "{{ SCIPY_SHA }}  scipy-{{ SCIPY_VERSION }}.tar.gz" | sha256sum -c - \
-    && tar -xzf scipy-{{ SCIPY_VERSION }}.tar.gz -C . \
-    && cd scipy-{{ SCIPY_VERSION }} \
-    && LAPACK=${OLCF_NETLIB_LAPACK_ROOT}/lib64/liblapack.so BLAS=${OLCF_NETLIB_LAPACK_ROOT}/lib64/libblas.so python3 setup.py install \
-    && cd $BUILDDIR \
-    && rm -rf scipy-{{ SCIPY_VERSION }} \
-    || exit 1
 
 # install pybind11 headers
 curl -SL https://github.com/pybind/pybind11/archive/v{{PYBIND11_VERSION}}.tar.gz | tar -xzC $BUILDDIR && \

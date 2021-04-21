@@ -71,6 +71,14 @@ software. Download the latest image to update::
 
     $ singularity pull software.sif docker://glotzerlab/software
 
+Environment variables set in the image identify the build::
+
+    $ singularity exec software.sif bash -c "set" | grep GLOTZERLAB
+    GLOTZERLAB_SOFTWARE_CONFIGURATION=nompi
+    GLOTZERLAB_SOFTWARE_GIT_BRANCH=master
+    GLOTZERLAB_SOFTWARE_GIT_SHA=f2debd75280c98ed0a4e46e3e2d381e953b80b6f
+    GLOTZERLAB_SOFTWARE_TAG=2021.03.24
+
 .. seealso::
 
     See the `Singularity documentation <https://www.sylabs.io/docs/>`_ for more information on
@@ -85,6 +93,7 @@ _____________
     software
     cluster
     files
+    profiling
     test
     docker
     community

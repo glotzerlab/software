@@ -1,0 +1,39 @@
+name: Build
+
+concurrency:
+  group: ${{ github.ref }}
+  cancel-in-progress: true
+
+on:
+  # Trigger on pull requests.
+  pull_request:
+
+  # Trigger on pushes to the mainline branches. This prevents building commits  twice when the pull
+  # request source branch is in the same repository.
+  push:
+    branches:
+      - "master"
+
+  # Trigger on request.
+  workflow_dispatch:
+
+jobs:
+  Build:
+    name: Build ${{ matrix.configuration }}
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        configuration: [nompi, greatlakes, bridges2, comet, stampede2]
+    steps:
+      - uses: actions/checkout@v2.3.4
+      - name: Login to DockerHub
+        uses: docker/login-action@v1
+        with:
+          username: ${{ secrets.DOCKER_HUB_USERNAME }}
+          password: ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
+      - name: Build image
+        run: ./build.sh -r glotzerlab ${{ matrix.configuration }}
+      - name: Push image
+        run: docker push -a glotzerlab/software
+        if: github.ref == 'refs/heads/master'

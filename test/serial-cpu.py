@@ -26,10 +26,6 @@ try:
     results.write('HOOMD version     : {}\n'.format(hoomd.version.version))
     results.write('HOOMD flags       : {}\n'.format(hoomd.version.compile_flags))
 
-    # libgetar
-    import gtar
-    results.write('libgetar version  : {}\n'.format(gtar.__version__))
-
     # pythia
     import pythia
     results.write('pythia version    : {}\n'.format(pythia.__version__))

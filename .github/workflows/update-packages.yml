@@ -1,0 +1,46 @@
+name: Update packages
+
+on:
+  # Trigger on request.
+  workflow_dispatch:
+
+  # Run hourly during the work week
+  schedule:
+    - cron: '12 10-20 * * 1-5'
+
+jobs:
+  update_packages:
+    name: Update packages
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2.3.4
+      - uses: tibdex/github-app-token@v1.3.0
+        id: generate-token
+        with:
+          app_id: ${{ secrets.PR_SUBMITTER_APP_ID }}
+          private_key: ${{ secrets.PR_SUBMITTER_PRIVATE_KEY }}
+      - name: Install required packages
+        run: python3 -m pip install -r .github/workflows/requirements.txt
+      - name: Bump versions in packages.yml
+        run: python3 .github/workflows/update-packages.py
+      - name: Bump versions in .github/workflows/requirements.txt
+        run: pur -r .github/workflows/requirements.txt
+      - name: Bump versions in requirements.txt
+        run: pur -r requirements.txt
+      - name: Bump versions in requirements-mpi.txt
+        run: pur -r requirements-mpi.txt
+      - name: Bump versions in requirements-source.txt
+        run: pur -r requirements-source.txt
+      - name: Bump versions in generated scripts
+        run: python3 make_dockerfiles.py
+      - name: Display updates
+        run: git diff
+      - name: Create Pull Request
+        uses: peter-evans/create-pull-request@v3.8.2
+        with:
+          commit-message: "[update-packages] Bump package versions"
+          branch: update-packages
+          delete-branch: true
+          title: Update packages
+          body: Automated changes by `update-packages.yml`.
+          token: ${{ steps.generate-token.outputs.token }}
