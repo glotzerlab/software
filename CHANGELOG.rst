@@ -14,8 +14,8 @@ and optionally the day separated by periods.
 *Added:*
 
 * Environment variables that identify source commit and configuration of the image:
-  `GLOTZERLAB_SOFTWARE_GIT_SHA`, `GLOTZERLAB_SOFTWARE_GIT_BRANCH`,
-  `GLOTZERLAB_SOFTWARE_CONFIGURATION`, and `GLOTZERLAB_SOFTWARE_TAG`
+  ``GLOTZERLAB_SOFTWARE_GIT_SHA``, ``GLOTZERLAB_SOFTWARE_GIT_BRANCH``,
+  ``GLOTZERLAB_SOFTWARE_CONFIGURATION``, and ``GLOTZERLAB_SOFTWARE_TAG``
 
 *Changed:*
 
