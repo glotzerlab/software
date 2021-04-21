@@ -9,10 +9,11 @@ RUN cd /test && \
 #     && rm -rf coxeter \
 #     || exit 1
 
+# Run minimal tests on freud - the full suite takes a long time to run.
 RUN cd \
     && git clone --recursive --branch v$(python3 -c "import freud; print(freud.__version__)") --depth 1 https://github.com/glotzerlab/freud \
     && cd freud/tests/ \
-    && python -m pytest -v \
+    && python -m pytest -v test_box_Box.py \
     && cd ../../ \
     && rm -rf freud \
     || exit 1
