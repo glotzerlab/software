@@ -42,13 +42,12 @@ jobs:
         uses: 8398a7/action-slack@v3.9.0
         with:
           status: ${{ job.status }}
-          fields: workflow,job,message,commit
+          fields: workflow,ref,message,commit
           mention: channel
           if_mention: failure,cancelled
           channel: '#dev-glotzerlab-software'
           username: Github Action
-          author_name: ''
-          job_name: Build ${{ matrix.configuration }}
+          author_name: Build ${{ matrix.configuration }}
         env:
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
           MATRIX_CONTEXT: ${{ toJson(matrix) }}
