@@ -32,11 +32,11 @@ jobs:
         with:
           username: ${{ secrets.DOCKER_HUB_USERNAME }}
           password: ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
-      - name: Build image
-        run: ./build.sh -r glotzerlab ${{ matrix.configuration }}
-      - name: Push image
-        run: docker push -a glotzerlab/software
-        if: github.ref == 'refs/heads/master' || github.ref == 'refs/heads/hoomd-v3-beta'
+      # - name: Build image
+      #   run: ./build.sh -r glotzerlab ${{ matrix.configuration }}
+      # - name: Push image
+      #   run: docker push -a glotzerlab/software
+      #   if: github.ref == 'refs/heads/master' || github.ref == 'refs/heads/hoomd-v3-beta'
       - name: Slack notification
         if: (github.ref == 'refs/heads/master' || github.ref == 'refs/heads/hoomd-v3-beta') && always()
         uses: 8398a7/action-slack@v3.9.0
@@ -47,8 +47,7 @@ jobs:
           if_mention: failure,cancelled
           channel: '#dev-glotzerlab-software'
           username: Github Action
-          author_name: ''
-          job_name: Build ${{ matrix.configuration }}
+          author_name: Build ${{ matrix.configuration }}
         env:
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
           MATRIX_CONTEXT: ${{ toJson(matrix) }}
