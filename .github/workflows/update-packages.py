@@ -25,12 +25,16 @@ if __name__ == '__main__':
 
     for name, p in packages.items():
         if 'repository' in p and p['repository'] is not None:
-            p['version'] = get_latest_git_tag(p['repository'],
-                                              p.get('ignore', ''))
+            new_version = get_latest_git_tag(p['repository'],
+                                             p.get('ignore', ''))
 
             # remove 'v' prefix when requested
-            if not p.get('include_v_prefix', True) and p['version'][0] == 'v':
-                p['version'] = p['version'][1:]
+            if not p.get('include_v_prefix', True) and new_version[0] == 'v':
+                new_version = new_version[1:]
+
+            if p['version'] != new_version:
+                print(f"Updating {name} {p['version']} -> {new_version}")
+                p['version'] = new_version
 
     with open('packages.yml', 'w') as f:
         yaml.dump(packages, f)
