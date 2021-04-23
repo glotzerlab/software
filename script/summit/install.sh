@@ -16,7 +16,7 @@ ROOT=$1
 module reset
 module load gcc/7.4.0
 module load python/3.7.0
-python3 -m venv $ROOT --system-site-packages
+python3 -m venv $ROOT
 
 cat >$ROOT/environment.sh << EOL
 module reset
@@ -55,64 +55,92 @@ cd $BUILDDIR
 cp -a $DIR/../../*.txt $BUILDDIR
 cd $BUILDDIR
 
-python3 -m pip install --upgrade pip
-python3 -m pip install --no-cache-dir --no-binary mpi4py -r requirements-mpi.txt
+set -x
+python3 -m pip install --upgrade pip setuptools wheel
+python3 -m pip install -r requirements-mpi.txt
 
 # TBB
+if [ ! -f $ROOT/lib64/libtbb.so ]
+then
 curl -sSLO https://github.com/oneapi-src/oneTBB/archive/v2021.2.0.tar.gz \
     && tar -xzf v2021.2.0.tar.gz -C . \
     && cd oneTBB-2021.2.0 \
-    && make \
-    && install -d $ROOT/lib \
-    && install -m755 build/linux_*release/*.so* ${ROOT}/lib \
-    && install -d $ROOT/include \
-    && cp -a include/tbb $ROOT/include \
+    && cmake -S . -B build -DTBB_TEST=off -DTBB_STRICT=off -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=$ROOT \
+    && cmake --build build -j 8  \
+    && cmake --install build \
     && cd .. \
     && rm -rf oneTBB-2021.2.0 \
     && rm v2021.2.0.tar.gz \
     || exit 1
+fi
 
 # embree is not available for power9
 
 # install pybind11 headers
+if [ ! -f $ROOT/include/pybind11/pybind11.h ]
+then
 curl -SL https://github.com/pybind/pybind11/archive/v2.6.2.tar.gz | tar -xzC $BUILDDIR && \
     cd pybind11-2.6.2 && \
     mkdir build && cd build && \
     cmake ../ -DCMAKE_INSTALL_PREFIX=$ROOT -DPYBIND11_TEST=off && \
     make install && \
     cd $BUILDDIR && rm -rf pybind11-*
+fi
 
 # install cereal headers
+if [ ! -f $ROOT/include/cereal/cereal.hpp ]
+then
 curl -SL https://github.com/USCiLab/cereal/archive/v1.3.0.tar.gz | tar -xzC $BUILDDIR && \
     cd cereal-1.3.0 && \
     mkdir build && cd build && \
     cmake ../ -DCMAKE_INSTALL_PREFIX=$ROOT -DJUST_INSTALL_CEREAL=on && \
     make install && \
     cd $BUILDDIR && rm -rf cereal-*
+fi
 
 # install eigen headers
+if [ ! -f $ROOT/include/eigen3/Eigen/Eigen ]
+then
 curl -SL https://gitlab.com/libeigen/eigen/-/archive/3.3.9/eigen-3.3.9.tar.gz | tar -xzC $BUILDDIR && \
     cd eigen-3.3.9 && \
     mkdir build && cd build && \
     cmake ../ -DCMAKE_INSTALL_PREFIX=$ROOT -DBUILD_TESTING=off, -DEIGEN_TEST_NOQT=on && \
     make install && \
     cd $BUILDDIR && rm -rf eigen-*
+fi
+
+if [ ! -f $ROOT/bin/clang ]
+then
+    git clone --depth 1 --branch release/10.x https://github.com/llvm/llvm-project
+    cd llvm-project
+    cmake -S llvm -B build \
+        -D CMAKE_INSTALL_PREFIX=$ROOT -DLLVM_ENABLE_PROJECTS=clang \
+        -DBUILD_SHARED_LIBS=ON \
+        -DCMAKE_BUILD_TYPE=Release \
+        -DLLVM_TARGETS_TO_BUILD="PowerPC"
+    cmake --build build -j 8
+    cmake --install build
+    cd $BUILDDIR
+    rm -rf llvm-project
+fi
 
 
 
 
-# build scipy from source on summit
- export LAPACK=${OLCF_NETLIB_LAPACK_ROOT}/lib64/liblapack.so BLAS=${OLCF_NETLIB_LAPACK_ROOT}/lib64/libblas.so
-    && python3 -m pip install \
-       --no-cache-dir \
-       --no-binary freud-analysis,gsd,scipy,numpy \
-       -r requirements.txt \
+
+
+# install packages that are build requirements of other packages first
+# lapack is needed for scipy
+ export LAPACK=${OLCF_NETLIB_LAPACK_ROOT}/lib64/liblapack.so BLAS=${OLCF_NETLIB_LAPACK_ROOT}/lib64/libblas.so CFLAGS="-mcpu=power9 -mtune=power9" CXXFLAGS="-mcpu=power9 -mtune=power9"\
+    && python3 -m pip install -r requirements-source.txt \
+    || exit 1
+
+# unlike with Docker builds, use the pip cache on summit to reduce time when rerunning the install script
+ export CFLAGS="-mcpu=power9 -mtune=power9" CXXFLAGS="-mcpu=power9 -mtune=power9" \
+    && python3 -m pip install --no-build-isolation -r requirements.txt \
     || exit 1
 
 
-RUN python3 -m pip install \
-    --no-cache-dir \
-    -r requirements.txt
 
 
 
@@ -122,7 +150,7 @@ RUN python3 -m pip install \
     && cd build \
     && export CFLAGS="-mcpu=power9 -mtune=power9" CXXFLAGS="-mcpu=power9 -mtune=power9" \
     && cmake ../ -DPYTHON_EXECUTABLE="`which python3`" -DENABLE_GPU=on -DENABLE_MPI=on -DENABLE_TBB=off -DBUILD_JIT=off -DBUILD_TESTING=off -DENABLE_MPI_CUDA=on \
-    && make install -j4 \
+    && make install -j8 \
     && cd ../../ \
     && rm -rf hoomd \
     || exit 1
