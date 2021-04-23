@@ -5,25 +5,21 @@
 {% endif %}
 
 {% if system != 'summit' %}
-{{ RUN }} export CFLAGS="{{CFLAGS}}" CXXFLAGS="{{CFLAGS}}" \
-    && python3 -m pip install \
-       --no-cache-dir \
-       --no-binary freud-analysis,gsd \
-       -r requirements-source.txt \
-    || exit 1
-{% else %}
-# build scipy from source on summit
-{{ RUN }} export LAPACK=${OLCF_NETLIB_LAPACK_ROOT}/lib64/liblapack.so BLAS=${OLCF_NETLIB_LAPACK_ROOT}/lib64/libblas.so
-    && python3 -m pip install \
-       --no-cache-dir \
-       --no-binary freud-analysis,gsd,scipy,numpy \
-       -r requirements.txt \
-    || exit 1
-{% endif %}
 
-RUN python3 -m pip install \
-    --no-cache-dir \
-    -r requirements.txt
+{{ RUN }} python3 -m pip install --no-binary freud-analysis,gsd -r requirements.txt \
+    && python3 -m pip cache purge
+
+{% else %}
+
+# install scipy first - otherwise scikit-learn fails to build
+{{ RUN }} export LAPACK=${OLCF_NETLIB_LAPACK_ROOT}/lib64/liblapack.so BLAS=${OLCF_NETLIB_LAPACK_ROOT}/lib64/libblas.so \
+    && python3 -m pip intstall scipy scipy
+
+# unlike with Docker builds, use the pip cache on summit to reduce time when rerunning the install script
+{{ RUN }} python3 -m pip install -r requirements.txt \
+    || exit 1
+
+{% endif %}
 
 {% if system != 'summit' %}
 {{ RUN }} git clone --recursive --branch {{ FRESNEL_VERSION }} --depth 1 https://github.com/glotzerlab/fresnel \

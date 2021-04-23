@@ -16,7 +16,7 @@ ROOT=$1
 module reset
 module load gcc/7.4.0
 module load python/3.7.0
-python3 -m venv $ROOT --system-site-packages
+python3 -m venv $ROOT
 
 cat >$ROOT/environment.sh << EOL
 module reset
@@ -55,45 +55,57 @@ cd $BUILDDIR
 cp -a $DIR/../../*.txt $BUILDDIR
 cd $BUILDDIR
 
-python3 -m pip install --upgrade pip
-python3 -m pip install --no-cache-dir --no-binary mpi4py -r requirements-mpi.txt
+set -x
+python3 -m pip install --upgrade pip setuptools wheel
+python3 -m pip install -r requirements-mpi.txt
 
 # TBB
+if [ ! -f $ROOT/lib64/libtbb.so ]
+then
 curl -sSLO https://github.com/oneapi-src/oneTBB/archive/v{{ TBB_VERSION }}.tar.gz \
     && tar -xzf v{{ TBB_VERSION }}.tar.gz -C . \
     && cd oneTBB-{{ TBB_VERSION }} \
-    && make \
-    && install -d $ROOT/lib \
-    && install -m755 build/linux_*release/*.so* ${ROOT}/lib \
-    && install -d $ROOT/include \
-    && cp -a include/tbb $ROOT/include \
+    && cmake -S . -B build -DTBB_TEST=off -DTBB_STRICT=off -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=$ROOT \
+    && cmake --build build -j {{ MAKEJOBS }}  \
+    && cmake --install build \
     && cd .. \
     && rm -rf oneTBB-{{ TBB_VERSION }} \
     && rm v{{ TBB_VERSION }}.tar.gz \
     || exit 1
+fi
 
 # embree is not available for power9
 
 # install pybind11 headers
+if [ ! -f $ROOT/include/pybind11/pybind11.h ]
+then
 curl -SL https://github.com/pybind/pybind11/archive/v{{PYBIND11_VERSION}}.tar.gz | tar -xzC $BUILDDIR && \
     cd pybind11-{{PYBIND11_VERSION}} && \
     mkdir build && cd build && \
     cmake ../ -DCMAKE_INSTALL_PREFIX=$ROOT -DPYBIND11_TEST=off && \
     make install && \
     cd $BUILDDIR && rm -rf pybind11-*
+fi
 
 # install cereal headers
+if [ ! -f $ROOT/include/cereal/cereal.hpp ]
+then
 curl -SL https://github.com/USCiLab/cereal/archive/v{{CEREAL_VERSION}}.tar.gz | tar -xzC $BUILDDIR && \
     cd cereal-{{CEREAL_VERSION}} && \
     mkdir build && cd build && \
     cmake ../ -DCMAKE_INSTALL_PREFIX=$ROOT -DJUST_INSTALL_CEREAL=on && \
     make install && \
     cd $BUILDDIR && rm -rf cereal-*
+fi
 
 # install eigen headers
+if [ ! -f $ROOT/include/eigen3/Eigen/Eigen ]
+then
 curl -SL https://gitlab.com/libeigen/eigen/-/archive/{{EIGEN_VERSION}}/eigen-{{EIGEN_VERSION}}.tar.gz | tar -xzC $BUILDDIR && \
     cd eigen-{{EIGEN_VERSION}} && \
     mkdir build && cd build && \
     cmake ../ -DCMAKE_INSTALL_PREFIX=$ROOT -DBUILD_TESTING=off, -DEIGEN_TEST_NOQT=on && \
     make install && \
     cd $BUILDDIR && rm -rf eigen-*
+fi
+
