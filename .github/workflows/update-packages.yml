@@ -25,6 +25,12 @@ jobs:
         with:
           app_id: ${{ secrets.PR_SUBMITTER_APP_ID }}
           private_key: ${{ secrets.PR_SUBMITTER_PRIVATE_KEY }}
+      - uses: actions/cache@v2
+        with:
+          path: ~/.cache/pip
+          key: ${{ runner.os }}-pip-${{ hashFiles('.github/workflows/requirements.txt') }}
+          restore-keys: |
+            ${{ runner.os }}-pip-
       - name: Install required packages
         run: python3 -m pip install -r .github/workflows/requirements.txt
       - name: Bump versions in packages.yml
