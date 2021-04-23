@@ -66,7 +66,7 @@ curl -sSLO https://github.com/oneapi-src/oneTBB/archive/v2021.2.0.tar.gz \
     && tar -xzf v2021.2.0.tar.gz -C . \
     && cd oneTBB-2021.2.0 \
     && cmake -S . -B build -DTBB_TEST=off -DTBB_STRICT=off -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=$ROOT \
-    && cmake --build build -j 4  \
+    && cmake --build build -j 8  \
     && cmake --install build \
     && cd .. \
     && rm -rf oneTBB-2021.2.0 \
@@ -109,6 +109,21 @@ curl -SL https://gitlab.com/libeigen/eigen/-/archive/3.3.9/eigen-3.3.9.tar.gz | 
     cd $BUILDDIR && rm -rf eigen-*
 fi
 
+if [ ! -f $ROOT/bin/clang ]
+then
+    git clone --depth 1 --branch release/10.x https://github.com/llvm/llvm-project
+    cd llvm-project
+    cmake -S llvm -B build \
+        -D CMAKE_INSTALL_PREFIX=$ROOT -DLLVM_ENABLE_PROJECTS=clang \
+        -DBUILD_SHARED_LIBS=ON \
+        -DCMAKE_BUILD_TYPE=Release \
+        -DLLVM_TARGETS_TO_BUILD="PowerPC"
+    cmake --build build -j 8
+    cmake --install build
+    cd $BUILDDIR
+    rm -rf llvm-project
+fi
+
 
 
 
@@ -135,7 +150,7 @@ fi
     && cd build \
     && export CFLAGS="-mcpu=power9 -mtune=power9" CXXFLAGS="-mcpu=power9 -mtune=power9" \
     && cmake ../ -DPYTHON_EXECUTABLE="`which python3`" -DENABLE_GPU=on -DENABLE_MPI=on -DENABLE_TBB=off -DBUILD_JIT=off -DBUILD_TESTING=off -DENABLE_MPI_CUDA=on \
-    && make install -j4 \
+    && make install -j8 \
     && cd ../../ \
     && rm -rf hoomd \
     || exit 1

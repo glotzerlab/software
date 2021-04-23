@@ -89,7 +89,7 @@ if __name__ == '__main__':
 
     write('script/summit/install.sh', [summit_template, glotzerlab_software_template],
           ENABLE_MPI='on',
-          MAKEJOBS=4,
+          MAKEJOBS=8,
           CFLAGS='-mcpu=power9 -mtune=power9',
           output='script',
           system='summit',
