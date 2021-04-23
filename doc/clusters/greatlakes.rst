@@ -18,10 +18,6 @@ Download the image with support for Great Lakes::
 
     $ singularity pull software.sif docker://glotzerlab/software:greatlakes
 
-Or the beta (with HOOMD v3.0.0-beta)::
-
-    $ singularity pull software.sif docker://glotzerlab/software:beta-greatlakes
-
 Using
 *****
 

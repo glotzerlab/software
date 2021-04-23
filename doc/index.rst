@@ -21,10 +21,6 @@ Or the beta (with HOOMD v3.0.0-beta)::
 
     $ singularity pull software.sif docker://glotzerlab/software:beta-nompi
 
-Or the beta (with HOOMD v3.0.0-beta)::
-
-    $ curl -o software.simg https://glotzerlab.engin.umich.edu/downloads/glotzerlab/software-beta-nompi.simg
-
 .. note::
 
     On HPC clusters, download the cluster specific image. See :doc:`cluster` for details.
