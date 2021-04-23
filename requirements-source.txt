@@ -1,2 +1,8 @@
-
-# commonly used packages
+# packages needed to build with --no-build-isolation
+Cython==0.29.23
+numpy==1.20.2
+pkgconfig==1.5.2
+pybind11==2.6.2
+pythran==0.9.9
+scikit-build==0.11.1
+scipy==1.6.2

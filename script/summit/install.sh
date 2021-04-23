@@ -59,8 +59,6 @@ set -x
 python3 -m pip install --upgrade pip setuptools wheel
 python3 -m pip install -r requirements-mpi.txt
 
-exit 1
-
 # TBB
 if [ ! -f $ROOT/lib64/libtbb.so ]
 then
@@ -116,12 +114,15 @@ fi
 
 
 
-# install scipy first - otherwise scikit-learn fails to build
- export LAPACK=${OLCF_NETLIB_LAPACK_ROOT}/lib64/liblapack.so BLAS=${OLCF_NETLIB_LAPACK_ROOT}/lib64/libblas.so \
-    && python3 -m pip intstall scipy scipy
+# install packages that are build requirements of other packages first
+# lapack is needed for scipy
+ export LAPACK=${OLCF_NETLIB_LAPACK_ROOT}/lib64/liblapack.so BLAS=${OLCF_NETLIB_LAPACK_ROOT}/lib64/libblas.so CFLAGS="-mcpu=power9 -mtune=power9" CXXFLAGS="-mcpu=power9 -mtune=power9"\
+    && python3 -m pip install -r requirements-source.txt \
+    || exit 1
 
 # unlike with Docker builds, use the pip cache on summit to reduce time when rerunning the install script
- python3 -m pip install -r requirements.txt \
+ export CFLAGS="-mcpu=power9 -mtune=power9" CXXFLAGS="-mcpu=power9 -mtune=power9" \
+    && python3 -m pip install --no-build-isolation -r requirements.txt \
     || exit 1
 
 

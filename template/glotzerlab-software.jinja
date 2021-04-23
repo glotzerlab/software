@@ -6,17 +6,26 @@
 
 {% if system != 'summit' %}
 
-{{ RUN }} python3 -m pip install --no-binary freud-analysis,gsd -r requirements.txt \
+{{ RUN }} export CFLAGS="{{CFLAGS}}" CXXFLAGS="{{CFLAGS}}" \
+    && python3 -m pip install -r requirements-source.txt \
+    && python3 -m pip cache purge
+
+# build select packages from source with machine specific flags
+{{ RUN }} export CFLAGS="{{CFLAGS}}" CXXFLAGS="{{CFLAGS}}" \
+    && python3 -m pip install --no-build-isolation --no-binary freud-analysis,gsd -r requirements.txt \
     && python3 -m pip cache purge
 
 {% else %}
 
-# install scipy first - otherwise scikit-learn fails to build
-{{ RUN }} export LAPACK=${OLCF_NETLIB_LAPACK_ROOT}/lib64/liblapack.so BLAS=${OLCF_NETLIB_LAPACK_ROOT}/lib64/libblas.so \
-    && python3 -m pip intstall scipy scipy
+# install packages that are build requirements of other packages first
+# lapack is needed for scipy
+{{ RUN }} export LAPACK=${OLCF_NETLIB_LAPACK_ROOT}/lib64/liblapack.so BLAS=${OLCF_NETLIB_LAPACK_ROOT}/lib64/libblas.so CFLAGS="{{CFLAGS}}" CXXFLAGS="{{CFLAGS}}"\
+    && python3 -m pip install -r requirements-source.txt \
+    || exit 1
 
 # unlike with Docker builds, use the pip cache on summit to reduce time when rerunning the install script
-{{ RUN }} python3 -m pip install -r requirements.txt \
+{{ RUN }} export CFLAGS="{{CFLAGS}}" CXXFLAGS="{{CFLAGS}}" \
+    && python3 -m pip install --no-build-isolation -r requirements.txt \
     || exit 1
 
 {% endif %}
