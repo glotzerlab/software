@@ -18,12 +18,12 @@ Download the image with support for Great Lakes::
 
     $ singularity pull software.sif docker://glotzerlab/software:greatlakes
 
-Using
-*****
-
 Or the beta (with HOOMD v3.0.0-beta)::
 
-    $ curl -o software.simg https://glotzerlab.engin.umich.edu/downloads/glotzerlab/software-beta-greatlakes.simg
+    $ singularity pull software.sif docker://glotzerlab/software:beta-greatlakes
+
+Using
+*****
 
 Use the following commands in your job scripts or interactively to execute software inside the container:
 
