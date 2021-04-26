@@ -3,9 +3,6 @@
 import jinja2
 import yaml
 
-# repository name (change this if you want to modify and rebuild these in your own repository)
-base_repository = 'glotzerlab/base'
-
 # software versions
 versions = {}
 
