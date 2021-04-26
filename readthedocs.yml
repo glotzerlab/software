@@ -1,3 +1,5 @@
-python:
-   version: 3
-   setup_py_install: false
+version: 2
+
+sphinx:
+   configuration: doc/conf.py
+   fail_on_warning: true
