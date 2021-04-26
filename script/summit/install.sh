@@ -16,7 +16,7 @@ ROOT=$1
 module reset
 module load gcc/7.4.0
 module load python/3.7.0
-python3 -m venv $ROOT --system-site-packages
+python3 -m venv $ROOT
 
 cat >$ROOT/environment.sh << EOL
 module reset
@@ -35,48 +35,78 @@ export CC=\${OLCF_GCC_ROOT}/bin/gcc
 export CXX=\${OLCF_GCC_ROOT}/bin/g++
 export LDSHARED="\${OLCF_GCC_ROOT}/bin/gcc -shared"
 export VIRTUAL_ENV=$ROOT
+export CMAKE_PREFIX_PATH=$ROOT
 EOL
 
 source $ROOT/environment.sh
 
-mkdir -p /tmp/$USER-glotzerlab-software
-cp -a $DIR/../../*.txt /tmp/$USER-glotzerlab-software
-cd /tmp/$USER-glotzerlab-software
+BUILDDIR=`mktemp -d`
+mkdir -p $BUILDDIR
 
-python3 -m pip install --upgrade pip
-python3 -m pip install --no-cache-dir --no-binary mpi4py -r requirements-mpi.txt
+# deletes the temp directory
+function cleanup {
+  rm -rf "$BUILDDIR"
+  echo "Deleted temp working directory $BUILDDIR"
+}
+
+trap cleanup EXIT
+cd $BUILDDIR
+
+cp -a $DIR/../../*.txt $BUILDDIR
+cd $BUILDDIR
+
+set -x
+python3 -m pip install --upgrade pip setuptools wheel
+python3 -m pip install -r requirements-mpi.txt
 
 # TBB
+if [ ! -f $ROOT/lib64/libtbb.so ]
+then
 curl -sSLO https://github.com/oneapi-src/oneTBB/archive/v2021.2.0.tar.gz \
     && tar -xzf v2021.2.0.tar.gz -C . \
     && cd oneTBB-2021.2.0 \
-    && make \
-    && install -d $ROOT/lib \
-    && install -m755 build/linux_*release/*.so* ${ROOT}/lib \
-    && install -d $ROOT/include \
-    && cp -a include/tbb $ROOT/include \
+    && cmake -S . -B build -DTBB_TEST=off -DTBB_STRICT=off -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=$ROOT \
+    && cmake --build build -j 4  \
+    && cmake --install build \
     && cd .. \
     && rm -rf oneTBB-2021.2.0 \
     && rm v2021.2.0.tar.gz \
     || exit 1
+fi
 
 # embree is not available for power9
 
+if [ ! -f $ROOT/bin/clang ]
+then
+    git clone --depth 1 --branch release/10.x https://github.com/llvm/llvm-project
+    cd llvm-project
+    cmake -S llvm -B build \
+        -D CMAKE_INSTALL_PREFIX=$ROOT -DLLVM_ENABLE_PROJECTS=clang \
+        -DBUILD_SHARED_LIBS=ON \
+        -DCMAKE_BUILD_TYPE=Release \
+        -DLLVM_TARGETS_TO_BUILD="PowerPC"
+    cmake --build build -j 4
+    cmake --install build
+    cd $BUILDDIR
+    rm -rf llvm-project
+fi
 
 
 
-# build scipy from source on summit
- export LAPACK=${OLCF_NETLIB_LAPACK_ROOT}/lib64/liblapack.so BLAS=${OLCF_NETLIB_LAPACK_ROOT}/lib64/libblas.so
-    && python3 -m pip install \
-       --no-cache-dir \
-       --no-binary freud-analysis,gsd,scipy,numpy \
-       -r requirements.txt \
+
+
+# install packages that are build requirements of other packages first
+# lapack is needed for scipy
+ export LAPACK=${OLCF_NETLIB_LAPACK_ROOT}/lib64/liblapack.so BLAS=${OLCF_NETLIB_LAPACK_ROOT}/lib64/libblas.so CFLAGS="-mcpu=power9 -mtune=power9" CXXFLAGS="-mcpu=power9 -mtune=power9"\
+    && python3 -m pip install -r requirements-source.txt \
+    || exit 1
+
+# unlike with Docker builds, use the pip cache on summit to reduce time when rerunning the install script
+ export CFLAGS="-mcpu=power9 -mtune=power9" CXXFLAGS="-mcpu=power9 -mtune=power9" \
+    && python3 -m pip install --no-build-isolation -r requirements.txt \
     || exit 1
 
 
-RUN python3 -m pip install \
-    --no-cache-dir \
-    -r requirements.txt
 
 
 
