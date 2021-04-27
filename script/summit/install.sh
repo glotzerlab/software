@@ -128,7 +128,6 @@ fi
 
 
 
-
 # install packages that are build requirements of other packages first
 # lapack is needed for scipy
  export LAPACK=${OLCF_NETLIB_LAPACK_ROOT}/lib64/liblapack.so BLAS=${OLCF_NETLIB_LAPACK_ROOT}/lib64/libblas.so CFLAGS="-mcpu=power9 -mtune=power9" CXXFLAGS="-mcpu=power9 -mtune=power9"\
