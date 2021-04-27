@@ -51,4 +51,4 @@ Contributions are welcomed via
 [pull requests](https://github.com/glotzerlab/software/pulls).
 Please report bugs and suggest feature enhancements via the
 [issue tracker](https://github.com/glotzerlab/software/issues).
-See [CONTRIBUTING.md](CONTRIBUTING.md) for more information.
+See [ARCHITECTURE.md](ARCHITECTURE.md) for more information.
