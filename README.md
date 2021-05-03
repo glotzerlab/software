@@ -1,9 +1,8 @@
 # Glotzerlab software
 
 **glotzerlab-software** is a set of container images that provide software developed by the [Glotzer
-group](<http://glotzerlab.engin.umich.edu>)_ at the [University of Michigan]
-(https://www.umich.edu/) along with related software commonly used in simulation and data analysis
-workflows.
+group](<http://glotzerlab.engin.umich.edu>) at the [University of Michigan](https://www.umich.edu/)
+along with related software commonly used in simulation and data analysis workflows.
 
 ## Resources
 
@@ -17,27 +16,27 @@ workflows.
 ## Quick start
 
 First, download the stable **glotzerlab/software** image using
-[Singularity](https://sylabs.io/singularity/)::
+[Singularity](https://sylabs.io/singularity/):
 
     $ singularity pull software.sif docker://glotzerlab/software
 
-Or the beta (with HOOMD v3.0.0-beta)::
+Or the beta (with HOOMD v3.0.0-beta):
 
     $ singularity pull software.sif docker://glotzerlab/software:beta-nompi
 
 **singularity exec** executes software from inside the container. For example, run a Python script
-with::
+with:
 
     $ singularity exec software.sif python3 script.py
 
-Add the ``--nv`` option to **enable NVIDIA GPUs** inside the container::
+Add the ``--nv`` option to **enable NVIDIA GPUs** inside the container:
 
     $ singularity exec --nv software.sif nvidia-smi
 
 ## Updates
 
 **glotzerlab-software** updates regularly with the latest versions of included software. Download
-the latest image to update::
+the latest image to update:
 
     $ singularity pull software.sif docker://glotzerlab/software
 
