@@ -4,9 +4,9 @@ on:
   # Trigger on request.
   workflow_dispatch:
 
-  # Run hourly during the work week
+  # Run weekly.
   schedule:
-    - cron: '12 10-20 * * 1-5'
+  - cron:  '0 18 * * 1'
 
 jobs:
   update_packages:
