@@ -6,7 +6,7 @@ embree:
 fresnel:
   ignore: alpha,rc,beta
   repository: https://github.com/glotzerlab/fresnel
-  version: v0.13.1
+  version: v0.13.2
 hoomd:
   ignore: alpha,rc,beta
   pinned: v2
