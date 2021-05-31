@@ -24,7 +24,7 @@ scikit-image==0.18.1; platform_machine != 'ppc64le'
 scipy==1.6.3
 
 # test requirements
-hypothesis==6.13.5
+hypothesis==6.13.10
 pytest==6.2.4
 miniball==1.1.0
 sympy==1.8
