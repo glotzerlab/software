@@ -41,6 +41,7 @@ extra_tags=( ["nompi"]="-t ${repository}/software:latest"
              ["comet"]=""
              ["bridges2"]=""
              ["stampede2"]=""
+             ["expanse"]=""
 )
 
 for cluster in "$@"
