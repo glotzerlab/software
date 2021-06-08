@@ -14,8 +14,8 @@ Copy the test scripts to the current directory::
 
 Submit the test jobs::
 
-    $ sbatch job-cpu.sh
-    $ sbatch job-gpu.sh
+    $ sbatch -A <your-account> job-cpu.sh
+    $ sbatch -A <your-account> job-gpu.sh
 
 .. note::
 

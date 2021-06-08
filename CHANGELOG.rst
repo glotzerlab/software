@@ -8,6 +8,17 @@ and optionally the day separated by periods.
 2021
 ----
 
+2021.06.08
+++++++++++
+
+*Added:*
+
+* Image for SDSC Expanse.
+
+*Removed:*
+
+* Image for SDSC Comet.
+
 2021.04.21
 ++++++++++
 
