@@ -38,10 +38,9 @@ DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 declare -A extra_tags
 extra_tags=( ["nompi"]="-t ${repository}/software:latest"
              ["greatlakes"]=""
-             ["comet"]=""
+             ["expanse"]=""
              ["bridges2"]=""
              ["stampede2"]=""
-             ["expanse"]=""
 )
 
 for cluster in "$@"

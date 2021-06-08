@@ -59,17 +59,6 @@ if __name__ == '__main__':
     # see https://stackoverflow.com/questions/5470257/how-to-see-which-flags-march-native-will-activate
     # for information on obtaining CFLAGS settings for specific machines
     # gcc -'###' -E - -march=native 2>&1 | sed -r '/cc1/!d;s/(")|(^.* - )|( -mno-[^\ ]+)//g'
-    write('docker/comet/Dockerfile', [base_template, ib_mlx_template, openmpi_template, glotzerlab_software_template, finalize_template],
-          FROM='nvidia/cuda:10.1-devel-ubuntu18.04',
-          ubuntu_version=18,
-          system='comet',
-          OPENMPI_VERSION='3.1',
-          OPENMPI_PATCHLEVEL='4',
-          ENABLE_MPI='on',
-          MAKEJOBS=4,
-          CFLAGS='-march=haswell -mmmx -msse -msse2 -msse3 -mssse3 -mcx16 -msahf -mmovbe -maes -mpclmul -mpopcnt -mabm -mfma -mbmi -mbmi2 -mavx -mavx2 -msse4.2 -msse4.1 -mlzcnt -mrdrnd -mf16c -mfsgsbase -mfxsr -mxsave -mxsaveopt --param l1-cache-size=32 --param l1-cache-line-size=64 --param l2-cache-size=30720 -mtune=haswell -fstack-protector-strong -Wformat -Wformat-security',
-          **versions)
-
     write('docker/stampede2/Dockerfile', [base_template, ib_hfi1_stampede2_template, mvapich2_template, glotzerlab_software_template, finalize_template],
           FROM='nvidia/cuda:10.1-devel-ubuntu18.04',
           ubuntu_version=18,
@@ -105,7 +94,7 @@ if __name__ == '__main__':
           MAKEJOBS=4,
           CFLAGS='-march=znver1 -mmmx -msse -msse2 -msse3 -mssse3 -msse4a -mcx16 -msahf -mmovbe -maes -msha -mpclmul -mpopcnt -mabm -mfma -mbmi -mbmi2 -mavx -mavx2 -msse4.2 -msse4.1 -mlzcnt -mrdrnd -mf16c -mfsgsbase -mrdseed -mprfchw -madx -mfxsr -mxsave -mxsaveopt -mclflushopt -mxsavec -mxsaves -mclwb -mmwaitx -mclzero -mrdpid --param l1-cache-size=32 --param l1-cache-line-size=64 --param l2-cache-size=512 -mtune=znver2',
           **versions)
-    
+
     write('docker/expanse/Dockerfile', [base_template, ib_mlx_template, openmpi_template, glotzerlab_software_template, finalize_template],
           FROM='nvidia/cuda:10.1-devel-ubuntu18.04',
           ubuntu_version=18,
