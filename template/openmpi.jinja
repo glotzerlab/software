@@ -30,26 +30,6 @@ RUN curl -sSLO https://www.open-mpi.org/software/ompi/v{{ OPENMPI_VERSION }}/dow
    && rm -rf /root/openmpi-{{ OPENMPI_VERSION }}.{{ OPENMPI_PATCHLEVEL }} \
    && rm /openmpi-{{ OPENMPI_VERSION }}.{{ OPENMPI_PATCHLEVEL }}.tar.bz2
 
-{% elif ubuntu_version == 18 and system == 'comet' %}
-
-RUN curl -sSLO https://www.open-mpi.org/software/ompi/v{{ OPENMPI_VERSION }}/downloads/openmpi-{{ OPENMPI_VERSION }}.{{ OPENMPI_PATCHLEVEL }}.tar.bz2 \
-   && tar -xjf openmpi-{{ OPENMPI_VERSION }}.{{ OPENMPI_PATCHLEVEL }}.tar.bz2 -C /root \
-   && cd /root/openmpi-{{ OPENMPI_VERSION }}.{{ OPENMPI_PATCHLEVEL }} \
-   && ./configure --prefix=/usr --with-libevent=external --with-hwloc=/usr --with-verbs --enable-shared \
-   && make all install \
-   && rm -rf /root/openmpi-{{ OPENMPI_VERSION }}.{{ OPENMPI_PATCHLEVEL }} \
-   && rm /openmpi-{{ OPENMPI_VERSION }}.{{ OPENMPI_PATCHLEVEL }}.tar.bz2
-
-{% elif ubuntu_version == 18 and system == 'bridges' %}
-
-RUN curl -sSLO https://www.open-mpi.org/software/ompi/v{{ OPENMPI_VERSION }}/downloads/openmpi-{{ OPENMPI_VERSION }}.{{ OPENMPI_PATCHLEVEL }}.tar.bz2 \
-   && tar -xjf openmpi-{{ OPENMPI_VERSION }}.{{ OPENMPI_PATCHLEVEL }}.tar.bz2 -C /root \
-   && cd /root/openmpi-{{ OPENMPI_VERSION }}.{{ OPENMPI_PATCHLEVEL }} \
-   && ./configure --prefix=/usr --with-libevent=external --with-hwloc=/usr --with-verbs --with-libfabric --enable-shared \
-   && make all install \
-   && rm -rf /root/openmpi-{{ OPENMPI_VERSION }}.{{ OPENMPI_PATCHLEVEL }} \
-   && rm /openmpi-{{ OPENMPI_VERSION }}.{{ OPENMPI_PATCHLEVEL }}.tar.bz2
-
 {% elif ubuntu_version == 18 and system == 'bridges2' %}
 
 # bridges2 needs UCX
@@ -92,6 +72,53 @@ RUN curl -sSLO https://www.open-mpi.org/software/ompi/v{{ OPENMPI_VERSION }}/dow
    && rm /openmpi-{{ OPENMPI_VERSION }}.{{ OPENMPI_PATCHLEVEL }}.tar.bz2
 
 COPY openmpi-mca-params.conf /usr/etc
+
+{% elif ubuntu_version == 18 and system == 'expanse' %}
+
+# expanse needs UCX
+
+RUN curl -sSLO https://github.com/openucx/ucx/releases/download/v{{UCX_VERSION}}/ucx-{{UCX_VERSION}}.tar.gz \
+   && tar -xzf ucx-{{UCX_VERSION}}.tar.gz -C /root \
+   && cd /root/ucx-{{UCX_VERSION}} \
+   && mkdir build && cd build \
+   && ../configure --prefix=/usr  \
+   && make install -j {{ MAKEJOBS }} \
+   && rm -rf /root/ucx-{{UCX_VERSION}} \
+   && rm /ucx-{{UCX_VERSION}}.tar.gz
+
+RUN curl -sSLO https://www.open-mpi.org/software/ompi/v{{ OPENMPI_VERSION }}/downloads/openmpi-{{ OPENMPI_VERSION }}.{{ OPENMPI_PATCHLEVEL }}.tar.bz2 \
+   && tar -xjf openmpi-{{ OPENMPI_VERSION }}.{{ OPENMPI_PATCHLEVEL }}.tar.bz2 -C /root \
+   && cd /root/openmpi-{{ OPENMPI_VERSION }}.{{ OPENMPI_PATCHLEVEL }} \
+   && ./configure --prefix=/usr \
+                  --enable-shared \
+                  --disable-silent-rules \
+                  --disable-builtin-atomics \
+                  --enable-static \
+                  --without-pmi \
+                  --enable-mpi1-compatibility \
+                  --without-fca \
+                  --without-ofi \
+                  --without-verbs \
+                  --without-cuda  \
+                  --without-mxm \
+                  --without-psm \
+                  --without-knem \
+                  --without-hcoll \
+                  --without-cma \
+                  --without-xpmem \
+                  --without-psm2 \
+                  --without-loadleveler \
+                  --without-lsf \
+                  --without-alps \
+                  --without-tm \
+                  --without-sge \
+                  --disable-memchecker \
+                  --disable-java \
+                  --disable-mpi-java \
+                  --with-ucx \
+   && make all install \
+   && rm -rf /root/openmpi-{{ OPENMPI_VERSION }}.{{ OPENMPI_PATCHLEVEL }} \
+   && rm /openmpi-{{ OPENMPI_VERSION }}.{{ OPENMPI_PATCHLEVEL }}.tar.bz2
 
 {% endif %}
 

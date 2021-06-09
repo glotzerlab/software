@@ -40,7 +40,7 @@ declare -A extra_tags
 # Don't tag beta builds with extra tags
 extra_tags=( ["nompi"]=""
              ["greatlakes"]=""
-             ["comet"]=""
+             ["expanse"]=""
              ["bridges2"]=""
              ["stampede2"]=""
 )

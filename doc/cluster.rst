@@ -11,7 +11,7 @@ community <community>` for suggestions.
     :maxdepth: 2
 
     clusters/bridges2
-    clusters/comet
+    clusters/expanse
     clusters/greatlakes
     clusters/stampede2
     clusters/summit
