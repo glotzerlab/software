@@ -7,7 +7,7 @@ pythia-learn==0.3.0
 rowan==1.3.0.post1
 coxeter==0.5.0
 plato-draw==1.12.0
-signac==1.6.0
+signac==1.7.0
 signac-flow==0.14.0
 
 # commonly used packages
@@ -24,7 +24,7 @@ scikit-image==0.18.1; platform_machine != 'ppc64le'
 scipy==1.6.3
 
 # test requirements
-hypothesis==6.13.10
+hypothesis==6.13.14
 pytest==6.2.4
 miniball==1.1.0
 sympy==1.8
