@@ -6,6 +6,8 @@
 #SBATCH --gpus=1
 #SBATCH -t 0:10:00
 
+module load cpu singularitypro openmpi/4.0.4
+
 rm -f test-results-gpu.out
 
 singularity exec --nv software.sif python3 serial-gpu.py
