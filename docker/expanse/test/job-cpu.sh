@@ -5,6 +5,8 @@
 #SBATCH --ntasks-per-node=1
 #SBATCH -t 0:10:00
 
+module load cpu singularitypro openmpi/4.0.4
+
 rm -f test-results-cpu.out
 
 singularity exec software.sif python3 serial-cpu.py
