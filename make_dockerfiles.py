@@ -80,7 +80,6 @@ if __name__ == '__main__':
           system='summit',
           ENABLE_TBB='off',
           BUILD_JIT='off',
-          ENABLE_MPI_CUDA='on',
           **versions)
 
     write('docker/bridges2/Dockerfile', [base_template, ib_mlx_template, openmpi_template, glotzerlab_software_template, finalize_template],
