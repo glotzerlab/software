@@ -21,7 +21,7 @@ pyqt5==5.15.4; platform_machine != 'ppc64le'
 pyyaml==5.4.1
 scikit-learn==0.24.2
 scikit-image==0.18.1; platform_machine != 'ppc64le'
-scipy==1.6.3
+scipy==1.7.0
 
 # test requirements
 hypothesis==6.14.0

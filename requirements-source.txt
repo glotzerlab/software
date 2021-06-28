@@ -4,4 +4,4 @@ pkgconfig==1.5.4
 pybind11==2.6.2
 pythran==0.9.11
 scikit-build==0.11.1
-scipy==1.6.3
+scipy==1.7.0
