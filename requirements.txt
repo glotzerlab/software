@@ -16,7 +16,7 @@ jupyter==1.0.0; platform_machine != 'ppc64le'
 matplotlib==3.4.2; platform_machine != 'ppc64le'
 notebook==6.4.0; platform_machine != 'ppc64le'
 pandas==1.3.0; platform_machine != 'ppc64le'
-Pillow==8.3.0
+Pillow==8.3.1
 pyqt5==5.15.4; platform_machine != 'ppc64le'
 pyyaml==5.4.1
 scikit-learn==0.24.2
@@ -24,7 +24,7 @@ scikit-image==0.18.2; platform_machine != 'ppc64le'
 scipy==1.7.0
 
 # test requirements
-hypothesis==6.14.1
+hypothesis==6.14.2
 pytest==6.2.4
 miniball==1.1.0
 sympy==1.8
