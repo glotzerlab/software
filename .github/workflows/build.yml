@@ -39,7 +39,7 @@ jobs:
         if: github.ref == 'refs/heads/master' || github.ref == 'refs/heads/hoomd-v3-beta'
       - name: Slack notification
         if: ${{ (github.ref == 'refs/heads/master' || github.ref == 'refs/heads/hoomd-v3-beta') && (failure() || cancelled()) }}
-        uses: 8398a7/action-slack@v3.9.1
+        uses: 8398a7/action-slack@v3.9.2
         with:
           status: ${{ job.status }}
           fields: workflow,ref,message,commit
