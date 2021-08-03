@@ -21,7 +21,7 @@ hoomd:
   ignore: alpha,rc
   pinned: v3
   repository: https://github.com/glotzerlab/hoomd-blue
-  version: v3.0.0-beta.7
+  version: v3.0.0-beta.8
 osu_microbenchmark:
   repository: null
   version: 5.4.1
