@@ -110,7 +110,7 @@ fi
 
 
 
- git clone --recursive --branch v2.9.6 --depth 1 https://github.com/glotzerlab/hoomd-blue hoomd \
+ git clone --recursive --branch v2.9.7 --depth 1 https://github.com/glotzerlab/hoomd-blue hoomd \
     && cd hoomd \
     && mkdir -p build \
     && cd build \
