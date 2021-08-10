@@ -1,7 +1,7 @@
 Cython==0.29.24
 numpy==1.21.1
 pkgconfig==1.5.5
-pybind11==2.7.0
+pybind11==2.7.1
 pythran==0.9.12.post1
 scikit-build==0.11.1
 scipy==1.7.1
