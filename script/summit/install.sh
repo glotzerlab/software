@@ -101,8 +101,8 @@ fi
 # install eigen headers
 if [ ! -f $ROOT/include/eigen3/Eigen/Eigen ]
 then
-curl -SL https://gitlab.com/libeigen/eigen/-/archive/3.3.9/eigen-3.3.9.tar.gz | tar -xzC $BUILDDIR && \
-    cd eigen-3.3.9 && \
+curl -SL https://gitlab.com/libeigen/eigen/-/archive/3.4.0/eigen-3.4.0.tar.gz | tar -xzC $BUILDDIR && \
+    cd eigen-3.4.0 && \
     mkdir build && cd build && \
     cmake ../ -DCMAKE_INSTALL_PREFIX=$ROOT -DBUILD_TESTING=off, -DEIGEN_TEST_NOQT=on && \
     make install && \
