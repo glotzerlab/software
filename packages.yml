@@ -7,7 +7,7 @@ eigen:
   ignore: alpha,rc,beta,before,after,actual
   include_v_prefix: false
   repository: https://gitlab.com/libeigen/eigen
-  version: 3.3.9
+  version: 3.4.0
 embree:
   ignore: alpha,rc,beta
   include_v_prefix: false
