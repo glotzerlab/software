@@ -36,7 +36,7 @@ qhull:
   repository: https://github.com/qhull/qhull
   version: 8.0.2
 tbb:
-  ignore: alpha,rc,beta
+  ignore: alpha,rc,beta,v2021.3.0
   include_v_prefix: false
   repository: https://github.com/oneapi-src/oneTBB
-  version: 2021.3.0
+  version: 2021.2.0
