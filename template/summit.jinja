@@ -14,15 +14,15 @@ fi
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 ROOT=$1
 module reset
-module load gcc/10.2.0
+module load gcc/7.5.0
 module load python/3.8.10
 python3 -m venv $ROOT
 
 cat >$ROOT/environment.sh << EOL
 module reset
-module load gcc/10.2.0
+module load gcc/7.5.0
 module load python/3.8.10
-module load cuda/11.3.1
+module load cuda/11.0.3
 module load cmake
 module load git
 module load netlib-lapack/3.9.1
