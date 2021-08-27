@@ -14,18 +14,19 @@ fi
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 ROOT=$1
 module reset
-module load gcc/7.4.0
-module load python/3.7.0
+module load gcc/10.2.0
+module load python/3.8.10
 python3 -m venv $ROOT
 
 cat >$ROOT/environment.sh << EOL
 module reset
-module load gcc/7.4.0
-module load cuda
+module load gcc/10.2.0
+module load python/3.8.10
+module load cuda/11.3.1
 module load cmake
 module load git
-module load netlib-lapack/3.8.0
-module load hdf5/1.10.3
+module load netlib-lapack/3.9.1
+module load hdf5/1.10.7
 
 export LD_LIBRARY_PATH=$ROOT/lib:\$LD_LIBRARY_PATH
 export PATH=$ROOT/bin:\$PATH
@@ -62,15 +63,15 @@ python3 -m pip install -r requirements-mpi.txt
 # TBB
 if [ ! -f $ROOT/lib64/libtbb.so ]
 then
-curl -sSLO https://github.com/oneapi-src/oneTBB/archive/v2021.3.0.tar.gz \
-    && tar -xzf v2021.3.0.tar.gz -C . \
-    && cd oneTBB-2021.3.0 \
+curl -sSLO https://github.com/oneapi-src/oneTBB/archive/v2021.2.0.tar.gz \
+    && tar -xzf v2021.2.0.tar.gz -C . \
+    && cd oneTBB-2021.2.0 \
     && cmake -S . -B build -DTBB_TEST=off -DTBB_STRICT=off -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=$ROOT \
     && cmake --build build -j 4  \
     && cmake --install build \
     && cd .. \
-    && rm -rf oneTBB-2021.3.0 \
-    && rm v2021.3.0.tar.gz \
+    && rm -rf oneTBB-2021.2.0 \
+    && rm v2021.2.0.tar.gz \
     || exit 1
 fi
 
