@@ -21,12 +21,12 @@ Pillow==8.3.1
 pyqt5==5.15.4; platform_machine != 'ppc64le'
 pyyaml==5.4.1
 scikit-learn==0.24.2
-scikit-image==0.18.2; platform_machine != 'ppc64le'
+scikit-image==0.18.3; platform_machine != 'ppc64le'
 scipy==1.7.1
 
 # test requirements
-hypothesis==6.15.0
-pytest==6.2.4
+hypothesis==6.17.3
+pytest==6.2.5
 miniball==1.1.0
 sympy==1.8
 tables==3.6.1
