@@ -112,11 +112,13 @@ fi
 
 if [ ! -f $ROOT/bin/clang ]
 then
-    git clone --depth 1 --branch release/10.x https://github.com/llvm/llvm-project
+    git clone --depth 1 --branch release/12.x https://github.com/llvm/llvm-project
     cd llvm-project
     cmake -S llvm -B build \
         -D CMAKE_INSTALL_PREFIX=$ROOT -DLLVM_ENABLE_PROJECTS=clang \
-        -DBUILD_SHARED_LIBS=ON \
+        -DCLANG_LINK_CLANG_DYLIB=ON \
+        -DLLVM_BUILD_LLVM_DYLIB=ON \
+        -DLLVM_LINK_LLVM_DYLIB=ON \
         -DCMAKE_BUILD_TYPE=Release \
         -DLLVM_TARGETS_TO_BUILD="PowerPC"
     cmake --build build -j 8
