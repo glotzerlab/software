@@ -1,5 +1,5 @@
 # glotzer tools
-freud-analysis==2.6.2
+freud-analysis==2.7.0
 fsph==0.2.0
 gsd==2.4.2
 garnett==0.7.1
@@ -25,7 +25,7 @@ scikit-image==0.18.3; platform_machine != 'ppc64le'
 scipy==1.7.1
 
 # test requirements
-hypothesis==6.23.0
+hypothesis==6.23.1
 pytest==6.2.5
 miniball==1.1.0
 sympy==1.8
