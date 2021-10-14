@@ -23,6 +23,7 @@ pyyaml==5.4.1
 scikit-learn==1.0
 scikit-image==0.18.3; platform_machine != 'ppc64le'
 scipy==1.7.1
+statsmodels==0.12.2
 
 # test requirements
 hypothesis==6.23.2
