@@ -48,7 +48,7 @@
     && mkdir -p build \
     && cd build \
     && export CFLAGS="{{CFLAGS}}" CXXFLAGS="{{CFLAGS}}" \
-    && cmake ../ -DPYTHON_EXECUTABLE="`which python3`" -DENABLE_GPU=on -DENABLE_MPI={{ ENABLE_MPI }} -DENABLE_TBB={{ ENABLE_TBB|default('on') }} -DENABLE_LLVM=on -DBUILD_TESTING=off -DENABLE_MPI_CUDA={{ ENABLE_MPI_CUDA|default('off') }} \
+    && cmake ../ -DPYTHON_EXECUTABLE="`which python3`" -DENABLE_GPU=on -DENABLE_MPI={{ ENABLE_MPI }} -DENABLE_TBB={{ ENABLE_TBB|default('on') }} -DENABLE_LLVM= {{ ENABLE_LLVM|default('on') }} -DBUILD_TESTING=off -DENABLE_MPI_CUDA={{ ENABLE_MPI_CUDA|default('off') }} \
     && make install -j{{ MAKEJOBS }} \
     && cd ../../ \
     && rm -rf hoomd \
