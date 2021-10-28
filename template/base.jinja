@@ -14,7 +14,7 @@ ARG DEBIAN_FRONTEND=noninteractive
 
 {% if ubuntu_version == 18 %}
 RUN apt-get update && apt-get install -y --no-install-recommends \
-  clang-7 \
+  clang-10 \
   cmake \
   curl \
   ffmpeg \
@@ -22,13 +22,15 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
   hwloc \
   libboost-dev \
   libcereal-dev \
+  libclang-10-dev \
+  libclang-cpp10-dev \
   libedit-dev \
   libeigen3-dev \
   libevent-dev \
   libhwloc-dev \
   libtbb-dev \
   libsqlite3-dev \
-  llvm-7-dev \
+  llvm-10-dev \
   python3.8 \
   python3.8-dev \
   python3.8-venv \
@@ -39,7 +41,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 
 
 # put clang on the path
-ENV PATH=$PATH:/usr/lib/llvm-7/bin
+ENV PATH=$PATH:/usr/lib/llvm-10/bin
 {% endif %}
 
 # Link python3.8 to python3 in user path
