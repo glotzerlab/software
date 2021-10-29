@@ -33,15 +33,14 @@ if __name__ == '__main__':
     test_template = env.get_template('test.jinja')
 
     write('docker/nompi/Dockerfile', [base_template, glotzerlab_software_template, finalize_template, test_template],
-          FROM='nvidia/cuda:10.1-devel-ubuntu18.04',
+          FROM='nvidia/cuda:10.2-devel-ubuntu18.04',
           ubuntu_version=18,
           ENABLE_MPI='off',
-          BUILD_JIT='off',
           MAKEJOBS=4,
           **versions)
 
     write('docker/greatlakes/Dockerfile', [base_template, ib_mlx_template, openmpi_template, glotzerlab_software_template, finalize_template],
-          FROM='nvidia/cuda:10.1-devel-ubuntu18.04',
+          FROM='nvidia/cuda:10.2-devel-ubuntu18.04',
           ubuntu_version=18,
           system='greatlakes',
           OPENMPI_VERSION='4.0',
@@ -49,7 +48,6 @@ if __name__ == '__main__':
           UCX_VERSION='1.6.0',
           PMIX_VERSION='2.2.3',
           ENABLE_MPI='on',
-          BUILD_JIT='off',
           MAKEJOBS=4,
           CFLAGS='-march=sandybridge -mmmx -msse -msse2 -msse3 -mssse3 -mcx16 -msahf -maes -mpclmul -mpopcnt -mavx -msse4.2 -msse4.1 -mfxsr -mxsave -mxsaveopt --param l1-cache-size=32 --param l1-cache-line-size=64 --param l2-cache-size=20480 -mtune=sandybridge',
           **versions)
@@ -62,7 +60,7 @@ if __name__ == '__main__':
     # for information on obtaining CFLAGS settings for specific machines
     # gcc -'###' -E - -march=native 2>&1 | sed -r '/cc1/!d;s/(")|(^.* - )|( -mno-[^\ ]+)//g'
     write('docker/stampede2/Dockerfile', [base_template, ib_hfi1_stampede2_template, mvapich2_template, glotzerlab_software_template, finalize_template],
-          FROM='nvidia/cuda:10.1-devel-ubuntu18.04',
+          FROM='nvidia/cuda:10.2-devel-ubuntu18.04',
           ubuntu_version=18,
           system='stampede2',
           MVAPICH_VERSION='2.3',
@@ -70,7 +68,6 @@ if __name__ == '__main__':
           MVAPICH_SHA='01d5fb592454ddd9ecc17e91c8983b6aea0e7559aa38f410b111c8ef385b50dd',
           MVAPICH_EXTRA_OPTS='--with-device=ch3:psm --with-ch3-rank-bits=32 --enable-cxx --enable-romio --enable-fast=O3 --enable-g=dbg',
           ENABLE_MPI='on',
-          BUILD_JIT='off',
           MAKEJOBS=4,
           CFLAGS='-march=skylake-avx512 -mmmx -msse -msse2 -msse3 -mssse3 -mcx16 -msahf -mmovbe -maes -mpclmul -mpopcnt -mabm -mfma -mbmi -mbmi2 -mavx -mavx2 -msse4.2 -msse4.1 -mlzcnt -mrtm -mhle -mrdrnd -mf16c -mfsgsbase -mrdseed -mprfchw -madx -mfxsr -mxsave -mxsaveopt -mavx512f -mavx512cd -mclflushopt -mxsavec -mxsaves -mavx512dq -mavx512bw -mavx512vl -mclwb -mpku --param l1-cache-size=32 --param l1-cache-line-size=64 --param l2-cache-size=25344 -mtune=skylake-avx512',
           **versions)
@@ -82,31 +79,28 @@ if __name__ == '__main__':
           output='script',
           system='summit',
           ENABLE_TBB='off',
-          BUILD_JIT='off',
           **versions)
 
     write('docker/bridges2/Dockerfile', [base_template, ib_mlx_template, openmpi_template, glotzerlab_software_template, finalize_template],
-          FROM='nvidia/cuda:10.1-devel-ubuntu18.04',
+          FROM='nvidia/cuda:10.2-devel-ubuntu18.04',
           ubuntu_version=18,
           system='bridges2',
           OPENMPI_VERSION='4.0',
           OPENMPI_PATCHLEVEL='5',
           UCX_VERSION='1.9.0',
           ENABLE_MPI='on',
-          BUILD_JIT='off',
           MAKEJOBS=4,
           CFLAGS='-march=znver1 -mmmx -msse -msse2 -msse3 -mssse3 -msse4a -mcx16 -msahf -mmovbe -maes -msha -mpclmul -mpopcnt -mabm -mfma -mbmi -mbmi2 -mavx -mavx2 -msse4.2 -msse4.1 -mlzcnt -mrdrnd -mf16c -mfsgsbase -mrdseed -mprfchw -madx -mfxsr -mxsave -mxsaveopt -mclflushopt -mxsavec -mxsaves -mclwb -mmwaitx -mclzero -mrdpid --param l1-cache-size=32 --param l1-cache-line-size=64 --param l2-cache-size=512 -mtune=znver1',
           **versions)
 
     write('docker/expanse/Dockerfile', [base_template, ib_mlx_template, openmpi_template, glotzerlab_software_template, finalize_template],
-          FROM='nvidia/cuda:10.1-devel-ubuntu18.04',
+          FROM='nvidia/cuda:10.2-devel-ubuntu18.04',
           ubuntu_version=18,
           system='expanse',
           OPENMPI_VERSION='4.0',
           OPENMPI_PATCHLEVEL='4',
           UCX_VERSION='1.8.1',
           ENABLE_MPI='on',
-          BUILD_JIT='off',
           MAKEJOBS=4,
           CFLAGS='-march=znver1 -mmmx -msse -msse2 -msse3 -mssse3 -msse4a -mcx16 -msahf -mmovbe -maes -msha -mpclmul -mpopcnt -mabm -mfma -mbmi -mbmi2 -mavx -mavx2 -msse4.2 -msse4.1 -mlzcnt -mrdrnd -mf16c -mfsgsbase -mrdseed -mprfchw -madx -mfxsr -mxsave -mxsaveopt -mclflushopt -mxsavec -mxsaves -mclwb -mmwaitx -mclzero -mrdpid --param l1-cache-size=32 --param l1-cache-line-size=64 --param l2-cache-size=512 -mtune=znver1',
           **versions)
