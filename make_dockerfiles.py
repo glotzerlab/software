@@ -33,14 +33,14 @@ if __name__ == '__main__':
     test_template = env.get_template('test.jinja')
 
     write('docker/nompi/Dockerfile', [base_template, glotzerlab_software_template, finalize_template, test_template],
-          FROM='nvidia/cuda:10.1-devel-ubuntu18.04',
+          FROM='nvidia/cuda:10.2-devel-ubuntu18.04',
           ubuntu_version=18,
           ENABLE_MPI='off',
           MAKEJOBS=4,
           **versions)
 
     write('docker/greatlakes/Dockerfile', [base_template, ib_mlx_template, openmpi_template, glotzerlab_software_template, finalize_template],
-          FROM='nvidia/cuda:10.1-devel-ubuntu18.04',
+          FROM='nvidia/cuda:10.2-devel-ubuntu18.04',
           ubuntu_version=18,
           system='greatlakes',
           OPENMPI_VERSION='4.0',
@@ -60,7 +60,7 @@ if __name__ == '__main__':
     # for information on obtaining CFLAGS settings for specific machines
     # gcc -'###' -E - -march=native 2>&1 | sed -r '/cc1/!d;s/(")|(^.* - )|( -mno-[^\ ]+)//g'
     write('docker/stampede2/Dockerfile', [base_template, ib_hfi1_stampede2_template, mvapich2_template, glotzerlab_software_template, finalize_template],
-          FROM='nvidia/cuda:10.1-devel-ubuntu18.04',
+          FROM='nvidia/cuda:10.2-devel-ubuntu18.04',
           ubuntu_version=18,
           system='stampede2',
           MVAPICH_VERSION='2.3',
@@ -82,7 +82,7 @@ if __name__ == '__main__':
           **versions)
 
     write('docker/bridges2/Dockerfile', [base_template, ib_mlx_template, openmpi_template, glotzerlab_software_template, finalize_template],
-          FROM='nvidia/cuda:10.1-devel-ubuntu18.04',
+          FROM='nvidia/cuda:10.2-devel-ubuntu18.04',
           ubuntu_version=18,
           system='bridges2',
           OPENMPI_VERSION='4.0',
@@ -94,7 +94,7 @@ if __name__ == '__main__':
           **versions)
 
     write('docker/expanse/Dockerfile', [base_template, ib_mlx_template, openmpi_template, glotzerlab_software_template, finalize_template],
-          FROM='nvidia/cuda:10.1-devel-ubuntu18.04',
+          FROM='nvidia/cuda:10.2-devel-ubuntu18.04',
           ubuntu_version=18,
           system='expanse',
           OPENMPI_VERSION='4.0',
