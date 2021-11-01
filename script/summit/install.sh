@@ -80,8 +80,8 @@ fi
 # install pybind11 headers
 if [ ! -f $ROOT/include/pybind11/pybind11.h ]
 then
-curl -SL https://github.com/pybind/pybind11/archive/v2.8.0.tar.gz | tar -xzC $BUILDDIR && \
-    cd pybind11-2.8.0 && \
+curl -SL https://github.com/pybind/pybind11/archive/v2.8.1.tar.gz | tar -xzC $BUILDDIR && \
+    cd pybind11-2.8.1 && \
     mkdir build && cd build && \
     cmake ../ -DCMAKE_INSTALL_PREFIX=$ROOT -DPYBIND11_TEST=off && \
     make install && \
