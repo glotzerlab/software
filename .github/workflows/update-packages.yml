@@ -17,7 +17,7 @@ jobs:
       matrix:
         branch: [master,hoomd-v3-beta]
     steps:
-      - uses: actions/checkout@v2.3.4
+      - uses: actions/checkout@v2.3.5
         with:
           ref: ${{ matrix.branch }}
       - uses: tibdex/github-app-token@v1.4
