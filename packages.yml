@@ -2,7 +2,7 @@ embree:
   ignore: alpha,rc,beta
   include_v_prefix: false
   repository: https://github.com/embree/embree
-  version: 3.13.1
+  version: 3.13.2
 fresnel:
   ignore: alpha,rc,beta
   repository: https://github.com/glotzerlab/fresnel
@@ -19,7 +19,7 @@ pybind11:
   ignore: alpha,rc,beta
   include_v_prefix: false
   repository: https://github.com/pybind/pybind11
-  version: 2.8.0
+  version: 2.8.1
 qhull:
   ignore: alpha,rc,beta
   include_v_prefix: false
