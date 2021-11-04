@@ -26,7 +26,7 @@ jobs:
       matrix:
         configuration: [nompi, greatlakes, bridges2, expanse, stampede2]
     steps:
-      - uses: actions/checkout@v2.3.4
+      - uses: actions/checkout@v2.3.5
       - name: Login to DockerHub
         if: ${{ github.event_name != 'pull_request' || (github.event.pull_request.head.repo.full_name == github.repository && github.actor != 'dependabot[bot]') }}
         uses: docker/login-action@v1
