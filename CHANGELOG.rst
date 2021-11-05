@@ -13,7 +13,11 @@ and optionally the day separated by periods.
 
 *Removed*
 
+<<<<<<< HEAD
 * Stamped2 image.
+=======
+* Stampede2 image.
+>>>>>>> remove-stampede2
 
 2021.06.08
 ++++++++++
