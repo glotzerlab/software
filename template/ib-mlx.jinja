@@ -21,23 +21,9 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
   libnl-utils \
   && rm -rf /var/lib/apt/lists/*
 
-{% if system == 'greatlakes' %}
-RUN rm -f /usr/lib/x86_64-linux-gnu/libibverbs* /usr/lib/x86_64-linux-gnu/librdmacm* /lib/x86_64-linux-gnu/libnl*
-COPY mlx4.driver mlx5.driver rxe.driver /etc/libibverbs.d/
-COPY libmlx4-rdmav2.so libmlx5-rdmav2.so libmlx5.so librxe-rdmav2.so /usr/lib/
-COPY librdmacm.so /usr/lib/x86_64-linux-gnu/librdmacm.so.1.1.20
-RUN ln -s /usr/lib/x86_64-linux-gnu/librdmacm.so.1.1.20 /usr/lib/x86_64-linux-gnu/librdmacm.so && \
-    ln -s /usr/lib/x86_64-linux-gnu/librdmacm.so.1.1.20 /usr/lib/x86_64-linux-gnu/librdmacm.so.1
-COPY libibverbs.so /usr/lib/x86_64-linux-gnu/libibverbs.so.1.1.20
-RUN ln -s /usr/lib/x86_64-linux-gnu/libibverbs.so.1.1.20 /usr/lib/x86_64-linux-gnu/libibverbs.so && \
-    ln -s /usr/lib/x86_64-linux-gnu/libibverbs.so.1.1.20 /usr/lib/x86_64-linux-gnu/libibverbs.so.1
-COPY libnl-3.so.200 libnl-route-3.so.200 /usr/lib/x86_64-linux-gnu/
-COPY infiniband/ /usr/include/infiniband/
-{% else %}
-# testing ubuntu provided ibverbs on comet and bridges
+# use ubuntu provided ibverbs
 RUN apt-get update && apt-get install -y --no-install-recommends \
   libibverbs-dev \
   ibverbs-providers \
   librdmacm-dev \
   && rm -rf /var/lib/apt/lists/*
-{% endif %}
