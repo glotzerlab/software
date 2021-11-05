@@ -8,6 +8,13 @@ and optionally the day separated by periods.
 2021
 ----
 
+not yet released
+++++++++++++++++
+
+*Removed*
+
+* Support for Stampede2.
+
 2021.06.08
 ++++++++++
 

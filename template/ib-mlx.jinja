@@ -1,6 +1,5 @@
 
 
-{% if ubuntu_version == 18 %}
 RUN apt-get update && apt-get install -y --no-install-recommends \
   dkms \
   infiniband-diags \
@@ -41,6 +40,4 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
   ibverbs-providers \
   librdmacm-dev \
   && rm -rf /var/lib/apt/lists/*
-{% endif %}
-
 {% endif %}
