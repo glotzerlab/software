@@ -23,7 +23,6 @@ if __name__ == '__main__':
     env = jinja2.Environment(loader=jinja2.FileSystemLoader('template'))
     base_template = env.get_template('base.jinja')
     ib_mlx_template = env.get_template('ib-mlx.jinja')
-    ib_hfi1_template = env.get_template('ib-hfi1.jinja')
     openmpi_template = env.get_template('openmpi.jinja')
     mvapich2_template = env.get_template('mvapich2.jinja')
     summit_template = env.get_template('summit.jinja')
