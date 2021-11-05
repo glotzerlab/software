@@ -8,8 +8,13 @@ and optionally the day separated by periods.
 2021
 ----
 
-2021.11.05
+2021.11.08
 ++++++++++
+
+*Changed*
+
+* Use Ubuntu 20.04 base image.
+* Use CUDA 11 base image.
 
 *Removed*
 
