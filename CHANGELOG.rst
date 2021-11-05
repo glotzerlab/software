@@ -8,12 +8,12 @@ and optionally the day separated by periods.
 2021
 ----
 
-not yet released
-++++++++++++++++
+2021.11.05
+++++++++++
 
 *Removed*
 
-* Support for Stampede2.
+* Stamped2 image.
 
 2021.06.08
 ++++++++++
