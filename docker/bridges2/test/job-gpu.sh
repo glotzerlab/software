@@ -5,7 +5,7 @@
 #SBATCH --gpus-per-node=1
 #SBATCH -t 0:20:00
 
-module load openmpi
+module load openmpi/4.0.5-gcc10.2.0
 
 rm -f test-results-gpu.out
 
