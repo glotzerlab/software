@@ -8,6 +8,13 @@ and optionally the day separated by periods.
 2021
 ----
 
+2021.11.05
+++++++++++
+
+*Removed*
+
+* Stampede2 image.
+
 2021.06.08
 ++++++++++
 

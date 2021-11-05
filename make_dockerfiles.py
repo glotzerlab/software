@@ -24,7 +24,6 @@ if __name__ == '__main__':
     base_template = env.get_template('base.jinja')
     ib_mlx_template = env.get_template('ib-mlx.jinja')
     ib_hfi1_template = env.get_template('ib-hfi1.jinja')
-    ib_hfi1_stampede2_template = env.get_template('ib-hfi1-stampede2.jinja')
     openmpi_template = env.get_template('openmpi.jinja')
     mvapich2_template = env.get_template('mvapich2.jinja')
     summit_template = env.get_template('summit.jinja')
@@ -59,19 +58,6 @@ if __name__ == '__main__':
     # see https://stackoverflow.com/questions/5470257/how-to-see-which-flags-march-native-will-activate
     # for information on obtaining CFLAGS settings for specific machines
     # gcc -'###' -E - -march=native 2>&1 | sed -r '/cc1/!d;s/(")|(^.* - )|( -mno-[^\ ]+)//g'
-    write('docker/stampede2/Dockerfile', [base_template, ib_hfi1_stampede2_template, mvapich2_template, glotzerlab_software_template, finalize_template],
-          FROM='nvidia/cuda:10.1-devel-ubuntu18.04',
-          ubuntu_version=18,
-          system='stampede2',
-          MVAPICH_VERSION='2.3',
-          MVAPICH_PATCHLEVEL='',
-          MVAPICH_SHA='01d5fb592454ddd9ecc17e91c8983b6aea0e7559aa38f410b111c8ef385b50dd',
-          MVAPICH_EXTRA_OPTS='--with-device=ch3:psm --with-ch3-rank-bits=32 --enable-cxx --enable-romio --enable-fast=O3 --enable-g=dbg',
-          ENABLE_MPI='on',
-          MAKEJOBS=4,
-          CFLAGS='-march=skylake-avx512 -mmmx -msse -msse2 -msse3 -mssse3 -mcx16 -msahf -mmovbe -maes -mpclmul -mpopcnt -mabm -mfma -mbmi -mbmi2 -mavx -mavx2 -msse4.2 -msse4.1 -mlzcnt -mrtm -mhle -mrdrnd -mf16c -mfsgsbase -mrdseed -mprfchw -madx -mfxsr -mxsave -mxsaveopt -mavx512f -mavx512cd -mclflushopt -mxsavec -mxsaves -mavx512dq -mavx512bw -mavx512vl -mclwb -mpku --param l1-cache-size=32 --param l1-cache-line-size=64 --param l2-cache-size=25344 -mtune=skylake-avx512',
-          **versions)
-
     write('script/summit/install.sh', [summit_template, glotzerlab_software_template],
           ENABLE_MPI='on',
           MAKEJOBS=4,
