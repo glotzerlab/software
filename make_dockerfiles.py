@@ -41,7 +41,7 @@ if __name__ == '__main__':
     # gcc -'###' -E - -march=native 2>&1 | sed -r '/cc1/!d;s/(")|(^.* - )|( -mno-[^\ ]+)//g'
 
     write('docker/greatlakes/Dockerfile', [base_template, ib_mlx_template, openmpi_template, glotzerlab_software_template, finalize_template],
-          FROM='nvidia/cuda:11.4.2-devel-ubuntu20.04',
+          FROM='nvidia/cuda:11.1.1-devel-ubuntu20.04',
           system='greatlakes',
           OPENMPI_VERSION='4.0',
           OPENMPI_PATCHLEVEL='2',
