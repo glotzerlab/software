@@ -7,9 +7,11 @@ nodes. Apply for resources on Bridges through the `XSEDE <https://www.xsede.org/
 Downloading
 ***********
 
-The **glotzerlab-software** image is large, store it in your project directory::
+The **glotzerlab-software** image and the singularity cache are large, store them in your project
+directory::
 
     $ cd $PROJECT
+    $ export SINGULARITY_CACHEDIR=$PROJECT/.singularity
 
 Download the image with support for Bridges-2::
 

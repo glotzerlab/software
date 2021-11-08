@@ -10,9 +10,11 @@ the XSEDE_ program.
 Downloading
 ***********
 
-The **glotzerlab-software** image is large, store it in your project directory::
+The **glotzerlab-software** image and the singularity cache are large, store them in your scratch
+directory::
 
     $ cd /expanse/lustre/scratch/$USER/temp_project
+    $ export SINGULARITY_CACHEDIR=/expanse/lustre/scratch/$USER/temp_project/.singularity
 
 Download the image with support for Expanse::
 

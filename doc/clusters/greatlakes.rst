@@ -6,13 +6,15 @@ Great Lakes (UMich)
 Downloading
 ***********
 
-The **glotzerlab-software** image is large, store it in your scratch directory::
+The **glotzerlab-software** image and the singularity cache are large, store them in your scratch
+directory::
 
-    $ cd /scratch/your-account_root/<your-account>/$USER
+    $ cd /scratch/<your-account_root>/<your-account>/$USER
+    $ export SINGULARITY_CACHEDIR=/scratch/<your-account_root>/<your-account>/$USER/.singularity
 
 .. note::
 
-    replace ``<your-account>`` with your Great Lakes account name
+    Replace ``<your-account>`` with your Great Lakes account name.
 
 Download the image with support for Great Lakes::
 
