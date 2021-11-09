@@ -71,8 +71,6 @@ RUN curl -sSLO https://www.open-mpi.org/software/ompi/v{{ OPENMPI_VERSION }}/dow
    && rm -rf /root/openmpi-{{ OPENMPI_VERSION }}.{{ OPENMPI_PATCHLEVEL }} \
    && rm /openmpi-{{ OPENMPI_VERSION }}.{{ OPENMPI_PATCHLEVEL }}.tar.bz2
 
-COPY openmpi-mca-params.conf /usr/etc
-
 {% elif system == 'expanse' %}
 
 # expanse needs UCX
