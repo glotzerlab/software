@@ -15,6 +15,7 @@ and optionally the day separated by periods.
 
 * Use Ubuntu 20.04 base image.
 * Use CUDA 11 base image.
+* Require ``openmpi/4.1.1`` module on Expanse.
 
 *Removed*
 
