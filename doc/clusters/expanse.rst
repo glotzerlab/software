@@ -10,9 +10,11 @@ the XSEDE_ program.
 Downloading
 ***********
 
-The **glotzerlab-software** image is large, store it in your project directory::
+The **glotzerlab-software** image and the singularity cache are large, store them in your scratch
+directory::
 
     $ cd /expanse/lustre/scratch/$USER/temp_project
+    $ export SINGULARITY_CACHEDIR=/expanse/lustre/scratch/$USER/temp_project/.singularity
 
 Download the image with support for Expanse::
 
@@ -35,20 +37,20 @@ container:
 
 Serial (or multithreaded) CPU jobs (``shared`` partition)::
 
-    module load cpu singularitypro openmpi/4.0.4
+    module load cpu singularitypro openmpi/4.1.1
     singularity exec /expanse/lustre/scratch/$USER/temp_project/software.sif command arguments
 
 Single GPU jobs (``gpu-shared`` partition)::
 
-    module load gpu singularitypro openmpi/4.0.4
+    module load gpu singularitypro openmpi/4.1.1
     singularity exec --nv /expanse/lustre/scratch/$USER/temp_project/software.sif command arguments
 
 MPI parallel CPU jobs (``compute`` partition, ``shared`` partition with more than 1 core)::
 
-    module load cpu singularitypro openmpi/4.0.4
+    module load cpu singularitypro openmpi/4.1.1
     mpirun singularity exec /expanse/lustre/scratch/$USER/temp_project/software.sif command arguments
 
 MPI parallel GPU jobs (``gpu`` partition, ``gpu-shared`` with more than 1 GPU)::
 
-    module load gpu singularitypro openmpi/4.0.4
+    module load gpu singularitypro openmpi/4.1.1
     mpirun singularity exec --nv /expanse/lustre/scratch/$USER/temp_project/software.sif command arguments

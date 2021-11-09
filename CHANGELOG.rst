@@ -8,8 +8,14 @@ and optionally the day separated by periods.
 2021
 ----
 
-2021.11.05
+2021.11.09
 ++++++++++
+
+*Changed*
+
+* Use Ubuntu 20.04 base image.
+* Use CUDA 11 base image.
+* Require ``openmpi/4.1.1`` module on Expanse.
 
 *Removed*
 

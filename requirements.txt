@@ -1,6 +1,5 @@
 # glotzer tools
 freud-analysis==2.7.0
-fsph==0.2.0
 gsd==2.5.0
 garnett==0.7.1
 pythia-learn==0.3.0
