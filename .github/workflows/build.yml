@@ -24,7 +24,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        configuration: [nompi, greatlakes, bridges2, expanse, stampede2]
+        configuration: [nompi, greatlakes, bridges2, expanse]
     steps:
       - uses: actions/checkout@v2.3.5
       - name: Login to DockerHub

@@ -34,7 +34,7 @@ Images are combined from a number of Jinja template files in `template/*.jinja` 
   `nvidia/cuda-?.?-devel-ubuntu18.04`.
 * `summit.jinja` provides the base dependencies through modules on summit and configures
   a software root directory for the build script.
-* `ib-mlx.jinja` and `ib-hfi1.jinja` adds high speed IB networking drivers.
+* `ib-mlx.jinja` adds high speed IB networking drivers.
 * `openmpi.jinja` and `mvapich2.jinja` build the corresponding MPI libraries.
 * `glotzer-software.jinja` compiles and installs glotzer group software.
 * `finalize.jinja` creates a `glotzerlab-software` user so that tools designed to run as
