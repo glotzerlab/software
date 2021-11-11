@@ -31,7 +31,7 @@ if __name__ == '__main__':
     test_template = env.get_template('test.jinja')
 
     write('docker/nompi/Dockerfile', [base_template, glotzerlab_software_template, finalize_template, test_template],
-          FROM='nvidia/cuda:11.0.3-devel-ubuntu20.04',
+          FROM='nvidia/cuda:11.1.1-devel-ubuntu20.04',
           ENABLE_MPI='off',
           MAKEJOBS=4,
           **versions)
@@ -62,7 +62,7 @@ if __name__ == '__main__':
           **versions)
 
     write('docker/bridges2/Dockerfile', [base_template, ib_mlx_template, openmpi_template, glotzerlab_software_template, finalize_template],
-          FROM='nvidia/cuda:11.0.3-devel-ubuntu20.04',
+          FROM='nvidia/cuda:11.1.1-devel-ubuntu20.04',
           system='bridges2',
           OPENMPI_VERSION='4.0',
           OPENMPI_PATCHLEVEL='5',
