@@ -1,6 +1,6 @@
 try:
     import hoomd
-    dev = hoomd.device.CPU
+    dev = hoomd.device.CPU()
     assert(dev.communicator.num_ranks == 2)
 
     if (dev.communicator.rank == 0):
