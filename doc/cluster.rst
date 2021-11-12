@@ -13,5 +13,4 @@ community <community>` for suggestions.
     clusters/bridges2
     clusters/expanse
     clusters/greatlakes
-    clusters/stampede2
     clusters/summit

@@ -12,7 +12,6 @@ ENV GLOTZERLAB_SOFTWARE_GIT_SHA=${GIT_SHA} \
 
 ARG DEBIAN_FRONTEND=noninteractive
 
-{% if ubuntu_version == 18 %}
 RUN apt-get update && apt-get install -y --no-install-recommends \
   clang-10 \
   cmake \
@@ -28,13 +27,15 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
   libeigen3-dev \
   libevent-dev \
   libhwloc-dev \
+  libqhull-dev \
   libtbb-dev \
   libsqlite3-dev \
   llvm-10-dev \
-  python3.8 \
-  python3.8-dev \
-  python3.8-venv \
-  python3.8-distutils \
+  pybind11-dev \
+  python3.9 \
+  python3.9-dev \
+  python3.9-venv \
+  python3.9-distutils \
   zlib1g-dev \
   ca-certificates \
   && rm -rf /var/lib/apt/lists/*
@@ -42,10 +43,9 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 
 # put clang on the path
 ENV PATH=$PATH:/usr/lib/llvm-10/bin
-{% endif %}
 
-# Link python3.8 to python3 in user path
-RUN rm -f /usr/bin/python3 && ln -s "$(which python3.8)" /usr/bin/python3
+# Link python3.9 to python3 in user path
+RUN rm -f /usr/bin/python3 && ln -s "$(which python3.9)" /usr/bin/python3
 
 # prevent python from loading packages from outside the container
 # default empty pythonpath
@@ -59,22 +59,6 @@ RUN curl -sSL https://github.com/embree/embree/archive/v{{ EMBREE_VERSION }}/emb
     && cmake ../ -DCMAKE_INSTALL_PREFIX=/usr/local -DCMAKE_INSTALL_LIBDIR=lib/ -DCMAKE_BUILD_TYPE=Release -DEMBREE_TUTORIALS=OFF -DEMBREE_MAX_ISA="AVX2" -DEMBREE_ISPC_SUPPORT=OFF \
     && make install -j {{ MAKEJOBS }} \
     && cd / && rm -rf /root/embree-*
-
-# install pybind11 headers
-RUN curl -SL https://github.com/pybind/pybind11/archive/v{{PYBIND11_VERSION}}.tar.gz | tar -xzC /root && \
-    cd /root/pybind11-{{PYBIND11_VERSION}} && \
-    mkdir build && cd build && \
-    cmake ../ -DCMAKE_INSTALL_PREFIX=/usr -DPYBIND11_TEST=off && \
-    make install && \
-    cd / && rm -rf /root/pybind11-*
-
-# ubuntu qhull doesn't provide qhullcpp, build it by hand
-RUN curl -SL https://github.com/qhull/qhull/archive/v{{QHULL_VERSION}}.tar.gz | tar -xzC /root && \
-    cd /root/qhull-{{QHULL_VERSION}} && \
-    mkdir build2 && cd build2 && \
-    cmake ../ -DCMAKE_INSTALL_PREFIX=/usr -DLIB_INSTALL_DIR=/usr/lib/x86_64-linux-gnu -DCMAKE_BUILD_TYPE=Release -DCMAKE_CXX_FLAGS=-fPIC -DCMAKE_C_FLAGS=-fPIC && \
-    make install -j {{ MAKEJOBS }} && \
-    cd / && rm -rf /root/qhull-*
 
 # mount points for filesystems on clusters
 RUN mkdir -p /nfs \
@@ -98,5 +82,5 @@ RUN python3 -m venv /opt/glotzerlab \
 COPY requirements*.txt /
 
 # Fix library search paths
-RUN echo "/usr/local/cuda-10.2/compat" >> /etc/ld.so.conf.d/cuda-10-2.conf
+RUN echo "/usr/local/cuda-11.1/compat" >> /etc/ld.so.conf.d/cuda-11-1.conf
 RUN ldconfig

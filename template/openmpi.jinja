@@ -1,6 +1,6 @@
 
 
-{% if ubuntu_version == 18 and system == 'greatlakes' %}
+{% if system == 'greatlakes' %}
 
 # great lakes needs PMIx and UCX
 
@@ -30,7 +30,7 @@ RUN curl -sSLO https://www.open-mpi.org/software/ompi/v{{ OPENMPI_VERSION }}/dow
    && rm -rf /root/openmpi-{{ OPENMPI_VERSION }}.{{ OPENMPI_PATCHLEVEL }} \
    && rm /openmpi-{{ OPENMPI_VERSION }}.{{ OPENMPI_PATCHLEVEL }}.tar.bz2
 
-{% elif ubuntu_version == 18 and system == 'bridges2' %}
+{% elif system == 'bridges2' %}
 
 # bridges2 needs UCX
 
@@ -71,9 +71,7 @@ RUN curl -sSLO https://www.open-mpi.org/software/ompi/v{{ OPENMPI_VERSION }}/dow
    && rm -rf /root/openmpi-{{ OPENMPI_VERSION }}.{{ OPENMPI_PATCHLEVEL }} \
    && rm /openmpi-{{ OPENMPI_VERSION }}.{{ OPENMPI_PATCHLEVEL }}.tar.bz2
 
-COPY openmpi-mca-params.conf /usr/etc
-
-{% elif ubuntu_version == 18 and system == 'expanse' %}
+{% elif system == 'expanse' %}
 
 # expanse needs UCX
 

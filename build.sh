@@ -42,7 +42,6 @@ extra_tags=( ["nompi"]=""
              ["greatlakes"]=""
              ["expanse"]=""
              ["bridges2"]=""
-             ["stampede2"]=""
 )
 
 for cluster in "$@"

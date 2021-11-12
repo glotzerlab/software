@@ -8,6 +8,18 @@ and optionally the day separated by periods.
 2021
 ----
 
+2021.11.09
+++++++++++
+
+*Changed*
+
+* Use Ubuntu 20.04 base image.
+* Use CUDA 11 base image.
+
+*Removed*
+
+* Stampede2 image.
+
 2021.06.08
 ++++++++++
 

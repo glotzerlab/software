@@ -6,7 +6,7 @@
 #SBATCH --gpus=1
 #SBATCH -t 0:10:00
 
-module load cpu singularitypro openmpi/4.0.4
+module load gpu singularitypro openmpi/4.0.4
 
 rm -f test-results-gpu.out
 
