@@ -22,10 +22,10 @@ pyyaml==6.0
 scikit-learn==1.0.1
 scikit-image==0.18.3; platform_machine != 'ppc64le'
 scipy==1.7.2
-statsmodels==0.13.0
+statsmodels==0.13.1
 
 # test requirements
-hypothesis==6.24.2
+hypothesis==6.24.4
 pytest==6.2.5
 miniball==1.1.0
 sympy==1.9
