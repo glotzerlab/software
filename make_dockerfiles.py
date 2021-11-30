@@ -85,7 +85,7 @@ if __name__ == '__main__':
 
     write('docker/expanse-gpu/Dockerfile', [base_template, ib_mlx_template, openmpi_template, glotzerlab_software_template, finalize_template],
           FROM='nvidia/cuda:11.1.1-devel-ubuntu20.04',
-          system='expanse',
+          system='expanse-gpu',
           OPENMPI_VERSION='4.0',
           OPENMPI_PATCHLEVEL='4',
           ENABLE_MPI='on',
