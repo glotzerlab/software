@@ -41,6 +41,7 @@ declare -A extra_tags
 extra_tags=( ["nompi"]=""
              ["greatlakes"]=""
              ["expanse"]=""
+             ["expanse-gpu"]=""
              ["bridges2"]=""
 )
 
