@@ -16,13 +16,34 @@ directory::
     $ cd /expanse/lustre/scratch/$USER/temp_project
     $ export SINGULARITY_CACHEDIR=/expanse/lustre/scratch/$USER/temp_project/.singularity
 
-Download the image with support for Expanse::
+CPU
++++
+
+Download the image with support for Expanse's CPU nodes::
 
     $ singularity pull software.sif docker://glotzerlab/software:expanse
 
-Or the beta (with HOOMD v3.0.0-beta)::
+Or the beta for CPU nodes (with HOOMD v3.0.0-beta)::
 
     $ singularity pull software.sif docker://glotzerlab/software:beta-expanse
+
+GPU
++++
+
+Download the image with support for Expanse's GPU nodes::
+
+    $ singularity pull software.sif docker://glotzerlab/software:expanse-gpu
+
+Or the beta for GPU nodes (with HOOMD v3.0.0-beta)::
+
+    $ singularity pull software.sif docker://glotzerlab/software:beta-expanse-gpu
+
+.. important::
+
+    Use the correct image:
+
+    * ``expanse`` on CPU nodes.
+    * ``expanse-gpu`` on GPU nodes.
 
 Using
 *****
@@ -54,3 +75,7 @@ MPI parallel GPU jobs (``gpu`` partition, ``gpu-shared`` with more than 1 GPU)::
 
     module load gpu singularitypro openmpi/4.0.4
     mpirun singularity exec --nv /expanse/lustre/scratch/$USER/temp_project/software.sif command arguments
+
+.. important::
+
+    Use the correct ``module load`` line for the type of node your job will execute on.
