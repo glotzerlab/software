@@ -8,6 +8,7 @@ coxeter==0.6.1
 plato-draw==1.12.0
 signac==1.7.0
 signac-flow==0.17.0
+signac-dashboard==0.2.8
 
 # commonly used packages
 h5py==3.6.0

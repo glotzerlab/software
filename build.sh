@@ -39,6 +39,7 @@ declare -A extra_tags
 extra_tags=( ["nompi"]="-t ${repository}/software:latest"
              ["greatlakes"]=""
              ["expanse"]=""
+             ["expanse-gpu"]=""
              ["bridges2"]=""
 )
 

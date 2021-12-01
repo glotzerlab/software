@@ -8,6 +8,22 @@ and optionally the day separated by periods.
 2021
 ----
 
+2021-12-01
+++++++++++
+
+*Added*
+
+* ``signac-dashboard`` Python package.
+
+*Changed*
+
+* Added ``expanse-gpu`` image with support for XSEDE Expanse's GPU nodes.
+
+  * Expanse CPU jobs should use the ``expanse`` image and
+    ``module load cpu singularitypro gcc/9.2.0 openmpi/4.1.1``.
+  * GPU jobs should use the ``expanse-gpu`` image and
+    ``module load gpu singularitypro openmpi/4.0.4``.
+
 2021.11.09
 ++++++++++
 
