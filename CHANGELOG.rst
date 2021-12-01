@@ -11,6 +11,10 @@ and optionally the day separated by periods.
 2021-12-01
 ++++++++++
 
+*Added*
+
+* ``signac-dashboard`` Python package.
+
 *Changed*
 
 * Added ``expanse-gpu`` image with support for XSEDE Expanse's GPU nodes.
