@@ -13,10 +13,10 @@ signac-dashboard==0.2.8
 # commonly used packages
 h5py==3.6.0
 jupyter==1.0.0; platform_machine != 'ppc64le'
-matplotlib==3.5.0; platform_machine != 'ppc64le'
+matplotlib==3.5.1; platform_machine != 'ppc64le'
 notebook==6.4.6; platform_machine != 'ppc64le'
 opencv-python==4.5.4.60
-pandas==1.3.4; platform_machine != 'ppc64le'
+pandas==1.3.5; platform_machine != 'ppc64le'
 Pillow==8.4.0
 pyqt5==5.15.6; platform_machine != 'ppc64le'
 pyyaml==6.0
@@ -26,7 +26,7 @@ scipy==1.7.3
 statsmodels==0.13.1
 
 # test requirements
-hypothesis==6.30.1
+hypothesis==6.31.4
 pytest==6.2.5
 miniball==1.1.0
 sympy==1.9
