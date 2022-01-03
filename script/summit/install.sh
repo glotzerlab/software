@@ -63,15 +63,15 @@ python3 -m pip install -r requirements-mpi.txt
 # TBB
 if [ ! -f $ROOT/lib64/libtbb.so ]
 then
-curl -sSLO https://github.com/oneapi-src/oneTBB/archive/v2021.4.0.tar.gz \
-    && tar -xzf v2021.4.0.tar.gz -C . \
-    && cd oneTBB-2021.4.0 \
+curl -sSLO https://github.com/oneapi-src/oneTBB/archive/v2021.5.0.tar.gz \
+    && tar -xzf v2021.5.0.tar.gz -C . \
+    && cd oneTBB-2021.5.0 \
     && cmake -S . -B build -DTBB_TEST=off -DTBB_STRICT=off -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=$ROOT \
     && cmake --build build -j 8  \
     && cmake --install build \
     && cd .. \
-    && rm -rf oneTBB-2021.4.0 \
-    && rm v2021.4.0.tar.gz \
+    && rm -rf oneTBB-2021.5.0 \
+    && rm v2021.5.0.tar.gz \
     || exit 1
 fi
 
@@ -80,8 +80,8 @@ fi
 # install pybind11 headers
 if [ ! -f $ROOT/include/pybind11/pybind11.h ]
 then
-curl -SL https://github.com/pybind/pybind11/archive/v2.8.1.tar.gz | tar -xzC $BUILDDIR && \
-    cd pybind11-2.8.1 && \
+curl -SL https://github.com/pybind/pybind11/archive/v2.9.0.tar.gz | tar -xzC $BUILDDIR && \
+    cd pybind11-2.9.0 && \
     mkdir build && cd build && \
     cmake ../ -DCMAKE_INSTALL_PREFIX=$ROOT -DPYBIND11_TEST=off && \
     make install && \
