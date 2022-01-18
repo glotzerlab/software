@@ -23,3 +23,13 @@ RUN cd && \
 
 RUN cd && \
     python3 -m pytest -v --pyargs fresnel
+
+RUN cd \
+    && git clone --branch v$(python3 -c "import signac; print(signac.__version__)") --depth 1 https://github.com/glotzerlab/signac.git \
+    && cd signac \
+    && python -m pytest -v tests
+
+RUN cd \
+    && git clone --branch v$(python3 -c "import flow; print(flow.__version__)") --depth 1 https://github.com/glotzerlab/signac-flow.git \
+    && cd signac-flow \
+    && python -m pytest -v tests
