@@ -3,11 +3,11 @@
 RUN cd /test && \
     python3 serial-cpu.py
 
-RUN cd \
-    && git clone --recursive --branch v$(python3 -c "import coxeter; print(coxeter.__version__)") --depth 1 https://github.com/glotzerlab/coxeter \
-    && python3 -m pytest -v ./coxeter/tests \
-    && rm -rf coxeter \
-    || exit 1
+# RUN cd \
+#    && git clone --recursive --branch v$(python3 -c "import coxeter; print(coxeter.__version__)") --depth 1 https://github.com/glotzerlab/coxeter \
+#    && python3 -m pytest -v ./coxeter/tests \
+#    && rm -rf coxeter \
+#    || exit 1
 
 # Run minimal tests on freud - the full suite takes a long time to run.
 RUN cd \
