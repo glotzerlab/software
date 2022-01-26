@@ -27,20 +27,20 @@ RUN cd && \
 RUN cd \
     && git clone --branch v$(python3 -c "import signac; print(signac.__version__)") --depth 1 https://github.com/glotzerlab/signac.git \
     && cd signac \
-    && python -m pytest -v tests
-    && cd ..
+    && python -m pytest -v tests \
+    && cd .. \
     && rm -rf signac
 
 RUN cd \
     && git clone --branch v$(python3 -c "import flow; print(flow.__version__)") --depth 1 https://github.com/glotzerlab/signac-flow.git \
     && cd signac-flow \
-    && python -m pytest -v tests
-    && cd ..
+    && python -m pytest -v tests \
+    && cd .. \
     && rm -rf signac-flow
 
 RUN cd \
     && git clone --branch v$(python3 -c "import signac_dashboard; print(signac_dashboard.__version__)") --depth 1 https://github.com/glotzerlab/signac-dashboard.git \
     && cd signac-dashboard \
-    && python -m pytest -v tests
-    && cd ..
+    && python -m pytest -v tests \
+    && cd .. \
     && rm -rf signac-dashboard

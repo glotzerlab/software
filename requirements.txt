@@ -33,5 +33,5 @@ sympy==1.9
 tables==3.7.0
 coverage==6.2
 click==8.0.3
-pytest-cov=3.0.0
+pytest-cov==3.0.0
 ruamel.yaml==0.17.19
