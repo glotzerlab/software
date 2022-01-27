@@ -39,7 +39,7 @@ RUN cd \
     && rm -rf signac-flow
 
 RUN cd \
-    && git clone --branch v$(python3 -c "import signac_dashboard; print(signac_dashboard.__version__)") --depth 1 https://github.com/glotzerlab/signac-dashboard.git \
+    && git clone --branch v$(python3 -c "import signac_dashboard; print(signac_dashboard.__version__)") --depth 1 https://github.com/glotzerlab/signac-dashboard.git --recursive \
     && cd signac-dashboard \
     && python -m pytest -v tests \
     && cd .. \
