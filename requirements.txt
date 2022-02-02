@@ -1,5 +1,5 @@
 # glotzer tools
-freud-analysis==2.7.0
+freud-analysis==2.8.0
 gsd==2.5.1
 garnett==0.7.1
 pythia-learn==0.3.0
@@ -14,7 +14,7 @@ signac-dashboard==0.2.8
 h5py==3.6.0
 jupyter==1.0.0; platform_machine != 'ppc64le'
 matplotlib==3.5.1; platform_machine != 'ppc64le'
-notebook==6.4.7; platform_machine != 'ppc64le'
+notebook==6.4.8; platform_machine != 'ppc64le'
 opencv-python==4.5.5.62
 pandas==1.4.0; platform_machine != 'ppc64le'
 Pillow==9.0.0
@@ -26,12 +26,12 @@ scipy==1.7.3
 statsmodels==0.13.1
 
 # test requirements
-hypothesis==6.36.0
+hypothesis==6.36.1
 pytest==6.2.5
 miniball==1.1.0
 sympy==1.9
 tables==3.7.0
-coverage==6.2
+coverage==6.3
 click==8.0.3
 pytest-cov==3.0.0
-ruamel.yaml==0.17.19
+ruamel.yaml==0.17.20
