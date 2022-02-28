@@ -2,7 +2,7 @@ cereal:
   ignore: alpha,rc,beta
   include_v_prefix: false
   repository: https://github.com/USCiLab/cereal
-  version: 1.3.1
+  version: 1.3.2
 eigen:
   ignore: alpha,rc,beta,before,after,actual,starting
   include_v_prefix: false
