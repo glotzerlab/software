@@ -91,8 +91,8 @@ fi
 # install cereal headers
 if [ ! -f $ROOT/include/cereal/cereal.hpp ]
 then
-curl -SL https://github.com/USCiLab/cereal/archive/v1.3.1.tar.gz | tar -xzC $BUILDDIR && \
-    cd cereal-1.3.1 && \
+curl -SL https://github.com/USCiLab/cereal/archive/v1.3.2.tar.gz | tar -xzC $BUILDDIR && \
+    cd cereal-1.3.2 && \
     mkdir build && cd build && \
     cmake ../ -DCMAKE_INSTALL_PREFIX=$ROOT -DJUST_INSTALL_CEREAL=on && \
     make install && \
