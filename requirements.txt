@@ -31,3 +31,7 @@ pytest==7.0.1
 miniball==1.1.0
 sympy==1.10
 tables==3.7.0
+coverage==6.3.2
+click==8.0.4
+pytest-cov==3.0.0
+ruamel.yaml==0.17.21

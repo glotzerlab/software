@@ -4,10 +4,10 @@ RUN cd /test && \
     python3 serial-cpu.py
 
 # RUN cd \
-#     && git clone --recursive --branch v$(python3 -c "import coxeter; print(coxeter.__version__)") --depth 1 https://github.com/glotzerlab/coxeter \
-#     && python3 -m pytest -v ./coxeter/tests \
-#     && rm -rf coxeter \
-#     || exit 1
+#    && git clone --recursive --branch v$(python3 -c "import coxeter; print(coxeter.__version__)") --depth 1 https://github.com/glotzerlab/coxeter \
+#    && python3 -m pytest -v ./coxeter/tests \
+#    && rm -rf coxeter \
+#    || exit 1
 
 # Run minimal tests on freud - the full suite takes a long time to run.
 RUN cd \
@@ -26,3 +26,24 @@ RUN cd && \
 
 RUN cd && \
     python3 -m pytest -v --pyargs hoomd
+
+RUN cd \
+    && git clone --branch v$(python3 -c "import signac; print(signac.__version__)") --depth 1 https://github.com/glotzerlab/signac.git \
+    && cd signac \
+    && python -m pytest -v tests \
+    && cd .. \
+    && rm -rf signac
+
+RUN cd \
+    && git clone --branch v$(python3 -c "import flow; print(flow.__version__)") --depth 1 https://github.com/glotzerlab/signac-flow.git \
+    && cd signac-flow \
+    && python -m pytest -v tests \
+    && cd .. \
+    && rm -rf signac-flow
+
+RUN cd \
+    && git clone --branch v$(python3 -c "import signac_dashboard; print(signac_dashboard.__version__)") --depth 1 https://github.com/glotzerlab/signac-dashboard.git --recursive \
+    && cd signac-dashboard \
+    && python -m pytest -v tests \
+    && cd .. \
+    && rm -rf signac-dashboard
