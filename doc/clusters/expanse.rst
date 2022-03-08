@@ -10,6 +10,11 @@ the XSEDE_ program.
 Downloading
 ***********
 
+Singularity requires more memory than Expanse provides on the login node. Launch an interactive
+job with sufficient memory and perform the image pull steps on a compute node::
+
+    $ srun --partition=shared --pty --nodes=1 --ntasks-per-node=1 --mem=8G --time=02:00:00 --wait=0 --export=ALL --account=<your-account> /bin/bash
+
 The **glotzerlab-software** image and the singularity cache are large, store them in your scratch
 directory::
 
