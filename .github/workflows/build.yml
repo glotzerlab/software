@@ -11,8 +11,7 @@ on:
   # Trigger on pushes to the mainline branches. These triggers push the built images to Docker Hub.
   push:
     branches:
-      - "master"
-      - "hoomd-v3-beta"
+      - "trunk"
 
   # Trigger on request.
   workflow_dispatch:
@@ -37,9 +36,9 @@ jobs:
         run: ./build.sh -r glotzerlab ${{ matrix.configuration }}
       - name: Push image
         run: docker push -a glotzerlab/software
-        if: github.ref == 'refs/heads/master' || github.ref == 'refs/heads/hoomd-v3-beta'
+        if: github.ref == 'refs/heads/trunk'
       - name: Slack notification
-        if: ${{ (github.ref == 'refs/heads/master' || github.ref == 'refs/heads/hoomd-v3-beta') && (failure() || cancelled()) }}
+        if: ${{ (github.ref == 'refs/heads/trunk') && (failure() || cancelled()) }}
         uses: 8398a7/action-slack@v3.13.0
         with:
           status: ${{ job.status }}
