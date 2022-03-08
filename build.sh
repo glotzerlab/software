@@ -36,9 +36,7 @@ python3 make_dockerfiles.py
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
 declare -A extra_tags
-# extra_tags=( ["nompi"]="-t ${repository}/software:latest"
-# Don't tag beta builds with extra tags
-extra_tags=( ["nompi"]=""
+extra_tags=( ["nompi"]="-t ${repository}/software:latest"
              ["greatlakes"]=""
              ["expanse"]=""
              ["expanse-gpu"]=""
@@ -50,11 +48,11 @@ do
     cp -a $DIR/test/*.py $DIR/docker/${cluster}/test
     cp -a requirements*.txt $DIR/docker/${cluster}
     docker build $DIR/docker/${cluster} \
-                -t ${repository}/software:beta-${cluster} \
-                -t ${repository}/software:${tag}-beta-${cluster} \
+                -t ${repository}/software:${cluster} \
+                -t ${repository}/software:${tag}-${cluster} \
                 ${extra_tags[$cluster]} \
                 --build-arg GIT_SHA=$(git rev-parse HEAD) \
                 --build-arg GIT_BRANCH=$(git branch --show-current) \
                 --build-arg CONFIGURATION=${cluster} \
-                --build-arg TAG=${tag}-beta
+                --build-arg TAG=${tag}
 done

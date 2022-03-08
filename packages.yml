@@ -19,7 +19,6 @@ fresnel:
   version: v0.13.4
 hoomd:
   ignore: alpha,rc
-  pinned: v3
   repository: https://github.com/glotzerlab/hoomd-blue
   version: v3.0.0-beta.14
 osu_microbenchmark:
