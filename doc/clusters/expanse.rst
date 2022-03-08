@@ -28,20 +28,12 @@ Download the image with support for Expanse's CPU nodes::
 
     $ singularity pull software.sif docker://glotzerlab/software:expanse
 
-Or the beta for CPU nodes (with HOOMD v3.0.0-beta)::
-
-    $ singularity pull software.sif docker://glotzerlab/software:beta-expanse
-
 GPU
 +++
 
 Download the image with support for Expanse's GPU nodes::
 
     $ singularity pull software.sif docker://glotzerlab/software:expanse-gpu
-
-Or the beta for GPU nodes (with HOOMD v3.0.0-beta)::
-
-    $ singularity pull software.sif docker://glotzerlab/software:beta-expanse-gpu
 
 .. important::
 

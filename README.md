@@ -20,10 +20,6 @@ First, download the stable **glotzerlab/software** image using
 
     $ singularity pull software.sif docker://glotzerlab/software
 
-Or the beta (with HOOMD v3.0.0-beta):
-
-    $ singularity pull software.sif docker://glotzerlab/software:beta-nompi
-
 **singularity exec** executes software from inside the container. For example, run a Python script
 with:
 
