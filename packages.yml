@@ -18,9 +18,9 @@ fresnel:
   repository: https://github.com/glotzerlab/fresnel
   version: v0.13.4
 hoomd:
-  ignore: alpha,rc
+  ignore: beta,alpha,rc
   repository: https://github.com/glotzerlab/hoomd-blue
-  version: v3.0.0-beta.14
+  version: v3.0.0
 osu_microbenchmark:
   repository: null
   version: 5.4.1
