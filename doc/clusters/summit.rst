@@ -43,17 +43,13 @@ architecture:
   * embree
   * fresnel
 
-The following packages are missing because we have not yet tested these on summit:
+The following packages are missing because they do not build on summit:
 
-  * clang/llvm
-  * ffmpeg
-  * libboost
-  * h5py
+  * jupyter
   * matplotlib
   * pandas
   * pyqt5
-  * sklearn
-  * yaml
+  * scikit-image
 
 The summit environment is a `python3 venv <https://docs.python.org/3/library/venv.html>`_. You may
 extend it with additional python packages using ``python3 -m pip install``::
