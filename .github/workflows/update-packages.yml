@@ -15,7 +15,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        branch: [master,hoomd-v3-beta]
+        branch: [trunk]
     steps:
       - uses: actions/checkout@v3.0.0
         with:

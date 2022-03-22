@@ -20,7 +20,7 @@ First, clone the **glotzerlab-software** repository::
 If you already have a clone, update it::
 
     $ cd software
-    $ git pull origin master
+    $ git pull origin trunk
 
 Per OLCF policies, you should install your software in NFS under ``/ccs/proj/``. Set the
 installation root directory to ``/ccs/proj/your-project/glotzerlab-software`` to share a single

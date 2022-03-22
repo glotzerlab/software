@@ -10,10 +10,9 @@ try:
 
     # HOOMD
     import hoomd
-    context = hoomd.context.initialize('--mode=gpu')
-    assert(context.on_gpu())
-    results.write('HOOMD version     : {}\n'.format(hoomd.__version__))
-    results.write('HOOMD flags       : {}\n'.format(hoomd._hoomd.hoomd_compile_flags()))
+    device = hoomd.device.GPU()
+    results.write('HOOMD version     : {}\n'.format(hoomd.version.version))
+    results.write('HOOMD flags       : {}\n'.format(hoomd.version.compile_flags))
 
     results.write('** Serial GPU tests PASSED **\n\n')
 except:

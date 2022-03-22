@@ -11,8 +11,7 @@ on:
   # Trigger on pushes to the mainline branches. These triggers push the built images to Docker Hub.
   push:
     branches:
-      - "master"
-      - "hoomd-v3-beta"
+      - "trunk"
 
   # Trigger on request.
   workflow_dispatch:
@@ -20,7 +19,7 @@ on:
 jobs:
   Build:
     name: Build ${{ matrix.configuration }}
-    runs-on: ubuntu-latest
+    runs-on: [self-hosted,jetstream2,CPU]
     strategy:
       fail-fast: false
       matrix:
@@ -37,9 +36,9 @@ jobs:
         run: ./build.sh -r glotzerlab ${{ matrix.configuration }}
       - name: Push image
         run: docker push -a glotzerlab/software
-        if: github.ref == 'refs/heads/master' || github.ref == 'refs/heads/hoomd-v3-beta'
+        if: github.ref == 'refs/heads/trunk'
       - name: Slack notification
-        if: ${{ (github.ref == 'refs/heads/master' || github.ref == 'refs/heads/hoomd-v3-beta') && (failure() || cancelled()) }}
+        if: ${{ (github.ref == 'refs/heads/trunk') && (failure() || cancelled()) }}
         uses: 8398a7/action-slack@v3.13.0
         with:
           status: ${{ job.status }}
@@ -52,3 +51,30 @@ jobs:
         env:
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
           MATRIX_CONTEXT: ${{ toJson(matrix) }}
+
+  start_action_runners:
+    name: Start action runners
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2.4.0
+        with:
+          path: code
+      - uses: actions/cache@v2.1.7
+        with:
+          path: ~/.cache/pip
+          key: ${{ runner.os }}-pip-openstacksdk==0.61.0
+          restore-keys: |
+            ${{ runner.os }}-pip-
+      - name: Install openstack
+        run: python3 -m pip install openstacksdk==0.61.0
+      - name: Start action runners
+        run: python3 code/.github/workflows/start-action-runners.py
+        env:
+          OS_APPLICATION_CREDENTIAL_ID: ${{ secrets.OS_APPLICATION_CREDENTIAL_ID }}
+          OS_APPLICATION_CREDENTIAL_SECRET: ${{ secrets.OS_APPLICATION_CREDENTIAL_SECRET }}
+          OS_AUTH_TYPE: v3applicationcredential
+          OS_AUTH_URL: https://js2.jetstream-cloud.org:5000/v3/
+          OS_IDENTITY_API_VERSION: 3
+          OS_REGION_NAME: "IU"
+          OS_INTERFACE: public

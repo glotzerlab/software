@@ -17,10 +17,6 @@ Download the image with support for Bridges-2::
 
     $ singularity pull software.sif docker://glotzerlab/software:bridges2
 
-Or the beta (with HOOMD v3.0.0-beta)::
-
-    $ singularity pull software.sif docker://glotzerlab/software:beta-bridges2
-
 Using
 *****
 

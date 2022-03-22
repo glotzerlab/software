@@ -17,10 +17,6 @@ First, download the stable **glotzerlab/software** image::
 
     $ singularity pull software.sif docker://glotzerlab/software
 
-Or the beta (with HOOMD v3.0.0-beta)::
-
-    $ singularity pull software.sif docker://glotzerlab/software:beta-nompi
-
 .. note::
 
     On HPC clusters, download the cluster specific image. See :doc:`cluster` for details.
@@ -71,7 +67,7 @@ Environment variables set in the image identify the build::
 
     $ singularity exec software.sif bash -c "set" | grep GLOTZERLAB
     GLOTZERLAB_SOFTWARE_CONFIGURATION=nompi
-    GLOTZERLAB_SOFTWARE_GIT_BRANCH=master
+    GLOTZERLAB_SOFTWARE_GIT_BRANCH=trunk
     GLOTZERLAB_SOFTWARE_GIT_SHA=f2debd75280c98ed0a4e46e3e2d381e953b80b6f
     GLOTZERLAB_SOFTWARE_TAG=2021.03.24
 

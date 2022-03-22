@@ -80,3 +80,7 @@ RUN python3 -m venv /opt/glotzerlab \
 
 # Install the requirements files
 COPY requirements*.txt /
+
+# Fix library search paths
+RUN echo "/usr/local/cuda-11.1/compat" >> /etc/ld.so.conf.d/cuda-11-1.conf
+RUN ldconfig

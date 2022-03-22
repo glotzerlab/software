@@ -14,15 +14,15 @@ fi
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 ROOT=$1
 module reset
-module load gcc/10.2.0
+module load gcc/7.5.0
 module load python/3.8.10
 python3 -m venv $ROOT
 
 cat >$ROOT/environment.sh << EOL
 module reset
-module load gcc/10.2.0
+module load gcc/7.5.0
 module load python/3.8.10
-module load cuda/11.3.1
+module load cuda/11.0.3
 module load cmake
 module load git
 module load netlib-lapack/3.9.1
@@ -67,7 +67,7 @@ curl -sSLO https://github.com/oneapi-src/oneTBB/archive/v2021.5.0.tar.gz \
     && tar -xzf v2021.5.0.tar.gz -C . \
     && cd oneTBB-2021.5.0 \
     && cmake -S . -B build -DTBB_TEST=off -DTBB_STRICT=off -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=$ROOT \
-    && cmake --build build -j 4  \
+    && cmake --build build -j 8  \
     && cmake --install build \
     && cd .. \
     && rm -rf oneTBB-2021.5.0 \
@@ -77,16 +77,51 @@ fi
 
 # embree is not available for power9
 
+# install pybind11 headers
+if [ ! -f $ROOT/include/pybind11/pybind11.h ]
+then
+curl -SL https://github.com/pybind/pybind11/archive/v2.9.1.tar.gz | tar -xzC $BUILDDIR && \
+    cd pybind11-2.9.1 && \
+    mkdir build && cd build && \
+    cmake ../ -DCMAKE_INSTALL_PREFIX=$ROOT -DPYBIND11_TEST=off && \
+    make install && \
+    cd $BUILDDIR && rm -rf pybind11-*
+fi
+
+# install cereal headers
+if [ ! -f $ROOT/include/cereal/cereal.hpp ]
+then
+curl -SL https://github.com/USCiLab/cereal/archive/v1.3.2.tar.gz | tar -xzC $BUILDDIR && \
+    cd cereal-1.3.2 && \
+    mkdir build && cd build && \
+    cmake ../ -DCMAKE_INSTALL_PREFIX=$ROOT -DJUST_INSTALL_CEREAL=on && \
+    make install && \
+    cd $BUILDDIR && rm -rf cereal-*
+fi
+
+# install eigen headers
+if [ ! -f $ROOT/include/eigen3/Eigen/Eigen ]
+then
+curl -SL https://gitlab.com/libeigen/eigen/-/archive/3.4.0/eigen-3.4.0.tar.gz | tar -xzC $BUILDDIR && \
+    cd eigen-3.4.0 && \
+    mkdir build && cd build && \
+    cmake ../ -DCMAKE_INSTALL_PREFIX=$ROOT -DBUILD_TESTING=off, -DEIGEN_TEST_NOQT=on && \
+    make install && \
+    cd $BUILDDIR && rm -rf eigen-*
+fi
+
 if [ ! -f $ROOT/bin/clang ]
 then
-    git clone --depth 1 --branch release/10.x https://github.com/llvm/llvm-project
+    git clone --depth 1 --branch release/12.x https://github.com/llvm/llvm-project
     cd llvm-project
     cmake -S llvm -B build \
         -D CMAKE_INSTALL_PREFIX=$ROOT -DLLVM_ENABLE_PROJECTS=clang \
-        -DBUILD_SHARED_LIBS=ON \
+        -DCLANG_LINK_CLANG_DYLIB=ON \
+        -DLLVM_BUILD_LLVM_DYLIB=ON \
+        -DLLVM_LINK_LLVM_DYLIB=ON \
         -DCMAKE_BUILD_TYPE=Release \
         -DLLVM_TARGETS_TO_BUILD="PowerPC"
-    cmake --build build -j 4
+    cmake --build build -j 8
     cmake --install build
     cd $BUILDDIR
     rm -rf llvm-project
@@ -111,13 +146,13 @@ fi
 
 
 
- git clone --recursive --branch v2.9.7 --depth 1 https://github.com/glotzerlab/hoomd-blue hoomd \
+ git clone --recursive --branch v3.0.0-beta.14 --depth 1 https://github.com/glotzerlab/hoomd-blue hoomd \
     && cd hoomd \
     && mkdir -p build \
     && cd build \
     && export CFLAGS="-mcpu=power9 -mtune=power9" CXXFLAGS="-mcpu=power9 -mtune=power9" \
-    && cmake ../ -DPYTHON_EXECUTABLE="`which python3`" -DENABLE_CUDA=on -DENABLE_MPI=on -DENABLE_TBB=off -DBUILD_JIT=off -DBUILD_TESTING=off -DENABLE_MPI_CUDA=off -DCMAKE_INSTALL_PREFIX=`python3 -c "import site; print(site.getsitepackages()[0])"` \
-    && make install -j4 \
+    && cmake ../ -DPYTHON_EXECUTABLE="`which python3`" -DENABLE_GPU=on -DENABLE_MPI=on -DENABLE_TBB=off -DENABLE_LLVM=on -DBUILD_TESTING=off -DENABLE_MPI_CUDA=off \
+    && make install -j8 \
     && cd ../../ \
     && rm -rf hoomd \
     || exit 1
