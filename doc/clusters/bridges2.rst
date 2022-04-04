@@ -31,19 +31,19 @@ container:
 Serial (or multithreaded) CPU jobs (``RM-shared`` partitions)::
 
     module load openmpi/4.0.5-gcc10.2.0
-    mpirun -n 1 singularity exec $PROJECT/software.sif command arguments
+    mpirun -n 1 singularity exec --bind /ocean $PROJECT/software.sif command arguments
 
 Single GPU jobs (``GPU-shared`` partition)::
 
     module load openmpi/4.0.5-gcc10.2.0
-    mpirun -n 1 singularity exec --nv $PROJECT/software.sif command arguments
+    mpirun -n 1 singularity exec --bind /ocean --nv $PROJECT/software.sif command arguments
 
 MPI parallel CPU jobs (``RM`` partition, ``RM-shared`` partition with more than 1 core)::
 
     module load openmpi/4.0.5-gcc10.2.0
-    mpirun singularity exec $PROJECT/software.sif command arguments
+    mpirun singularity exec --bind /ocean $PROJECT/software.sif command arguments
 
 MPI parallel GPU jobs (``GPU`` partition)::
 
     module load openmpi/4.0.5-gcc10.2.0
-    mpirun singularity exec --nv $PROJECT/software.sif command arguments
+    mpirun singularity exec --bind /ocean --nv $PROJECT/software.sif command arguments
