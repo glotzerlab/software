@@ -146,7 +146,6 @@ fi
  python3 -m pip install git+https://github.com/deepcharles/ruptures
 
 
-
  git clone --recursive --branch v3.0.1 --depth 1 https://github.com/glotzerlab/hoomd-blue hoomd \
     && cd hoomd \
     && mkdir -p build \
