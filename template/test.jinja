@@ -42,10 +42,9 @@ RUN cd \
     && cd .. \
     && rm -rf signac-flow
 
-# signac-dashboard 0.2.9 fails to import
-# RUN cd \
-#     && git clone --branch v$(python3 -c "import signac_dashboard; print(signac_dashboard.__version__)") --depth 1 https://github.com/glotzerlab/signac-dashboard.git --recursive \
-#     && cd signac-dashboard \
-#     && python -m pytest -v tests \
-#     && cd .. \
-#     && rm -rf signac-dashboard
+RUN cd \
+    && git clone --branch v$(python3 -c "import signac_dashboard; print(signac_dashboard.__version__)") --depth 1 https://github.com/glotzerlab/signac-dashboard.git --recursive \
+    && cd signac-dashboard \
+    && python -m pytest -v tests \
+    && cd .. \
+    && rm -rf signac-dashboard
