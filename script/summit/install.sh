@@ -142,7 +142,8 @@ fi
     && python3 -m pip install --no-build-isolation -r requirements.txt \
     || exit 1
 
-
+ python3 -m pip install git+https://github.com/glotzerlab/kneed
+ python3 -m pip install git+https://github.com/deepcharles/ruptures
 
 
 
