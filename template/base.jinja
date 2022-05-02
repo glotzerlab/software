@@ -12,10 +12,20 @@ ENV GLOTZERLAB_SOFTWARE_GIT_SHA=${GIT_SHA} \
 
 ARG DEBIAN_FRONTEND=noninteractive
 
+# Fix for NVIDIA CUDA key rotation: https://github.com/nytimes/rd-blender-docker/issues/41
+RUN rm /etc/apt/sources.list.d/cuda.list \
+    && rm /etc/apt/sources.list.d/nvidia-ml.list \
+    && apt-key del 7fa2af80 \
+    && apt-get update \
+    && apt-get install -y --no-install-recommends curl \
+    && curl -sSLO https://developer.download.nvidia.com/compute/cuda/repos/ubuntu1804/x86_64/cuda-keyring_1.0-1_all.deb \
+    && dpkg -i cuda-keyring_1.0-1_all.deb \
+    && rm cuda-keyring_1.0-1_all.deb \
+    && rm -rf /var/lib/apt/lists/*
+
 RUN apt-get update && apt-get install -y --no-install-recommends \
   clang-10 \
   cmake \
-  curl \
   ffmpeg \
   git \
   hwloc \
