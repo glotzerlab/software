@@ -14,19 +14,19 @@ signac-dashboard==0.2.10
 h5py==3.7.0
 jupyter==1.0.0; platform_machine != 'ppc64le'
 matplotlib==3.5.2; platform_machine != 'ppc64le'
-notebook==6.4.11; platform_machine != 'ppc64le'
-opencv-python==4.5.5.64; platform_machine != 'ppc64le'
+notebook==6.4.12; platform_machine != 'ppc64le'
+opencv-python==4.6.0.66; platform_machine != 'ppc64le'
 pandas==1.4.2; platform_machine != 'ppc64le'
 Pillow==9.1.1
 pyqt5==5.15.6; platform_machine != 'ppc64le'
 pyyaml==6.0
 scikit-learn==1.1.1
-scikit-image==0.19.2; platform_machine != 'ppc64le'
+scikit-image==0.19.3; platform_machine != 'ppc64le'
 scipy==1.8.1
 statsmodels==0.13.2
 
 # test requirements
-hypothesis==6.46.11
+hypothesis==6.47.2
 pytest==7.1.2
 miniball==1.1.0
 sympy==1.10.1
