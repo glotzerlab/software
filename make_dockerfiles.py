@@ -52,6 +52,18 @@ if __name__ == '__main__':
           CFLAGS='-march=skylake-avx512 -mmmx -msse -msse2 -msse3 -mssse3 -mcx16 -msahf -mmovbe -maes -mpclmul -mpopcnt -mabm -mfma -mbmi -mbmi2 -mavx -mavx2 -msse4.2 -msse4.1 -mlzcnt -mrtm -mhle -mrdrnd -mf16c -mfsgsbase -mrdseed -mprfchw -madx -mfxsr -mxsave -mxsaveopt -mavx512f -mavx512cd -mclflushopt -mxsavec -mxsaves -mavx512dq -mavx512bw -mavx512vl -mclwb -mpku --param l1-cache-size=32 --param l1-cache-line-size=64 --param l2-cache-size=25344 -mtune=skylake-avx512',
           **versions)
 
+    write('docker/delta/Dockerfile', [base_template, ib_mlx_template, openmpi_template, glotzerlab_software_template, finalize_template],
+          FROM='nvidia/nvidia/cuda:11.6.2-devel-ubuntu20.04',
+          system='delta',
+          OPENMPI_VERSION='4.1',
+          OPENMPI_PATCHLEVEL='2',
+          UCX_VERSION='1.11.2',
+          PMIX_VERSION='3.2.3',
+          ENABLE_MPI='on',
+          MAKEJOBS=10,
+          CFLAGS='-march=znver2 -mmmx -msse -msse2 -msse3 -mssse3 -msse4a -mcx16 -msahf -mmovbe -maes -msha -mpclmul -mpopcnt -mabm -mfma -mbmi -mbmi2 -mwbnoinvd -mavx -mavx2 -msse4.2 -msse4.1 -mlzcnt -mrdrnd -mf16c -mfsgsbase -mrdseed -mprfchw -madx -mfxsr -mxsave -mxsaveopt -mclflushopt -mxsavec -mxsaves -mclwb -mmwaitx -mclzero -mrdpid --param l1-cache-size=32 --param l1-cache-line-size=64 --param l2-cache-size=512 -mtune=znver2',
+          **versions)
+
     write('script/summit/install.sh', [summit_template, glotzerlab_software_template],
           ENABLE_MPI='on',
           MAKEJOBS=8,

@@ -30,6 +30,58 @@ RUN curl -sSLO https://www.open-mpi.org/software/ompi/v{{ OPENMPI_VERSION }}/dow
    && rm -rf /root/openmpi-{{ OPENMPI_VERSION }}.{{ OPENMPI_PATCHLEVEL }} \
    && rm /openmpi-{{ OPENMPI_VERSION }}.{{ OPENMPI_PATCHLEVEL }}.tar.bz2
 
+{% elif system == 'delta' %}
+
+RUN curl -sSLO https://github.com/pmix/pmix/releases/download/v{{ PMIX_VERSION }}/pmix-{{ PMIX_VERSION }}.tar.bz2 \
+   && tar -xjf pmix-{{ PMIX_VERSION }}.tar.bz2 -C /root \
+   && cd /root/pmix-{{ PMIX_VERSION }} \
+   && mkdir build && cd build \
+   && ../configure --prefix=/usr  \
+   && make all install \
+   && rm -rf /root/pmix-{{ PMIX_VERSION }} \
+   && rm /pmix-{{ PMIX_VERSION }}.tar.bz2
+
+RUN curl -sSLO https://github.com/openucx/ucx/releases/download/v{{UCX_VERSION}}/ucx-{{UCX_VERSION}}.tar.gz \
+   && tar -xzf ucx-{{UCX_VERSION}}.tar.gz -C /root \
+   && cd /root/ucx-{{UCX_VERSION}} \
+   && mkdir build && cd build \
+   && ../configure --prefix=/usr  \
+   && make install \
+   && rm -rf /root/ucx-{{UCX_VERSION}} \
+   && rm /ucx-{{UCX_VERSION}}.tar.gz
+
+RUN curl -sSLO https://www.open-mpi.org/software/ompi/v{{ OPENMPI_VERSION }}/downloads/openmpi-{{ OPENMPI_VERSION }}.{{ OPENMPI_PATCHLEVEL }}.tar.bz2 \
+   && tar -xjf openmpi-{{ OPENMPI_VERSION }}.{{ OPENMPI_PATCHLEVEL }}.tar.bz2 -C /root \
+   && cd /root/openmpi-{{ OPENMPI_VERSION }}.{{ OPENMPI_PATCHLEVEL }} \
+   && ./configure --prefix=/usr \
+                  --enable-shared \
+                  --disable-silent-rules \
+                  --disable-builtin-atomics \
+                  --with-pmix=/usr \
+                  --enable-mpi1-compatibility \
+                  --without-verbs \
+                  --with-ucx \
+                  --with-ofi \
+                  --without-cma \
+                  --without-mxm \
+                  --without-xpmem \
+                  --without-psm2 \
+                  --without-hcoll \
+                  --without-fca \
+                  --without-psm \
+                  --without-cray-xpmem \
+                  --without-alps \
+                  --disable-memchecker \
+                  --with-libevent=external \
+                  --with-hwloc=/usr \
+                  --disable-java \
+                  --disable-mpi-java \
+                  --with-gpfs=no \
+                  --enable-dlopen \
+   && make all install \
+   && rm -rf /root/openmpi-{{ OPENMPI_VERSION }}.{{ OPENMPI_PATCHLEVEL }} \
+   && rm /openmpi-{{ OPENMPI_VERSION }}.{{ OPENMPI_PATCHLEVEL }}.tar.bz2
+
 {% elif system == 'bridges2' %}
 
 # bridges2 needs UCX
