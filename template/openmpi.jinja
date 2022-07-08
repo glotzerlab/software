@@ -50,6 +50,15 @@ RUN curl -sSLO https://github.com/openucx/ucx/releases/download/v{{UCX_VERSION}}
    && rm -rf /root/ucx-{{UCX_VERSION}} \
    && rm /ucx-{{UCX_VERSION}}.tar.gz
 
+RUN curl -sSLO https://github.com/ofiwg/libfabric/releases/download/v{{LIBFABRIC_VERSION}}/libfabric-{{LIBFABRIC_VERSION}}.tar.bz2 \
+   && tar -xjf libfabric-{{LIBFABRIC_VERSION}}.tar.bz2 -C /root \
+   && cd /root/libfabric-{{LIBFABRIC_VERSION}} \
+   && mkdir build && cd build \
+   && ../configure --prefix=/usr  \
+   && make install \
+   && rm -rf /root/libfabric-{{LIBFABRIC_VERSION}} \
+   && rm /libfabric-{{LIBFABRIC_VERSION}}.tar.bz2
+
 RUN curl -sSLO https://www.open-mpi.org/software/ompi/v{{ OPENMPI_VERSION }}/downloads/openmpi-{{ OPENMPI_VERSION }}.{{ OPENMPI_PATCHLEVEL }}.tar.bz2 \
    && tar -xjf openmpi-{{ OPENMPI_VERSION }}.{{ OPENMPI_PATCHLEVEL }}.tar.bz2 -C /root \
    && cd /root/openmpi-{{ OPENMPI_VERSION }}.{{ OPENMPI_PATCHLEVEL }} \

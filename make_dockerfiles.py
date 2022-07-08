@@ -2,6 +2,7 @@
 
 import jinja2
 import yaml
+import multiprocessing
 
 # software versions
 versions = {}
@@ -33,7 +34,7 @@ if __name__ == '__main__':
     write('docker/nompi/Dockerfile', [base_template, glotzerlab_software_template, finalize_template, test_template],
           FROM='nvidia/cuda:11.1.1-devel-ubuntu20.04',
           ENABLE_MPI='off',
-          MAKEJOBS=10,
+          MAKEJOBS=multiprocessing.cpu_count()+2,
           **versions)
 
     # see https://stackoverflow.com/questions/5470257/how-to-see-which-flags-march-native-will-activate
@@ -48,19 +49,20 @@ if __name__ == '__main__':
           UCX_VERSION='1.6.0',
           PMIX_VERSION='2.2.3',
           ENABLE_MPI='on',
-          MAKEJOBS=10,
+          MAKEJOBS=multiprocessing.cpu_count()+2,
           CFLAGS='-march=skylake-avx512 -mmmx -msse -msse2 -msse3 -mssse3 -mcx16 -msahf -mmovbe -maes -mpclmul -mpopcnt -mabm -mfma -mbmi -mbmi2 -mavx -mavx2 -msse4.2 -msse4.1 -mlzcnt -mrtm -mhle -mrdrnd -mf16c -mfsgsbase -mrdseed -mprfchw -madx -mfxsr -mxsave -mxsaveopt -mavx512f -mavx512cd -mclflushopt -mxsavec -mxsaves -mavx512dq -mavx512bw -mavx512vl -mclwb -mpku --param l1-cache-size=32 --param l1-cache-line-size=64 --param l2-cache-size=25344 -mtune=skylake-avx512',
           **versions)
 
     write('docker/delta/Dockerfile', [base_template, ib_mlx_template, openmpi_template, glotzerlab_software_template, finalize_template],
-          FROM='nvidia/nvidia/cuda:11.6.2-devel-ubuntu20.04',
+          FROM='nvidia/cuda:11.6.2-devel-ubuntu20.04',
           system='delta',
           OPENMPI_VERSION='4.1',
           OPENMPI_PATCHLEVEL='2',
           UCX_VERSION='1.11.2',
           PMIX_VERSION='3.2.3',
+          LIBFABRIC_VERSION='1.13.2',
           ENABLE_MPI='on',
-          MAKEJOBS=10,
+          MAKEJOBS=multiprocessing.cpu_count()+2,
           CFLAGS='-march=znver2 -mmmx -msse -msse2 -msse3 -mssse3 -msse4a -mcx16 -msahf -mmovbe -maes -msha -mpclmul -mpopcnt -mabm -mfma -mbmi -mbmi2 -mwbnoinvd -mavx -mavx2 -msse4.2 -msse4.1 -mlzcnt -mrdrnd -mf16c -mfsgsbase -mrdseed -mprfchw -madx -mfxsr -mxsave -mxsaveopt -mclflushopt -mxsavec -mxsaves -mclwb -mmwaitx -mclzero -mrdpid --param l1-cache-size=32 --param l1-cache-line-size=64 --param l2-cache-size=512 -mtune=znver2',
           **versions)
 
@@ -80,7 +82,7 @@ if __name__ == '__main__':
           OPENMPI_PATCHLEVEL='5',
           UCX_VERSION='1.9.0',
           ENABLE_MPI='on',
-          MAKEJOBS=10,
+          MAKEJOBS=multiprocessing.cpu_count()+2,
           CFLAGS='-march=znver2 -mmmx -msse -msse2 -msse3 -mssse3 -msse4a -mcx16 -msahf -mmovbe -maes -msha -mpclmul -mpopcnt -mabm -mfma -mbmi -mbmi2 -mwbnoinvd -mavx -mavx2 -msse4.2 -msse4.1 -mlzcnt -mrdrnd -mf16c -mfsgsbase -mrdseed -mprfchw -madx -mfxsr -mxsave -mxsaveopt -mclflushopt -mxsavec -mxsaves -mclwb -mmwaitx -mclzero -mrdpid --param l1-cache-size=32 --param l1-cache-line-size=64 --param l2-cache-size=512 -mtune=znver2 -fasynchronous-unwind-tables -fstack-protector-strong -Wformat -Wformat-security -fstack-clash-protection -fcf-protection',
           **versions)
 
@@ -91,7 +93,7 @@ if __name__ == '__main__':
           OPENMPI_PATCHLEVEL='1',
           UCX_VERSION='1.10.1',
           ENABLE_MPI='on',
-          MAKEJOBS=10,
+          MAKEJOBS=multiprocessing.cpu_count()+2,
           CFLAGS='-march=znver2 -mmmx -msse -msse2 -msse3 -mssse3 -msse4a -mcx16 -msahf -mmovbe -maes -msha -mpclmul -mpopcnt -mabm -mfma -mbmi -mbmi2 -mwbnoinvd -mavx -mavx2 -msse4.2 -msse4.1 -mlzcnt -mrdrnd -mf16c -mfsgsbase -mrdseed -mprfchw -madx -mfxsr -mxsave -mxsaveopt -mclflushopt -mxsavec -mxsaves -mclwb -mmwaitx -mclzero -mrdpid --param l1-cache-size=32 --param l1-cache-line-size=64 --param l2-cache-size=512 -mtune=znver2',
           **versions)
 
@@ -101,6 +103,6 @@ if __name__ == '__main__':
           OPENMPI_VERSION='4.0',
           OPENMPI_PATCHLEVEL='4',
           ENABLE_MPI='on',
-          MAKEJOBS=10,
+          MAKEJOBS=multiprocessing.cpu_count()+2,
           CFLAGS='-march=knl -mmmx -msse -msse2 -msse3 -mssse3 -mcx16 -msahf -mmovbe -maes -mpclmul -mpopcnt -mabm -mfma -mbmi -mbmi2 -mavx -mavx2 -msse4.2 -msse4.1 -mlzcnt -mrtm -mhle -mrdrnd -mf16c -mfsgsbase -mrdseed -mprfchw -madx -mfxsr -mxsave -mxsaveopt -mavx512f -mavx512cd -mclflushopt -mxsavec -mxsaves -mavx512dq -mavx512bw -mavx512vl -mclwb -mpku --param l1-cache-size=32 --param l1-cache-line-size=64 --param l2-cache-size=28160 -mtune=generic',
           **versions)
