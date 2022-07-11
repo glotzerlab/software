@@ -14,7 +14,7 @@ The **glotzerlab-software** image and the singularity cache are large, store the
 directory::
 
     $ cd /scratch/<your-account>/$USER/
-    $ export SINGULARITY_CACHEDIR=/scratch<your-account>/$USER/.singularity
+    $ export SINGULARITY_CACHEDIR=/scratch/<your-account>/$USER/.singularity
 
 .. note::
 
