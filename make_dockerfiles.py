@@ -35,6 +35,7 @@ if __name__ == '__main__':
           FROM='nvidia/cuda:11.1.1-devel-ubuntu20.04',
           ENABLE_MPI='off',
           MAKEJOBS=multiprocessing.cpu_count()+2,
+          CUDA_VERSION='11.1',
           **versions)
 
     # see https://stackoverflow.com/questions/5470257/how-to-see-which-flags-march-native-will-activate
