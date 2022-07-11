@@ -32,7 +32,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        configuration: [nompi, greatlakes, bridges2, expanse, expanse-gpu]
+        configuration: [nompi, greatlakes, bridges2, delta, expanse, expanse-gpu]
     steps:
       - uses: actions/checkout@v3.0.2
       - name: Login to DockerHub
