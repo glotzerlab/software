@@ -5,6 +5,16 @@ Change log
 **glotzerlab-software** releases update regularly. Releases are numbered by the year, month,
 and optionally the day separated by periods.
 
+2022
+----
+
+2022-07-11
+++++++++++
+
+*Added*
+
+* ``delta`` image with support for NCSA Delta.
+
 2021
 ----
 
