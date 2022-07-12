@@ -181,6 +181,15 @@ RUN curl -sSLO https://www.open-mpi.org/software/ompi/v{{ OPENMPI_VERSION }}/dow
 
 {% elif system == 'expanse-gpu' %}
 
+RUN curl -sSLO https://github.com/openucx/ucx/releases/download/v{{UCX_VERSION}}/ucx-{{UCX_VERSION}}.tar.gz \
+   && tar -xzf ucx-{{UCX_VERSION}}.tar.gz -C /root \
+   && cd /root/ucx-{{UCX_VERSION}} \
+   && mkdir build && cd build \
+   && ../configure --prefix=/usr  \
+   && make install -j {{ MAKEJOBS }} \
+   && rm -rf /root/ucx-{{UCX_VERSION}} \
+   && rm /ucx-{{UCX_VERSION}}.tar.gz
+
 RUN curl -sSLO https://www.open-mpi.org/software/ompi/v{{ OPENMPI_VERSION }}/downloads/openmpi-{{ OPENMPI_VERSION }}.{{ OPENMPI_PATCHLEVEL }}.tar.bz2 \
    && tar -xjf openmpi-{{ OPENMPI_VERSION }}.{{ OPENMPI_PATCHLEVEL }}.tar.bz2 -C /root \
    && cd /root/openmpi-{{ OPENMPI_VERSION }}.{{ OPENMPI_PATCHLEVEL }} \
@@ -193,7 +202,7 @@ RUN curl -sSLO https://www.open-mpi.org/software/ompi/v{{ OPENMPI_VERSION }}/dow
                   --enable-mpi1-compatibility \
                   --without-fca \
                   --without-ofi \
-                  --with-verbs \
+                  --without-verbs \
                   --without-cuda  \
                   --without-mxm \
                   --without-psm \
@@ -210,7 +219,7 @@ RUN curl -sSLO https://www.open-mpi.org/software/ompi/v{{ OPENMPI_VERSION }}/dow
                   --disable-memchecker \
                   --disable-java \
                   --disable-mpi-java \
-                  --without-ucx \
+                  --with-ucx \
    && make all install \
    && rm -rf /root/openmpi-{{ OPENMPI_VERSION }}.{{ OPENMPI_PATCHLEVEL }} \
    && rm /openmpi-{{ OPENMPI_VERSION }}.{{ OPENMPI_PATCHLEVEL }}.tar.bz2
