@@ -108,6 +108,7 @@ if __name__ == '__main__':
           CUDA_VERSION='11.1',
           OPENMPI_VERSION='4.0',
           OPENMPI_PATCHLEVEL='4',
+          UCX_VERSION='1.8.0',
           ENABLE_MPI='on',
           MAKEJOBS=multiprocessing.cpu_count()+2,
           CFLAGS='-march=knl -mmmx -msse -msse2 -msse3 -mssse3 -mcx16 -msahf -mmovbe -maes -mpclmul -mpopcnt -mabm -mfma -mbmi -mbmi2 -mavx -mavx2 -msse4.2 -msse4.1 -mlzcnt -mrtm -mhle -mrdrnd -mf16c -mfsgsbase -mrdseed -mprfchw -madx -mfxsr -mxsave -mxsaveopt -mavx512f -mavx512cd -mclflushopt -mxsavec -mxsaves -mavx512dq -mavx512bw -mavx512vl -mclwb -mpku --param l1-cache-size=32 --param l1-cache-line-size=64 --param l2-cache-size=28160 -mtune=generic',
