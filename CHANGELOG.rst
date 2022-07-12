@@ -8,6 +8,17 @@ and optionally the day separated by periods.
 2022
 ----
 
+2022-07-12
+++++++++++
+
+*Fixed*
+
+* ``expanse-gpu`` execution with more than one MPI rank.
+
+*Added*
+
+* ``cupy`` Python package.
+
 2022-07-11
 ++++++++++
 
