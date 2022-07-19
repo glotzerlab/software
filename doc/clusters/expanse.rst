@@ -15,11 +15,16 @@ job with sufficient memory and perform the image pull steps on a compute node::
 
     $ srun --partition=shared --pty --nodes=1 --ntasks-per-node=1 --mem=8G --time=02:00:00 --wait=0 --export=ALL --account=<your-account> /bin/bash
 
-The **glotzerlab-software** image and the singularity cache are large, store them in your scratch
-directory::
+The **glotzerlab-software** image and the singularity cache are large, normally you would store them
+in your scratch directory. **However**, the lustre filesystem on Expanse causes problems with
+``singularity pull``. Pull the images in your home directory and move them to scratch. You will need
+to periodically clear the cache to prevent it from filling your quota::
 
-    $ cd /expanse/lustre/scratch/$USER/temp_project
-    $ export SINGULARITY_CACHEDIR=/expanse/lustre/scratch/$USER/temp_project/.singularity
+    $ rm -rf $HOME/.singularity
+
+Unset the cache directory if you set it based on previous instructions in this documentation::
+
+    $ unset SINGULARITY_CACHEDIR
 
 CPU
 +++
@@ -27,6 +32,7 @@ CPU
 Download the image with support for Expanse's CPU nodes::
 
     $ singularity pull software.sif docker://glotzerlab/software:expanse
+    $ mv software.sif /expanse/lustre/scratch/$USER/temp_project/
 
 GPU
 +++
@@ -34,6 +40,7 @@ GPU
 Download the image with support for Expanse's GPU nodes::
 
     $ singularity pull software.sif docker://glotzerlab/software:expanse-gpu
+    $ mv software.sif /expanse/lustre/scratch/$USER/temp_project/
 
 .. important::
 
