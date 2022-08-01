@@ -22,9 +22,9 @@ pyqt5==5.15.7; platform_machine != 'ppc64le'
 pyyaml==6.0
 scikit-learn==1.1.1
 scikit-image==0.19.3; platform_machine != 'ppc64le'
-scipy==1.8.1
+scipy==1.9.0
 statsmodels==0.13.2
-cupy==10.6.0
+cupy==11.0.0
 
 # test requirements
 hypothesis==6.53.0
