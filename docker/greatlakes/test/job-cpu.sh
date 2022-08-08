@@ -7,7 +7,7 @@
 #SBATCH --export=ALL
 #SBATCH -t 0:10:00
 
-module load gcc/8.2.0 openmpi/4.0.2 singularity
+module load gcc/10.3.0 openmpi/4.1.4 singularity
 
 rm -f test-results-cpu.out
 
