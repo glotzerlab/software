@@ -75,8 +75,11 @@ ENV PATH=/opt/glotzerlab/bin:$PATH \
     CMAKE_PREFIX_PATH=/opt/glotzerlab/bin \
     LD_LIBRARY_PATH=/usr/local/lib:${LD_LIBRARY_PATH}
 
+# setuptools 65 breaks the gsd build: https://github.com/pypa/setuptools/pull/3505
+# pip 22.1 breaks the build.
+
 RUN python3 -m venv /opt/glotzerlab \
-    && /opt/glotzerlab/bin/python3 -m pip install --no-cache-dir --upgrade pip==22.0 setuptools wheel
+    && /opt/glotzerlab/bin/python3 -m pip install --no-cache-dir --upgrade pip==22.2.2 setuptools==64.0.3 wheel
 
 # Install the requirements files
 COPY requirements*.txt /
