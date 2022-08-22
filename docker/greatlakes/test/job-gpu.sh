@@ -9,6 +9,8 @@
 
 module load gcc/10.3.0 openmpi/4.1.4 singularity
 
-rm -f test-results-gpu.out
+set -x
 
 mpirun -n 1 singularity exec --nv software.sif python3 serial-gpu.py
+
+echo "Tests complete."

@@ -2,26 +2,6 @@
 
 {% if system == 'greatlakes' %}
 
-# great lakes needs PMIx and UCX
-
-RUN curl -sSLO https://github.com/pmix/pmix/releases/download/v{{ PMIX_VERSION }}/pmix-{{ PMIX_VERSION }}.tar.bz2 \
-   && tar -xjf pmix-{{ PMIX_VERSION }}.tar.bz2 -C /root \
-   && cd /root/pmix-{{ PMIX_VERSION }} \
-   && mkdir build && cd build \
-   && ../configure --prefix=/usr  \
-   && make all install \
-   && rm -rf /root/pmix-{{ PMIX_VERSION }} \
-   && rm /pmix-{{ PMIX_VERSION }}.tar.bz2
-
-RUN curl -sSLO https://github.com/openucx/ucx/releases/download/v{{UCX_VERSION}}/ucx-{{UCX_VERSION}}.tar.gz \
-   && tar -xzf ucx-{{UCX_VERSION}}.tar.gz -C /root \
-   && cd /root/ucx-{{UCX_VERSION}} \
-   && mkdir build && cd build \
-   && ../configure --prefix=/usr  \
-   && make install \
-   && rm -rf /root/ucx-{{UCX_VERSION}} \
-   && rm /ucx-{{UCX_VERSION}}.tar.gz
-
 RUN curl -sSLO https://www.open-mpi.org/software/ompi/v{{ OPENMPI_VERSION }}/downloads/openmpi-{{ OPENMPI_VERSION }}.{{ OPENMPI_PATCHLEVEL }}.tar.bz2 \
    && tar -xjf openmpi-{{ OPENMPI_VERSION }}.{{ OPENMPI_PATCHLEVEL }}.tar.bz2 -C /root \
    && cd /root/openmpi-{{ OPENMPI_VERSION }}.{{ OPENMPI_PATCHLEVEL }} \
@@ -31,24 +11,6 @@ RUN curl -sSLO https://www.open-mpi.org/software/ompi/v{{ OPENMPI_VERSION }}/dow
    && rm /openmpi-{{ OPENMPI_VERSION }}.{{ OPENMPI_PATCHLEVEL }}.tar.bz2
 
 {% elif system == 'delta' %}
-
-RUN curl -sSLO https://github.com/pmix/pmix/releases/download/v{{ PMIX_VERSION }}/pmix-{{ PMIX_VERSION }}.tar.bz2 \
-   && tar -xjf pmix-{{ PMIX_VERSION }}.tar.bz2 -C /root \
-   && cd /root/pmix-{{ PMIX_VERSION }} \
-   && mkdir build && cd build \
-   && ../configure --prefix=/usr  \
-   && make all install \
-   && rm -rf /root/pmix-{{ PMIX_VERSION }} \
-   && rm /pmix-{{ PMIX_VERSION }}.tar.bz2
-
-RUN curl -sSLO https://github.com/openucx/ucx/releases/download/v{{UCX_VERSION}}/ucx-{{UCX_VERSION}}.tar.gz \
-   && tar -xzf ucx-{{UCX_VERSION}}.tar.gz -C /root \
-   && cd /root/ucx-{{UCX_VERSION}} \
-   && mkdir build && cd build \
-   && ../configure --prefix=/usr  \
-   && make install \
-   && rm -rf /root/ucx-{{UCX_VERSION}} \
-   && rm /ucx-{{UCX_VERSION}}.tar.gz
 
 RUN curl -sSLO https://github.com/ofiwg/libfabric/releases/download/v{{LIBFABRIC_VERSION}}/libfabric-{{LIBFABRIC_VERSION}}.tar.bz2 \
    && tar -xjf libfabric-{{LIBFABRIC_VERSION}}.tar.bz2 -C /root \
@@ -95,15 +57,6 @@ RUN curl -sSLO https://www.open-mpi.org/software/ompi/v{{ OPENMPI_VERSION }}/dow
 
 # bridges2 needs UCX
 
-RUN curl -sSLO https://github.com/openucx/ucx/releases/download/v{{UCX_VERSION}}/ucx-{{UCX_VERSION}}.tar.gz \
-   && tar -xzf ucx-{{UCX_VERSION}}.tar.gz -C /root \
-   && cd /root/ucx-{{UCX_VERSION}} \
-   && mkdir build && cd build \
-   && ../configure --prefix=/usr  \
-   && make install -j {{ MAKEJOBS }} \
-   && rm -rf /root/ucx-{{UCX_VERSION}} \
-   && rm /ucx-{{UCX_VERSION}}.tar.gz
-
 RUN curl -sSLO https://www.open-mpi.org/software/ompi/v{{ OPENMPI_VERSION }}/downloads/openmpi-{{ OPENMPI_VERSION }}.{{ OPENMPI_PATCHLEVEL }}.tar.bz2 \
    && tar -xjf openmpi-{{ OPENMPI_VERSION }}.{{ OPENMPI_PATCHLEVEL }}.tar.bz2 -C /root \
    && cd /root/openmpi-{{ OPENMPI_VERSION }}.{{ OPENMPI_PATCHLEVEL }} \
@@ -134,17 +87,6 @@ RUN curl -sSLO https://www.open-mpi.org/software/ompi/v{{ OPENMPI_VERSION }}/dow
 
 {% elif system == 'expanse' %}
 
-# expanse needs UCX
-
-RUN curl -sSLO https://github.com/openucx/ucx/releases/download/v{{UCX_VERSION}}/ucx-{{UCX_VERSION}}.tar.gz \
-   && tar -xzf ucx-{{UCX_VERSION}}.tar.gz -C /root \
-   && cd /root/ucx-{{UCX_VERSION}} \
-   && mkdir build && cd build \
-   && ../configure --prefix=/usr  \
-   && make install -j {{ MAKEJOBS }} \
-   && rm -rf /root/ucx-{{UCX_VERSION}} \
-   && rm /ucx-{{UCX_VERSION}}.tar.gz
-
 RUN curl -sSLO https://www.open-mpi.org/software/ompi/v{{ OPENMPI_VERSION }}/downloads/openmpi-{{ OPENMPI_VERSION }}.{{ OPENMPI_PATCHLEVEL }}.tar.bz2 \
    && tar -xjf openmpi-{{ OPENMPI_VERSION }}.{{ OPENMPI_PATCHLEVEL }}.tar.bz2 -C /root \
    && cd /root/openmpi-{{ OPENMPI_VERSION }}.{{ OPENMPI_PATCHLEVEL }} \
@@ -153,7 +95,7 @@ RUN curl -sSLO https://www.open-mpi.org/software/ompi/v{{ OPENMPI_VERSION }}/dow
                   --disable-silent-rules \
                   --disable-builtin-atomics \
                   --enable-static \
-                  --without-pmi \
+                  --with-pmix=/usr \
                   --enable-mpi1-compatibility \
                   --without-fca \
                   --without-ofi \
@@ -181,15 +123,6 @@ RUN curl -sSLO https://www.open-mpi.org/software/ompi/v{{ OPENMPI_VERSION }}/dow
 
 {% elif system == 'expanse-gpu' %}
 
-RUN curl -sSLO https://github.com/openucx/ucx/releases/download/v{{UCX_VERSION}}/ucx-{{UCX_VERSION}}.tar.gz \
-   && tar -xzf ucx-{{UCX_VERSION}}.tar.gz -C /root \
-   && cd /root/ucx-{{UCX_VERSION}} \
-   && mkdir build && cd build \
-   && ../configure --prefix=/usr  \
-   && make install -j {{ MAKEJOBS }} \
-   && rm -rf /root/ucx-{{UCX_VERSION}} \
-   && rm /ucx-{{UCX_VERSION}}.tar.gz
-
 RUN curl -sSLO https://www.open-mpi.org/software/ompi/v{{ OPENMPI_VERSION }}/downloads/openmpi-{{ OPENMPI_VERSION }}.{{ OPENMPI_PATCHLEVEL }}.tar.bz2 \
    && tar -xjf openmpi-{{ OPENMPI_VERSION }}.{{ OPENMPI_PATCHLEVEL }}.tar.bz2 -C /root \
    && cd /root/openmpi-{{ OPENMPI_VERSION }}.{{ OPENMPI_PATCHLEVEL }} \
@@ -198,7 +131,6 @@ RUN curl -sSLO https://www.open-mpi.org/software/ompi/v{{ OPENMPI_VERSION }}/dow
                   --disable-silent-rules \
                   --disable-builtin-atomics \
                   --enable-static \
-                  --without-pmi \
                   --enable-mpi1-compatibility \
                   --without-fca \
                   --without-ofi \

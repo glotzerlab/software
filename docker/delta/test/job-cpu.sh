@@ -9,10 +9,14 @@
 
 module load gcc/11.2.0 openmpi/4.1.2
 
-rm -f test-results-cpu.out
+set -x
+
+singularity exec software.sif bash -c "set" | grep GLOTZERLAB
 
 mpirun -n 1 singularity exec software.sif python3 serial-cpu.py
 
-mpirun singularity exec software.sif python3 mpi-cpu.py
+mpirun --npernode 1 singularity exec software.sif python3 mpi-cpu.py
 
-mpirun singularity exec software.sif /opt/osu-micro-benchmarks/libexec/osu-micro-benchmarks/mpi/pt2pt/osu_bibw >> test-results-cpu.out
+mpirun --npernode 1 singularity exec software.sif /opt/osu-micro-benchmarks/libexec/osu-micro-benchmarks/mpi/pt2pt/osu_bibw
+
+echo "Tests complete."

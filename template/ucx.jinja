@@ -1,0 +1,9 @@
+
+RUN curl -sSLO https://github.com/openucx/ucx/releases/download/v{{UCX_VERSION}}/ucx-{{UCX_VERSION}}.tar.gz \
+   && tar -xzf ucx-{{UCX_VERSION}}.tar.gz -C /root \
+   && cd /root/ucx-{{UCX_VERSION}} \
+   && mkdir build && cd build \
+   && ../configure --prefix=/usr  \
+   && make install \
+   && rm -rf /root/ucx-{{UCX_VERSION}} \
+   && rm /ucx-{{UCX_VERSION}}.tar.gz

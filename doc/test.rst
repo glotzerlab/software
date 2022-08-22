@@ -21,65 +21,68 @@ Submit the test jobs::
 
     Replace ``sbatch`` with the appropriate queue submission command if necessary.
 
-After the jobs complete, examine the test output::
+After the jobs complete, examine the test output. Here example output::
 
-    $ cat test-results-cpu.out
+    + singularity exec software.sif bash -c set
+    + grep GLOTZERLAB
+    GLOTZERLAB_SOFTWARE_CONFIGURATION=bridges2
+    GLOTZERLAB_SOFTWARE_GIT_BRANCH=trunk
+    GLOTZERLAB_SOFTWARE_GIT_SHA=2327dce1a5cf37351abca48d44a39b93359e55ad
+    GLOTZERLAB_SOFTWARE_TAG=2022.08.19
+    + mpirun -n 1 singularity exec software.sif python3 serial-cpu.py
     ** Starting serial CPU tests **
-    Fresnel version   : 0.6.0
+    Fresnel version   : 0.13.4
     Fresnel device    : <fresnel.Device: All available CPU threads>
-    Freud version     : 0.10.0
-    GSD version       : 1.5.3
-    HOOMD version     : 2.3.4
-    HOOMD flags       : CUDA (8.0) DOUBLE HPMC_MIXED MPI TBB SSE SSE2 SSE3 SSE4_1 SSE4_2 AVX AVX2
-    libgetar version  : 0.6.1
-    pythia version    : 0.2.2
-    plato version     : 1.1.0
-    rowan version     : 1.1.0
-    signac version    : 0.9.3
-    flow version      : 0.6.3
+    Freud version     : 2.11.0
+    garnett version       : 0.7.1
+    GSD version       : 2.6.0
+    HOOMD version     : 3.4.0
+    HOOMD flags       : GPU [CUDA] (11.1) DOUBLE HPMC_MIXED MPI TBB SSE SSE2 SSE3 SSE4_1 SSE4_2 AVX AVX2
+    pythia version    : 0.3.0
+    plato version     : 1.12.0
+    rowan version     : 1.3.0
+    signac version    : 1.7.0
+    flow version      : 0.21.0
 
-    h5py version      : 2.6.0
-    matplotlib version: 1.5.1
-    numpy version     : 1.5.1
-    pandas version    : 1.5.1
-    pillow version    : 5.2.0
-    pyhull version    : 2015.2.0
-    scipy version     : 0.17.0
-    sklearn version   : 0.17
-    pyyaml version    : 3.11
+    h5py version      : 3.7.0
+    matplotlib version: 3.5.3
+    numpy version     : 3.5.3
+    pandas version    : 3.5.3
+    pillow version    : 9.2.0
+    scipy version     : 1.9.0
+    sklearn version   : 1.1.2
+    pyyaml version    : 6.0
     ** Serial CPU tests PASSED **
 
+    + mpirun --npernode 1 singularity exec software.sif python3 mpi-cpu.py
     ** Starting MPI CPU tests **
-    HOOMD version     : 2.3.4
+    HOOMD version     : 3.4.0
     ** MPI CPU tests PASSED **
-    # OSU MPI Bi-Directional Bandwidth Test v5.4.1
+    + mpirun --npernode 1 singularity exec software.sif /opt/osu-micro-benchmarks/libexec/osu-micro-benchmarks/mpi/pt2pt/osu_bw
+    # OSU MPI Bandwidth Test v5.4.1
     # Size      Bandwidth (MB/s)
-    1                       0.02
-    2                       0.03
-    4                       0.07
-    8                       0.18
-    16                      0.27
-    32                      0.59
-    64                      0.93
-    128                   137.51
-    256                   270.04
-    512                   520.99
-    1024                  999.65
-    2048                 1818.69
-    4096                 3349.42
-    8192                 5120.30
-    16384                  37.72
-    32768                  90.25
-    65536                 159.50
-    131072                579.37
-    262144               1547.74
-    524288               3464.45
-    1048576              7672.50
-    2097152              7377.73
-    4194304              7640.81
-
-    $ cat test-results-gpu.out
-    ** Starting serial GPU tests **
-    HOOMD version     : 2.3.4
-    HOOMD flags       : CUDA (8.0) DOUBLE HPMC_MIXED MPI TBB SSE SSE2 SSE3 SSE4_1 SSE4_2 AVX AVX2
-    ** Serial GPU tests PASSED **
+    1                       2.53
+    2                       5.07
+    4                      10.13
+    8                      20.31
+    16                     40.70
+    32                     80.90
+    64                    159.37
+    128                   314.75
+    256                   603.60
+    512                  1186.74
+    1024                 2437.16
+    2048                 4385.84
+    4096                 6576.44
+    8192                10170.07
+    16384               12811.31
+    32768               15895.04
+    65536               17412.40
+    131072              18098.46
+    262144              21474.57
+    524288              22771.60
+    1048576             22894.82
+    2097152             22945.78
+    4194304             23162.50
+    + echo 'Tests complete.'
+    Tests complete.

@@ -1,4 +1,5 @@
-results = open('test-results-gpu.out', 'a')
+import sys
+results = sys.stdout
 results.write('** Starting serial GPU tests **\n')
 
 try:
