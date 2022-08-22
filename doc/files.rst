@@ -1,10 +1,6 @@
 Accessing files
 ===============
 
-Singularity's default behavior is very intuitive when it comes to accessing files on the host. If
-you have problems accessing your files from within the container, read on to understand how the
-process works.
-
 The container's filesystem
 ---------------------------
 
@@ -29,8 +25,8 @@ Bind mounting
 -------------
 
 Specific directories may be *bind mounted* from the host into the container so it can access the
-contents directly. On most systems, Singularity is configured to bind mount your current working
-directory by default::
+contents directly. On most systems, Singularity is configured to bind mount your home directory by
+default::
 
     $ echo "print('hello world')" > script.py
     $ singularity exec software.sif ls
@@ -45,12 +41,13 @@ Even though there are many users on this host system, singularity only sees ``/g
     $ singularity exec software.sif ls /home
     glotzerlab-software  testuser
 
+You can bind mount additional directories with the ``--bind`` command line option.
+
 .. tip::
 
-    Most HPC systems also bind mount their scratch filesytems.
+    Bind the scratch filesystems when launching singularity processes on HPC systems. For example::
 
-If you can't access files that you need to, make sure they are either in the current working
-directory at the time you launch singularity, or they are on the scratch filesystem.
+        singularity exec --nv --bind /scratch
 
 .. seealso::
 
