@@ -27,7 +27,7 @@ statsmodels==0.13.2
 cupy==11.0.0
 
 # test requirements
-hypothesis==6.54.3
+hypothesis==6.54.4
 pytest==7.1.2
 miniball==1.1.0
 sympy==1.10.1
