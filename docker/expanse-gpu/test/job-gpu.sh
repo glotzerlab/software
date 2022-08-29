@@ -1,15 +1,21 @@
 #!/bin/bash
 #SBATCH --job-name="test-gpu"
-#SBATCH --partition=gpu-shared
+#SBATCH --partition=gpu
 #SBATCH --nodes=1
 #SBATCH --ntasks-per-node=2
-#SBATCH --gpus-per-task=1
+#SBATCH --gpus=4
 #SBATCH -t 0:10:00
 
 module load gpu singularitypro openmpi/4.0.4-nocuda
 
-rm -f test-results-gpu.out
+set -x
 
-mpirun -n 1 singularity exec --nv software.sif python3 serial-gpu.py
+singularity exec software.sif bash -c "set" | grep GLOTZERLAB
 
-mpirun -n 2 singularity exec --nv software.sif python3 mpi-gpu.py
+singularity exec --nv software.sif python3 serial-gpu.py
+
+mpirun -v singularity exec --nv software.sif python3 mpi-gpu.py
+
+mpirun -v singularity exec software.sif /opt/osu-micro-benchmarks/libexec/osu-micro-benchmarks/mpi/pt2pt/osu_bibw
+
+echo "Tests complete."

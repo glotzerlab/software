@@ -47,3 +47,8 @@ MPI parallel GPU jobs (``GPU`` partition)::
 
     module load openmpi/4.0.5-gcc10.2.0
     mpirun singularity exec --bind /ocean --nv $PROJECT/software.sif command arguments
+
+.. important::
+
+    You must use ``mpirun`` to launch parallel jobs. ``srun`` is not compatible with the MPI library
+    installed inside the container.

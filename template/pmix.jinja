@@ -1,0 +1,9 @@
+
+RUN curl -sSLO https://github.com/pmix/pmix/releases/download/v{{ PMIX_VERSION }}/pmix-{{ PMIX_VERSION }}.tar.bz2 \
+   && tar -xjf pmix-{{ PMIX_VERSION }}.tar.bz2 -C /root \
+   && cd /root/pmix-{{ PMIX_VERSION }} \
+   && mkdir build && cd build \
+   && ../configure --prefix=/usr \
+   && make all install \
+   && rm -rf /root/pmix-{{ PMIX_VERSION }} \
+   && rm /pmix-{{ PMIX_VERSION }}.tar.bz2

@@ -83,3 +83,12 @@ MPI parallel GPU jobs (``gpu`` partition, ``gpu-shared`` with more than 1 GPU)::
 .. important::
 
     Use the correct ``module load`` line for the type of node your job will execute on.
+
+.. warning::
+
+    ``mpirun`` will hang when launching jobs one more than one node in the ``gpu`` partition.
+
+.. important::
+
+    You must use ``mpirun`` to launch parallel jobs. ``srun`` is not compatible with the MPI library
+    installed inside the container.

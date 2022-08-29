@@ -1,4 +1,5 @@
-results = open('test-results-cpu.out', 'a')
+import sys
+results = sys.stdout
 results.write('** Starting serial CPU tests **\n')
 
 try:
