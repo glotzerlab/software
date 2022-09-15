@@ -60,6 +60,16 @@ Build scripts are generated under the `script/` directory for systems that don't
 
 ## Building images
 
+### Dependencies
+
+`glotzerlab/software` requires the following Python dependencies
+- `jinja2`
+- `pyyaml`.
+
+We recommend installing these into a virtual environment with `venv`.
+
+### Building
+
 `build.sh -r repository [ -t tag ] [ system [ system [ ... ] ] ]` builds the images.
 
 * `-r repository` sets the docker repository to label the builds
