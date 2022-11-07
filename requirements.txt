@@ -13,7 +13,7 @@ signac-dashboard==0.3.1
 # commonly used packages
 h5py==3.7.0
 jupyter==1.0.0; platform_machine != 'ppc64le'
-jupyterlab==1.0.10
+jupyterlab==3.5.0; platform_machine != 'ppc64le'
 matplotlib==3.6.1; platform_machine != 'ppc64le'
 notebook==6.5.2; platform_machine != 'ppc64le'
 opencv-python==4.6.0.66; platform_machine != 'ppc64le'
