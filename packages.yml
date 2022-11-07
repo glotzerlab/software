@@ -28,7 +28,7 @@ pybind11:
   ignore: alpha,rc,beta
   include_v_prefix: false
   repository: https://github.com/pybind/pybind11
-  version: 2.10.0
+  version: 2.10.1
 qhull:
   ignore: alpha,rc,beta
   include_v_prefix: false
