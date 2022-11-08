@@ -15,8 +15,8 @@ singularity exec software.sif bash -c "set" | grep GLOTZERLAB
 
 singularity exec --nv software.sif python3 serial-gpu.py
 
-mpirun -v singularity exec --nv software.sif python3 mpi-gpu.py
+mpirun -v -x UCX_POSIX_USE_PROC_LINK=n singularity exec --nv software.sif python3 mpi-gpu.py
 
-mpirun -v singularity exec software.sif /opt/osu-micro-benchmarks/libexec/osu-micro-benchmarks/mpi/pt2pt/osu_bibw
+mpirun -v -x UCX_POSIX_USE_PROC_LINK=n singularity exec software.sif /opt/osu-micro-benchmarks/libexec/osu-micro-benchmarks/mpi/pt2pt/osu_bibw
 
 echo "Tests complete."
