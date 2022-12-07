@@ -21,6 +21,7 @@ python3 -m venv $ROOT
 cat >$ROOT/environment.sh << EOL
 module reset
 module load gcc/7.5.0
+module load openblas/0.3.20
 module load python/3.8.10
 module load cuda/11.0.3
 module load cmake
@@ -133,7 +134,7 @@ fi
 
 # install packages that are build requirements of other packages first
 # lapack is needed for scipy
- export LAPACK=${OLCF_NETLIB_LAPACK_ROOT}/lib64/liblapack.so BLAS=${OLCF_NETLIB_LAPACK_ROOT}/lib64/libblas.so CFLAGS="-mcpu=power9 -mtune=power9" CXXFLAGS="-mcpu=power9 -mtune=power9"\
+ export CFLAGS="-mcpu=power9 -mtune=power9" CXXFLAGS="-mcpu=power9 -mtune=power9"\
     && python3 -m pip install -r requirements-source.txt \
     || exit 1
 

@@ -19,7 +19,7 @@
 
 # install packages that are build requirements of other packages first
 # lapack is needed for scipy
-{{ RUN }} export LAPACK=${OLCF_NETLIB_LAPACK_ROOT}/lib64/liblapack.so BLAS=${OLCF_NETLIB_LAPACK_ROOT}/lib64/libblas.so CFLAGS="{{CFLAGS}}" CXXFLAGS="{{CFLAGS}}"\
+{{ RUN }} export CFLAGS="{{CFLAGS}}" CXXFLAGS="{{CFLAGS}}"\
     && python3 -m pip install -r requirements-source.txt \
     || exit 1
 
