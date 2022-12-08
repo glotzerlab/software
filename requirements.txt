@@ -17,7 +17,7 @@ jupyterlab==3.5.1; platform_machine != 'ppc64le'
 matplotlib==3.6.2; platform_machine != 'ppc64le'
 notebook==6.5.2; platform_machine != 'ppc64le'
 opencv-python==4.6.0.66; platform_machine != 'ppc64le'
-pandas==1.5.2; platform_machine != 'ppc64le'
+pandas==1.5.2
 Pillow==9.3.0
 pyqt5==5.15.7; platform_machine != 'ppc64le'
 pyyaml==6.0
