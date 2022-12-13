@@ -2,10 +2,10 @@ Expanse (SDSC)
 ---------------
 
 Expanse_ is an HPC cluster at SDSC with GPU and CPU nodes. Apply for resources on Expanse through
-the XSEDE_ program.
+the ACCESS_ program.
 
 .. _Expanse: https://www.sdsc.edu/support/user_guides/expanse.html
-.. _XSEDE: https://www.xsede.org/
+.. _ACCESS: https://allocations.access-ci.org/
 
 Downloading
 ***********
