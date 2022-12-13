@@ -2,7 +2,7 @@ Bridges-2 (PSC)
 ---------------
 
 `Bridges-2 <https://www.psc.edu/resources/bridges-2/>`_ is an HPC cluster at PSC with GPU and CPU
-nodes. Apply for resources on Bridges through the `XSEDE <https://www.xsede.org/>`_ program.
+nodes. Apply for resources on Bridges through the `ACCESS <https://allocations.access-ci.org/>`_ program.
 
 Downloading
 ***********
