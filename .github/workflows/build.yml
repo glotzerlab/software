@@ -48,7 +48,7 @@ jobs:
         if: github.ref == 'refs/heads/trunk'
       - name: Slack notification
         if: ${{ (github.ref == 'refs/heads/trunk') && (failure() || cancelled()) }}
-        uses: 8398a7/action-slack@v3.14.0
+        uses: 8398a7/action-slack@v3.15.0
         with:
           status: ${{ job.status }}
           fields: workflow,ref,message,commit
