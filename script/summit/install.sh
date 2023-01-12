@@ -64,15 +64,15 @@ python3 -m pip install -r requirements-mpi.txt
 # TBB
 if [ ! -f $ROOT/lib64/libtbb.so ]
 then
-curl -sSLO https://github.com/oneapi-src/oneTBB/archive/v2021.7.0.tar.gz \
-    && tar -xzf v2021.7.0.tar.gz -C . \
-    && cd oneTBB-2021.7.0 \
+curl -sSLO https://github.com/oneapi-src/oneTBB/archive/v2021.8.0.tar.gz \
+    && tar -xzf v2021.8.0.tar.gz -C . \
+    && cd oneTBB-2021.8.0 \
     && cmake -S . -B build -DTBB_TEST=off -DTBB_STRICT=off -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=$ROOT \
     && cmake --build build -j 8  \
     && cmake --install build \
     && cd .. \
-    && rm -rf oneTBB-2021.7.0 \
-    && rm v2021.7.0.tar.gz \
+    && rm -rf oneTBB-2021.8.0 \
+    && rm v2021.8.0.tar.gz \
     || exit 1
 fi
 
@@ -81,8 +81,8 @@ fi
 # install pybind11 headers
 if [ ! -f $ROOT/include/pybind11/pybind11.h ]
 then
-curl -SL https://github.com/pybind/pybind11/archive/v2.10.1.tar.gz | tar -xzC $BUILDDIR && \
-    cd pybind11-2.10.1 && \
+curl -SL https://github.com/pybind/pybind11/archive/v2.10.3.tar.gz | tar -xzC $BUILDDIR && \
+    cd pybind11-2.10.3 && \
     mkdir build && cd build && \
     cmake ../ -DCMAKE_INSTALL_PREFIX=$ROOT -DPYBIND11_TEST=off && \
     make install && \
@@ -147,7 +147,7 @@ fi
 
 
 
- git clone --recursive --branch v3.7.0 --depth 1 https://github.com/glotzerlab/hoomd-blue hoomd \
+ git clone --recursive --branch v3.8.0 --depth 1 https://github.com/glotzerlab/hoomd-blue hoomd \
     && cd hoomd \
     && mkdir -p build \
     && cd build \
