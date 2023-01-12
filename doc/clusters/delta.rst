@@ -2,10 +2,10 @@ Delta (NCSA)
 ------------
 
 Delta_ is an HPC cluster at NCSA with GPU and CPU nodes. Apply for resources on Delta through
-the XSEDE_ program.
+the ACCESS_ program.
 
 .. _Delta: https://wiki.ncsa.illinois.edu/display/DSC/Delta+User+Guide
-.. _XSEDE: https://www.xsede.org/
+.. _ACCESS: https://allocations.access-ci.org
 
 Downloading
 ***********
@@ -18,7 +18,7 @@ directory::
 
 .. note::
 
-    Replace ``<your-account>`` with your Great Lakes account name.
+    Replace ``<your-account>`` with your NCSA account name.
 
 Download the image with support for Delta::
 
