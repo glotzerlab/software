@@ -147,7 +147,7 @@ fi
 
 
 
- git clone --recursive --branch v3.8.0 --depth 1 https://github.com/glotzerlab/hoomd-blue hoomd \
+ git clone --recursive --branch v3.8.1 --depth 1 https://github.com/glotzerlab/hoomd-blue hoomd \
     && cd hoomd \
     && mkdir -p build \
     && cd build \
