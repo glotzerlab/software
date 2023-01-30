@@ -19,7 +19,7 @@ notebook==6.5.2; platform_machine != 'ppc64le'
 opencv-python==4.7.0.68; platform_machine != 'ppc64le'
 pandas==1.5.3
 Pillow==9.4.0
-pyqt5==5.15.7; platform_machine != 'ppc64le'
+pyqt5==5.15.8; platform_machine != 'ppc64le'
 pyyaml==6.0
 scikit-learn==1.2.1
 scikit-image==0.19.3; platform_machine != 'ppc64le'
