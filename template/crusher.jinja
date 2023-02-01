@@ -1,0 +1,139 @@
+#!/usr/bin/bash
+
+set -u
+set -e
+
+usage="$(basename "$0") root -- Build software and install in root."
+
+if [[ $# -lt 1 || $# -gt 1  || $1 == "-h" ]]
+then
+    echo "$usage"
+    exit 0
+fi
+
+DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+ROOT=$1
+module reset
+module load cray-python/3.9.13.1
+python3 -m venv $ROOT
+
+cat >$ROOT/environment.sh << EOL
+module reset
+module load cmake/3.23.2
+module load git/2.36.1
+module load rocm/5.1.0
+module load cray-python/3.9.13.1
+module load hdf5/1.12.1
+
+# The cray-mpich module does not provide this, it is needed to build mpi4py from source.
+export MPICC=\$CRAY_MPICH_DIR/bin/mpicc
+
+export LD_LIBRARY_PATH=$ROOT/lib:\$LD_LIBRARY_PATH
+export PATH=$ROOT/bin:\$PATH
+export CPATH=$ROOT/include
+export LIBRARY_PATH=$ROOT/lib
+export VIRTUAL_ENV=$ROOT
+export CMAKE_PREFIX_PATH=$ROOT
+
+# Settings to build cupy for rocm: https://docs.cupy.dev/en/stable/install.html
+export CUPY_INSTALL_USE_HIP=1
+export ROCM_HOME=\$OLCF_ROCM_ROOT
+export HCC_AMDGPU_TARGET=gfx90a
+EOL
+
+source $ROOT/environment.sh
+
+BUILDDIR=`mktemp -d`
+mkdir -p $BUILDDIR
+
+# deletes the temp directory
+function cleanup {
+  rm -rf "$BUILDDIR"
+  echo "Deleted temp working directory $BUILDDIR"
+}
+
+trap cleanup EXIT
+cd $BUILDDIR
+
+cp -a $DIR/../../*.txt $BUILDDIR
+cd $BUILDDIR
+
+set -x
+python3 -m pip install --upgrade pip setuptools wheel
+python3 -m pip install -r requirements-mpi.txt
+
+# TBB
+if [ ! -f $ROOT/lib64/libtbb.so ]
+then
+curl -sSLO https://github.com/oneapi-src/oneTBB/archive/v{{ TBB_VERSION }}.tar.gz \
+    && tar -xzf v{{ TBB_VERSION }}.tar.gz -C . \
+    && cd oneTBB-{{ TBB_VERSION }} \
+    && cmake -S . -B build -DTBB_TEST=off -DTBB_STRICT=off -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=$ROOT \
+    && cmake --build build -j {{ MAKEJOBS }}  \
+    && cmake --install build \
+    && cd .. \
+    && rm -rf oneTBB-{{ TBB_VERSION }} \
+    && rm v{{ TBB_VERSION }}.tar.gz \
+    || exit 1
+fi
+
+# Embree
+if [ ! -f $ROOT/lib64/libembree3.so ]
+then
+curl -sSL https://github.com/embree/embree/archive/v{{ EMBREE_VERSION }}/embree-{{ EMBREE_VERSION }}.tar.gz | tar -xzC $BUILDDIR \
+    && cd $BUILDDIR/embree-{{ EMBREE_VERSION }} \
+    && mkdir build && cd build \
+    && cmake ../ -DCMAKE_INSTALL_PREFIX=$ROOT -DCMAKE_INSTALL_LIBDIR=lib64/ -DCMAKE_BUILD_TYPE=Release -DEMBREE_TUTORIALS=OFF -DEMBREE_MAX_ISA="AVX2" -DEMBREE_ISPC_SUPPORT=OFF \
+    && make install -j {{ MAKEJOBS }} \
+    && cd $BUILDDIR/ && rm -rf embree-*
+fi
+
+# install pybind11 headers
+if [ ! -f $ROOT/include/pybind11/pybind11.h ]
+then
+curl -SL https://github.com/pybind/pybind11/archive/v{{PYBIND11_VERSION}}.tar.gz | tar -xzC $BUILDDIR && \
+    cd pybind11-{{PYBIND11_VERSION}} && \
+    mkdir build && cd build && \
+    cmake ../ -DCMAKE_INSTALL_PREFIX=$ROOT -DPYBIND11_TEST=off && \
+    make install && \
+    cd $BUILDDIR && rm -rf pybind11-*
+fi
+
+# install cereal headers
+if [ ! -f $ROOT/include/cereal/cereal.hpp ]
+then
+curl -SL https://github.com/USCiLab/cereal/archive/v{{CEREAL_VERSION}}.tar.gz | tar -xzC $BUILDDIR && \
+    cd cereal-{{CEREAL_VERSION}} && \
+    mkdir build && cd build && \
+    cmake ../ -DCMAKE_INSTALL_PREFIX=$ROOT -DJUST_INSTALL_CEREAL=on && \
+    make install && \
+    cd $BUILDDIR && rm -rf cereal-*
+fi
+
+# install eigen headers
+if [ ! -f $ROOT/include/eigen3/Eigen/Eigen ]
+then
+curl -SL https://gitlab.com/libeigen/eigen/-/archive/{{EIGEN_VERSION}}/eigen-{{EIGEN_VERSION}}.tar.gz | tar -xzC $BUILDDIR && \
+    cd eigen-{{EIGEN_VERSION}} && \
+    mkdir build && cd build && \
+    cmake ../ -DCMAKE_INSTALL_PREFIX=$ROOT -DBUILD_TESTING=off, -DEIGEN_TEST_NOQT=on && \
+    make install && \
+    cd $BUILDDIR && rm -rf eigen-*
+fi
+
+# if [ ! -f $ROOT/bin/clang ]
+# then
+#     git clone --depth 1 --branch release/12.x https://github.com/llvm/llvm-project
+#     cd llvm-project
+#     cmake -S llvm -B build \
+#         -D CMAKE_INSTALL_PREFIX=$ROOT -DLLVM_ENABLE_PROJECTS=clang \
+#         -DCLANG_LINK_CLANG_DYLIB=ON \
+#         -DLLVM_BUILD_LLVM_DYLIB=ON \
+#         -DLLVM_LINK_LLVM_DYLIB=ON \
+#         -DCMAKE_BUILD_TYPE=Release \
+#         -DLLVM_TARGETS_TO_BUILD="PowerPC"
+#     cmake --build build -j {{ MAKEJOBS }}
+#     cmake --install build
+#     cd $BUILDDIR
+#     rm -rf llvm-project
+# fi

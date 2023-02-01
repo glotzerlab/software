@@ -23,6 +23,7 @@ if __name__ == '__main__':
 
     env = jinja2.Environment(loader=jinja2.FileSystemLoader('template'))
     base_template = env.get_template('base.jinja')
+    crusher_template = env.get_template('crusher.jinja')
     ib_mlx_template = env.get_template('ib-mlx.jinja')
     openmpi_template = env.get_template('openmpi.jinja')
     pmix_template = env.get_template('pmix.jinja')
@@ -90,6 +91,17 @@ if __name__ == '__main__':
           output='script',
           system='summit',
           ENABLE_TBB='off',
+          **versions)
+
+    write('script/crusher/install.sh', [crusher_template, glotzerlab_software_template],
+          MAKEJOBS=16,
+          CFLAGS='-march=native',
+          output='script',
+          system='crusher',
+          ENABLE_MPI='on',
+          ENABLE_TBB='off',
+          ENABLE_LLVM='off',
+          HOOMD_GPU_PLATFORM='HIP',
           **versions)
 
     write('docker/bridges2/Dockerfile', [base_template,
