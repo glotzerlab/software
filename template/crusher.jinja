@@ -19,13 +19,14 @@ python3 -m venv $ROOT
 
 cat >$ROOT/environment.sh << EOL
 module reset
+module load PrgEnv-gnu
 module load cmake/3.23.2
 module load git/2.36.1
 module load rocm/5.1.0
 module load cray-python/3.9.13.1
 module load hdf5/1.12.1
-module load ninja
-module load tmux
+module load ninja/1.10.2
+module load tmux/3.2a
 
 # The cray-mpich module does not provide this, it is needed to build mpi4py from source.
 export MPICC=\$CRAY_MPICH_DIR/bin/mpicc
