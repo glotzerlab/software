@@ -31,6 +31,11 @@
 {% endif %}
 
 {% if system != 'summit' %}
+
+{% if output == 'script' %}
+if [ ! -n "$(ls -d $ROOT/lib/python*/site-packages/fresnel)" ]
+then
+{% endif %}
 {{ RUN }} git clone --recursive --branch {{ FRESNEL_VERSION }} --depth 1 https://github.com/glotzerlab/fresnel \
     && cd fresnel \
     && mkdir -p build \
@@ -41,6 +46,17 @@
     && cd ../../ \
     && rm -rf fresnel \
     || exit 1
+
+{% if output == 'script' %}
+fi
+{% endif %}
+
+{% endif %}
+
+
+{% if output == 'script' %}
+if [ ! -n "$(ls -d $ROOT/lib/python*/site-packages/hoomd)" ]
+then
 {% endif %}
 {{ RUN }} git clone --recursive --branch {{ HOOMD_VERSION }} --depth 1 https://github.com/glotzerlab/hoomd-blue hoomd \
     && cd hoomd \
@@ -52,3 +68,7 @@
     && cd ../../ \
     && rm -rf hoomd \
     || exit 1
+
+{% if output == 'script' %}
+fi
+{% endif %}

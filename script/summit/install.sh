@@ -146,6 +146,12 @@ fi
 
 
 
+
+
+
+if [ ! -n "$(ls -d $ROOT/lib/python*/site-packages/hoomd)" ]
+then
+
  git clone --recursive --branch fix-rocm-build --depth 1 https://github.com/glotzerlab/hoomd-blue hoomd \
     && cd hoomd \
     && mkdir -p build \
@@ -156,3 +162,6 @@ fi
     && cd ../../ \
     && rm -rf hoomd \
     || exit 1
+
+
+fi

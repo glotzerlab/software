@@ -24,6 +24,8 @@ module load git/2.36.1
 module load rocm/5.1.0
 module load cray-python/3.9.13.1
 module load hdf5/1.12.1
+module load ninja
+module load tmux
 
 # The cray-mpich module does not provide this, it is needed to build mpi4py from source.
 export MPICC=\$CRAY_MPICH_DIR/bin/mpicc
@@ -42,6 +44,8 @@ export HCC_AMDGPU_TARGET=gfx90a
 EOL
 
 source $ROOT/environment.sh
+
+set -x
 
 BUILDDIR=`mktemp -d`
 mkdir -p $BUILDDIR
@@ -69,7 +73,7 @@ curl -sSLO https://github.com/oneapi-src/oneTBB/archive/v2021.8.0.tar.gz \
     && tar -xzf v2021.8.0.tar.gz -C . \
     && cd oneTBB-2021.8.0 \
     && cmake -S . -B build -DTBB_TEST=off -DTBB_STRICT=off -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=$ROOT \
-    && cmake --build build -j 16  \
+    && cmake --build build -j 32  \
     && cmake --install build \
     && cd .. \
     && rm -rf oneTBB-2021.8.0 \
@@ -84,7 +88,7 @@ curl -sSL https://github.com/embree/embree/archive/v3.13.5/embree-3.13.5.tar.gz 
     && cd $BUILDDIR/embree-3.13.5 \
     && mkdir build && cd build \
     && cmake ../ -DCMAKE_INSTALL_PREFIX=$ROOT -DCMAKE_INSTALL_LIBDIR=lib64/ -DCMAKE_BUILD_TYPE=Release -DEMBREE_TUTORIALS=OFF -DEMBREE_MAX_ISA="AVX2" -DEMBREE_ISPC_SUPPORT=OFF \
-    && make install -j 16 \
+    && make install -j 32 \
     && cd $BUILDDIR/ && rm -rf embree-*
 fi
 
@@ -132,7 +136,7 @@ fi
 #         -DLLVM_LINK_LLVM_DYLIB=ON \
 #         -DCMAKE_BUILD_TYPE=Release \
 #         -DLLVM_TARGETS_TO_BUILD="PowerPC"
-#     cmake --build build -j 16
+#     cmake --build build -j 32
 #     cmake --install build
 #     cd $BUILDDIR
 #     rm -rf llvm-project
@@ -156,16 +160,32 @@ fi
 
 
 
+
+
+if [ ! -n "$(ls -d $ROOT/lib/python*/site-packages/fresnel)" ]
+then
+
  git clone --recursive --branch v0.13.4 --depth 1 https://github.com/glotzerlab/fresnel \
     && cd fresnel \
     && mkdir -p build \
     && cd build \
     && export CFLAGS="-march=native" CXXFLAGS="-march=native" \
     && cmake ../ -DENABLE_EMBREE=on -DENABLE_OPTIX=off -Dembree_DIR=/opt/embree-3.13.5.x86_64.linux -DCMAKE_INSTALL_PREFIX=`python3 -c "import site; print(site.getsitepackages()[0])"` \
-    && make install -j16 \
+    && make install -j32 \
     && cd ../../ \
     && rm -rf fresnel \
     || exit 1
+
+
+fi
+
+
+
+
+
+
+if [ ! -n "$(ls -d $ROOT/lib/python*/site-packages/hoomd)" ]
+then
 
  git clone --recursive --branch fix-rocm-build --depth 1 https://github.com/glotzerlab/hoomd-blue hoomd \
     && cd hoomd \
@@ -173,7 +193,15 @@ fi
     && cd build \
     && export CFLAGS="-march=native" CXXFLAGS="-march=native" \
     && cmake ../ -DPYTHON_EXECUTABLE="`which python3`" -DENABLE_GPU=on -DENABLE_MPI=on -DENABLE_TBB=off -DENABLE_LLVM=off -DBUILD_TESTING=off -DENABLE_MPI_CUDA=off -DHOOMD_GPU_PLATFORM=HIP \
-    && make install -j16 \
+    && make install -j32 \
     && cd ../../ \
     && rm -rf hoomd \
     || exit 1
+
+
+fi
+# cupy does not support the cuda array interface on crusher
+pip uninstall -y cupy
+
+# pip uninstall does not remote the cupy directory, so `import cupy` still works:
+rm -rf $ROOT/lib/python*/site-packages/cupy
