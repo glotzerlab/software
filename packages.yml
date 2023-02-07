@@ -20,7 +20,7 @@ fresnel:
 hoomd:
   ignore: beta,alpha,rc
   repository: https://github.com/glotzerlab/hoomd-blue
-  version: fix-rocm-build
+  version: trunk-minor
 osu_microbenchmark:
   repository: null
   version: 5.4.1
