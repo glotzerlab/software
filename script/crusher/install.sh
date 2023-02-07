@@ -126,23 +126,6 @@ curl -SL https://gitlab.com/libeigen/eigen/-/archive/3.4.0/eigen-3.4.0.tar.gz | 
     cd $BUILDDIR && rm -rf eigen-*
 fi
 
-# if [ ! -f $ROOT/bin/clang ]
-# then
-#     git clone --depth 1 --branch release/12.x https://github.com/llvm/llvm-project
-#     cd llvm-project
-#     cmake -S llvm -B build \
-#         -D CMAKE_INSTALL_PREFIX=$ROOT -DLLVM_ENABLE_PROJECTS=clang \
-#         -DCLANG_LINK_CLANG_DYLIB=ON \
-#         -DLLVM_BUILD_LLVM_DYLIB=ON \
-#         -DLLVM_LINK_LLVM_DYLIB=ON \
-#         -DCMAKE_BUILD_TYPE=Release \
-#         -DLLVM_TARGETS_TO_BUILD="PowerPC"
-#     cmake --build build -j 32
-#     cmake --install build
-#     cd $BUILDDIR
-#     rm -rf llvm-project
-# fi
-
 
 
 
@@ -188,7 +171,7 @@ fi
 if [ ! -n "$(ls -d $ROOT/lib/python*/site-packages/hoomd)" ]
 then
 
- git clone --recursive --branch fix-rocm-build --depth 1 https://github.com/glotzerlab/hoomd-blue hoomd \
+ git clone --recursive --branch trunk-minor --depth 1 https://github.com/glotzerlab/hoomd-blue hoomd \
     && cd hoomd \
     && mkdir -p build \
     && cd build \
