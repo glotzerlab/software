@@ -28,7 +28,7 @@ statsmodels==0.13.5; platform_machine != 'ppc64le'
 cupy==11.5.0
 
 # test requirements
-hypothesis==6.67.1
+hypothesis==6.68.1
 pytest==7.2.1
 miniball==1.1.0
 sympy==1.11.1
