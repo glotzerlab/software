@@ -82,7 +82,8 @@ exclude_patterns = ['build']
 #show_authors = False
 
 # The name of the Pygments (syntax highlighting) style to use.
-pygments_style = 'sphinx'
+pygments_style = "friendly"
+pygments_dark_style = "native"
 
 # A list of ignored prefixes for module index sorting.
 #modindex_common_prefix = []
@@ -98,12 +99,21 @@ todo_include_todos = False
 
 # The theme to use for HTML and HTML Help pages.  See the documentation for
 # a list of builtin themes.
-html_theme = 'sphinx_rtd_theme'
+html_theme = 'furo'
 
 # Theme options are theme-specific and customize the look and feel of a theme
 # further.  For a list of options available for each theme, see the
 # documentation.
-#html_theme_options = {}
+html_theme_options = {
+    "dark_css_variables": {
+        "color-brand-primary": "#5187b2",
+        "color-brand-content": "#5187b2",
+    },
+    "light_css_variables": {
+        "color-brand-primary": "#406a8c",
+        "color-brand-content": "#406a8c",
+    },
+}
 
 # Add any paths that contain custom themes here, relative to this directory.
 #html_theme_path = []
@@ -129,9 +139,7 @@ html_theme = 'sphinx_rtd_theme'
 # so a file named "default.css" will overwrite the builtin "default.css".
 html_static_path = ['_static']
 
-html_css_files = [
-    'css/glotzerlab-software-theme.css',
-]
+
 
 # Add any extra paths that contain custom files (such as robots.txt or
 # .htaccess) here, relative to this directory. These files are copied
