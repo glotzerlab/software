@@ -37,6 +37,8 @@ export CPATH=$ROOT/include
 export LIBRARY_PATH=$ROOT/lib
 export VIRTUAL_ENV=$ROOT
 export CMAKE_PREFIX_PATH=$ROOT
+export CC=\$GCC_PATH/bin/gcc
+export CXX=\$GCC_PATH/bin/g++
 
 # Settings to build cupy for rocm: https://docs.cupy.dev/en/stable/install.html
 export CUPY_INSTALL_USE_HIP=1
@@ -171,7 +173,7 @@ fi
 if [ ! -n "$(ls -d $ROOT/lib/python*/site-packages/hoomd)" ]
 then
 
- git clone --recursive --branch trunk-minor --depth 1 https://github.com/glotzerlab/hoomd-blue hoomd \
+ git clone --recursive --branch v3.9.0 --depth 1 https://github.com/glotzerlab/hoomd-blue hoomd \
     && cd hoomd \
     && mkdir -p build \
     && cd build \

@@ -20,7 +20,7 @@ fresnel:
 hoomd:
   ignore: beta,alpha,rc
   repository: https://github.com/glotzerlab/hoomd-blue
-  version: trunk-minor
+  version: v3.9.0
 osu_microbenchmark:
   repository: null
   version: 5.4.1
