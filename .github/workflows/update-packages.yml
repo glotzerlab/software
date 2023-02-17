@@ -17,15 +17,15 @@ jobs:
       matrix:
         branch: [trunk]
     steps:
-      - uses: actions/checkout@v3.2.0
+      - uses: actions/checkout@v3.3.0
         with:
           ref: ${{ matrix.branch }}
-      - uses: tibdex/github-app-token@v1.7
+      - uses: tibdex/github-app-token@v1.8
         id: generate-token
         with:
           app_id: ${{ secrets.PR_SUBMITTER_APP_ID }}
           private_key: ${{ secrets.PR_SUBMITTER_PRIVATE_KEY }}
-      - uses: actions/cache@v3.2.2
+      - uses: actions/cache@v3.2.4
         with:
           path: ~/.cache/pip
           key: ${{ runner.os }}-pip-${{ hashFiles('.github/workflows/requirements.txt') }}

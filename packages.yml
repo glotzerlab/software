@@ -9,7 +9,7 @@ eigen:
   repository: https://gitlab.com/libeigen/eigen
   version: 3.4.0
 embree:
-  ignore: alpha,rc,beta
+  ignore: alpha,rc,beta,v4
   include_v_prefix: false
   repository: https://github.com/embree/embree
   version: 3.13.5
