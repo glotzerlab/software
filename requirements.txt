@@ -23,7 +23,6 @@ pyqt5==5.15.9; platform_machine != 'ppc64le'
 pyyaml==6.0
 scikit-learn==1.2.1
 scikit-image==0.19.3; platform_machine != 'ppc64le'
-scipy==1.10.0
 statsmodels==0.13.5; platform_machine != 'ppc64le'
 cupy==11.5.0
 
