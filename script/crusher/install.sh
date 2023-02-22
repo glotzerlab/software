@@ -135,9 +135,12 @@ fi
 # Install packages that are build requirements of other packages first.
 # lapack is needed for scipy.
 # Use the pip cache in script builds to reduce time when rerunning the install script.
+
+
  export CFLAGS="-march=native" CXXFLAGS="-march=native"\
     && python3 -m pip install -r requirements-source.txt \
     || exit 1
+
 
  export CFLAGS="-march=native" CXXFLAGS="-march=native" \
     && python3 -m pip install --no-build-isolation -r requirements.txt \

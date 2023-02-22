@@ -20,9 +20,16 @@
 # Install packages that are build requirements of other packages first.
 # lapack is needed for scipy.
 # Use the pip cache in script builds to reduce time when rerunning the install script.
+
+{% if system == 'summit' %}
 {{ RUN }} export CFLAGS="{{CFLAGS}}" CXXFLAGS="{{CFLAGS}}"\
     && python3 -m pip install -r requirements-source-summit.txt \
     || exit 1
+{% else %}
+{{ RUN }} export CFLAGS="{{CFLAGS}}" CXXFLAGS="{{CFLAGS}}"\
+    && python3 -m pip install -r requirements-source.txt \
+    || exit 1
+{% endif %}
 
 {{ RUN }} export CFLAGS="{{CFLAGS}}" CXXFLAGS="{{CFLAGS}}" \
     && python3 -m pip install --no-build-isolation -r requirements.txt \
