@@ -1,0 +1,7 @@
+Cython==0.29.33
+numpy==1.23.5
+pkgconfig==1.5.5
+pybind11==2.10.3
+pythran==0.12.1
+scikit-build==0.16.6
+scipy==1.9.3

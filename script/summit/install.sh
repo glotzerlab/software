@@ -135,7 +135,7 @@ fi
 # install packages that are build requirements of other packages first
 # lapack is needed for scipy
  export CFLAGS="-mcpu=power9 -mtune=power9" CXXFLAGS="-mcpu=power9 -mtune=power9"\
-    && python3 -m pip install -r requirements-source.txt \
+    && python3 -m pip install -r requirements-source-summit.txt \
     || exit 1
 
 # unlike with Docker builds, use the pip cache on summit to reduce time when rerunning the install script
