@@ -87,8 +87,8 @@ fi
 # Embree
 if [ ! -f $ROOT/lib64/libembree3.so ]
 then
-curl -sSL https://github.com/embree/embree/archive/v3.13.5/embree-3.13.5.tar.gz | tar -xzC $BUILDDIR \
-    && cd $BUILDDIR/embree-3.13.5 \
+curl -sSL https://github.com/embree/embree/archive/v4.0.0/embree-4.0.0.tar.gz | tar -xzC $BUILDDIR \
+    && cd $BUILDDIR/embree-4.0.0 \
     && mkdir build && cd build \
     && cmake ../ -DCMAKE_INSTALL_PREFIX=$ROOT -DCMAKE_INSTALL_LIBDIR=lib64/ -DCMAKE_BUILD_TYPE=Release -DEMBREE_TUTORIALS=OFF -DEMBREE_MAX_ISA="AVX2" -DEMBREE_ISPC_SUPPORT=OFF \
     && make install -j 32 \
@@ -154,12 +154,12 @@ fi
 if [ ! -n "$(ls -d $ROOT/lib/python*/site-packages/fresnel)" ]
 then
 
- git clone --recursive --branch v0.13.4 --depth 1 https://github.com/glotzerlab/fresnel \
+ git clone --recursive --branch v0.13.5 --depth 1 https://github.com/glotzerlab/fresnel \
     && cd fresnel \
     && mkdir -p build \
     && cd build \
     && export CFLAGS="-march=native" CXXFLAGS="-march=native" \
-    && cmake ../ -DENABLE_EMBREE=on -DENABLE_OPTIX=off -Dembree_DIR=/opt/embree-3.13.5.x86_64.linux -DCMAKE_INSTALL_PREFIX=`python3 -c "import site; print(site.getsitepackages()[0])"` \
+    && cmake ../ -DENABLE_EMBREE=on -DENABLE_OPTIX=off -Dembree_DIR=/opt/embree-4.0.0.x86_64.linux -DCMAKE_INSTALL_PREFIX=`python3 -c "import site; print(site.getsitepackages()[0])"` \
     && make install -j32 \
     && cd ../../ \
     && rm -rf fresnel \
