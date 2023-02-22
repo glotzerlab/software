@@ -16,7 +16,7 @@ embree:
 fresnel:
   ignore: alpha,rc,beta
   repository: https://github.com/glotzerlab/fresnel
-  version: v0.13.4
+  version: v0.13.5
 hoomd:
   ignore: beta,alpha,rc
   repository: https://github.com/glotzerlab/hoomd-blue
