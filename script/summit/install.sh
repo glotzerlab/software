@@ -136,7 +136,7 @@ fi
 # lapack is needed for scipy.
 # Use the pip cache in script builds to reduce time when rerunning the install script.
  export CFLAGS="-mcpu=power9 -mtune=power9" CXXFLAGS="-mcpu=power9 -mtune=power9"\
-    && python3 -m pip install -r requirements-source.txt \
+    && python3 -m pip install -r requirements-source-summit.txt \
     || exit 1
 
  export CFLAGS="-mcpu=power9 -mtune=power9" CXXFLAGS="-mcpu=power9 -mtune=power9" \

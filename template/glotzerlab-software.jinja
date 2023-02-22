@@ -21,7 +21,7 @@
 # lapack is needed for scipy.
 # Use the pip cache in script builds to reduce time when rerunning the install script.
 {{ RUN }} export CFLAGS="{{CFLAGS}}" CXXFLAGS="{{CFLAGS}}"\
-    && python3 -m pip install -r requirements-source.txt \
+    && python3 -m pip install -r requirements-source-summit.txt \
     || exit 1
 
 {{ RUN }} export CFLAGS="{{CFLAGS}}" CXXFLAGS="{{CFLAGS}}" \
