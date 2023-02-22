@@ -1,7 +1,7 @@
 Summit (OLCF)
 -------------
 
-`Summit <https://www.olcf.ornl.gov/for-users/system-user-guides/summit/>`_ is massive supercomputer
+`Summit <https://docs.olcf.ornl.gov/systems/summit_user_guide.html>`_ is massive supercomputer
 at ORNL with 6 NVIDIA V100 GPUs and 2 IBM Power9 CPUs per node. Apply for resources on Summit
 through the `INCITE <http://www.doeleadershipcomputing.org/>`_, `ALCC
 <https://science.energy.gov/ascr/facilities/accessing-ascr-facilities/alcc/>`_, or `director's
@@ -22,19 +22,17 @@ If you already have a clone, update it::
     $ cd software
     $ git pull origin trunk
 
-Per OLCF policies, you should install your software in NFS under ``/ccs/proj/``. Set the
-installation root directory to ``/ccs/proj/your-project/glotzerlab-software`` to share a single
-software installation with your project. Include your username in the directory name (e.g.
-``/ccs/proj/your-project/glotzerlab-software-$USER}``) to install a user-specific set of software.
+Per OLCF policies, you should install your software in NFS under ``/ccs/proj/``. For example,
+set the installation root directory to ``/ccs/proj/{your-project}/software/${USER}``.
 
 Build the software environment and install it into the root::
 
-    $ script/summit/install.sh /ccs/proj/your-project/glotzerlab-software
+    $ script/summit/install.sh /ccs/proj/{your-project}/software
     ... compiling software will take several minutes ...
 
 Activate the environment with::
 
-    $ source /ccs/proj/your-project/glotzerlab-software/environment.sh
+    $ source /ccs/proj/{your-project}/software/environment.sh
 
 The summit environment is intended to execute HOOMD simulations. Compared to the containerized
 environments, the following packages are missing because they do not yet support the ppc64le
@@ -54,7 +52,7 @@ The following packages are missing because they do not build on summit:
 The summit environment is a `python3 venv <https://docs.python.org/3/library/venv.html>`_. You may
 extend it with additional python packages using ``python3 -m pip install``::
 
-    $ source /ccs/proj/your-project/glotzerlab-software/environment.sh
+    $ source /ccs/proj/{your-project}/software/environment.sh
     $ python3 -m pip install package
 
 .. note::
@@ -64,8 +62,8 @@ extend it with additional python packages using ``python3 -m pip install``::
 Use the following commands in your job scripts or interactively to execute software inside the
 container::
 
-    source /ccs/proj/your-project/glotzerlab-software/environment.sh
-    jsrun <jsrun options> command arguments
+    source /ccs/proj/{your-project}/software/environment.sh
+    jsrun {jsrun options} command arguments
 
 .. note::
 
