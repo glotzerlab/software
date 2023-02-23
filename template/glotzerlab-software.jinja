@@ -4,7 +4,7 @@
 {% set RUN = 'RUN' %}
 {% endif %}
 
-{% if system != 'summit' %}
+{% if output != 'script' %}
 
 {{ RUN }} export CFLAGS="{{CFLAGS}}" CXXFLAGS="{{CFLAGS}}" \
     && python3 -m pip install -r requirements-source.txt \
@@ -17,13 +17,20 @@
 
 {% else %}
 
-# install packages that are build requirements of other packages first
-# lapack is needed for scipy
+# Install packages that are build requirements of other packages first.
+# lapack is needed for scipy.
+# Use the pip cache in script builds to reduce time when rerunning the install script.
+
+{% if system == 'summit' %}
 {{ RUN }} export CFLAGS="{{CFLAGS}}" CXXFLAGS="{{CFLAGS}}"\
     && python3 -m pip install -r requirements-source-summit.txt \
     || exit 1
+{% else %}
+{{ RUN }} export CFLAGS="{{CFLAGS}}" CXXFLAGS="{{CFLAGS}}"\
+    && python3 -m pip install -r requirements-source.txt \
+    || exit 1
+{% endif %}
 
-# unlike with Docker builds, use the pip cache on summit to reduce time when rerunning the install script
 {{ RUN }} export CFLAGS="{{CFLAGS}}" CXXFLAGS="{{CFLAGS}}" \
     && python3 -m pip install --no-build-isolation -r requirements.txt \
     || exit 1
@@ -31,6 +38,11 @@
 {% endif %}
 
 {% if system != 'summit' %}
+
+{% if output == 'script' %}
+if [ ! -n "$(ls -d $ROOT/lib/python*/site-packages/fresnel)" ]
+then
+{% endif %}
 {{ RUN }} git clone --recursive --branch {{ FRESNEL_VERSION }} --depth 1 https://github.com/glotzerlab/fresnel \
     && cd fresnel \
     && mkdir -p build \
@@ -41,15 +53,29 @@
     && cd ../../ \
     && rm -rf fresnel \
     || exit 1
+
+{% if output == 'script' %}
+fi
 {% endif %}
 
+{% endif %}
+
+
+{% if output == 'script' %}
+if [ ! -n "$(ls -d $ROOT/lib/python*/site-packages/hoomd)" ]
+then
+{% endif %}
 {{ RUN }} git clone --recursive --branch {{ HOOMD_VERSION }} --depth 1 https://github.com/glotzerlab/hoomd-blue hoomd \
     && cd hoomd \
     && mkdir -p build \
     && cd build \
     && export CFLAGS="{{CFLAGS}}" CXXFLAGS="{{CFLAGS}}" \
-    && cmake ../ -DPYTHON_EXECUTABLE="`which python3`" -DENABLE_GPU=on -DENABLE_MPI={{ ENABLE_MPI }} -DENABLE_TBB={{ ENABLE_TBB|default('on') }} -DENABLE_LLVM={{ ENABLE_LLVM|default('on') }} -DBUILD_TESTING=off -DENABLE_MPI_CUDA={{ ENABLE_MPI_CUDA|default('off') }} \
+    && cmake ../ -DPYTHON_EXECUTABLE="`which python3`" -DENABLE_GPU=on -DENABLE_MPI={{ ENABLE_MPI }} -DENABLE_TBB={{ ENABLE_TBB|default('on') }} -DENABLE_LLVM={{ ENABLE_LLVM|default('on') }} -DBUILD_TESTING=off -DENABLE_MPI_CUDA={{ ENABLE_MPI_CUDA|default('off') }} -DHOOMD_GPU_PLATFORM={{ HOOMD_GPU_PLATFORM|default('CUDA') }} \
     && make install -j{{ MAKEJOBS }} \
     && cd ../../ \
     && rm -rf hoomd \
     || exit 1
+
+{% if output == 'script' %}
+fi
+{% endif %}

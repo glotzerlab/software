@@ -14,33 +14,41 @@ fi
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 ROOT=$1
 module reset
-module load gcc/7.5.0
-module load python/3.8.10
+module load cray-python/3.9.13.1
 python3 -m venv $ROOT
 
 cat >$ROOT/environment.sh << EOL
 module reset
-module load gcc/7.5.0
-module load openblas/0.3.20
-module load python/3.8.10
-module load cuda/11.0.3
-module load cmake
-module load git
-module load netlib-lapack/3.9.1
-module load hdf5/1.10.7
+module load PrgEnv-gnu
+module load cmake/3.23.2
+module load git/2.36.1
+module load rocm/5.1.0
+module load cray-python/3.9.13.1
+module load hdf5/1.12.1
+module load ninja/1.10.2
+module load tmux/3.2a
+
+# The cray-mpich module does not provide this, it is needed to build mpi4py from source.
+export MPICC=\$CRAY_MPICH_DIR/bin/mpicc
 
 export LD_LIBRARY_PATH=$ROOT/lib:\$LD_LIBRARY_PATH
 export PATH=$ROOT/bin:\$PATH
-export CPATH=$ROOT/include:\$CPATH
-export LIBRARY_PATH=$ROOT/lib:\$LIBRARY_PATH
-export CC=\${OLCF_GCC_ROOT}/bin/gcc
-export CXX=\${OLCF_GCC_ROOT}/bin/g++
-export LDSHARED="\${OLCF_GCC_ROOT}/bin/gcc -shared"
+export CPATH=$ROOT/include
+export LIBRARY_PATH=$ROOT/lib
 export VIRTUAL_ENV=$ROOT
 export CMAKE_PREFIX_PATH=$ROOT
+export CC=\$GCC_PATH/bin/gcc
+export CXX=\$GCC_PATH/bin/g++
+
+# Settings to build cupy for rocm: https://docs.cupy.dev/en/stable/install.html
+export CUPY_INSTALL_USE_HIP=1
+export ROCM_HOME=\$OLCF_ROCM_ROOT
+export HCC_AMDGPU_TARGET=gfx90a
 EOL
 
 source $ROOT/environment.sh
+
+set -x
 
 BUILDDIR=`mktemp -d`
 mkdir -p $BUILDDIR
@@ -68,7 +76,7 @@ curl -sSLO https://github.com/oneapi-src/oneTBB/archive/v2021.8.0.tar.gz \
     && tar -xzf v2021.8.0.tar.gz -C . \
     && cd oneTBB-2021.8.0 \
     && cmake -S . -B build -DTBB_TEST=off -DTBB_STRICT=off -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=$ROOT \
-    && cmake --build build -j 8  \
+    && cmake --build build -j 32  \
     && cmake --install build \
     && cd .. \
     && rm -rf oneTBB-2021.8.0 \
@@ -76,7 +84,16 @@ curl -sSLO https://github.com/oneapi-src/oneTBB/archive/v2021.8.0.tar.gz \
     || exit 1
 fi
 
-# embree is not available for power9
+# Embree
+if [ ! -f $ROOT/lib64/libembree3.so ]
+then
+curl -sSL https://github.com/embree/embree/archive/v4.0.0/embree-4.0.0.tar.gz | tar -xzC $BUILDDIR \
+    && cd $BUILDDIR/embree-4.0.0 \
+    && mkdir build && cd build \
+    && cmake ../ -DCMAKE_INSTALL_PREFIX=$ROOT -DCMAKE_INSTALL_LIBDIR=lib64/ -DCMAKE_BUILD_TYPE=Release -DEMBREE_TUTORIALS=OFF -DEMBREE_MAX_ISA="AVX2" -DEMBREE_ISPC_SUPPORT=OFF \
+    && make install -j 32 \
+    && cd $BUILDDIR/ && rm -rf embree-*
+fi
 
 # install pybind11 headers
 if [ ! -f $ROOT/include/pybind11/pybind11.h ]
@@ -111,23 +128,6 @@ curl -SL https://gitlab.com/libeigen/eigen/-/archive/3.4.0/eigen-3.4.0.tar.gz | 
     cd $BUILDDIR && rm -rf eigen-*
 fi
 
-if [ ! -f $ROOT/bin/clang ]
-then
-    git clone --depth 1 --branch release/12.x https://github.com/llvm/llvm-project
-    cd llvm-project
-    cmake -S llvm -B build \
-        -D CMAKE_INSTALL_PREFIX=$ROOT -DLLVM_ENABLE_PROJECTS=clang \
-        -DCLANG_LINK_CLANG_DYLIB=ON \
-        -DLLVM_BUILD_LLVM_DYLIB=ON \
-        -DLLVM_LINK_LLVM_DYLIB=ON \
-        -DCMAKE_BUILD_TYPE=Release \
-        -DLLVM_TARGETS_TO_BUILD="PowerPC"
-    cmake --build build -j 8
-    cmake --install build
-    cd $BUILDDIR
-    rm -rf llvm-project
-fi
-
 
 
 
@@ -137,15 +137,36 @@ fi
 # Use the pip cache in script builds to reduce time when rerunning the install script.
 
 
- export CFLAGS="-mcpu=power9 -mtune=power9" CXXFLAGS="-mcpu=power9 -mtune=power9"\
-    && python3 -m pip install -r requirements-source-summit.txt \
+ export CFLAGS="-march=native" CXXFLAGS="-march=native"\
+    && python3 -m pip install -r requirements-source.txt \
     || exit 1
 
 
- export CFLAGS="-mcpu=power9 -mtune=power9" CXXFLAGS="-mcpu=power9 -mtune=power9" \
+ export CFLAGS="-march=native" CXXFLAGS="-march=native" \
     && python3 -m pip install --no-build-isolation -r requirements.txt \
     || exit 1
 
+
+
+
+
+
+if [ ! -n "$(ls -d $ROOT/lib/python*/site-packages/fresnel)" ]
+then
+
+ git clone --recursive --branch v0.13.5 --depth 1 https://github.com/glotzerlab/fresnel \
+    && cd fresnel \
+    && mkdir -p build \
+    && cd build \
+    && export CFLAGS="-march=native" CXXFLAGS="-march=native" \
+    && cmake ../ -DENABLE_EMBREE=on -DENABLE_OPTIX=off -Dembree_DIR=/opt/embree-4.0.0.x86_64.linux -DCMAKE_INSTALL_PREFIX=`python3 -c "import site; print(site.getsitepackages()[0])"` \
+    && make install -j32 \
+    && cd ../../ \
+    && rm -rf fresnel \
+    || exit 1
+
+
+fi
 
 
 
@@ -159,12 +180,17 @@ then
     && cd hoomd \
     && mkdir -p build \
     && cd build \
-    && export CFLAGS="-mcpu=power9 -mtune=power9" CXXFLAGS="-mcpu=power9 -mtune=power9" \
-    && cmake ../ -DPYTHON_EXECUTABLE="`which python3`" -DENABLE_GPU=on -DENABLE_MPI=on -DENABLE_TBB=off -DENABLE_LLVM=on -DBUILD_TESTING=off -DENABLE_MPI_CUDA=off -DHOOMD_GPU_PLATFORM=CUDA \
-    && make install -j8 \
+    && export CFLAGS="-march=native" CXXFLAGS="-march=native" \
+    && cmake ../ -DPYTHON_EXECUTABLE="`which python3`" -DENABLE_GPU=on -DENABLE_MPI=on -DENABLE_TBB=off -DENABLE_LLVM=off -DBUILD_TESTING=off -DENABLE_MPI_CUDA=off -DHOOMD_GPU_PLATFORM=HIP \
+    && make install -j32 \
     && cd ../../ \
     && rm -rf hoomd \
     || exit 1
 
 
 fi
+# cupy does not support the cuda array interface on crusher
+pip uninstall -y cupy
+
+# pip uninstall does not remote the cupy directory, so `import cupy` still works:
+rm -rf $ROOT/lib/python*/site-packages/cupy
