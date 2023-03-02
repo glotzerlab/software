@@ -41,6 +41,8 @@ jobs:
         with:
           username: ${{ secrets.DOCKER_HUB_USERNAME }}
           password: ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
+      - name: Clear existing images
+        run: docker system prune -a -f
       - name: Build image
         run: ./build.sh -r glotzerlab ${{ matrix.configuration }}
       - name: Push image
