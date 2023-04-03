@@ -7,3 +7,5 @@ updates:
     pull-request-branch-name:
       separator: "-"
     open-pull-requests-limit: 10
+    commit-message:
+      prefix: "[ci skip]"
