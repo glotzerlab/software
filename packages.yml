@@ -20,7 +20,7 @@ fresnel:
 hoomd:
   ignore: beta,alpha,rc
   repository: https://github.com/glotzerlab/hoomd-blue
-  version: v3.10.0
+  version: v3.11.0
 osu_microbenchmark:
   repository: null
   version: 5.4.1
@@ -38,4 +38,4 @@ tbb:
   ignore: alpha,rc,beta,v2021.3.0
   include_v_prefix: false
   repository: https://github.com/oneapi-src/oneTBB
-  version: 2021.8.0
+  version: 2021.9.0
