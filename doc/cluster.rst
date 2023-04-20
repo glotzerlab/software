@@ -16,3 +16,4 @@ community <community>` for suggestions.
     clusters/expanse
     clusters/greatlakes
     clusters/summit
+    clusters/frontier
