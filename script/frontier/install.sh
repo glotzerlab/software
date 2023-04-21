@@ -85,7 +85,7 @@ curl -sSLO https://github.com/oneapi-src/oneTBB/archive/v2021.9.0.tar.gz \
 fi
 
 # Embree
-if [ ! -f $ROOT/lib64/libembree3.so ]
+if [ ! -f $ROOT/lib64/libembree4.so ]
 then
 curl -sSL https://github.com/embree/embree/archive/v4.0.1/embree-4.0.1.tar.gz | tar -xzC $BUILDDIR \
     && cd $BUILDDIR/embree-4.0.1 \
@@ -133,7 +133,6 @@ fi
 
 
 # Install packages that are build requirements of other packages first.
-# lapack is needed for scipy.
 # Use the pip cache in script builds to reduce time when rerunning the install script.
 
 
@@ -143,8 +142,10 @@ fi
 
 
  export CFLAGS="-march=native" CXXFLAGS="-march=native" \
-    && python3 -m pip install --no-build-isolation -r requirements.txt \
+    && python3 -m pip install --no-build-isolation --no-binary freud-analysis,gsd -r requirements.txt \
     || exit 1
+
+
 
 
 
@@ -189,8 +190,3 @@ then
 
 
 fi
-# cupy does not support the cuda array interface on crusher
-pip uninstall -y cupy
-
-# pip uninstall does not remote the cupy directory, so `import cupy` still works:
-rm -rf $ROOT/lib/python*/site-packages/cupy

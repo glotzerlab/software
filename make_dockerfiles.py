@@ -24,9 +24,7 @@ if __name__ == '__main__':
     env = jinja2.Environment(loader=jinja2.FileSystemLoader('template'))
     base_template = env.get_template('base.jinja')
     crusher_template = env.get_template('crusher.jinja')
-    crusher_finalize_template = env.get_template('crusher_finalize.jinja')
     frontier_template = env.get_template('frontier.jinja')
-    frontier_finalize_template = env.get_template('frontier_finalize.jinja')
     ib_mlx_template = env.get_template('ib-mlx.jinja')
     openmpi_template = env.get_template('openmpi.jinja')
     pmix_template = env.get_template('pmix.jinja')
@@ -96,7 +94,7 @@ if __name__ == '__main__':
           ENABLE_TBB='off',
           **versions)
 
-    write('script/crusher/install.sh', [crusher_template, glotzerlab_software_template, crusher_finalize_template],
+    write('script/crusher/install.sh', [crusher_template, glotzerlab_software_template],
           MAKEJOBS=32,
           CFLAGS='-march=native',
           output='script',
@@ -107,7 +105,7 @@ if __name__ == '__main__':
           HOOMD_GPU_PLATFORM='HIP',
           **versions)
 
-    write('script/frontier/install.sh', [frontier_template, glotzerlab_software_template, frontier_finalize_template],
+    write('script/frontier/install.sh', [frontier_template, glotzerlab_software_template],
           MAKEJOBS=32,
           CFLAGS='-march=native',
           output='script',

@@ -133,7 +133,6 @@ fi
 
 
 # Install packages that are build requirements of other packages first.
-# lapack is needed for scipy.
 # Use the pip cache in script builds to reduce time when rerunning the install script.
 
 
@@ -143,8 +142,14 @@ fi
 
 
  export CFLAGS="-mcpu=power9 -mtune=power9" CXXFLAGS="-mcpu=power9 -mtune=power9" \
-    && python3 -m pip install --no-build-isolation -r requirements.txt \
+    && python3 -m pip install --no-build-isolation --no-binary freud-analysis,gsd -r requirements.txt \
     || exit 1
+
+
+ export CFLAGS="-mcpu=power9 -mtune=power9" CXXFLAGS="-mcpu=power9 -mtune=power9" \
+    && python3 -m pip install --no-build-isolation -r requirements-cupy.txt \
+    || exit 1
+
 
 
 

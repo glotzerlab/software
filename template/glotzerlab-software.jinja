@@ -18,7 +18,6 @@
 {% else %}
 
 # Install packages that are build requirements of other packages first.
-# lapack is needed for scipy.
 # Use the pip cache in script builds to reduce time when rerunning the install script.
 
 {% if system == 'summit' %}
@@ -32,8 +31,14 @@
 {% endif %}
 
 {{ RUN }} export CFLAGS="{{CFLAGS}}" CXXFLAGS="{{CFLAGS}}" \
-    && python3 -m pip install --no-build-isolation -r requirements.txt \
+    && python3 -m pip install --no-build-isolation --no-binary freud-analysis,gsd -r requirements.txt \
     || exit 1
+
+{% if system != 'crusher' and system != 'frontier' %}
+{{ RUN }} export CFLAGS="{{CFLAGS}}" CXXFLAGS="{{CFLAGS}}" \
+    && python3 -m pip install --no-build-isolation -r requirements-cupy.txt \
+    || exit 1
+{% endif %}
 
 {% endif %}
 

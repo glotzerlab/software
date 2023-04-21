@@ -85,7 +85,7 @@ curl -sSLO https://github.com/oneapi-src/oneTBB/archive/v{{ TBB_VERSION }}.tar.g
 fi
 
 # Embree
-if [ ! -f $ROOT/lib64/libembree3.so ]
+if [ ! -f $ROOT/lib64/libembree4.so ]
 then
 curl -sSL https://github.com/embree/embree/archive/v{{ EMBREE_VERSION }}/embree-{{ EMBREE_VERSION }}.tar.gz | tar -xzC $BUILDDIR \
     && cd $BUILDDIR/embree-{{ EMBREE_VERSION }} \
