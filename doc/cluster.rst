@@ -14,5 +14,6 @@ community <community>` for suggestions.
     clusters/crusher
     clusters/delta
     clusters/expanse
+    clusters/frontier
     clusters/greatlakes
     clusters/summit
