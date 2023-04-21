@@ -43,6 +43,8 @@ jobs:
         run: pur -r requirements-mpi.txt
       - name: Bump versions in requirements-source.txt
         run: pur -r requirements-source.txt
+      - name: Bump versions in requirements-cupy.txt
+        run: pur -r requirements-cupy.txt
       - name: Bump versions in generated scripts
         run: python3 make_dockerfiles.py
       - name: Display updates

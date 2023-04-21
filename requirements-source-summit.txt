@@ -5,3 +5,4 @@ pybind11==2.10.3
 pythran==0.12.1
 scikit-build==0.16.6
 scipy==1.9.3
+versioneer==0.28

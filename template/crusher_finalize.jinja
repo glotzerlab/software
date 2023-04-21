@@ -1,5 +1,0 @@
-# cupy does not support the cuda array interface on crusher
-pip uninstall -y cupy
-
-# pip uninstall does not remote the cupy directory, so `import cupy` still works:
-rm -rf $ROOT/lib/python*/site-packages/cupy

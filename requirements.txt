@@ -17,14 +17,13 @@ jupyterlab==3.6.3; platform_machine != 'ppc64le'
 matplotlib==3.7.1; platform_machine != 'ppc64le'
 notebook==6.5.4; platform_machine != 'ppc64le'
 opencv-python==4.7.0.72; platform_machine != 'ppc64le'
-pandas==1.5.3
+pandas==2.0.0
 Pillow==9.5.0
 pyqt5==5.15.9; platform_machine != 'ppc64le'
 pyyaml==6.0
 scikit-learn==1.2.2
 scikit-image==0.20.0; platform_machine != 'ppc64le'
 statsmodels==0.13.5; platform_machine != 'ppc64le'
-cupy==12.0.0
 
 
 # test requirements
