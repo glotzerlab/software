@@ -1,4 +1,4 @@
-Crusher (OLCF)
+Frontier (OLCF)
 --------------
 
 `frontier <https://docs.olcf.ornl.gov/systems/frontier_user_guide.html>`_ is a system
