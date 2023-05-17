@@ -28,6 +28,7 @@ module load cmake
 module load git
 module load netlib-lapack/3.9.1
 module load hdf5/1.10.7
+module unload darshan-runtime
 
 export LD_LIBRARY_PATH=$ROOT/lib:\$LD_LIBRARY_PATH
 export PATH=$ROOT/bin:\$PATH
