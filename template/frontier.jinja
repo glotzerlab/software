@@ -27,6 +27,7 @@ module load cray-python/3.9.13.1
 module load hdf5/1.14.0
 module load ninja/1.10.2
 module load tmux/3.2a
+module unload darshan-runtime
 
 # The cray-mpich module does not provide this, it is needed to build mpi4py from source.
 export MPICC=\$CRAY_MPICH_DIR/bin/mpicc
