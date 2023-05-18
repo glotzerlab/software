@@ -57,22 +57,22 @@ container:
 
 Serial (or multithreaded) CPU jobs (``shared`` partition)::
 
-    module load cpu singularitypro gcc/9.2.0 openmpi/4.1.1
+    module load cpu/0.15.4 singularitypro gcc/9.2.0 openmpi/4.1.1
     singularity exec --bind /expanse /expanse/lustre/scratch/$USER/temp_project/software.sif command arguments
 
 Single GPU jobs (``gpu-shared`` partition)::
 
-    module load gpu singularitypro openmpi/4.0.4-nocuda
+    module load gpu/0.15.4 singularitypro openmpi/4.0.4-nocuda
     singularity exec --nv --bind /expanse /expanse/lustre/scratch/$USER/temp_project/software.sif command arguments
 
 MPI parallel CPU jobs (``compute`` partition, ``shared`` partition with more than 1 core)::
 
-    module load cpu singularitypro gcc/9.2.0 openmpi/4.1.1
+    module load cpu/0.15.4 singularitypro gcc/9.2.0 openmpi/4.1.1
     mpirun singularity exec --bind /expanse /expanse/lustre/scratch/$USER/temp_project/software.sif command arguments
 
 MPI parallel GPU jobs (``gpu`` partition, ``gpu-shared`` with more than 1 GPU)::
 
-    module load gpu singularitypro openmpi/4.0.4-nocuda
+    module load gpu/0.15.4 singularitypro openmpi/4.0.4-nocuda
     mpirun singularity exec --nv --bind /expanse /expanse/lustre/scratch/$USER/temp_project/software.sif command arguments
 
 .. important::

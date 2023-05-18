@@ -5,7 +5,7 @@
 #SBATCH --ntasks-per-node=1
 #SBATCH -t 0:10:00
 
-module load cpu singularitypro gcc/9.2.0 openmpi/4.1.1
+module load cpu/0.15.4 singularitypro gcc/9.2.0 openmpi/4.1.1
 
 set -x
 

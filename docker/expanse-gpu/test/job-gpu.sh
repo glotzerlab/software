@@ -6,7 +6,7 @@
 #SBATCH --gpus=4
 #SBATCH -t 0:10:00
 
-module load gpu singularitypro openmpi/4.0.4-nocuda
+module load gpu/0.15.4 singularitypro openmpi/4.0.4-nocuda
 
 set -x
 
