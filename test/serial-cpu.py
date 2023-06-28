@@ -19,7 +19,7 @@ try:
 
     # GSD
     import gsd
-    results.write('GSD version       : {}\n'.format(gsd.__version__))
+    results.write('GSD version       : {}\n'.format(gsd.version.version))
 
     # HOOMD
     import hoomd
