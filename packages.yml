@@ -38,4 +38,4 @@ tbb:
   ignore: alpha,rc,beta,v2021.3.0
   include_v_prefix: false
   repository: https://github.com/oneapi-src/oneTBB
-  version: 2021.9.0
+  version: 2021.10.0
