@@ -88,8 +88,8 @@ fi
 # Embree
 if [ ! -f $ROOT/lib64/libembree4.so ]
 then
-curl -sSL https://github.com/embree/embree/archive/v4.1.0/embree-4.1.0.tar.gz | tar -xzC $BUILDDIR \
-    && cd $BUILDDIR/embree-4.1.0 \
+curl -sSL https://github.com/embree/embree/archive/v4.2.0/embree-4.2.0.tar.gz | tar -xzC $BUILDDIR \
+    && cd $BUILDDIR/embree-4.2.0 \
     && mkdir build && cd build \
     && cmake ../ -DCMAKE_INSTALL_PREFIX=$ROOT -DCMAKE_INSTALL_LIBDIR=lib64/ -DCMAKE_BUILD_TYPE=Release -DEMBREE_TUTORIALS=OFF -DEMBREE_MAX_ISA="AVX2" -DEMBREE_ISPC_SUPPORT=OFF \
     && make install -j 32 \
@@ -161,7 +161,7 @@ then
     && mkdir -p build \
     && cd build \
     && export CFLAGS="-march=native" CXXFLAGS="-march=native" \
-    && cmake ../ -DENABLE_EMBREE=on -DENABLE_OPTIX=off -Dembree_DIR=/opt/embree-4.1.0.x86_64.linux -DCMAKE_INSTALL_PREFIX=`python3 -c "import site; print(site.getsitepackages()[0])"` \
+    && cmake ../ -DENABLE_EMBREE=on -DENABLE_OPTIX=off -Dembree_DIR=/opt/embree-4.2.0.x86_64.linux -DCMAKE_INSTALL_PREFIX=`python3 -c "import site; print(site.getsitepackages()[0])"` \
     && make install -j32 \
     && cd ../../ \
     && rm -rf fresnel \
@@ -178,7 +178,7 @@ fi
 if [ ! -n "$(ls -d $ROOT/lib/python*/site-packages/hoomd)" ]
 then
 
- git clone --recursive --branch v4.0.1 --depth 1 https://github.com/glotzerlab/hoomd-blue hoomd \
+ git clone --recursive --branch v4.1.0 --depth 1 https://github.com/glotzerlab/hoomd-blue hoomd \
     && cd hoomd \
     && mkdir -p build \
     && cd build \
