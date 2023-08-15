@@ -59,7 +59,8 @@ cp -a $DIR/../../*.txt $BUILDDIR
 cd $BUILDDIR
 
 set -x
-python3 -m pip install --upgrade pip setuptools wheel
+# setuptools <60 needed to build scipy 1.9.3 from source
+python3 -m pip install --upgrade pip setuptools==59.8.0 wheel
 python3 -m pip install -r requirements-mpi.txt
 
 # TBB
@@ -137,9 +138,13 @@ fi
 # Use the pip cache in script builds to reduce time when rerunning the install script.
 
 
- export CFLAGS="-mcpu=power9 -mtune=power9" CXXFLAGS="-mcpu=power9 -mtune=power9"\
-    && python3 -m pip install -r requirements-source-summit.txt \
-    || exit 1
+ export CFLAGS="-mcpu=power9 -mtune=power9" CXXFLAGS="-mcpu=power9 -mtune=power9"
+while read package; do
+  python3 -m pip install --no-build-isolation $package || exit 1
+done <requirements-source-summit.txt
+
+ # modern setuptools needed for gsd and other packages\
+ python3 -m pip install --upgrade setuptools
 
 
  export CFLAGS="-mcpu=power9 -mtune=power9" CXXFLAGS="-mcpu=power9 -mtune=power9" \

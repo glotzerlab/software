@@ -21,9 +21,13 @@
 # Use the pip cache in script builds to reduce time when rerunning the install script.
 
 {% if system == 'summit' %}
-{{ RUN }} export CFLAGS="{{CFLAGS}}" CXXFLAGS="{{CFLAGS}}"\
-    && python3 -m pip install -r requirements-source-summit.txt \
-    || exit 1
+{{ RUN }} export CFLAGS="-mcpu=power9 -mtune=power9" CXXFLAGS="-mcpu=power9 -mtune=power9"
+while read package; do
+  python3 -m pip install --no-build-isolation $package || exit 1
+done <requirements-source-summit.txt
+
+ # modern setuptools needed for gsd and other packages\
+ python3 -m pip install --upgrade setuptools
 {% else %}
 {{ RUN }} export CFLAGS="{{CFLAGS}}" CXXFLAGS="{{CFLAGS}}"\
     && python3 -m pip install -r requirements-source.txt \

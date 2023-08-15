@@ -59,7 +59,8 @@ cp -a $DIR/../../*.txt $BUILDDIR
 cd $BUILDDIR
 
 set -x
-python3 -m pip install --upgrade pip setuptools wheel
+# setuptools <60 needed to build scipy 1.9.3 from source
+python3 -m pip install --upgrade pip setuptools==59.8.0 wheel
 python3 -m pip install -r requirements-mpi.txt
 
 # TBB
