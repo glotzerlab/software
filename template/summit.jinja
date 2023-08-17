@@ -12,7 +12,8 @@ then
 fi
 
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
-ROOT=$1
+ROOT=$(realpath $1)
+echo "Installing glotzerlab-software to $ROOT"
 module reset
 module load gcc/7.5.0
 module load python/3.8.10
