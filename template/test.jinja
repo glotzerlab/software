@@ -1,5 +1,9 @@
 
 
+# setup self test
+RUN mkdir /test
+COPY test/* /test/
+
 RUN cd /test && \
     python3 serial-cpu.py
 

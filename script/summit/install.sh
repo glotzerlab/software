@@ -150,6 +150,7 @@ done <requirements-source-summit.txt
 
  export CFLAGS="-mcpu=power9 -mtune=power9" CXXFLAGS="-mcpu=power9 -mtune=power9" \
     && python3 -m pip install --no-build-isolation --no-binary freud-analysis,gsd -r requirements.txt \
+    && chmod o+rX `python3 -c "import site; print(site.getsitepackages()[0])"`/flow/templates/* \
     || exit 1
 
 
