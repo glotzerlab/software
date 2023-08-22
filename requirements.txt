@@ -27,12 +27,12 @@ statsmodels==0.14.0; platform_machine != 'ppc64le'
 
 
 # test requirements
-hypothesis==6.82.4
+hypothesis==6.82.6
 pytest==7.4.0
 miniball==1.2.0
 sympy==1.12
 tables==3.8.0; platform_machine != 'ppc64le'
 coverage==7.3.0
-click==8.1.6
+click==8.1.7
 pytest-cov==4.1.0
 ruamel.yaml==0.17.32
