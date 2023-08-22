@@ -1,13 +1,8 @@
 
 
-# setup self test
-RUN mkdir /test
-COPY test/* /test/
-
 # configure unprivileged user
 RUN useradd --create-home --shell /bin/bash glotzerlab-software \
     && chown glotzerlab-software:glotzerlab-software -R /test \
-    && chmod o+rX -R /test \
-    && chmod o+rX `python3 -c "import site; print(site.getsitepackages()[0])"`/flow/templates/*
+    && chmod o+rX -R /test
 
 USER glotzerlab-software:glotzerlab-software

@@ -87,3 +87,7 @@ COPY requirements*.txt /
 # Fix library search paths
 RUN echo "/usr/local/cuda-{{ CUDA_VERSION }}/compat" >> /etc/ld.so.conf.d/999-cuda-glotzerlab.conf
 RUN ldconfig
+
+# setup self test
+RUN mkdir /test
+COPY test/* /test/

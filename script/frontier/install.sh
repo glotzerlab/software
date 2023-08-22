@@ -12,13 +12,15 @@ then
 fi
 
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
-ROOT=$1
-module reset
+ROOT=$(realpath $1)
+echo "Installing glotzerlab-software to $ROOT"
+module purge
+module load PrgEnv-gnu
 module load cray-python/3.9.13.1
 python3 -m venv $ROOT
 
 cat >$ROOT/environment.sh << EOL
-module reset
+module purge
 module load PrgEnv-gnu
 module load cmake/3.23.2
 module load git/2.36.1
@@ -144,6 +146,7 @@ fi
 
  export CFLAGS="-march=native" CXXFLAGS="-march=native" \
     && python3 -m pip install --no-build-isolation --no-binary freud-analysis,gsd -r requirements.txt \
+    && chmod o+rX `python3 -c "import site; print(site.getsitepackages()[0])"`/flow/templates/* \
     || exit 1
 
 

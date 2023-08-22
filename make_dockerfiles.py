@@ -35,7 +35,7 @@ if __name__ == '__main__':
     finalize_template = env.get_template('finalize.jinja')
     test_template = env.get_template('test.jinja')
 
-    write('docker/nompi/Dockerfile', [base_template, glotzerlab_software_template, finalize_template, test_template],
+    write('docker/nompi/Dockerfile', [base_template, glotzerlab_software_template, test_template, finalize_template],
           FROM='nvidia/cuda:11.1.1-devel-ubuntu20.04',
           ENABLE_MPI='off',
           MAKEJOBS=multiprocessing.cpu_count()+2,
