@@ -12,7 +12,7 @@
 
 # build select packages from source with machine specific flags
 {{ RUN }} export CFLAGS="{{CFLAGS}}" CXXFLAGS="{{CFLAGS}}" \
-    && python3 -m pip install --no-build-isolation --no-binary freud-analysis,gsd -r requirements.txt \
+    && python3 -m pip install --no-build-isolation --no-binary freud-analysis,gsd -r requirements.txt -r requirements-cupy.txt \
     && python3 -m pip cache purge
 
 {% else %}
