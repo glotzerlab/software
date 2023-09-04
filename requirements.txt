@@ -8,16 +8,16 @@ coxeter==0.6.1
 plato-draw==1.12.0
 signac==2.1.0
 signac-flow==0.25.1
-signac-dashboard==0.5.0
+signac-dashboard==0.6.0
 
 # commonly used packages
 h5py==3.9.0
 jupyter==1.0.0; platform_machine != 'ppc64le'
 jupyterlab==4.0.5; platform_machine != 'ppc64le'
 matplotlib==3.7.2; platform_machine != 'ppc64le'
-notebook==7.0.2; platform_machine != 'ppc64le'
+notebook==7.0.3; platform_machine != 'ppc64le'
 opencv-python==4.8.0.76; platform_machine != 'ppc64le'
-pandas==2.0.3
+pandas==2.1.0
 Pillow==10.0.0
 pyqt5==5.15.9; platform_machine != 'ppc64le'
 pyyaml==6.0.1
@@ -27,8 +27,8 @@ statsmodels==0.14.0; platform_machine != 'ppc64le'
 
 
 # test requirements
-hypothesis==6.82.6
-pytest==7.4.0
+hypothesis==6.84.0
+pytest==7.4.1
 miniball==1.2.0
 sympy==1.12
 tables==3.8.0; platform_machine != 'ppc64le'
