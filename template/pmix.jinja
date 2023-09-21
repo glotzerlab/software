@@ -8,4 +8,4 @@ RUN curl -sSLO https://github.com/pmix/pmix/releases/download/v{{ PMIX_VERSION }
    && rm -rf /root/pmix-{{ PMIX_VERSION }} \
    && rm /pmix-{{ PMIX_VERSION }}.tar.bz2
 
-ENV PMIX_MCA_psec=^munge
+ENV PMIX_MCA_psec=^munge PMIX_MCA_gds=hash

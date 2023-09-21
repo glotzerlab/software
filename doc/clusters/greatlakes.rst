@@ -53,6 +53,3 @@ MPI parallel GPU jobs::
     module load gcc/10.3.0 openmpi/4.1.6 singularity
     mpirun singularity exec --bind /scratch,/gpfs --nv \
       /scratch/your-account_root/your-account/$USER/software.sif command arguments
-
-.. tip::
-
