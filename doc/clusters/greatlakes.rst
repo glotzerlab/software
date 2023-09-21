@@ -32,24 +32,27 @@ Use the following commands in your job scripts or interactively to execute softw
 
 Serial (or multithreaded) CPU jobs::
 
-    module load gcc/10.3.0 openmpi/4.1.4 singularity
+    module load gcc/10.3.0 openmpi/4.1.6 singularity
     mpirun -n 1 singularity exec --bind /scratch,/gpfs \
       /scratch/your-account_root/your-account/$USER/software.sif command arguments
 
 Single GPU jobs::
 
-    module load gcc/10.3.0 openmpi/4.1.4 singularity
+    module load gcc/10.3.0 openmpi/4.1.6 singularity
     mpirun -n 1 singularity exec --bind /scratch,/gpfs --nv \
       /scratch/your-account_root/your-account/$USER/software.sif command arguments
 
 MPI parallel CPU jobs::
 
-    module load gcc/10.3.0 openmpi/4.1.4 singularity
+    module load gcc/10.3.0 openmpi/4.1.6 singularity
     mpirun singularity exec --bind /scratch,/gpfs \
       /scratch/your-account_root/your-account/$USER/software.sif command arguments
 
 MPI parallel GPU jobs::
 
-    module load gcc/10.3.0 openmpi/4.1.4 singularity
+    module load gcc/10.3.0 openmpi/4.1.6 singularity
     mpirun singularity exec --bind /scratch,/gpfs --nv \
       /scratch/your-account_root/your-account/$USER/software.sif command arguments
+
+.. tip::
+
