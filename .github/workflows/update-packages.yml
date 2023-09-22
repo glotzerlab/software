@@ -42,7 +42,7 @@ jobs:
       - name: Bump versions in requirements-mpi.txt
         run: pur -r requirements-mpi.txt
       - name: Bump versions in requirements-source.txt
-        run: pur -r requirements-source.txt --patch Cython
+        run: pur -r requirements-source.txt
       - name: Bump versions in requirements-cupy.txt
         run: pur -r requirements-cupy.txt
       - name: Bump versions in generated scripts
