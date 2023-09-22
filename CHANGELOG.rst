@@ -3,7 +3,19 @@ Change log
 ==========
 
 **glotzerlab-software** releases update regularly. Releases are numbered by the year, month,
-and optionally the day separated by periods.
+and optionally the day separated by periods or hyphens.
+
+2023
+----
+
+2023-09-22
+++++++++++
+
+*Changed*
+
+* Require openmpi/4.1.6 on Great Lakes.
+* Set `PYTHONUBUFFERED=1`.
+
 
 2022
 ----
