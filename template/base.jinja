@@ -49,7 +49,7 @@ RUN rm -f /usr/bin/python3 && ln -s "$(which python3.9)" /usr/bin/python3
 
 # prevent python from loading packages from outside the container
 # default empty pythonpath
-ENV PYTHONPATH=/ignore/pythonpath
+ENV PYTHONPATH=/ignore/pythonpath PYTHONUNBUFFERED=1
 # disable user site directories (https://docs.python.org/3/library/site.html#module-site)
 RUN sed -i -e 's/ENABLE_USER_SITE = None/ENABLE_USER_SITE = False/g' `python3 -c 'import site; print(site.__file__)'`
 

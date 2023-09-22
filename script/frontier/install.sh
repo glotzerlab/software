@@ -47,6 +47,8 @@ export CXX=\$GCC_PATH/bin/g++
 export CUPY_INSTALL_USE_HIP=1
 export ROCM_HOME=\$OLCF_ROCM_ROOT
 export HCC_AMDGPU_TARGET=gfx90a
+
+export PYTHONUNBUFFERED=1
 EOL
 
 source $ROOT/environment.sh

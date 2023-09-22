@@ -40,6 +40,8 @@ export CXX=\${OLCF_GCC_ROOT}/bin/g++
 export LDSHARED="\${OLCF_GCC_ROOT}/bin/gcc -shared"
 export VIRTUAL_ENV=$ROOT
 export CMAKE_PREFIX_PATH=$ROOT
+
+export PYTHONUNBUFFERED=1
 EOL
 
 source $ROOT/environment.sh

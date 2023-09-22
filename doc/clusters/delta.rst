@@ -57,8 +57,4 @@ MPI parallel GPU jobs (``gpuA100x4`` and similar partitions with more than 1 GPU
 
 .. tip::
 
-    You may use ``srun`` in place of ``mpirun`` on Delta. Set the environment variable
-    ``PMIX_MCA_gds=hash`` before launching processes with ``srun``::
-
-        export PMIX_MCA_gds=hash
-        srun singularity exec --nv --bind /scratch /scratch/<your-account>/$USER/software.sif command arguments
+    You may use ``srun`` in place of ``mpirun`` on Delta.
