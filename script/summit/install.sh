@@ -157,6 +157,7 @@ done <requirements-source-summit.txt
 
 
  export CFLAGS="-mcpu=power9 -mtune=power9" CXXFLAGS="-mcpu=power9 -mtune=power9" \
+    && python3 -m pip install cython==0.29.36
     && python3 -m pip install --no-build-isolation -r requirements-cupy.txt \
     || exit 1
 
