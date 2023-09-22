@@ -157,6 +157,7 @@ done <requirements-source-summit.txt
 
 
  export CFLAGS="-mcpu=power9 -mtune=power9" CXXFLAGS="-mcpu=power9 -mtune=power9" \
+    && python3 -m pip install cython==0.29.36
     && python3 -m pip install --no-build-isolation -r requirements-cupy.txt \
     || exit 1
 
@@ -170,7 +171,7 @@ done <requirements-source-summit.txt
 if [ ! -n "$(ls -d $ROOT/lib/python*/site-packages/hoomd)" ]
 then
 
- git clone --recursive --branch v4.1.0 --depth 1 https://github.com/glotzerlab/hoomd-blue hoomd \
+ git clone --recursive --branch v4.2.0 --depth 1 https://github.com/glotzerlab/hoomd-blue hoomd \
     && cd hoomd \
     && mkdir -p build \
     && cd build \
