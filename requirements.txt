@@ -1,6 +1,6 @@
 # glotzer tools
 freud-analysis==2.13.1
-gsd==3.1.1
+gsd==3.2.0
 garnett==0.7.1
 pythia-learn==0.3.0
 rowan==1.3.0.post1
@@ -16,7 +16,7 @@ jupyter==1.0.0; platform_machine != 'ppc64le'
 jupyterlab==4.0.6; platform_machine != 'ppc64le'
 matplotlib==3.8.0; platform_machine != 'ppc64le'
 notebook==7.0.4; platform_machine != 'ppc64le'
-opencv-python==4.8.0.76; platform_machine != 'ppc64le'
+opencv-python==4.8.1.78; platform_machine != 'ppc64le'
 pandas==2.1.1
 Pillow==10.0.1
 pyqt5==5.15.9; platform_machine != 'ppc64le'
@@ -35,4 +35,4 @@ tables==3.8.0; platform_machine != 'ppc64le'
 coverage==7.3.1
 click==8.1.7
 pytest-cov==4.1.0
-ruamel.yaml==0.17.32
+ruamel.yaml==0.17.33
