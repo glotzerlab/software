@@ -38,7 +38,7 @@ jobs:
       - name: Bump versions in .github/workflows/requirements.txt
         run: pur -r .github/workflows/requirements.txt
       - name: Bump versions in requirements.txt
-        run: pur -r requirements.txt
+        run: pur -r requirements.txt --minor Werkzeug
       - name: Bump versions in requirements-mpi.txt
         run: pur -r requirements-mpi.txt
       - name: Bump versions in requirements-source.txt
