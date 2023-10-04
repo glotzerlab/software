@@ -10,6 +10,9 @@ signac==2.1.0
 signac-flow==0.26.1
 signac-dashboard==0.6.0
 
+# transitive dependencies
+Werkzeug==2.3.7
+
 # commonly used packages
 h5py==3.9.0
 jupyter==1.0.0; platform_machine != 'ppc64le'
@@ -27,12 +30,12 @@ statsmodels==0.14.0; platform_machine != 'ppc64le'
 
 
 # test requirements
-hypothesis==6.87.0
+hypothesis==6.87.1
 pytest==7.4.2
 miniball==1.2.0
 sympy==1.12
 tables==3.8.0; platform_machine != 'ppc64le'
-coverage==7.3.1
+coverage==7.3.2
 click==8.1.7
 pytest-cov==4.1.0
 ruamel.yaml==0.17.33
