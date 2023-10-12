@@ -7,16 +7,18 @@
 #SBATCH --export=ALL
 #SBATCH -t 0:10:00
 
-module load gcc/11.2.0 openmpi/4.1.2
+module load gcc/11.2.0 openmpi/4.1.4
 
 set -x
 
+export OMPI_MCA_btl=self
+
 singularity exec software.sif bash -c "set" | grep GLOTZERLAB
 
-singularity exec --nv software.sif python3 serial-gpu.py
+srun -n 1 singularity exec --nv software.sif python3 serial-gpu.py
 
-mpirun -v -x UCX_POSIX_USE_PROC_LINK=n singularity exec --nv software.sif python3 mpi-gpu.py
+srun singularity exec --nv software.sif python3 mpi-gpu.py
 
-mpirun -v -x UCX_POSIX_USE_PROC_LINK=n singularity exec software.sif /opt/osu-micro-benchmarks/libexec/osu-micro-benchmarks/mpi/pt2pt/osu_bibw
+srun singularity exec software.sif /opt/osu-micro-benchmarks/libexec/osu-micro-benchmarks/mpi/pt2pt/osu_bibw
 
 echo "Tests complete."
