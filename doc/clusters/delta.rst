@@ -37,24 +37,35 @@ container:
 
 Serial (or multithreaded) CPU jobs (``cpu`` partition)::
 
-    module load gcc/11.2.0 openmpi/4.1.2
-    mpirun -n 1 -x UCX_POSIX_USE_PROC_LINK=n singularity exec --bind /scratch /scratch/<your-account>/$USER/software.sif command arguments
+    module load gcc/11.2.0 openmpi/4.1.4
+    srun -n 1 singularity exec --bind /scratch /scratch/<your-account>/$USER/software.sif command arguments
 
 Single GPU jobs (``gpuA100x4`` and similar partitions)::
 
-    module load gcc/11.2.0 openmpi/4.1.2
-    mpirun -n 1 -x UCX_POSIX_USE_PROC_LINK=n singularity exec --nv --bind /scratch /scratch/<your-account>/$USER/software.sif command arguments
+    module load gcc/11.2.0 openmpi/4.1.4
+    srun -n 1 singularity exec --nv --bind /scratch /scratch/<your-account>/$USER/software.sif command arguments
 
 MPI parallel CPU jobs (``cpu`` partition with more than 1 core)::
 
-    module load gcc/11.2.0 openmpi/4.1.2
-    mpirun -x UCX_POSIX_USE_PROC_LINK=n singularity exec --bind /scratch /scratch/<your-account>/$USER/software.sif command arguments
+    module load gcc/11.2.0 openmpi/4.1.4
+    export OMPI_MCA_btl=self
+    srun singularity exec --bind /scratch /scratch/<your-account>/$USER/software.sif command arguments
 
 MPI parallel GPU jobs (``gpuA100x4`` and similar partitions with more than 1 GPU)::
 
-    module load gcc/11.2.0 openmpi/4.1.2
-    mpirun -x UCX_POSIX_USE_PROC_LINK=n singularity exec --nv --bind /scratch /scratch/<your-account>/$USER/software.sif command arguments
+    module load gcc/11.2.0 openmpi/4.1.4
+    export OMPI_MCA_btl=self
+    srun singularity exec --nv --bind /scratch /scratch/<your-account>/$USER/software.sif command arguments
+
+.. note::
+
+    Setting ``OMPI_MCA_btl=self`` prevents the warning:
+    ```
+    UCX  WARN  IB: ibv_fork_init() was disabled or failed, yet a fork() has been issued.
+    UCX  WARN  IB: data corruption might occur when using registered memory.
+    ```
+    OpenMPI uses ``ucx`` for internode communication and skips ``btl`` on Delta.
 
 .. tip::
 
-    You may use ``srun`` in place of ``mpirun`` on Delta.
+    You may use ``mpirun -x UCX_POSIX_USE_PROC_LINK=n`` in place of ``srun`` on Delta.

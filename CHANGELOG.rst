@@ -8,6 +8,14 @@ and optionally the day separated by periods or hyphens.
 2023
 ----
 
+2023-10-12
+++++++++++
+
+*Changed*
+
+* Require openmpi/4.1.4 on Delta.
+* Recommend ``export OMPI_MCA_btl=self`` and ``srun`` when launching MPI jobs on Delta.
+
 2023-09-22
 ++++++++++
 
