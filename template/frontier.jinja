@@ -71,7 +71,7 @@ fi
 
 DEST=\$(realpath \$1)
 
-tar --directory $ROOT --exclude software.tar -cvf $DEST .
+tar --directory $ROOT --exclude software.tar -cvf \$DEST .
 EOL
 chmod ug+x $ROOT/generate-tar-cache.sh
 
