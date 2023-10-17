@@ -19,7 +19,7 @@ module load PrgEnv-gnu
 module load cray-python/3.9.13.1
 python3 -m venv $ROOT
 
-cat >$ROOT/environment.sh << EOL
+cat >$ROOT/variables.sh << EOL
 module purge
 module load PrgEnv-gnu
 module load cmake/3.23.2
@@ -34,12 +34,12 @@ module unload darshan-runtime
 # The cray-mpich module does not provide this, it is needed to build mpi4py from source.
 export MPICC=\$CRAY_MPICH_DIR/bin/mpicc
 
-export LD_LIBRARY_PATH=$ROOT/lib:\$LD_LIBRARY_PATH
-export PATH=$ROOT/bin:\$PATH
-export CPATH=$ROOT/include
-export LIBRARY_PATH=$ROOT/lib
-export VIRTUAL_ENV=$ROOT
-export CMAKE_PREFIX_PATH=$ROOT
+export LD_LIBRARY_PATH=\$GLOTZERLAB_SOFTWARE_ROOT/lib:\$LD_LIBRARY_PATH
+export PATH=\$GLOTZERLAB_SOFTWARE_ROOT/bin:\$PATH
+export CPATH=\$GLOTZERLAB_SOFTWARE_ROOT/include
+export LIBRARY_PATH=\$GLOTZERLAB_SOFTWARE_ROOT/lib
+export VIRTUAL_ENV=\$GLOTZERLAB_SOFTWARE_ROOT
+export CMAKE_PREFIX_PATH=\$GLOTZERLAB_SOFTWARE_ROOT
 export CC=\$GCC_PATH/bin/gcc
 export CXX=\$GCC_PATH/bin/g++
 
@@ -49,7 +49,31 @@ export ROCM_HOME=\$OLCF_ROCM_ROOT
 export HCC_AMDGPU_TARGET=gfx90a
 
 export PYTHONUNBUFFERED=1
+
+# work around PMI_Init mmap sync errors
+export PMI_MMAP_SYNC_WAIT_TIME=1800
 EOL
+
+cat >$ROOT/environment.sh << EOL
+export GLOTZERLAB_SOFTWARE_ROOT=$ROOT
+source \$GLOTZERLAB_SOFTWARE_ROOT/variables.sh
+EOL
+
+cat >$ROOT/generate-tar-cache.sh << EOL
+#! /usr/bin/bash
+usage="\$(basename "\$0") output-file -- Generate a tar cache file."
+
+if [[ \$# -lt 1 || \$# -gt 1  || \$1 == "-h" ]]
+then
+    echo "\$usage"
+    exit 0
+fi
+
+DEST=\$(realpath \$1)
+
+tar --directory $ROOT --exclude software.tar -cvf $DEST .
+EOL
+chmod ug+x $ROOT/generate-tar-cache.sh
 
 source $ROOT/environment.sh
 

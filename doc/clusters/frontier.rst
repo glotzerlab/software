@@ -17,26 +17,40 @@ If you already have a clone, update it::
     $ cd software
     $ git pull origin trunk
 
-Per OLCF policies, you should install your software in NFS under ``/ccs/proj/``. For example,
-set the installation root directory to ``/ccs/proj/{your-project}/software/${USER}``.
+You should install your software in NFS under ``/ccs/proj/``. For example,
+set the installation root directory to ``/ccs/proj/{your-project}/software/frontier/${USER}``.
 
 Build the software environment and install it into the root::
 
-    $ script/frontier/install.sh /ccs/proj/{your-project}/software/${USER}
+    $ script/frontier/install.sh /ccs/proj/{your-project}/software/frontier/${USER}
     ... compiling software will take several minutes ...
 
 Activate the environment with::
 
-    $ source /ccs/proj/{your-project}/software/${USER}/environment.sh
+    $ source /ccs/proj/{your-project}/software/frontier/${USER}/environment.sh
 
 The environment is a `python3 venv <https://docs.python.org/3/library/venv.html>`_. You may extend
 it with additional python packages using ``python3 -m pip install``::
 
-    $ source /ccs/proj/{your-project}/software/${USER}/environment.sh
+    $ source /ccs/proj/{your-project}/software/frontier/${USER}/environment.sh
     $ python3 -m pip install package
 
-Use the following commands in your job scripts or interactively to execute software inside the
-container::
+Importing Python packages from this environment will be *very* slow with large node count jobs.
+To improve performance, generate a tar file with the environment and store it on Orion (repeat this
+step after you update the environment or install packages with ``pip``)::
 
-    source /ccs/proj/{your-project}/software/${USER}/environment.sh
+    $ /ccs/proj/{your-project}/software/frontier/${USER}/generate-tar-cache.sh \
+      ${MEMBERWORK}/{your-project}/software.tar
+
+Use the following commands in your job scripts (or interactively with ``salloc``) to load the cache
+into NVME and execute software from there::
+
+    #SBATCH -C nvme
+
+    export GLOTZERLAB_SOFTWARE_ROOT=/mnt/bb/${USER}/software
+    srun --ntasks-per-node 1 mkdir ${GLOTZERLAB_SOFTWARE_ROOT}
+    srun --ntasks-per-node 1 tar --directory ${GLOTZERLAB_SOFTWARE_ROOT} -xpf \
+      ${MEMBERWORK}/{your-project}/software.tar
+
+    source ${GLOTZERLAB_SOFTWARE_ROOT}/variables.sh
     srun {srun options} command arguments
