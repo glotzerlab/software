@@ -51,6 +51,6 @@ into NVME and execute software from there::
     srun --ntasks-per-node 1 mkdir ${GLOTZERLAB_SOFTWARE_ROOT}
     srun --ntasks-per-node 1 tar --directory ${GLOTZERLAB_SOFTWARE_ROOT} -xpf \
       ${MEMBERWORK}/{your-project}/software.tar
-
     source ${GLOTZERLAB_SOFTWARE_ROOT}/variables.sh
+
     srun {srun options} command arguments

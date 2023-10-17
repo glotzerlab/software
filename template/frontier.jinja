@@ -40,6 +40,7 @@ export CPATH=\$GLOTZERLAB_SOFTWARE_ROOT/include
 export LIBRARY_PATH=\$GLOTZERLAB_SOFTWARE_ROOT/lib
 export VIRTUAL_ENV=\$GLOTZERLAB_SOFTWARE_ROOT
 export CMAKE_PREFIX_PATH=\$GLOTZERLAB_SOFTWARE_ROOT
+export PYTHONPATH=\$(\${GLOTZERLAB_SOFTWARE_ROOT}/bin/python -c 'import site; print(site.getsitepackages()[0])')
 export CC=\$GCC_PATH/bin/gcc
 export CXX=\$GCC_PATH/bin/g++
 
@@ -71,7 +72,7 @@ fi
 
 DEST=\$(realpath \$1)
 
-tar --directory $ROOT --exclude software.tar -cvf \$DEST .
+tar --directory $ROOT --exclude software.tar -cf \$DEST .
 EOL
 chmod ug+x $ROOT/generate-tar-cache.sh
 
