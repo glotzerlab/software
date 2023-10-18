@@ -16,7 +16,7 @@ ROOT=$(realpath $1)
 echo "Installing glotzerlab-software to $ROOT"
 module purge
 module load PrgEnv-gnu
-module load cray-python/3.9.13.1
+module load cray-python/3.10.10
 python3 -m venv $ROOT
 
 cat >$ROOT/variables.sh << EOL
@@ -25,7 +25,7 @@ module load PrgEnv-gnu
 module load cmake/3.23.2
 module load git/2.36.1
 module load rocm/5.4.3
-module load cray-python/3.9.13.1
+module load cray-python/3.10.10
 module load hdf5/1.14.0
 module load ninja/1.10.2
 module load tmux/3.2a
