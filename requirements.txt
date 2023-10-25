@@ -11,7 +11,7 @@ signac-flow==0.26.1
 signac-dashboard==0.6.0
 
 # transitive dependencies
-Werkzeug==2.3.7
+Werkzeug==3.0.1
 
 # commonly used packages
 h5py==3.10.0
