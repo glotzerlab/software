@@ -4,7 +4,7 @@ Delta (NCSA)
 Delta_ is an HPC cluster at NCSA with GPU and CPU nodes. Apply for resources on Delta through
 the ACCESS_ program.
 
-.. _Delta: https://wiki.ncsa.illinois.edu/display/DSC/Delta+User+Guide
+.. _Delta: https://ncsa-delta-doc.readthedocs-hosted.com
 .. _ACCESS: https://allocations.access-ci.org
 
 Downloading
@@ -32,8 +32,8 @@ container:
 
 .. note::
 
-    replace ``command arguments`` with the command and arguments you wish to run. For example:
-    ``python3 script.py``
+    Replace ``command arguments`` with the command and arguments you wish to run. For example:
+    ``python3 script.py``.
 
 Serial (or multithreaded) CPU jobs (``cpu`` partition)::
 

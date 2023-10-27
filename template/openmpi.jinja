@@ -10,6 +10,34 @@ RUN curl -sSLO https://www.open-mpi.org/software/ompi/v{{ OPENMPI_VERSION }}/dow
    && rm -rf /root/openmpi-{{ OPENMPI_VERSION }}.{{ OPENMPI_PATCHLEVEL }} \
    && rm /openmpi-{{ OPENMPI_VERSION }}.{{ OPENMPI_PATCHLEVEL }}.tar.bz2
 
+{% elif system == 'anvil' %}
+
+RUN curl -sSLO https://www.open-mpi.org/software/ompi/v{{ OPENMPI_VERSION }}/downloads/openmpi-{{ OPENMPI_VERSION }}.{{ OPENMPI_PATCHLEVEL }}.tar.bz2 \
+   && tar -xjf openmpi-{{ OPENMPI_VERSION }}.{{ OPENMPI_PATCHLEVEL }}.tar.bz2 -C /root \
+   && cd /root/openmpi-{{ OPENMPI_VERSION }}.{{ OPENMPI_PATCHLEVEL }} \
+   && ./configure --prefix=/usr \
+                  --enable-shared \
+                  --disable-silent-rules \
+                  --disable-builtin-atomics \
+                  --enable-mpi1-compatibility \
+                  --without-alps \
+                  --without-lsf \
+                  --without-sge \
+                  --without-tm \
+                  --without-loadleveler \
+                  --with-ucx \
+                  --disable-memchecker \
+                  --with-libevent=external \
+                  --with-hwloc=/usr \
+                  --without-cuda \
+                  --disable-java \
+                  --disable-mpi-java \
+                  --with-gpfs=no \
+                  --enable-cxx-exceptions \
+   && make all install \
+   && rm -rf /root/openmpi-{{ OPENMPI_VERSION }}.{{ OPENMPI_PATCHLEVEL }} \
+   && rm /openmpi-{{ OPENMPI_VERSION }}.{{ OPENMPI_PATCHLEVEL }}.tar.bz2
+
 {% elif system == 'delta' %}
 
 RUN curl -sSLO https://github.com/ofiwg/libfabric/releases/download/v{{LIBFABRIC_VERSION}}/libfabric-{{LIBFABRIC_VERSION}}.tar.bz2 \

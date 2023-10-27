@@ -8,6 +8,13 @@ and optionally the day separated by periods or hyphens.
 2023
 ----
 
+2023-10-27
+++++++++++
+
+*Added*
+
+* Support Purdue Anvil.
+
 2023-10-12
 ++++++++++
 
