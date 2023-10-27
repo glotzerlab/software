@@ -4,7 +4,7 @@ Delta (NCSA)
 Delta_ is an HPC cluster at NCSA with GPU and CPU nodes. Apply for resources on Delta through
 the ACCESS_ program.
 
-.. _Delta: https://wiki.ncsa.illinois.edu/display/DSC/Delta+User+Guide
+.. _Delta: https://ncsa-delta-doc.readthedocs-hosted.com
 .. _ACCESS: https://allocations.access-ci.org
 
 Downloading

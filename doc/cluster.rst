@@ -10,6 +10,7 @@ community <community>` for suggestions.
 .. toctree::
     :maxdepth: 2
 
+    clusters/anvil
     clusters/bridges2
     clusters/crusher
     clusters/delta
