@@ -28,8 +28,8 @@ container:
 
 .. note::
 
-    replace ``command arguments`` with the command and arguments you wish to run. For example:
-    ``python3 script.py``
+    Replace ``command arguments`` with the command and arguments you wish to run. For example:
+    ``python3 script.py``.
 
 Serial (or multithreaded) CPU jobs::
 
