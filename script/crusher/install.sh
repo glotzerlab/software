@@ -180,7 +180,7 @@ fi
 if [ ! -n "$(ls -d $ROOT/lib/python*/site-packages/hoomd)" ]
 then
 
- git clone --recursive --branch v4.2.1 --depth 1 https://github.com/glotzerlab/hoomd-blue hoomd \
+ git clone --recursive --branch v4.3.0 --depth 1 https://github.com/glotzerlab/hoomd-blue hoomd \
     && cd hoomd \
     && mkdir -p build \
     && cd build \
