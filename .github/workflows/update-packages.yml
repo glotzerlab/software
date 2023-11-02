@@ -17,7 +17,7 @@ jobs:
       matrix:
         branch: [trunk]
     steps:
-      - uses: actions/checkout@v4.1.0
+      - uses: actions/checkout@v4.1.1
         with:
           ref: ${{ matrix.branch }}
       - uses: tibdex/github-app-token@v2.1
