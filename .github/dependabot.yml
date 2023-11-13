@@ -3,9 +3,9 @@ updates:
   - package-ecosystem: "github-actions"
     directory: "/"
     schedule:
-      interval: "monthly"
+      interval: "weekly"
+      time: "07:00"
+      timezone: "EST5EDT"
     pull-request-branch-name:
       separator: "-"
-    open-pull-requests-limit: 10
-    commit-message:
-      prefix: "[ci skip]"
+    open-pull-requests-limit: 2
