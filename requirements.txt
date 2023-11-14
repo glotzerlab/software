@@ -11,7 +11,9 @@ signac-flow==0.26.1
 signac-dashboard==0.6.1
 
 # transitive dependencies
-Werkzeug==2.3.8
+Werkzeug==3.0.1
+flask-login==0.6.3
+flask==3.0.0
 
 # commonly used packages
 h5py==3.10.0
