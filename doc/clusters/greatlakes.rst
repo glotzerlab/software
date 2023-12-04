@@ -18,6 +18,7 @@ directory::
 
 Download the image with support for Great Lakes::
 
+    $ module load singularity
     $ singularity pull software.sif docker://glotzerlab/software:greatlakes
 
 Using
