@@ -37,7 +37,7 @@ pytest==7.4.3
 miniball==1.2.0
 sympy==1.12
 tables==3.9.2; platform_machine != 'ppc64le'
-coverage==7.3.3
+coverage==7.3.4
 click==8.1.7
 pytest-cov==4.1.0
 ruamel.yaml==0.18.5
