@@ -1,4 +1,4 @@
-Cython==3.0.7
+Cython==3.0.8
 numpy==1.26.3
 pkgconfig==1.5.5
 pybind11==2.11.1
