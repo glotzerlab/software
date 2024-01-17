@@ -49,12 +49,14 @@ MPI parallel CPU jobs (``cpu`` partition with more than 1 core)::
 
     module load gcc/11.2.0 openmpi/4.1.4
     export OMPI_MCA_btl=self
+    export UCX_POSIX_USE_PROC_LINK=n
     srun singularity exec --bind /scratch /scratch/<your-account>/$USER/software.sif command arguments
 
 MPI parallel GPU jobs (``gpuA100x4`` and similar partitions with more than 1 GPU)::
 
     module load gcc/11.2.0 openmpi/4.1.4
     export OMPI_MCA_btl=self
+    export UCX_POSIX_USE_PROC_LINK=n
     srun singularity exec --nv --bind /scratch /scratch/<your-account>/$USER/software.sif command arguments
 
 .. note::
@@ -66,6 +68,7 @@ MPI parallel GPU jobs (``gpuA100x4`` and similar partitions with more than 1 GPU
     ```
     OpenMPI uses ``ucx`` for internode communication and skips ``btl`` on Delta.
 
-.. tip::
+.. note::
 
-    You may use ``mpirun -x UCX_POSIX_USE_PROC_LINK=n`` in place of ``srun`` on Delta.
+    Setting ``UCX_POSIX_USE_PROC_LINK=n`` prevents permission denied errors when ``MPI_Init``
+    attempts to access files in ``/proc``.

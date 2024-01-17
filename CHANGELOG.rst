@@ -3,7 +3,10 @@ Change log
 ==========
 
 **glotzerlab-software** releases update regularly. Releases are numbered by the year, month,
-and optionally the day separated by periods or hyphens.
+and optionally the day separated by periods or hyphens. The change log highlights major changes.
+Find the complete archive of releases on `Docker Hub`_.
+
+.. _Docker Hub: https://hub.docker.com/r/glotzerlab/software/tags
 
 2024
 ----

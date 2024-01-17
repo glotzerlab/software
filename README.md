@@ -8,8 +8,8 @@ along with related software commonly used in simulation and data analysis workfl
 
 * [Documentation](https://glotzerlab-software.readthedocs.io/):
   Tutorial, usage information, and list of supported clusters.
-* [hoomd-users Google Group](https://groups.google.com/d/forum/hoomd-users):
-  Get support from the user community.
+* [glotzerlab-software discussion board](https://github.com/glotzerlab/software/discussions):
+  Ask the **glotzerlab-software** user community for help.
 * [glotzerlab/software on Docker Hub](https://hub.docker.com/r/glotzerlab/software):
   See the list of published images.
 

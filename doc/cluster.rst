@@ -8,7 +8,7 @@ using. If you wish to use **glotzerlab-software** on a different cluster, contac
 community <community>` for suggestions.
 
 .. toctree::
-    :maxdepth: 2
+    :maxdepth: 1
 
     clusters/anvil
     clusters/bridges2
