@@ -58,7 +58,7 @@ Add the ``--nv`` option to **enable NVIDIA GPUs** inside the container::
     ['[0]       Quadro RTX 5000  48 SM_7.5 @ 1.82 GHz, 16124 MiB DRAM']
     >>>
 
-**glotzerlab-software** :doc:`updates regularly <changes>` with the latest versions of included
+**glotzerlab-software** updates weekly with the latest versions of included
 software. Download the latest image to update::
 
     $ singularity pull software.sif docker://glotzerlab/software

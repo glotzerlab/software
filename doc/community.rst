@@ -1,13 +1,12 @@
 User community
 ==============
 
-hoomd-users mailing list
---------------------------
+Discussion board
+----------------
 
-**glotzerlab-software** exists primarily to deploy `HOOMD-blue
-<https://glotzerlab.engin.umich.edu/hoomd-blue>`_. Subscribe to the `hoomd-users
-<https://groups.google.com/d/forum/hoomd-users>`_ mailing list to receive release announcements,
-post questions for advice on using the images, and discuss potential new features.
+Use the `glotzerlab-software discussion board
+<https://github.com/glotzerlab/software/discussions/>`_ to post questions, ask for support, and
+discuss potential new features.
 
 Issue tracker
 -------------
