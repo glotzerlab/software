@@ -29,7 +29,6 @@ if __name__ == '__main__':
     openmpi_template = env.get_template('openmpi.jinja')
     pmix_template = env.get_template('pmix.jinja')
     mvapich2_template = env.get_template('mvapich2.jinja')
-    summit_template = env.get_template('summit.jinja')
     ucx_template = env.get_template('ucx.jinja')
     glotzerlab_software_template = env.get_template('glotzerlab-software.jinja')
     finalize_template = env.get_template('finalize.jinja')
@@ -103,15 +102,6 @@ if __name__ == '__main__':
           CFLAGS='-march=znver2 -mmmx -msse -msse2 -msse3 -mssse3 -msse4a -mcx16 -msahf -mmovbe -maes -msha -mpclmul -mpopcnt -mabm -mfma -mbmi -mbmi2 -mwbnoinvd -mavx -mavx2 -msse4.2 -msse4.1 -mlzcnt -mrdrnd -mf16c -mfsgsbase -mrdseed -mprfchw -madx -mfxsr -mxsave -mxsaveopt -mclflushopt -mxsavec -mxsaves -mclwb -mmwaitx -mclzero -mrdpid --param l1-cache-size=32 --param l1-cache-line-size=64 --param l2-cache-size=512 -mtune=znver2',
           # unsupported with ubuntu 20.04 compiler - try with 22.04?
           # CFLAGS='-march=znver3 -mmmx -mpopcnt -msse -msse2 -msse3 -mssse3 -msse4.1 -msse4.2 -mavx -mavx2 -msse4a -mfma -mbmi -mbmi2 -maes -mpclmul -mvpclmulqdq -madx -mabm -mclflushopt -mclwb -mclzero -mcx16 -mf16c -mfsgsbase -mfxsr -msahf -mlzcnt -mmovbe -mmwaitx -mpku -mprfchw -mrdpid -mrdrnd -mrdseed -msha -mshstk -mvaes -mwbnoinvd -mxsave -mxsavec -mxsaveopt -mxsaves --param l1-cache-size=32 --param l1-cache-line-size=64 --param l2-cache-size=512 -mtune=znver3 -dumpbase',
-          **versions)
-
-    write('script/summit/install.sh', [summit_template, glotzerlab_software_template],
-          ENABLE_MPI='on',
-          MAKEJOBS=8,
-          CFLAGS='-mcpu=power9 -mtune=power9',
-          output='script',
-          system='summit',
-          ENABLE_TBB='off',
           **versions)
 
     write('script/crusher/install.sh', [crusher_template, glotzerlab_software_template],

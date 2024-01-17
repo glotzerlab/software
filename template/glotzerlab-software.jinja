@@ -22,19 +22,9 @@
 # Install packages that are build requirements of other packages first.
 # Use the pip cache in script builds to reduce time when rerunning the install script.
 
-{% if system == 'summit' %}
-{{ RUN }} export CFLAGS="-mcpu=power9 -mtune=power9" CXXFLAGS="-mcpu=power9 -mtune=power9"
-while read package; do
-  python3 -m pip install --no-build-isolation $package || exit 1
-done <requirements-source-summit.txt
-
- # modern setuptools needed for gsd and other packages\
- python3 -m pip install --upgrade setuptools
-{% else %}
 {{ RUN }} export CFLAGS="{{CFLAGS}}" CXXFLAGS="{{CFLAGS}}"\
     && python3 -m pip install -r requirements-source.txt \
     || exit 1
-{% endif %}
 
 {{ RUN }} export CFLAGS="{{CFLAGS}}" CXXFLAGS="{{CFLAGS}}" \
     && python3 -m pip install --no-build-isolation --no-binary freud-analysis,gsd -r requirements.txt \
@@ -49,8 +39,6 @@ done <requirements-source-summit.txt
 {% endif %}
 
 {% endif %}
-
-{% if system != 'summit' %}
 
 {% if output == 'script' %}
 if [ ! -n "$(ls -d $ROOT/lib/python*/site-packages/fresnel)" ]
@@ -70,9 +58,6 @@ then
 {% if output == 'script' %}
 fi
 {% endif %}
-
-{% endif %}
-
 
 {% if output == 'script' %}
 if [ ! -n "$(ls -d $ROOT/lib/python*/site-packages/hoomd)" ]
