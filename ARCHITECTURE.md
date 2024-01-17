@@ -31,8 +31,8 @@ Images are combined from a number of Jinja template files in `template/*.jinja` 
 
 * `template/base.jinja` provides the base dependencies necessary to build Glotzer Lab
   software along with commonly used tools. This image is based on
-  `nvidia/cuda-?.?-devel-ubuntu18.04`.
-* `summit.jinja` provides the base dependencies through modules on summit and configures
+  `nvidia/cuda-?.?-devel-ubuntu20.04`.
+* `frontier.jinja` provides the base dependencies through modules on OLCF Frontier and configures
   a software root directory for the build script.
 * `ib-mlx.jinja` adds high speed IB networking drivers.
 * `openmpi.jinja` and `mvapich2.jinja` build the corresponding MPI libraries.
@@ -56,7 +56,7 @@ the `docker/` directory.
 
 Build scripts are generated under the `script/` directory for systems that don't support containers.
 
-* `script/summit/install.sh`
+* `script/frontier/install.sh`
 
 ## Building images
 
@@ -113,8 +113,8 @@ All packages in the above files are listed with explicit versions.
 
 Steps to add a new package:
 
-1. Add the package as appropriate to `requirements*.txt` or `packages.yml`
-2. Add build scripts for non-PyPI packages to `build.jinja` or
+1. Add the package as appropriate to `requirements*.txt` or `packages.yml`.
+2. Add build scripts for non-PyPI packages to `glotzerlab-software.jinja`.
 3. Add unit tests to `test.jinja` if needed.
 4. Build and test the image.
 

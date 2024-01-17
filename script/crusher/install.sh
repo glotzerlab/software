@@ -137,18 +137,14 @@ fi
 # Install packages that are build requirements of other packages first.
 # Use the pip cache in script builds to reduce time when rerunning the install script.
 
-
  export CFLAGS="-march=native" CXXFLAGS="-march=native"\
     && python3 -m pip install -r requirements-source.txt \
     || exit 1
-
 
  export CFLAGS="-march=native" CXXFLAGS="-march=native" \
     && python3 -m pip install --no-build-isolation --no-binary freud-analysis,gsd -r requirements.txt \
     && chmod o+rX `python3 -c "import site; print(site.getsitepackages()[0])"`/flow/templates/* \
     || exit 1
-
-
 
 
 
@@ -171,9 +167,6 @@ then
 
 
 fi
-
-
-
 
 
 

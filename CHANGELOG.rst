@@ -5,6 +5,16 @@ Change log
 **glotzerlab-software** releases update regularly. Releases are numbered by the year, month,
 and optionally the day separated by periods or hyphens.
 
+2024
+----
+
+2024-01-17
+++++++++++
+
+*Removed*
+
+* Support for OLCF Summit.
+
 2023
 ----
 
