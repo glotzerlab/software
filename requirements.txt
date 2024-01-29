@@ -33,12 +33,12 @@ statsmodels==0.14.1
 
 
 # test requirements
-hypothesis==6.96.3
-pytest==7.4.4
+hypothesis==6.97.1
+pytest==8.0.0
 miniball==1.2.0
 sympy==1.12
 tables==3.9.2
-coverage==7.4.0
+coverage==7.4.1
 click==8.1.7
 pytest-cov==4.1.0
 ruamel.yaml==0.18.5
