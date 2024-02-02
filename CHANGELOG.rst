@@ -11,6 +11,14 @@ Find the complete archive of releases on `Docker Hub`_.
 2024
 ----
 
+2024-02-02
+++++++++++
+
+*Changed*
+
+* Support Delta slingshot11 hardware update. Remove ``OMPI_MCA_btl=self`` - ``OMPI_MCA_btl`` must
+  remain unset.
+
 2024-01-17
 ++++++++++
 
