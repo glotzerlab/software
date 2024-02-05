@@ -13,13 +13,13 @@ signac-dashboard==0.6.1
 # transitive dependencies
 Werkzeug==3.0.1
 flask-login==0.6.3
-flask==3.0.1
+flask==3.0.2
 pyarrow==15.0.0
 
 # commonly used packages
 h5py==3.10.0
 jupyter==1.0.0
-jupyterlab==4.0.11
+jupyterlab==4.1.0
 matplotlib==3.8.2
 notebook==7.0.7
 opencv-python==4.9.0.80
@@ -33,7 +33,7 @@ statsmodels==0.14.1
 
 
 # test requirements
-hypothesis==6.97.1
+hypothesis==6.98.1
 pytest==8.0.0
 miniball==1.2.0
 sympy==1.12
