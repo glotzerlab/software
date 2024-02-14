@@ -10,6 +10,7 @@ cmake -B build \
       -DENABLE_TBB=off \
       -DENABLE_LLVM=off \
       -DPLUGINS="" \
+      -DCMAKE_CXX_FLAGS=-march=native -DCMAKE_C_FLAGS=-march=native \
       -GNinja
 
 ninja -C build
