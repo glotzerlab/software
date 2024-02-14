@@ -7,6 +7,9 @@
 module reset
 module load gcc/10.3.0 openmpi/4.1.6 cuda/12.3.0
 
+# Build package format 2
+export CONDARC=.condarc
+
 # Build on a node local SSD.
 export CONDA_BLD_PATH=`mktemp --directory --tmpdir=/tmpssd conda-build-${USER}.XXXXXXXX`
 

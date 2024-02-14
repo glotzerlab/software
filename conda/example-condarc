@@ -1,0 +1,9 @@
+channel_priority: strict
+channels:
+  - file://nfs/turbo/glotzer/software/conda
+  - conda-forge
+
+disallow:
+- openmpi
+- mpich
+- cuda-cudart-dev

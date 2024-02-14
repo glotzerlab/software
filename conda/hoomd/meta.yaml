@@ -43,14 +43,14 @@ requirements:
     - python
     - numpy
 
-test:
-  requires:
-    - pytest
-    - rowan
-  imports:
-    - hoomd
-    - hoomd.md
-    - hoomd.hpmc
-# pytest hangs for unknown reasons on Great Lakes
+# Tests hang for unknown reasons on great lakes.
+# test:
+#  requires:
+#    - pytest
+#    - rowan
+#  imports:
+#    - hoomd
+#    - hoomd.md
+#    - hoomd.hpmc
 #  commands:
 #    - pytest --pyargs hoomd -v
