@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Please use a compute node to build packages.
-# srun -Asglotzer9 --nodes=1 --ntasks-per-node=1 --cpus-per-task=36 --partition standard -t 8:00:00 --mem=144G --pty $SHELL
+# salloc -Asglotzer9 --nodes=1 --ntasks-per-node=1 --cpus-per-task=36 --partition standard -t 8:00:00 --mem=144G
 
 # Load modules used to build packages with native MPI and CUDA support.
 module reset
