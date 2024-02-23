@@ -5,7 +5,7 @@ Glotzerlab software images
 <http://glotzerlab.engin.umich.edu>`_ at the `University of Michigan <https://www.umich.edu/>`_ to
 HPC resources via conda packages and container images. Use **glotzerlab-software** to install a MPI
 and GPU enabled build of HOOMD-blue on a *HPC resource*. Use the standard **conda-forge** provided
-HOOMD-blue (`mamba install hoomd` with no special configuration) for serial execution on individual
+HOOMD-blue (``mamba install hoomd`` with no special configuration) for serial execution on individual
 workstations.
 
 .. note::

@@ -11,6 +11,17 @@ Find the complete archive of releases on `Docker Hub`_.
 2024
 ----
 
+Next release
+++++++++++++
+
+*Added*
+
+* Conda package distribution for UMich Great Lakes, Purdue ANVIL, and NCSA Delta.
+
+*Deprecated*
+
+* Docker images
+
 2024-02-02
 ++++++++++
 
