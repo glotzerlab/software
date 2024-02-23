@@ -1,8 +1,8 @@
 Accessing files
-===============
+----------------
 
 The container's filesystem
----------------------------
+**************************
 
 A container has its own filesystem baked into the image. The container's software is installed in
 it's filesystem. Software executing inside the container will see different files than on the host.
@@ -22,7 +22,7 @@ This starts at the root of the filesystem::
     With Singularity, the container's filesystem is **read-only**.
 
 Bind mounting
--------------
+*************
 
 Specific directories may be *bind mounted* from the host into the container so it can access the
 contents directly. On most systems, Singularity is configured to bind mount your home directory by

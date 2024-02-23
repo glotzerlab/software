@@ -1,11 +1,8 @@
 Bridges-2 (PSC)
----------------
+***************
 
 `Bridges-2 <https://www.psc.edu/resources/bridges-2/>`_ is an HPC cluster at PSC with GPU and CPU
 nodes. Apply for resources on Bridges through the `ACCESS <https://allocations.access-ci.org/>`_ program.
-
-Downloading
-***********
 
 The **glotzerlab-software** image and the singularity cache are large, store them in your project
 directory::
@@ -16,9 +13,6 @@ directory::
 Download the image with support for Bridges-2::
 
     $ singularity pull software.sif docker://glotzerlab/software:bridges2
-
-Using
-*****
 
 Use the following commands in your job scripts or interactively to execute software inside the
 container:

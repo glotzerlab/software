@@ -1,5 +1,5 @@
 HPC clusters
-============
+------------
 
 **glotzerlab-software** provides a number of cluster-specific images, needed to enable high
 performance CPU, CUDA, and multi-node MPI support matching the drivers and hardware available on

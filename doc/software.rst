@@ -1,5 +1,5 @@
 Installed software
-==================
+------------------
 
 **glotzerlab-software** includes the following installed inside the container.
 
