@@ -7,5 +7,12 @@
 #SBATCH --cpus-per-task=32
 #SBATCH --time=8:00:00
 
-./conda-build-anvil.sh hoomd mpi4py
+# Load modules used to build packages with native MPI support (no CUDA).
+module reset
+module load gcc/11.2.0 openmpi/4.1.6
+
+./build.sh "$@" \
+    --skip-existing \
+    --variants "{'cluster': ['anvil'], 'device': ['cpu']}" \
+    --output-folder /anvil/projects/x-dmr140129/software/conda
 
