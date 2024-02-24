@@ -11,8 +11,6 @@
 module reset
 module load gcc/11.2.0 openmpi/4.1.6
 
-export TMPDIR=/tmp
-
 ./build.sh "$@" \
     --skip-existing \
     --variants "{'cluster': ['anvil'], 'device': ['cpu']}" \

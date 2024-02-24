@@ -16,8 +16,6 @@
 module reset
 module load gcc/11.4.0 openmpi/4.1.6 cuda/12.3.0
 
-export TMPDIR=/tmp
-
 ./build.sh "$@" \
     --skip-existing \
     --variants "{'cluster': ['delta'], 'device': ['gpu']}" \
