@@ -3,9 +3,9 @@ Building packages
 
 If you are not a Glotzer Lab member, or would like to build these packages on a new resource:
 
-1. Install ``conda-build`` into your conda environment::
+1. Install ``conda-build`` and ``boa`` into your conda environment::
 
-    mamba install conda-build
+    mamba install conda-build boa
 
 2. Obtain the **glotzerlab-software** source code::
 
