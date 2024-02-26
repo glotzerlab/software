@@ -72,3 +72,8 @@ Load the specific module versions that match those used to build the package.
 
 Use your HPC resource scheduler to execute scripts on the appropriate compute nodes. Use ``srun``,
 ``mpirun``, or the appropriate launcher for MPI execution.
+
+.. tip::
+
+    After initial installation and setup is complete, you can update packages to their latest
+    versions with ``mamba update --all``.

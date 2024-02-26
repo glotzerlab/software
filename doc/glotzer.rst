@@ -31,3 +31,9 @@ release using the following channel paths and module versions:
 
             module load PrgEnv-gnu rocm/5.4.3
             module unload darshan-runtime
+
+    * - OLCF Andes:
+      - ``file://ccs/proj/mat110/software/andes/conda``
+      - .. code::
+
+            module load gcc/10.3.0 openmpi/4.1.2
