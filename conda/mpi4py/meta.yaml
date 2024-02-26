@@ -15,6 +15,12 @@ source:
 build:
   number: {{ build }}
   string: {{ cluster }}_py{{ py }}h{{ PKG_HASH }}_{{ build }}
+  script_env:
+    - LD_LIBRARY_PATH
+    - MPICC
+    - CC
+    - CXX
+    - CMAKE_PREFIX_PATH
   script:
     - {{ PYTHON }} conf/cythonize.py  # TODO: remove for mpi4py 4.0.0
     - {{ PYTHON }} -m pip install --no-deps . -vv

@@ -14,16 +14,18 @@ source:
   sha256: {{ sha256 }}
 
 build:
+  script_env:
+    - LD_LIBRARY_PATH
+    - MPICC
+    - CC
+    - CXX
+    - CMAKE_PREFIX_PATH
+    - HIP_PLATFORM
+    - HIP_COMPILER
+    - HCC_AMDGPU_TARGET
   number: {{ build }}
   string: {{ cluster }}_{{ device }}_py{{ py }}h{{ PKG_HASH }}_{{ build }}
-  script: bash ${RECIPE_DIR}/build_hoomd.sh {{ device }}
-
-#  rpaths:
-#    - lib/
-#    - lib/python3.12/site-packages/{{ name }}  # [py==312]
-#    - lib/python3.11/site-packages/{{ name }}  # [py==311]
-#    - lib/python3.10/site-packages/{{ name }}  # [py==310]
-#    - lib/python3.9/site-packages/{{ name }}  # [py==39]
+  script: bash ${RECIPE_DIR}/build_hoomd.sh {{ device }} {{ gpu_platform }}
 
 requirements:
   build:
@@ -43,14 +45,3 @@ requirements:
     - python
     - numpy
 
-# Tests hang for unknown reasons on great lakes.
-# test:
-#  requires:
-#    - pytest
-#    - rowan
-#  imports:
-#    - hoomd
-#    - hoomd.md
-#    - hoomd.hpmc
-#  commands:
-#    - pytest --pyargs hoomd -v

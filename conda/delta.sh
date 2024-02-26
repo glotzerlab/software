@@ -11,6 +11,7 @@
 #SBATCH --time=8:00:00
 
 # TODO: rewrite to use CPU account when it is renewed
+export OUTPUT_FOLDER=/projects/bbgw/software/conda
 
 # Load modules used to build packages with native MPI and CUDA support.
 module reset
@@ -18,6 +19,7 @@ module load gcc/11.4.0 openmpi/4.1.6 cuda/12.3.0
 
 ./build.sh "$@" \
     --skip-existing \
-    --variants "{'cluster': ['delta'], 'device': ['gpu']}" \
-    --output-folder /projects/bbgw/software/conda
+    --variants "{'cluster': ['delta'], 'device': ['gpu'], 'gpu_platform': ['CUDA']}" \
+    --output-folder $OUTPUT_FOLDER
 
+chmod g-w $OUTPUT_FOLDER -R
