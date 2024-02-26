@@ -2,8 +2,8 @@ Conda packages
 ==============
 
 **glotzerlab-software** provides conda packages built with cluster-specific *MPI* and *CUDA*
-libraries. Use it to add a fully *MPI-* and *GPU-enabled* build of **HOOMD-blue** (and related
-software) to your conda environment on a HPC resource.
+libraries. Use it to add *MPI-* and *GPU-enabled* builds of **HOOMD-blue** and related
+software to your conda environment on a HPC resource.
 
 **glotzerlab-software** provides the following packages:
 
@@ -19,5 +19,6 @@ software) to your conda environment on a HPC resource.
 .. toctree::
     :maxdepth: 1
 
-    conda-install
-    conda-build
+    glotzer
+    build
+    install

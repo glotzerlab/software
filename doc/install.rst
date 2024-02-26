@@ -1,9 +1,9 @@
 Installing packages
 -------------------
 
-1. `Install miniforge`_ or your preferred conda environment.
+1. `Install miniforge`_ (or your preferred conda environment provider).
 
-2. `Configure condarc`_ to use only the local HPC resource channel and **conda-forge**.
+2. `Configure condarc`_ to use the local HPC resource channel and **conda-forge**.
 
 3. `Install packages`_::
 
@@ -45,18 +45,6 @@ Replace ``$HOME/miniforge3/.condarc`` with:
     - mpich
     - cuda-cudart-dev
 
-.. tip::
-
-    Glotzer Lab members should use the following channel paths:
-
-    * UMich Great Lakes: ``file://nfs/turbo/glotzer/software/conda``
-    * Purdue ANVIL: ``file://anvil/projects/x-dmr140129/software/conda``
-    * NCSA Delta: ``file://projects/bbgw/software/conda``
-
-.. seealso::
-
-    See :doc:`conda-build` if you are not a Glotzer Lab member.
-
 .. note::
 
     The ``disallow`` section prevents you from accidentally installing *MPI* and *GPU* packages
@@ -66,7 +54,9 @@ Replace ``$HOME/miniforge3/.condarc`` with:
 
 .. rubric:: Install packages
 
-You should also install any non-MPI and non-GPU packages you need.
+You should also install any non-MPI and non-GPU packages you need. For example::
+
+    mamba install freud gsd
 
 
 .. _Load prerequisite modules:
@@ -74,14 +64,6 @@ You should also install any non-MPI and non-GPU packages you need.
 .. rubric:: Load prerequisite modules
 
 Load the specific module versions that match those used to build the package.
-
-.. tip::
-
-    Glotzer Lab members should load the following modules:
-
-    * UMich Great Lakes: ``module load gcc/10.3.0 openmpi/4.1.6 cuda/12.3.0``
-    * Purdue ANVIL: ``module load gcc/11.2.0 openmpi/4.1.6``
-    * NCSA Delta: ``module load gcc/11.4.0 openmpi/4.1.6 cuda/12.3.0``
 
 
 .. _Execute Python scripts:
