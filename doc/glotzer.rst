@@ -56,8 +56,9 @@ To improve performance, generate a **tar** file from the environment and store i
 
 .. tip::
 
-    Collaborative projects should aim to install and maintain a single copy of the software.
-    This should be installed to the project home::
+    Collaborative projects can maintain a single copy of the software in the shared project
+    directory. The miniforge installer accepts the installation prefix on the command line with
+    ``-p`` (adjust these steps as needed for a non-miniforge installer)::
 
         bash Miniforge3-Linux-x86_64.sh -b -p /ccs/proj/{your-project}/software/frontier/{subproject-name}
         chmod g+rwX /ccs/proj/{your-project}/software/frontier/{subproject-name} -R
@@ -65,9 +66,9 @@ To improve performance, generate a **tar** file from the environment and store i
     This allows environment changes to propagate between users, and cuts down on storage usage in
     the project home directory.
 
-    Collaborative projects can also work off of a single cached ``miniforge3.tar``::
+    Collaborative projects can also utilize a single cached ``miniforge3.tar``::
 
-        $ tar --directory $HOME/miniforge3 -cf ${PROJWORK}/{your-project}/software/{subproject-name}/software.tar .
+        $ tar --directory $HOME/miniforge3 -cf ${PROJWORK}/{your-project}/software/{subproject-name}/miniforge3.tar .
 
 Use the following lines in your job scripts (or interactively with ``salloc``) to load the cache
 into NVME and execute software from there::
