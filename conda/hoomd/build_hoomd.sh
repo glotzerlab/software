@@ -14,5 +14,5 @@ cmake -B build \
       -DCMAKE_CXX_FLAGS=-march=native -DCMAKE_C_FLAGS=-march=native \
       -GNinja
 
-ninja -C build
-ninja -C build install
+ninja -C build -j $SLURM_CPUS_PER_TASK
+ninja -C build install -j $SLURM_CPUS_PER_TASK

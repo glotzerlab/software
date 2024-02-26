@@ -23,6 +23,7 @@ build:
     - HIP_PLATFORM
     - HIP_COMPILER
     - HCC_AMDGPU_TARGET
+    - SLURM_CPUS_PER_TASK
   number: {{ build }}
   string: {{ cluster }}_{{ device }}_py{{ py }}h{{ PKG_HASH }}_{{ build }}
   script: bash ${RECIPE_DIR}/build_hoomd.sh {{ device }} {{ gpu_platform }}

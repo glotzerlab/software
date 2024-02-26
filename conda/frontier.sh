@@ -7,6 +7,9 @@ module unload darshan-runtime
 
 export OUTPUT_FOLDER=/ccs/proj/mat110/software/frontier/conda
 
+# Control ninja parallelism in hoomd builds
+export SLURM_CPUS_PER_TASK=16
+
 # The cray-mpich module does not provide this, it is needed to build mpi4py from source.
 export MPICC=$CRAY_MPICH_DIR/bin/mpicc
 export CC=$GCC_PATH/bin/gcc
