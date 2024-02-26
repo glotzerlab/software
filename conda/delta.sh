@@ -23,3 +23,4 @@ module load gcc/11.4.0 openmpi/4.1.6 cuda/12.3.0
     --output-folder $OUTPUT_FOLDER
 
 chmod g-w $OUTPUT_FOLDER -R
+chmod g+rX $OUTPUT_FOLDER -R
