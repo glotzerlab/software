@@ -1,14 +1,11 @@
 Expanse (SDSC)
----------------
+**************
 
 Expanse_ is an HPC cluster at SDSC with GPU and CPU nodes. Apply for resources on Expanse through
 the ACCESS_ program.
 
 .. _Expanse: https://www.sdsc.edu/support/user_guides/expanse.html
 .. _ACCESS: https://allocations.access-ci.org/
-
-Downloading
-***********
 
 For unknown reasons, ``singularity pull`` generates corrupt images when run on Expanse. You need
 to use another Linux system to pull the ``expanse`` or ``expanse-gpu`` image, then copy that image
@@ -19,19 +16,13 @@ to Expanse.
     The corrupt image causes ``/usr/<some_file>.so: file too short`` error messages when you
     attempt to use software in the container.
 
-CPU
-+++
-
 Download the image with support for Expanse's CPU nodes::
 
     $ singularity pull software.sif docker://glotzerlab/software:expanse
 
 Then copy ``software.sif`` to ``/expanse/lustre/scratch/$USER/temp_project/`` on Expanse.
 
-GPU
-+++
-
-Download the image with support for Expanse's GPU nodes::
+Or: download the image with support for Expanse's GPU nodes::
 
     $ singularity pull software.sif docker://glotzerlab/software:expanse-gpu
 
@@ -43,9 +34,6 @@ Then copy ``software.sif`` to ``/expanse/lustre/scratch/$USER/temp_project/`` on
 
     * ``expanse`` on CPU nodes.
     * ``expanse-gpu`` on GPU nodes.
-
-Using
-*****
 
 Use the following commands in your job scripts or interactively to execute software inside the
 container:

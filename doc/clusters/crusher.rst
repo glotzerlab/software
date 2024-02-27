@@ -1,5 +1,5 @@
 Crusher (OLCF)
---------------
+**************
 
 `Crusher <https://docs.olcf.ornl.gov/systems/crusher_quick_start_guide.html>`_ is a system
 at ORNL with identical hardware and similar software as the upcoming Frontier system.

@@ -1,10 +1,7 @@
 Great Lakes (UMich)
--------------------
+*******************
 
 `Great Lakes <https://arc-ts.umich.edu/greatlakes/>`_ is the University of Michigan campus cluster.
-
-Downloading
-***********
 
 The **glotzerlab-software** image and the singularity cache are large, store them in your scratch
 directory::
@@ -20,9 +17,6 @@ Download the image with support for Great Lakes::
 
     $ module load singularity
     $ singularity pull software.sif docker://glotzerlab/software:greatlakes
-
-Using
-*****
 
 Use the following commands in your job scripts or interactively to execute software inside the container:
 

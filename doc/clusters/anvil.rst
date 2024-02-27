@@ -1,14 +1,11 @@
 Anvil (Purdue)
----------------
+**************
 
 Anvil_ is an HPC cluster at NCSA with GPU and CPU nodes. Apply for resources on Anvil through
 the ACCESS_ program.
 
 .. _Anvil: https://www.rcac.purdue.edu/knowledge/anvil
 .. _ACCESS: https://allocations.access-ci.org
-
-Downloading
-***********
 
 The **glotzerlab-software** image and the singularity cache are large, store them in your scratch
 directory::
@@ -19,9 +16,6 @@ directory::
 Download the image with support for Anvil::
 
     $ singularity pull software.sif docker://glotzerlab/software:anvil
-
-Using
-*****
 
 Use the following commands in your job scripts or interactively to execute software inside the
 container:

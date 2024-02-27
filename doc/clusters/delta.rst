@@ -1,14 +1,11 @@
 Delta (NCSA)
-------------
+*************
 
 Delta_ is an HPC cluster at NCSA with GPU and CPU nodes. Apply for resources on Delta through
 the ACCESS_ program.
 
 .. _Delta: https://ncsa-delta-doc.readthedocs-hosted.com
 .. _ACCESS: https://allocations.access-ci.org
-
-Downloading
-***********
 
 The **glotzerlab-software** image and the singularity cache are large, store them in your scratch
 directory::
@@ -23,9 +20,6 @@ directory::
 Download the image with support for Delta::
 
     $ singularity pull software.sif docker://glotzerlab/software:delta
-
-Using
-*****
 
 Use the following commands in your job scripts or interactively to execute software inside the
 container:

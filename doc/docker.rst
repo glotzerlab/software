@@ -1,5 +1,5 @@
 Docker
-======
+------
 
 **glotzerlab-software** is available on the `Docker Hub
 <https://hub.docker.com/r/glotzerlab/software/>`_ for use on docker based systems (for example:

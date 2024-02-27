@@ -1,0 +1,48 @@
+{% set name = "hoomd" %}
+{% set version = "4.5.0" %}
+{% set build = 0 %}
+{% set sha256 = "b44f3dc9aa6b60c6bb5fe7c668d72af7eb1a52a4ebf5abe1849e9bb92da88667" %}
+
+
+package:
+  name: {{ name }}
+  version: {{ version }}
+
+source:
+  fn: {{ name }}-{{ version }}.tar.gz
+  url: https://github.com/glotzerlab/hoomd-blue/releases/download/v{{ version }}/{{ name }}-{{ version }}.tar.gz
+  sha256: {{ sha256 }}
+
+build:
+  script_env:
+    - LD_LIBRARY_PATH
+    - MPICC
+    - CC
+    - CXX
+    - CMAKE_PREFIX_PATH
+    - HIP_PLATFORM
+    - HIP_COMPILER
+    - HCC_AMDGPU_TARGET
+    - SLURM_CPUS_PER_TASK
+  number: {{ build }}
+  string: {{ cluster }}_{{ device }}_py{{ py }}h{{ PKG_HASH }}_{{ build }}
+  script: bash ${RECIPE_DIR}/build_hoomd.sh {{ device }} {{ gpu_platform }}
+
+requirements:
+  build:
+    - cmake
+    - ninja
+    - pkg-config
+
+  host:
+    - cereal
+    - eigen
+    - numpy
+    - pybind11
+    - pybind11-abi
+    - python
+
+  run:
+    - python
+    - numpy
+

@@ -1,0 +1,2 @@
+conda-build:
+   pkg_format: 2

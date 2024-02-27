@@ -1,5 +1,5 @@
 Tests
-============
+-----
 
 **glotzerlab-software** provides a set of test jobs to determine the installed software functions and that MPI-enabled
 software inter-operates with the host system.

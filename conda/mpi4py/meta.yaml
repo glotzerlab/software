@@ -1,0 +1,38 @@
+# Adapted from: https://github.com/conda-forge/mpi4py-feedstock/blob/main/recipe/meta.yaml
+
+{% set version = "3.1.5" %}
+{% set build = 0 %}
+
+package:
+  name: mpi4py
+  version: {{ version }}
+
+source:
+  - fn: mpi4py-{{ version }}.tar.gz
+    url: https://github.com/mpi4py/mpi4py/releases/download/{{ version }}/mpi4py-{{ version }}.tar.gz
+    sha256: a706e76db9255135c2fb5d1ef54cb4f7b0e4ad9e33cbada7de27626205f2a153
+
+build:
+  number: {{ build }}
+  string: {{ cluster }}_py{{ py }}h{{ PKG_HASH }}_{{ build }}
+  script_env:
+    - LD_LIBRARY_PATH
+    - MPICC
+    - CC
+    - CXX
+    - CMAKE_PREFIX_PATH
+  script:
+    - {{ PYTHON }} conf/cythonize.py  # TODO: remove for mpi4py 4.0.0
+    - {{ PYTHON }} -m pip install --no-deps . -vv
+
+requirements:
+  build:
+    - python                                 # [build_platform != target_platform]
+    - cython <3                              # [build_platform != target_platform]
+    - cross-python_{{ target_platform }}     # [build_platform != target_platform]
+  host:
+    - python
+    - pip
+    - cython <3
+  run:
+    - python
