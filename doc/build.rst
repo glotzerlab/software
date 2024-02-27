@@ -1,11 +1,16 @@
 Building packages
 -----------------
 
-If you are not a Glotzer Lab member or would like to build these packages on a new resource:
+If you are not a Glotzer Lab member or you would like to build these packages on a new resource:
 
-1. Install ``conda-build`` and ``boa`` into your conda environment::
+.. note::
 
-    mamba install conda-build boa
+    Replace ``{{ package-manager }}`` with the name of your preferred conda-compatible package manager
+    executable.
+
+1. Install ``conda-build`` and ``boa`` into your environment::
+
+    {{ package-manager }} install conda-build boa
 
 2. Obtain the **glotzerlab-software** source code::
 
@@ -15,7 +20,7 @@ If you are not a Glotzer Lab member or would like to build these packages on a n
 
     cd software/conda
 
-4. Load any modules needed to provide compilers, MPI, and CUDA (optional). For example::
+4. Load any modules needed to provide compilers, *MPI*, and *CUDA* (optional). For example::
 
     module load gcc openmpi cuda
 
@@ -23,10 +28,10 @@ If you are not a Glotzer Lab member or would like to build these packages on a n
 
     ./build.sh hoomd mpi4py \
         --skip-existing \
-        --variants "{'cluster': ['<cluster name>'], 'device': ['gpu'], 'gpu_platform': ['CUDA']}" \
-        --output-folder /path/to/conda/channel
+        --variants "{'cluster': ['{{ cluster-name }}'], 'device': ['gpu'], 'gpu_platform': ['CUDA']}" \
+        --output-folder {{ channel-path }}
 
 .. important::
 
     The ``output-folder`` is the directory where ``conda build`` will write the packages. Set the
-    channel path ``file://path/to/conda/channel`` in ``.condarc`` to match the ``output-folder``.
+    channel path ``file:/{{ channel-path }}`` in ``.condarc`` to match (see :doc:`install`).

@@ -1,8 +1,9 @@
 Glotzer lab members
 -------------------
 
-Members of the Glotzer lab: Follow the instructions in :doc:`install` to install the latest stable
-release using the following channel paths and module versions:
+Members of the Glotzer lab can install precompiled packages. Follow the instructions in
+:doc:`install` to install the latest stable release using the following channel paths and module
+versions:
 
 .. list-table::
     :header-rows: 1
@@ -40,56 +41,48 @@ release using the following channel paths and module versions:
 
 .. rubric:: Frontier
 
-Individual users should install **miniforge** environments in their home directory (the default):
-``$HOME/miniforge3`` on Frontier.
-
-Importing Python packages from this environment will be *very* slow with large node count jobs.
-To improve performance, generate a **tar** file from the environment and store it on Orion.
+Individual users should install conda-compatible environments in their **home directory** on
+Frontier. Importing Python packages from this environment will be *very* slow with large node count
+jobs. To improve performance, generate a **tar** file from the environment and store it on Orion.
 
 .. important::
 
-    Repeat this step after you install or update packages with ``mamba``.
+    Repeat this step after you install or update packages with ``{{ package-manager }}``.
 
 .. code-block::
 
-    $ tar --directory $HOME/miniforge3 -cf ${MEMBERWORK}/mat110/miniforge3.tar .
+    $ tar --directory {{ environment-path }} -cf ${MEMBERWORK}/mat110/conda-env.tar .
 
 .. tip::
 
-    Collaborative projects can maintain a single copy of the software in the shared project
-    directory. The miniforge installer accepts the installation prefix on the command line with
-    ``-p`` (adjust these steps as needed for a non-miniforge installer)::
+    Collaborative projects may maintain a single copy of the software in the shared project
+    directory: ``/ccs/proj/mat110/software/frontier/{{ subproject-name }}``.
 
-        bash Miniforge3-Linux-x86_64.sh -b -p /ccs/proj/{your-project}/software/frontier/{subproject-name}
-        chmod g+rwX /ccs/proj/{your-project}/software/frontier/{subproject-name} -R
+    Collaborative projects may also utilize a single cached ``conda-env.tar``::
 
-    This allows environment changes to propagate between users, and cuts down on storage usage in
-    the project home directory.
+        $ tar --directory /ccs/proj/mat110/software/frontier/{{ subproject-name }} \
+          -cf ${PROJWORK}/mat110/software/{{ subproject-name} }/conda-env.tar .
 
-    Collaborative projects can also utilize a single cached ``miniforge3.tar``::
-
-        $ tar --directory $HOME/miniforge3 -cf ${PROJWORK}/{your-project}/software/{subproject-name}/miniforge3.tar .
-
-Use the following lines in your job scripts (or interactively with ``salloc``) to load the cache
-into NVME and execute software from there::
+Use the following lines in your job scripts (or interactively with ``salloc``) to load the
+environment into NVME and execute software from there::
 
     #SBATCH -C nvme
 
     module load PrgEnv-gnu rocm/5.4.3
     module unload darshan-runtime
 
-    export MINIFORGE_ROOT=/mnt/bb/${USER}/miniforge
-    srun --ntasks-per-node 1 mkdir ${MINIFORGE_ROOT}
-    srun --ntasks-per-node 1 tar --directory ${MINIFORGE_ROOT} -xpf \
-          ${MEMBERWORK}/mat110/miniforge3.tar
-    #     ${PROJWORK}/{your-project}/software/{subproject-name}/miniforge3.tar # For use with shared projects.
+    export CONDA_ENV_ROOT=/mnt/bb/${USER}/conda-env
+    srun --ntasks-per-node 1 mkdir ${CONDA_ENV_ROOT}
+    srun --ntasks-per-node 1 tar --directory ${CONDA_ENV_ROOT} -xpf \
+          ${MEMBERWORK}/mat110/conda-env.tar
+    #     ${PROJWORK}/mat110/software/{{ subproject-name }}/conda-env.tar # For use with shared projects.
 
-    export PATH=${MINIFORGE_ROOT}/bin:$PATH
+    export PATH=${CONDA_ENV_ROOT}/bin:$PATH
 
     srun {srun options} command arguments
 
 .. note::
 
-    The above script has been tested on environments with all packages installed into the base.
+    The above script has been tested on environments with all packages installed into *base*.
     You may need to set additional environment variables or source activation scripts to activate
     conda environments within this directory.
