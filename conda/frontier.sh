@@ -6,6 +6,7 @@ module load PrgEnv-gnu rocm/5.4.3
 module unload darshan-runtime
 
 export OUTPUT_FOLDER=/ccs/proj/mat110/software/frontier/conda
+unset CMAKE_PREFIX_PATH
 
 # Control ninja parallelism in hoomd builds
 export SLURM_CPUS_PER_TASK=16

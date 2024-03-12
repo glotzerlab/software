@@ -12,6 +12,7 @@
 
 # TODO: rewrite to use CPU account when it is renewed
 export OUTPUT_FOLDER=/projects/bbgw/software/conda
+unset CMAKE_PREFIX_PATH
 
 # Load modules used to build packages with native MPI and CUDA support.
 module reset

@@ -5,6 +5,7 @@ module reset
 module load gcc/10.3.0 openmpi/4.1.2
 
 export OUTPUT_FOLDER=/ccs/proj/mat110/software/andes/conda
+unset CMAKE_PREFIX_PATH
 
 # Control ninja parallelism in hoomd builds
 export SLURM_CPUS_PER_TASK=8

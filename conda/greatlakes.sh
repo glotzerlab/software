@@ -10,6 +10,7 @@
 #SBATCH --time=8:00:00
 
 export OUTPUT_FOLDER=/nfs/turbo/glotzer/software/conda
+unset CMAKE_PREFIX_PATH
 
 # Load modules used to build packages with native MPI and CUDA support.
 module reset

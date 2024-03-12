@@ -8,6 +8,7 @@
 #SBATCH --time=8:00:00
 
 export OUTPUT_FOLDER=$PROJECT/software/conda
+unset CMAKE_PREFIX_PATH
 
 # Load modules used to build packages with native MPI support (no CUDA).
 module reset
