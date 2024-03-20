@@ -31,7 +31,6 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
   libtbb-dev \
   libsqlite3-dev \
   llvm-10-dev \
-  pybind11-dev \
   python3.9 \
   python3.9-dev \
   python3.9-venv \
@@ -92,3 +91,11 @@ RUN ldconfig
 # setup self test
 RUN mkdir /test
 COPY test/* /test/
+
+# install newer pybind11
+RUN curl -SL https://github.com/pybind/pybind11/archive/v2.10.4.tar.gz | tar -xzC /root \
+    && cd /root/pybind11-2.10.4 \
+    && mkdir build && cd build \
+    && cmake ../ -DCMAKE_INSTALL_PREFIX=/usr/local -DPYBIND11_TEST=off -DPYTHON_EXECUTABLE=/usr/bin/python3 \
+    && make install \
+    && cd / && rm -rf /root/pybind11-* \
