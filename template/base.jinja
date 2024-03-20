@@ -98,4 +98,4 @@ RUN curl -SL https://github.com/pybind/pybind11/archive/v2.10.4.tar.gz | tar -xz
     && mkdir build && cd build \
     && cmake ../ -DCMAKE_INSTALL_PREFIX=/usr/local -DPYBIND11_TEST=off -DPYTHON_EXECUTABLE=/usr/bin/python3 \
     && make install \
-    && cd / && rm -rf /root/pybind11-* \
+    && cd / && rm -rf /root/pybind11-*
