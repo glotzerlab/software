@@ -17,7 +17,7 @@ jobs:
       matrix:
         branch: [trunk]
     steps:
-      - uses: actions/checkout@v4.1.1
+      - uses: actions/checkout@v4.1.2
         with:
           ref: ${{ matrix.branch }}
       - uses: tibdex/github-app-token@v2.1
@@ -25,7 +25,7 @@ jobs:
         with:
           app_id: ${{ secrets.PR_SUBMITTER_APP_ID }}
           private_key: ${{ secrets.PR_SUBMITTER_PRIVATE_KEY }}
-      - uses: actions/cache@v4.0.1
+      - uses: actions/cache@v4.0.2
         with:
           path: ~/.cache/pip
           key: ${{ runner.os }}-pip-${{ hashFiles('.github/workflows/requirements.txt') }}
@@ -50,7 +50,7 @@ jobs:
       - name: Display updates
         run: git diff
       - name: Create Pull Request
-        uses: peter-evans/create-pull-request@v6.0.1
+        uses: peter-evans/create-pull-request@v6.0.2
         with:
           base: ${{ matrix.branch }}
           commit-message: "[update-packages] Bump package versions"
