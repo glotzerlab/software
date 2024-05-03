@@ -25,7 +25,7 @@ versions:
       - ``file://projects/bbgw/software/conda``
       - .. code::
 
-            module load gcc/11.4.0 openmpi/4.1.6 cuda/12.3.0
+            module load openmpi/4.1.6 cuda/12.3.0
     * - OLCF Frontier:
       - ``file://ccs/proj/mat110/software/frontier/conda``
       - .. code::
