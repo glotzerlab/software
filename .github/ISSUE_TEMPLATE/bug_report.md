@@ -30,6 +30,4 @@ assignees: ''
 
 ## Configuration
 
-<!-- Which container image are you using? -->
-
 <!-- What system are you using it on? -->

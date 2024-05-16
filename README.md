@@ -56,9 +56,8 @@ build will contain the cluster name and a `gpu` or `cpu` suffix. For example:
 ## Contributing
 
 Contributions are welcomed via [pull requests]. Please report bugs and suggest feature
-enhancements via the [issue tracker]. See [ARCHITECTURE.md] for information on how the
+enhancements via the [issue tracker]. See `ARCHITECTURE.md` for information on how the
 repository is structured, including how to modify the containers.
 
 [pull requests]: https://github.com/glotzerlab/software/pulls
 [issue tracker]: https://github.com/glotzerlab/software/issues
-[ARCHITECTURE.md]: ARCHITECTURE.md
