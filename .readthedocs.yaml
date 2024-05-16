@@ -1,14 +1,8 @@
 version: 2
-
 build:
-  os: ubuntu-22.04
-  tools:
-    python: "3.12"
-
-sphinx:
-   configuration: doc/conf.py
-   fail_on_warning: true
-
-python:
-  install:
-    - requirements: doc/requirements.txt
+  os: "ubuntu-22.04"
+  commands:
+    - mkdir -p bin
+    - curl -sSL "https://github.com/rust-lang/mdBook/releases/download/v0.4.37/mdbook-v0.4.37-x86_64-unknown-linux-gnu.tar.gz" | tar -xvz --directory "bin"
+    - mkdir -p $READTHEDOCS_OUTPUT/html
+    - bin/mdbook build doc --dest-dir=$READTHEDOCS_OUTPUT/html

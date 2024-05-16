@@ -24,7 +24,9 @@ only from **conda-forge**. When you install [miniforge] with default options, re
 If you are using a different conda compatible package manager, use the appropriate
 `{{ package-manager }}` and `{{ environment-path }}`.
 
-<div class="warning">Do not install any <i>MPI</i> or <i>GPU</i> enabled packages
-from the <b>conda-forge</b> channel. The generic <i>MPI</i> and <i>CUDA</i> libraries
-provided by <b>conda-forge</b> will take precedence and prevent the cluster-specific
-libraries from operating correctly.</d>
+<div class="warning">
+Do not install any <i>MPI</i> or <i>GPU</i> enabled packages from the <b>conda-forge</b>
+channel. The generic <i>MPI</i> and <i>CUDA</i> libraries provided by <b>conda-forge</
+b> will take precedence and prevent the cluster-specific libraries from operating
+correctly.
+</div>
