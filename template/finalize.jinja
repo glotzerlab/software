@@ -1,8 +1,0 @@
-
-
-# configure unprivileged user
-RUN useradd --create-home --shell /bin/bash glotzerlab-software \
-    && chown glotzerlab-software:glotzerlab-software -R /test \
-    && chmod o+rX -R /test
-
-USER glotzerlab-software:glotzerlab-software
