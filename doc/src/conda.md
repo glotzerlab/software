@@ -26,7 +26,7 @@ If you are using a different conda compatible package manager, use the appropria
 
 <div class="warning">
 Do not install any <i>MPI</i> or <i>GPU</i> enabled packages from the <b>conda-forge</b>
-channel. The generic <i>MPI</i> and <i>CUDA</i> libraries provided by <b>conda-forge</
-b> will take precedence and prevent the cluster-specific libraries from operating
-correctly.
+channel. The generic <i>MPI</i> and <i>CUDA</i> libraries provided by 
+<b>conda-forge</b> will take precedence and prevent the cluster-specific libraries from
+operating correctly.
 </div>

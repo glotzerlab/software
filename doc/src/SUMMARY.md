@@ -6,3 +6,4 @@
   - [Glotzer lab members](glotzer.md)
   - [Building packages](build.md)
   - [Installing packages](install.md)
+- [License](license.md)
