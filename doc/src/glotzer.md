@@ -30,9 +30,9 @@ $ tar --directory {{ environment-path }} -cf ${MEMBERWORK}/mat110/conda-env.tar 
 > Note: Collaborative projects may maintain a single copy of the software in the
 > shared project directory:
 > `/ccs/proj/mat110/software/frontier/{{ subproject-name }}`.
-> 
+>
 > Collaborative projects may also utilize a single cached `conda-env.tar`:
-> 
+>
 >     $ tar --directory /ccs/proj/mat110/software/frontier/{{ subproject-name }} \
 >       -cf ${PROJWORK}/mat110/software/{{ subproject-name} }/conda-env.tar .
 

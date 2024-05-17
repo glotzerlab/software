@@ -23,4 +23,3 @@ export CXX=$GCC_HOME/bin/g++
     --output-folder $OUTPUT_FOLDER
 
 chmod g-w $OUTPUT_FOLDER -R
-
