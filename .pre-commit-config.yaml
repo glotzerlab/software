@@ -1,0 +1,20 @@
+ci:
+  autoupdate_schedule: quarterly
+  autoupdate_branch: 'trunk'
+  autofix_prs: false
+
+repos:
+- repo: https://github.com/pre-commit/pre-commit-hooks
+  rev: 'v4.5.0'
+  hooks:
+  - id: end-of-file-fixer
+  - id: trailing-whitespace
+  - id: check-json
+  - id: check-toml
+  - id: check-yaml
+  - id: check-case-conflict
+  - id: mixed-line-ending
+- repo: https://github.com/crate-ci/typos
+  rev: v1.21.0
+  hooks:
+    - id: typos
