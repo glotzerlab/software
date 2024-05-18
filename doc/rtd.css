@@ -170,80 +170,18 @@ div.ethical-footer {
     line-height: 20px;
 }
 
-/* RTD Theme specific customizations */
-.wy-nav-side .ethical-rtd {
-    /* RTD theme doesn't correctly set the sidebar width */
-    max-width: 300px;
-    padding: 0 1em;
-}
-.ethical-rtd .ethical-sidebar {
-    /* RTD theme doesn't set sidebar text color */
-    color: #b3b3b3;
+/* Use mdbook theme colors. */
 
-    font-size: 14px;
-    line-height: 20px;
+.ethical-sidebar {
+    border: none;
+    box-shadow: none;
+    background: var(--sidebar-bg);
 }
 
-@media (min-width: 769px) {
-    /* Make sure the fixed footer ad is under the RTD theme version selector */
-    .wy-body-for-nav .ethical-fixedfooter {
-        padding-left: 300px;
-    }
+.ethical-sidebar:hover {
+    background: var(--sidebar-non-existant);
 }
 
-/* Alabaster specific customizations */
-.ethical-alabaster a.ethical-image-link {
-    /* Alabaster adds a border even to image links on hover */
-    border: 0 !important;
-}
-.ethical-alabaster hr {
-    /* Alabaster needs some extra spacing before the footer ad */
-    margin-top: 2em;
-}
-.ethical-alabaster::before {
-    /* Alabaster's search box above the ad is floating */
-    clear: both;
-    content: '';
-    display: table;
-    margin-top: 3em;
-}
-
-/* Dark theme */
-.ethical-dark-theme .ethical-sidebar {
-    background-color: #4e4b4b;
-    border: 1px solid #a0a0a0;
-    color: #c2c2c2 !important;
-}
-.ethical-dark-theme a,
-.ethical-dark-theme a:visited {
-    color: #e6e6e6 !important;
-    border-bottom: 0 !important;
-}
-.ethical-dark-theme .ethical-callout a {
-    color: #b3b3b3 !important;
-}
-
-
-/* Ad block nag */
-.keep-us-sustainable {
-    padding: .5em;
-    margin: 1em auto;
-    text-align: center;
-    border: 1px dotted #8ECC4C;
-    max-width: 300px;
-}
-.keep-us-sustainable a,
-.keep-us-sustainable a:hover,
-.keep-us-sustainable a:visited {
-    text-decoration: none;
-}
-/* Read the Docs theme specific fixes */
-.wy-nav-side .keep-us-sustainable {
-    margin: 1em 2em 1em 1em;
-    color: #b3b3b3;
-}
-.wy-nav-side .keep-us-sustainable a {
-    color: #efefef;
-    font-size: 14px;
-    line-height: 20px;
+.ethical-sidebar a {
+      color: var(--sidebar-fg);
 }
