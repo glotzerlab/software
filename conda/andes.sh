@@ -16,4 +16,3 @@ export SLURM_CPUS_PER_TASK=8
     --output-folder $OUTPUT_FOLDER
 
 chmod g-w $OUTPUT_FOLDER -R
-

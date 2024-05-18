@@ -15,7 +15,7 @@ export SLURM_CPUS_PER_TASK=16
 export MPICC=$CRAY_MPICH_DIR/bin/mpicc
 export CC=$GCC_PATH/bin/gcc
 export CXX=$GCC_PATH/bin/g++
-export HCC_AMDGPU_TARGET=gfx90a 
+export HCC_AMDGPU_TARGET=gfx90a
 
 ./build.sh "$@" \
     --skip-existing \
@@ -23,4 +23,3 @@ export HCC_AMDGPU_TARGET=gfx90a
     --output-folder $OUTPUT_FOLDER
 
 chmod g-w $OUTPUT_FOLDER -R
-
