@@ -45,8 +45,8 @@ environment into NVME and execute software from there:
     module unload darshan-runtime
 
     export CONDA_ENV_ROOT=/mnt/bb/${USER}/conda-env
-    srun --ntasks-per-node 1 mkdir ${CONDA_ENV_ROOT}
-    srun --ntasks-per-node 1 tar --directory ${CONDA_ENV_ROOT} -xpf \
+    srun --nodes=$SLURM_JOB_NUM_NODES --ntasks-per-node 1 mkdir ${CONDA_ENV_ROOT}
+    srun --nodes=$SLURM_JOB_NUM_NODES --ntasks-per-node 1 tar --directory ${CONDA_ENV_ROOT} -xpf \
           ${MEMBERWORK}/mat110/conda-env.tar
     #     ${PROJWORK}/mat110/software/{{ subproject-name }}/conda-env.tar # For use with shared projects.
 
