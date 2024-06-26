@@ -1,8 +1,5 @@
 # Building packages
 
-If you are not a Glotzer Lab member, or you would like to build these packages on a new
-resource:
-
 > Note: Replace `{{ package-manager }}` with the name of your preferred conda compatible
 > package manager executable.
 

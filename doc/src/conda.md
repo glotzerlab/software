@@ -2,7 +2,7 @@
 
 **glotzerlab-software** provides [conda] formatted packages built with cluster-specific
 *MPI* and *CUDA* libraries. Use it to add *MPI-* and *GPU-enabled* builds of the
-following software packages to your conda compatible environments on HPC resources:
+following software packages to your conda-compatible environments on HPC resources:
 
 -   hoomd
 -   mpi4py
@@ -13,7 +13,7 @@ following software packages to your conda compatible environments on HPC resourc
 > **conda-forge** channel. Ensure that you have **no** packages installed
 > from the **default** channel before proceeding.
 
-[miniforge] provides a conda compatible environment pre-configured to install packages
+[miniforge] provides a conda-compatible environment pre-configured to install packages
 only from **conda-forge**. When you install [miniforge] with default options, replace:
 
 - `{{ package-manager }}` with `mamba`
@@ -21,7 +21,7 @@ only from **conda-forge**. When you install [miniforge] with default options, re
 
 [miniforge]: https://github.com/conda-forge/miniforge
 
-If you are using a different conda compatible package manager, use the appropriate
+If you are using a different conda-compatible package manager, use the appropriate
 `{{ package-manager }}` and `{{ environment-path }}`.
 
 <div class="warning">
