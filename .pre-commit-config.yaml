@@ -5,7 +5,7 @@ ci:
 
 repos:
 - repo: https://github.com/pre-commit/pre-commit-hooks
-  rev: 'v4.5.0'
+  rev: 'v4.6.0'
   hooks:
   - id: end-of-file-fixer
   - id: trailing-whitespace
@@ -14,7 +14,7 @@ repos:
   - id: check-case-conflict
   - id: mixed-line-ending
 - repo: https://github.com/crate-ci/typos
-  rev: v1.21.0
+  rev: v1.22.9
   hooks:
     - id: typos
       exclude_types: [css]
