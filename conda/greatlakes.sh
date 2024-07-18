@@ -1,7 +1,7 @@
 #!/bin/bash
 
 #SBATCH --job-name="glotzerlab-software build"
-#SBATCH --account=sglotzer9
+#SBATCH --account=sglotzer0
 #SBATCH --partition=standard
 #SBATCH --nodes=1
 #SBATCH --tasks-per-node=1
