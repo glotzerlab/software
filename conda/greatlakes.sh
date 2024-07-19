@@ -8,6 +8,7 @@
 #SBATCH --cpus-per-task=36
 #SBATCH --mem=144g
 #SBATCH --time=8:00:00
+#SBATCH --exclude=gl3047,gl3053,gl3054,gl3056,gl3057,gl3064,gl3118,gl3120,gl3163,gl3243,gl3260,gl3270, gl[3384-3457]
 
 export OUTPUT_FOLDER=/nfs/turbo/glotzer/software/conda
 unset CMAKE_PREFIX_PATH
