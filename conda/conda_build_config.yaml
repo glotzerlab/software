@@ -6,11 +6,11 @@ zip_keys:
 
 python:
   # part of a zip_keys: python, numpy
-  - 3.9.* *_cpython
-  - 3.10.* *_cpython
-  - 3.11.* *_cpython
-  - 3.12.* *_cpython
-  - 3.13.* *_cpython
+  - 3.9.*
+  - 3.10.*
+  - 3.11.*
+  - 3.12.*
+  - 3.13.*
 
 numpy:
   # part of a zip_keys: python, numpy

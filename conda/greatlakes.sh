@@ -1,14 +1,14 @@
 #!/bin/bash
 
 #SBATCH --job-name="glotzerlab-software build"
-#SBATCH --account=sglotzer0
+#SBATCH --account=sglotzer9
 #SBATCH --partition=standard
 #SBATCH --nodes=1
 #SBATCH --tasks-per-node=1
 #SBATCH --cpus-per-task=36
 #SBATCH --mem=144g
 #SBATCH --time=8:00:00
-#SBATCH --exclude=gl3047,gl3053,gl3054,gl3056,gl3057,gl3064,gl3118,gl3120,gl3163,gl3243,gl3260,gl3270, gl[3384-3457]
+#SBATCH --exclude=gl3047,gl3053,gl3054,gl3056,gl3057,gl3064,gl3118,gl3120,gl3163,gl3243,gl3260,gl3270,gl[3384-3457]
 
 export OUTPUT_FOLDER=/nfs/turbo/glotzer/software/conda
 unset CMAKE_PREFIX_PATH
@@ -17,7 +17,15 @@ unset CMAKE_PREFIX_PATH
 module reset
 module load gcc/10.3.0 openmpi/4.1.6 cuda/12.3.0
 
-export TMPDIR=/tmpssd
+echo -n "Executing on host: " && hostname
+
+if [ -d "/tmpssd" ]; then
+  export TMPDIR=/tmpssd
+  echo "Using /tmpsdd for build."
+else
+  export TMPDIR=/tmp
+  echo "Warning! /tmpssd does not exist. Using /tmp for build."
+fi
 
 ./build.sh "$@" \
     --skip-existing \

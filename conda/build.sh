@@ -12,4 +12,4 @@ function cleanup {
 
 trap cleanup EXIT
 
-conda mambabuild  "$@"
+conda build  "$@"

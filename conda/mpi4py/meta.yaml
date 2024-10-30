@@ -10,7 +10,7 @@ package:
 source:
   - fn: mpi4py-{{ version }}.tar.gz
     url: https://github.com/mpi4py/mpi4py/releases/download/{{ version }}/mpi4py-{{ version }}.tar.gz
-    sha256: c8fa625e0f92b082ef955bfb52f19fa6691d29273d7d71135d295aa143dee6cb
+    sha256: f3174b245775d556f4fddb32519a2066ef0592edc810c5b5a59238f9a0a40c89
 
 build:
   binary_relocation: False
