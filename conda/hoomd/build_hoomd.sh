@@ -2,12 +2,10 @@ if [[ $1 == "gpu" ]]; then
     ENABLE_GPU="on"
 fi
 
-# TODO: Re-enable MPCD after HOOMD updates to automatically disable it for HIP builds.
-
 # Use CMAKE_INSTALL_RPATH_USE_LINK_PATH TRUE to keep absolute links to mpi and other modules
 cmake -B build \
       ${CMAKE_ARGS} \
-      -DBUILD_MPCD=off \
+      -DBUILD_MPCD=on \
       -DENABLE_MPI=on \
       -DENABLE_GPU=${ENABLE_GPU:-off} \
       -DHOOMD_GPU_PLATFORM=$2 \
