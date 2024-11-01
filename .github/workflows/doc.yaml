@@ -27,7 +27,7 @@ jobs:
     name: Build documentation
     runs-on: ubuntu-22.04
     steps:
-    - uses: actions/checkout@v4.2.0
+    - uses: actions/checkout@v4.2.2
     - name: Install mdbook
       run: |
         mkdir -p "$HOME/.cargo/bin"
