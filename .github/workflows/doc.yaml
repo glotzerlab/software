@@ -19,7 +19,7 @@ defaults:
 env:
   CARGO_TERM_COLOR: always
   CLICOLOR: 1
-  MDBOOK_VERSION: 0.4.37
+  MDBOOK_VERSION: 0.4.49
   LINKCHECK_VERSION: 0.7.7
 
 jobs:
