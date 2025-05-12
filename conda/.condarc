@@ -2,4 +2,3 @@ conda-build:
    pkg_format: 2
 channels:
   - conda-forge
-  - nodefaults
