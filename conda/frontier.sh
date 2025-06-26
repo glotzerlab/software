@@ -2,7 +2,7 @@
 
 # Load modules used to build packages with native MPI and HIP support
 module purge
-module load PrgEnv-gnu/8.6.0 gcc/12.2.0 rocm/6.3.1
+module load PrgEnv-gnu/8.6.0 gcc/12.2.0 rocm/6.4.1
 module unload darshan-runtime
 
 export OUTPUT_FOLDER=/ccs/proj/mat110/software/frontier/conda
