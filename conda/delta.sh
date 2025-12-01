@@ -14,7 +14,6 @@ unset CMAKE_PREFIX_PATH
 
 # Load modules used to build packages with native MPI and CUDA support.
 module reset
-module load gcc/11.4.0 openmpi/4.1.6 cuda/12.3.0
 
 ./build.sh "$@" \
     --skip-existing \
