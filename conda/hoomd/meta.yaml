@@ -20,7 +20,9 @@ build:
     - MPICC
     - CC
     - CXX
+    - CPATH
     - CMAKE_PREFIX_PATH
+    - CMAKE_LIBRARY_PATH
     - HIP_PLATFORM
     - HIP_COMPILER
     - HCC_AMDGPU_TARGET
