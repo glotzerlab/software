@@ -6,19 +6,19 @@ zip_keys:
 
 python:
   # part of a zip_keys: python, numpy
-  - 3.9.*
   - 3.10.*
   - 3.11.*
   - 3.12.*
   - 3.13.*=*_cp313
+  - 3.14.*=*_cp314
 
 numpy:
   # part of a zip_keys: python, numpy
   - 2.0
   - 2.0
   - 2.0
-  - 2.0
   - 2.1.2
+  - 2.4.2
 
 pybind11_abi:
   - 4
