@@ -14,6 +14,7 @@ unset CMAKE_PREFIX_PATH
 
 # Load modules used to build packages with native MPI and CUDA support.
 module reset
+module load cudatoolkit/25.3_12.8
 
 # Override compiler environment as PrgEnv-gnu fails to work correctly with CMake
 export CC=/opt/rh/gcc-toolset-13/root/usr/bin/gcc
