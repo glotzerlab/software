@@ -1,7 +1,7 @@
 {% set name = "hoomd" %}
-{% set version = "7.1.2" %}
+{% set version = "7.2.0" %}
 {% set build = 0 %}
-{% set sha256 = "148892bed9f3aca8ec71d80023360b0ceab05a03b8d5d36c224a3315dd9e5ebb" %}
+{% set sha256 = "c88f2652ee53b41fcb9253eb70b29c3329d6bc044f581761e29aaf60b72bc5c4" %}
 
 
 package:
