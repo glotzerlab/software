@@ -14,13 +14,13 @@ unset CMAKE_PREFIX_PATH
 
 # Load modules used to build packages with native MPI and CUDA support.
 module reset
-module load cudatoolkit/25.3_12.8
+module load cudatoolkit/26.5_12.9-unsupported
 
 # Override compiler environment as PrgEnv-gnu fails to work correctly with CMake
 export CC=/opt/rh/gcc-toolset-13/root/usr/bin/gcc
 export CXX=/opt/rh/gcc-toolset-13/root/usr/bin/g++
 
-export CMAKE_LIBRARY_PATH="/opt/nvidia/hpc_sdk/Linux_x86_64/25.3/math_libs/12.8/targets/x86_64-linux/lib:/opt/nvidia/hpc_sdk/Linux_x86_64/25.3/cuda/12.8/targets/x86_64-linux/lib"
+export CMAKE_LIBRARY_PATH="/opt/nvidia/hpc_sdk/Linux_x86_64/26.5/math_libs/12.9/targets/x86_64-linux/lib:/opt/nvidia/hpc_sdk/Linux_x86_64/26.5/cuda/12.9/targets/x86_64-linux/lib"
 
 ./build.sh "$@" \
     --skip-existing \
