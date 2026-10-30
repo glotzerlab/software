@@ -11,7 +11,8 @@ export OUTPUT_FOLDER=$PROJECT/software/conda
 unset CMAKE_PREFIX_PATH
 
 # Work around Purdue network dropping traffic to conda package servers.
-export HTTPS_PROXY=squid.rcac.purdue.edu:3128
+# export HTTPS_PROXY=squid.rcac.purdue.edu:3128
+unset HTTPS_PROXY
 
 # Load modules used to build packages with native MPI support (no CUDA).
 module reset
